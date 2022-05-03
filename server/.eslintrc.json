@@ -24,7 +24,12 @@
                 "ts": "never"
             }
         ],
-        "class-methods-use-this": ["error", { "exceptMethods": ["up", "down"] }]
+        //        "max-len": [ "warning", {"code": 140}],
+        "class-methods-use-this": "off",
+        "no-unused-vars": ["error", {
+            "args": "none"
+        }],
+        "no-underscore-dangle": "off"
     },
     "settings": {
         "import/resolver" : {
