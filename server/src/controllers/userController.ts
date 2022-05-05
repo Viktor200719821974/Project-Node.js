@@ -3,11 +3,11 @@ import { ErrorHandler } from '../error/errorHandler';
 
 class UserController {
     async registration(req: Request, res: Response) {
-
+        console.log(req);
     }
 
     async login(req: Request, res: Response) {
-
+        console.log(req);
     }
 
     async check(req: Request, res: Response, next: NextFunction) {
