@@ -17,8 +17,16 @@ class DeviceController {
             const device = await model.Device.create({
                 name, price, brandId, typeId, image: fileName,
             });
-            console.log(device);
-            console.log(info);
+            if (info) {
+                const inf = JSON.parse(info);
+                inf.forEach((i: { title: string; description: string; }) => model.DeviceInfo.create(
+                    {
+                        title: i.title,
+                        description: i.description,
+                        deviceId: device.get('id'),
+                    },
+                ));
+            }
             return res.json(device);
         } catch (e: any) {
             next(e);
@@ -26,12 +34,33 @@ class DeviceController {
     }
 
     async getAll(req: Request, res: Response) {
-        const devices = await model.Device.findAll();
+        const { brandId, typeId } = req.query;
+        // let {limit, page} =req.query;
+        // page = Number(page) || 1;
+        // limit = Number(limit) || 9;
+        // let offset = page * limit - limit;
+        let devices;
+        if (!brandId && !typeId) {
+            devices = await model.Device.findAndCountAll();
+        }
+        if (brandId && !typeId) {
+            devices = await model.Device.findAndCountAll({ where: { brandId } });
+        }
+        if (!brandId && typeId) {
+            devices = await model.Device.findAndCountAll({ where: { typeId } });
+        }
+        if (brandId && typeId) {
+            devices = await model.Device.findAndCountAll({ where: { brandId, typeId } });
+        }
         return res.json(devices);
     }
 
     async getOne(req: Request, res: Response) {
-        const device = await model.Device.findOne();
+        const { id } = req.params;
+        const device = await model.Device.findOne({
+            where: { id },
+            include: [{ model: model.DeviceInfo, as: 'info' }],
+        });
         return res.json(device);
     }
 }
