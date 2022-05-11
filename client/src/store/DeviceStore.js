@@ -20,6 +20,8 @@ export default class DeviceStore{
             {id: 4, name: "N45", price: 2500, rating: 4, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/" +
                     "23/Lake_mapourika_NZ.jpeg/800px-Lake_mapourika_NZ.jpeg", typeId: 1, brandId: 1 }
         ]
+        this._selectedType = {}
+        this._selectedBrand = {}
         makeAutoObservable(this)
     }
     setTypes(types){
@@ -31,6 +33,12 @@ export default class DeviceStore{
     setDevices(devices){
         this._device = devices
     }
+    setSelectedType(type){
+        this._selectedType=type
+    }
+    setSelectedBrand(brand){
+        this._selectedBrand=brand
+    }
     get types() {
         return this._types
     }
@@ -39,5 +47,11 @@ export default class DeviceStore{
     }
     get devices() {
         return this._device
+    }
+    get selectedType() {
+        return this._selectedType
+    }
+    get selectedBrand() {
+        return this._selectedBrand
     }
 }
