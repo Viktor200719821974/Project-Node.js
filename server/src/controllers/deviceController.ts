@@ -11,9 +11,9 @@ class DeviceController {
                 name, price, typeId, brandId, info,
             } = req.body;
             // @ts-ignore
-            const { img } = req.files;
+            const { image } = req.files;
             const fileName = `${uuidv4()}.jpg`;
-            img.mv(path.resolve(__dirname, '..', 'static', fileName));
+            image.mv(path.resolve(__dirname, '..', 'static', fileName));
             const device = await model.Device.create({
                 name, price, brandId, typeId, image: fileName,
             });

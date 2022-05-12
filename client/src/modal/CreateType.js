@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
+import {createType} from "../http/deviceApi";
 
 const CreateType = ({show, onHide}) => {
+    const [value, setValue] = useState('');
+    const addType = () => {
+        createType({name:value}).then(data => setValue(''));
+        onHide();
+    }
     return (
         <Modal
             show={show}
@@ -16,11 +22,15 @@ const CreateType = ({show, onHide}) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                   <Form.Control placeholder={"Введіть назву типу"}/>
+                   <Form.Control
+                       placeholder={"Введіть назву типу"}
+                       value={value}
+                       onChange={(e) => setValue(e.target.value)}
+                   />
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant={"outline-success"} onClick={onHide}>Додати</Button>
+                <Button variant={"outline-success"} onClick={addType}>Додати</Button>
                 <Button variant={"outline-danger"} onClick={onHide}>Закрити</Button>
             </Modal.Footer>
         </Modal>
