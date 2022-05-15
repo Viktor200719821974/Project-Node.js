@@ -49,7 +49,7 @@ class UserController {
         return res.json({ token });
     }
 
-    async check(req: Request, res: Response, next: NextFunction) {
+    async check(req: Request, res: Response) {
         return res.json('All Right');
     }
 }

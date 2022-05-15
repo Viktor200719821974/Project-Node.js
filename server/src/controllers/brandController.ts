@@ -8,6 +8,21 @@ class BrandController {
         return res.json(brand);
     }
 
+    async updateBrand(req:Request, res:Response) {
+        const { id } = req.params;
+        const { name } = req.body;
+        await model.Brand.update(
+            {
+                name,
+            },
+            {
+                where: { id },
+            },
+        );
+        const updateBrand = await model.Brand.findByPk(id);
+        res.json(updateBrand);
+    }
+
     async getAll(req: Request, res: Response) {
         const brands = await model.Brand.findAll();
         return res.json(brands);
