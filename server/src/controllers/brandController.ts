@@ -1,31 +1,47 @@
-import { Request, Response } from 'express';
-import { model } from '../models/models';
+import { NextFunction, Request, Response } from 'express';
+import { brandService } from '../services/brandService';
 
 class BrandController {
-    async create(req: Request, res: Response) {
-        const { name } = req.body;
-        const brand = await model.Brand.create({ name });
-        return res.json(brand);
+    async create(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { name } = req.body;
+            const brand = await brandService.createBrand(name);
+            res.json(brand);
+            return;
+        } catch (e) {
+            next(e);
+        }
     }
 
-    async updateBrand(req:Request, res:Response) {
-        const { id } = req.params;
-        const { name } = req.body;
-        await model.Brand.update(
-            {
-                name,
-            },
-            {
-                where: { id },
-            },
-        );
-        const updateBrand = await model.Brand.findByPk(id);
-        res.json(updateBrand);
+    async updateBrand(req:Request, res:Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const { name } = req.body;
+            const updateBrand = await brandService.updateBrand(name, id);
+            res.json(updateBrand);
+        } catch (e) {
+            next(e);
+        }
     }
 
-    async getAll(req: Request, res: Response) {
-        const brands = await model.Brand.findAll();
-        return res.json(brands);
+    async deleteBrand(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            await brandService.deleteBrand(id);
+            res.status(204).end();
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const brand = await brandService.getAll();
+            res.json(brand);
+            return;
+        } catch (e) {
+            next(e);
+        }
     }
 }
 

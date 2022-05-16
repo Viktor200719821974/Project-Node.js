@@ -10,6 +10,7 @@ const { DB_HOST } = process.env;
 const { DB_PORT } = process.env;
 const { DB_USER } = process.env;
 const { DB_PASSWORD } = process.env;
+const { USER_SALT_ROUNDS } = process.env;
 
 export const config = {
     PORT: PORT || 5000,
@@ -20,4 +21,5 @@ export const config = {
     DB_PORT,
     DB_USER,
     DB_PASSWORD,
+    USER_SALT_ROUNDS,
 };

@@ -1,16 +1,47 @@
-import { Request, Response } from 'express';
-import { model } from '../models/models';
+import { NextFunction, Request, Response } from 'express';
+import { typeService } from '../services/typeService';
 
 class TypeController {
-    async create(req: Request, res: Response) {
-        const { name } = req.body;
-        const type = await model.Type.create({ name });
-        return res.json(type);
+    async createType(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { name } = req.body;
+            const type = await typeService.createType(name);
+            res.json(type);
+            return;
+        } catch (e) {
+            next(e);
+        }
     }
 
-    async getAll(req: Request, res: Response) {
-        const types = await model.Type.findAll();
-        return res.json(types);
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const type = await typeService.getAll();
+            res.json(type);
+            return;
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async updateType(req:Request, res:Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const { name } = req.body;
+            const updateType = await typeService.updateType(name, id);
+            res.json(updateType);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async deleteType(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            await typeService.deleteType(id);
+            res.status(204).end();
+        } catch (e) {
+            next(e);
+        }
     }
 }
 
