@@ -5,7 +5,7 @@ import { ErrorHandler } from '../error/errorHandler';
 import { model } from '../models/models';
 import { config } from '../config/config';
 import { userService } from '../services/userService';
-import { IUser } from '../interfaces';
+import { authService } from '../services/authService';
 
 const generateJwt = (id:number, email: string, role: string) => jwt.sign(
     { id, email, role },
@@ -14,15 +14,52 @@ const generateJwt = (id:number, email: string, role: string) => jwt.sign(
 );
 
 class UserController {
-    async createUser(req:Request, res:Response): Promise<Response<IUser>> {
-        const createdUser = await userService.createUser(req.body);
-        return res.json(createdUser);
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const users = await userService.getAll();
+            res.json(users);
+            return;
+        } catch (e) {
+            next(e);
+        }
     }
 
-    async deleteUser(req: Request, res: Response) {
+    async getOne(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
-        await model.User.destroy({ where: { id } });
-        res.status(204).end();
+        const user = await userService.getOne(id);
+        return res.json(user);
+    }
+
+    async createUser(req:Request, res:Response, next: NextFunction) {
+        try {
+            const createdUser = await userService.createUser(req.body, next);
+            const tokenData = await authService.registration(createdUser);
+            res.json(tokenData);
+            return;
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async updateUser(req:Request, res:Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const user = req.body;
+            const updateUser = await userService.updateUser(id, user);
+            res.json(updateUser);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async deleteUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            await userService.deleteUser(id);
+            res.status(204).end();
+        } catch (e) {
+            next(e);
+        }
     }
 
     async registration(req: Request, res: Response, next: NextFunction) {

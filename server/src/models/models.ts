@@ -9,7 +9,10 @@ const User = sequelize.define('user', {
     surname: { type: DataTypes.STRING },
     age: { type: DataTypes.INTEGER },
     phone: { type: DataTypes.STRING },
-    role: { type: DataTypes.STRING, defaultValue: 'USER' },
+    is_active: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
+    is_staff: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
+    is_superuser: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
+    // role: { type: DataTypes.STRING, defaultValue: 'USER' },
 });
 
 const Basket = sequelize.define('basket', {
@@ -53,8 +56,17 @@ const TypeBrand = sequelize.define('type_brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 
+const Token = sequelize.define('token', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    accessToken: { type: DataTypes.STRING, unique: true, allowNull: false },
+    refreshToken: { type: DataTypes.STRING, unique: true, allowNull: false },
+});
+
 User.hasOne(Basket);
 Basket.belongsTo(User);
+
+User.hasOne(Token);
+Token.belongsTo(User);
 
 User.hasMany(Rating);
 Rating.belongsTo(User);
@@ -90,4 +102,5 @@ export const model = {
     Rating,
     DeviceInfo,
     TypeBrand,
+    Token,
 };
