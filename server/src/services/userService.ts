@@ -10,7 +10,7 @@ class UserService {
         return model.User.findAll();
     }
 
-    async getOne(id: string) {
+    async getOne(id: number) {
         return model.User.findOne({
             where: { id },
         });
@@ -25,6 +25,7 @@ class UserService {
         const hashedPassword = await UserService._hashPassword(password);
         const newUser = await model.User.create({ ...user, password: hashedPassword });
         const id = newUser.get('id');
+        Number(id);
         await model.Basket.create({ userId: id });
         return user;
     }
