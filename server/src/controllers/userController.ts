@@ -25,9 +25,14 @@ class UserController {
     }
 
     async getOne(req: Request, res: Response, next: NextFunction) {
-        const { id } = req.params;
-        const user = await userService.getOne(id);
-        return res.json(user);
+        try {
+            const { id } = req.params;
+            const user = await userService.getOne(Number(id));
+            res.json(user);
+            return;
+        } catch (e) {
+            next(e);
+        }
     }
 
     async createUser(req:Request, res:Response, next: NextFunction) {
@@ -79,24 +84,24 @@ class UserController {
         return res.json({ token });
     }
 
-    async login(req: Request, res: Response, next: NextFunction) {
-        const { email, password } = req.body;
-        const user = await model.User.findOne({ where: { email } });
-        if (!user) {
-            return next(new ErrorHandler('Bad email or password'));
-        }
-        const userPassword = user.get('password');
-        if (typeof userPassword === 'string') {
-            const comparePassword = bcrypt.compareSync(password, userPassword);
-            if (!comparePassword) {
-                return next(new ErrorHandler('Bad email or password'));
-            }
-        }
-        const id = Number(user.get('id'));
-        const role = String(user.get('role'));
-        const token = await generateJwt(id, email, role);
-        return res.json({ token });
-    }
+    // async login(req: Request, res: Response, next: NextFunction) {
+    //     const { email, password } = req.body;
+    //     const user = await model.User.findOne({ where: { email } });
+    //     if (!user) {
+    //         return next(new ErrorHandler('Bad email or password'));
+    //     }
+    //     const userPassword = user.get('password');
+    //     if (typeof userPassword === 'string') {
+    //         const comparePassword = bcrypt.compareSync(password, userPassword);
+    //         if (!comparePassword) {
+    //             return next(new ErrorHandler('Bad email or password'));
+    //         }
+    //     }
+    //     const id = Number(user.get('id'));
+    //     const role = String(user.get('role'));
+    //     const token = await generateJwt(id, email, role);
+    //     return res.json({ token });
+    // }
 
     async check(req: Request, res: Response) {
         return res.json('All Right');

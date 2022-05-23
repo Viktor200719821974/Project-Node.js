@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import bcrypt from 'bcrypt';
 import { model } from '../models/models';
-import { ErrorHandler } from '../error/errorHandler';
 import { IUser } from '../interfaces';
 import { tokenService } from '../services/tokenService';
 
@@ -14,20 +12,9 @@ class AuthController {
 //     // }
 //
     // eslint-disable-next-line consistent-return
-    async login(req: Request, res: Response, next: NextFunction) {
+    async login(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const { email, password } = req.body;
-            const user = await model.User.findOne({ where: { email } });
-            if (!user) {
-                return next(new ErrorHandler('Bad email or password'));
-            }
-            const userPassword = user.get('password');
-            if (typeof userPassword === 'string') {
-                const comparePassword = bcrypt.compareSync(password, userPassword);
-                if (!comparePassword) {
-                    return next(new ErrorHandler('Bad email or password'));
-                }
-            }
+            const { email } = req.body;
             const userDb = await model.User.findOne({ where: { email } });
             const { id } = userDb as unknown as IUser;
             // eslint-disable-next-line max-len
