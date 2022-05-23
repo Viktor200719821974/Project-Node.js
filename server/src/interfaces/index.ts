@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface IDevice{
     id: number;
     name: string;
@@ -41,4 +43,8 @@ export interface IToken {
     id: number;
     createdAt: string;
     deletedAt?: string;
+}
+
+export interface IRequestExtended extends Request{
+    user?: IUser;
 }

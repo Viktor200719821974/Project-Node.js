@@ -46,6 +46,10 @@ class UserService {
         return model.User.destroy({ where: { id } });
     }
 
+    async getUserByEmail(email: string) {
+        return model.User.findOne({ where: { email } });
+    }
+
     private static async _hashPassword(password: string): Promise<string> {
         return bcrypt.hash(password, Number(config.USER_SALT_ROUNDS));
     }

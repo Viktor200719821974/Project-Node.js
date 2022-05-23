@@ -25,21 +25,26 @@ class TokenService {
         return model.Token.create({ refreshToken, accessToken, userId });
     }
 
-    // async deleteUserTokenPair(userId: number) {
-    //     return tokenRepository.deleteByParams({ userId });
-    // }
-    //
-    // async deleteTokenPairByParams(searchObject: Partial<IToken>) {
-    //     return tokenRepository.deleteByParams(searchObject);
-    // }
+    async deleteUserTokenPair(userId: number) {
+        return model.Token.destroy({ where: { userId } });
+    }
 
-    // async verifyToken(authToken: string, tokenType = 'access'): Promise<IUserPayload> {
-    //     let secretWord = config.SECRET_ACCESS_KEY;
-    //     if (tokenType === 'refresh') {
-    //         secretWord = config.SECRET_REFRESH_KEY;
-    //     }
-    //     return jwt.verify(authToken, secretWord);
-    // }
+    async deleteTokenPairByParams(refreshToken: string | undefined) {
+        return model.Token.findOne({ where: { refreshToken } });
+    }
+
+    async verifyToken(authToken: string, tokenType = 'access') {
+        let secretWord = config.SECRET_ACCESS_KEY;
+        if (tokenType === 'refresh') {
+            secretWord = config.SECRET_REFRESH_KEY;
+        }
+        // @ts-ignore
+        return jwt.verify(authToken, secretWord);
+    }
+
+    async findByParams(refreshToken: string) {
+        return model.Token.findOne({ where: { refreshToken } });
+    }
 }
 
 export const tokenService = new TokenService();

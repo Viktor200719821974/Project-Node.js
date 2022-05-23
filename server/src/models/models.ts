@@ -6,7 +6,7 @@ const User = sequelize.define('user', {
         type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
     },
     email: { type: DataTypes.STRING, unique: true },
-    password: { type: DataTypes.STRING, allowNull: false },
+    password: { type: DataTypes.STRING },
     name: { type: DataTypes.STRING },
     surname: { type: DataTypes.STRING },
     age: { type: DataTypes.INTEGER },
@@ -15,8 +15,21 @@ const User = sequelize.define('user', {
     is_staff: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
     is_superuser: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
     // role: { type: DataTypes.STRING, defaultValue: 'USER' },
+    // defaultScope: {
+    //     attributes: { exclude: ['password'] },
+    // },
+    // scopes: {
+    //     withPassword: {
+    //         attributes: { },
+    //     }
+    // }
 });
-
+// const user = User.findAll({
+//     attributes: {
+//         exclude: ['password'],
+//     },
+// });
+// console.log(user);
 const Basket = sequelize.define('basket', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });

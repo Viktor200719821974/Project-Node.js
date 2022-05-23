@@ -1,22 +1,42 @@
 import { NextFunction, Request, Response } from 'express';
 import { model } from '../models/models';
-import { IUser } from '../interfaces';
+import { IRequestExtended, IUser, IUserPayload } from '../interfaces';
 import { tokenService } from '../services/tokenService';
+import { userService } from '../services/userService';
+import { authService } from '../services/authService';
 
 class AuthController {
-//     // async logout(req: Request, res: Response): Promise<Response<string>> {
-//     //     const { id } = req.user as IUser;
-//     //
-//     //     await tokenService.deleteUserTokenPair(id);
-//     //     return res.json('Ok');
-//     // }
-//
-    // eslint-disable-next-line consistent-return
-    async login(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async registration(req:Request, res:Response, next: NextFunction) {
+        try {
+            const createdUser = await userService.createUser(req.body, next);
+            const tokenData = await authService.registration(createdUser);
+            res.json(tokenData);
+            return;
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async logout(req: IRequestExtended, res: Response): Promise<Response<string>> {
+        // @ts-ignore
+        const { userId } = req.user as IUserPayload;
+        await tokenService.deleteUserTokenPair(userId);
+        return res.json('Ok');
+    }
+
+    async login(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
         try {
             const { email } = req.body;
-            const userDb = await model.User.findOne({ where: { email } });
-            const { id } = userDb as unknown as IUser;
+            const user = await model.User.findOne({
+                attributes: {
+                    exclude: ['password', 'is_staff', 'is_active', 'is_superuser', 'createdAt', 'updatedAt'],
+                },
+                where: {
+                    email,
+                },
+            });
+            // @ts-ignore
+            const { id } = user;
             // eslint-disable-next-line max-len
             //             // await emailService.sendMail(email, EmailActionEnum.WELCOME, { userName: 'Nastya' });
             const { refreshToken, accessToken } = await tokenService.generateTokenPair(
@@ -26,7 +46,29 @@ class AuthController {
             res.json({
                 refreshToken,
                 accessToken,
-                userDb,
+                user,
+            });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async refreshToken(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            const { id, email } = req.user as IUser;
+            const refreshTokenToDelete = req.get('Authorization');
+            await tokenService.deleteTokenPairByParams(refreshTokenToDelete);
+
+            const { accessToken, refreshToken } = await tokenService.generateTokenPair(
+                { userId: id, userEmail: email },
+            );
+
+            await tokenService.saveToken(id, refreshToken, accessToken);
+
+            res.json({
+                refreshToken,
+                accessToken,
+                user: req.user,
             });
         } catch (e) {
             next(e);

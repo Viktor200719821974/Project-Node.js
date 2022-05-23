@@ -3,9 +3,11 @@ import { userRouter } from './userRouter';
 import { brandRouter } from './brandRouter';
 import { typeRouter } from './typeRouter';
 import { deviceRouter } from './deviceRouter';
+import { authRouter } from './authRouter';
 
 const router = Router();
 
+router.use('/auth', authRouter);
 router.use('/user', userRouter);
 router.use('/brand', brandRouter);
 router.use('/type', typeRouter);
