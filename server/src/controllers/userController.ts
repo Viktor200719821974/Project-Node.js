@@ -86,9 +86,9 @@ class UserController {
     //     return res.json({ token });
     // }
 
-    async check(req: Request, res: Response) {
-        return res.json('All Right');
-    }
+    // async check(req: Request, res: Response) {
+    //     return res.json('All Right');
+    // }
 }
 
 export const userController = new UserController();

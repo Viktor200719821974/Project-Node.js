@@ -7,7 +7,7 @@ import { IRequestExtended, IUser, IUserPayload } from '../interfaces';
 import { model } from '../models/models';
 
 class AuthMiddleware {
-    public checkAccessToken(req: IRequestExtended, res: Response, next: NextFunction) {
+    async checkAccessToken(req: IRequestExtended, res: Response, next: NextFunction) {
         if (req.method === 'OPTIONS') {
             next();
         }
@@ -59,6 +59,9 @@ class AuthMiddleware {
         try {
             const { email } = req.body;
             const user = await model.User.findOne({ where: { email } });
+            if (!user) {
+                next(new ErrorHandler('Not found'));
+            }
             // @ts-ignore
             const userId = user.get('id');
             const token = await model.Token.findAll({ where: { userId } });
@@ -90,6 +93,18 @@ class AuthMiddleware {
             next(e);
         }
     }
+    // async findEmailUser(req: IRequestExtended, res: Response, next: NextFunction){
+    //     try {
+    //         const {email} = req.body;
+    //         const exist = await model.User.findOne({where: {email}});
+    //         if (exist) {
+    //             next(new ErrorHandler('Mail already exists'));
+    //         }
+    //         next();
+    //     }catch (e) {
+    //         next(e);
+    //     }
+    // }
 }
 
 export const authMiddleware = new AuthMiddleware();

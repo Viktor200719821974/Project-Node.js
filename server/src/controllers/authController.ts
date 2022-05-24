@@ -4,12 +4,17 @@ import { IRequestExtended, IUser, IUserPayload } from '../interfaces';
 import { tokenService } from '../services/tokenService';
 import { userService } from '../services/userService';
 import { authService } from '../services/authService';
+import { constants } from '../constants';
+import { emailService } from '../services/emailService';
+// import { EmailActionEnum } from '../constants';
 
 class AuthController {
     async registration(req:Request, res:Response, next: NextFunction) {
         try {
             const createdUser = await userService.createUser(req.body, next);
             const tokenData = await authService.registration(createdUser);
+            const { email, name } = createdUser;
+            await emailService.sendMail(email, { userName: name });
             res.json(tokenData);
             return;
         } catch (e) {
@@ -37,8 +42,6 @@ class AuthController {
             });
             // @ts-ignore
             const { id } = user;
-            // eslint-disable-next-line max-len
-            //             // await emailService.sendMail(email, EmailActionEnum.WELCOME, { userName: 'Nastya' });
             const { refreshToken, accessToken } = await tokenService.generateTokenPair(
                 { userId: id, userEmail: email },
             );
@@ -56,7 +59,7 @@ class AuthController {
     async refreshToken(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
             const { id, email } = req.user as IUser;
-            const refreshTokenToDelete = req.get('Authorization');
+            const refreshTokenToDelete = req.get(constants.AUTHORIZATION);
             await tokenService.deleteTokenPairByParams(refreshTokenToDelete);
 
             const { accessToken, refreshToken } = await tokenService.generateTokenPair(
