@@ -14,22 +14,8 @@ const User = sequelize.define('user', {
     is_active: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
     is_staff: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
     is_superuser: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
-    // role: { type: DataTypes.STRING, defaultValue: 'USER' },
-    // defaultScope: {
-    //     attributes: { exclude: ['password'] },
-    // },
-    // scopes: {
-    //     withPassword: {
-    //         attributes: { },
-    //     }
-    // }
 });
-// const user = User.findAll({
-//     attributes: {
-//         exclude: ['password'],
-//     },
-// });
-// console.log(user);
+
 const Basket = sequelize.define('basket', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
@@ -43,7 +29,7 @@ const Device = sequelize.define('device', {
     name: { type: DataTypes.STRING, unique: true, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
     rating: { type: DataTypes.INTEGER, defaultValue: 0 },
-    image: { type: DataTypes.STRING, allowNull: false },
+    // image: { type: DataTypes.STRING, allowNull: false },
 });
 
 const Type = sequelize.define('type', {
@@ -77,6 +63,11 @@ const Token = sequelize.define('token', {
     refreshToken: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
+const ImageDevice = sequelize.define('imageDevice', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    image: { type: DataTypes.STRING, allowNull: false },
+});
+
 User.hasOne(Basket);
 Basket.belongsTo(User);
 
@@ -104,6 +95,9 @@ BasketDevice.belongsTo(Device);
 Device.hasMany(DeviceInfo, { as: 'info' });
 DeviceInfo.belongsTo(Device);
 
+Device.hasMany(ImageDevice, { as: 'imageDevice' });
+ImageDevice.belongsTo(Device);
+
 Type.belongsToMany(Brand, { through: TypeBrand });
 Brand.belongsToMany(Type, { through: TypeBrand });
 
@@ -118,4 +112,5 @@ export const model = {
     DeviceInfo,
     TypeBrand,
     Token,
+    ImageDevice,
 };
