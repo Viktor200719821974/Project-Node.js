@@ -65,7 +65,9 @@ const Token = sequelize.define('token', {
 
 const ImageDevice = sequelize.define('imageDevice', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    image: { type: DataTypes.STRING, allowNull: false },
+    imageType: { type: DataTypes.STRING },
+    imageName: { type: DataTypes.STRING },
+    imageData: { type: DataTypes.BLOB },
 });
 
 User.hasOne(Basket);

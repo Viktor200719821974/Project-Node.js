@@ -3,9 +3,12 @@ import { Request } from 'express';
 export interface IDevice{
     id: number;
     name: string;
+    typeId: number;
+    brandId: number;
     price: string;
     rating: number;
-    image: string;
+    info: string;
+    imageDevice: string;
 }
 export interface IUser{
     id: number;
@@ -47,4 +50,11 @@ export interface IToken {
 
 export interface IRequestExtended extends Request{
     user?: IUser;
+}
+
+export interface IImageDevice {
+    id: number;
+    imageType: string;
+    imageName: string;
+    imageData: {};
 }
