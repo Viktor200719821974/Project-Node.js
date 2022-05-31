@@ -25,11 +25,13 @@ export interface IUser{
 export interface ITokenDataToSave {
     refreshToken: string;
     accessToken: string;
+    activateToken: string;
     userId: number;
 }
 export interface ITokenPair {
     accessToken: string;
     refreshToken: string;
+    activateToken: string;
 }
 
 export interface IUserPayload {
@@ -42,6 +44,7 @@ export type ITokenData = ITokenPair & IUserPayload;
 export interface IToken {
     refreshToken: string;
     accessToken: string;
+    activateToken: string;
     userId: number;
     id: number;
     createdAt: string;

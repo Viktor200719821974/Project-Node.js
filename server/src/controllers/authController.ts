@@ -6,15 +6,15 @@ import { userService } from '../services/userService';
 import { authService } from '../services/authService';
 import { constants } from '../constants';
 import { emailService } from '../services/emailService';
-// import { EmailActionEnum } from '../constants';
 
 class AuthController {
     async registration(req:Request, res:Response, next: NextFunction) {
         try {
             const createdUser = await userService.createUser(req.body, next);
             const tokenData = await authService.registration(createdUser);
+            const token = tokenData.activateToken;
             const { email, name } = createdUser;
-            await emailService.sendMail(email, { userName: name });
+            await emailService.sendMail(email, 'WELCOME', { userName: name }, token);
             res.json(tokenData);
             return;
         } catch (e) {

@@ -4,6 +4,7 @@ import { brandRouter } from './brandRouter';
 import { typeRouter } from './typeRouter';
 import { deviceRouter } from './deviceRouter';
 import { authRouter } from './authRouter';
+import { imageDeviceRouter } from './imageDeviceRouter';
 
 const router = Router();
 
@@ -12,6 +13,7 @@ router.use('/user', userRouter);
 router.use('/brand', brandRouter);
 router.use('/type', typeRouter);
 router.use('/device', deviceRouter);
+router.use('/imageDevice', imageDeviceRouter);
 // @ts-ignore
 router.use('*', (err, req, res, next) => {
     res.status(err.status || 500)

@@ -15,14 +15,23 @@ class TokenService {
             config.SECRET_REFRESH_KEY!,
             { expiresIn: '24h' },
         );
+        const activateToken = jwt.sign(
+            payload,
+            config.SECRET_ACTIVATE_KEY!,
+            { expiresIn: '48h' },
+        );
         return {
             accessToken,
             refreshToken,
+            activateToken,
         };
     }
 
-    async saveToken(userId: number, refreshToken: string, accessToken: string) {
-        return model.Token.create({ refreshToken, accessToken, userId });
+    // eslint-disable-next-line max-len
+    async saveToken(userId: number, refreshToken: string, accessToken: string, activateToken?: string) {
+        return model.Token.create({
+            refreshToken, accessToken, activateToken, userId,
+        });
     }
 
     async deleteUserTokenPair(userId: number) {

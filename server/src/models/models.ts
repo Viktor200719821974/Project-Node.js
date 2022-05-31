@@ -61,14 +61,14 @@ const Token = sequelize.define('token', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     accessToken: { type: DataTypes.STRING, unique: true, allowNull: false },
     refreshToken: { type: DataTypes.STRING, unique: true, allowNull: false },
+    activateToken: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
 const ImageDevice = sequelize.define('imageDevice', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    imageType: { type: DataTypes.STRING },
-    imageName: { type: DataTypes.STRING },
-    imageData: { type: DataTypes.BLOB },
-});
+    imageLocation: { type: DataTypes.STRING },
+    deviceId: { type: DataTypes.INTEGER },
+}, { createdAt: false, updatedAt: false });
 
 User.hasOne(Basket);
 Basket.belongsTo(User);

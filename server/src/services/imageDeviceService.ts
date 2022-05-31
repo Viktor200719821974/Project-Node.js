@@ -35,17 +35,7 @@ class ImageDeviceService {
                 exclude: ['createdAt', 'updatedAt'],
             },
             where: { id },
-        })
-        //     .then((projects) => {
-        //     // eslint-disable-next-line array-callback-return
-        //     projects.map((project) => { // @ts-ignore
-        //         // eslint-disable-next-line no-param-reassign
-        //         project.get('imageData') = project.get('imageData').toString('base64');
-        //     });
-        //     return projects;
-        // })
-        // eslint-disable-next-line semi-style
-        ;
+        });
     }
 }
 

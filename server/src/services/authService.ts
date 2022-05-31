@@ -13,7 +13,8 @@ class AuthService {
         // @ts-ignore
         const { id } = userModel;
         const tokenPair = await tokenService.generateTokenPair({ userId: id, userEmail: email });
-        await tokenService.saveToken(id, tokenPair.refreshToken, tokenPair.accessToken);
+        // eslint-disable-next-line max-len
+        await tokenService.saveToken(id, tokenPair.refreshToken, tokenPair.accessToken, tokenPair.activateToken);
 
         return {
             ...tokenPair,

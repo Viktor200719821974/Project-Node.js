@@ -4,6 +4,7 @@ import { IUser } from '../interfaces';
 import { config } from '../config/config';
 import { model } from '../models/models';
 import { ErrorHandler } from '../error/errorHandler';
+import { emailService } from './emailService';
 
 class UserService {
     async getAll() {
@@ -48,6 +49,67 @@ class UserService {
 
     async getUserByEmail(email: string) {
         return model.User.findOne({ where: { email } });
+    }
+
+    async userManager(id: number, userEmail: string, next: NextFunction) {
+        const user = await model.User.findOne({ where: { email: userEmail } });
+        if (user) {
+            const superuser = user.get('is_superuser');
+            if (!superuser) {
+                next(new ErrorHandler('Forbidden', 403));
+            }
+        }
+        return model.User.update({ is_staff: true }, { where: { id } });
+    }
+
+    async userIsNotManager(id: number, userEmail: string, next: NextFunction) {
+        const user = await model.User.findOne({ where: { email: userEmail } });
+        if (user) {
+            const superuser = user.get('is_superuser');
+            if (!superuser) {
+                next(new ErrorHandler('Forbidden', 403));
+            }
+        }
+        return model.User.update({ is_staff: false }, { where: { id } });
+    }
+
+    async userBlocked(id: number, userEmail: string, next: NextFunction) {
+        const user = await model.User.findOne({ where: { email: userEmail } });
+        if (user) {
+            const manager = user.get('is_staff');
+            if (!manager) {
+                next(new ErrorHandler('Forbidden', 403));
+            }
+        }
+        // @ts-ignore
+        const { email, name, surname } = await model.User.findOne({ where: { id } });
+        await emailService.sendMail(email, 'ACCOUNT_BLOCKED', { userName: name, surname });
+        return model.User.update({ is_active: false }, { where: { id } });
+    }
+
+    async userUnlocked(id: number, userEmail: string, next: NextFunction) {
+        const user = await model.User.findOne({ where: { email: userEmail } });
+        if (user) {
+            const manager = user.get('is_staff');
+            if (!manager) {
+                next(new ErrorHandler('Forbidden', 403));
+            }
+        }
+        // @ts-ignore
+        const { email, name, surname } = await model.User.findOne({ where: { id } });
+        await emailService.sendMail(email, 'ACCOUNT_UNLOCKED', { userName: name, surname });
+        return model.User.update({ is_active: true }, { where: { id } });
+    }
+
+    async activateUser(activateToken: string, next: NextFunction) {
+        const token = await model.Token.findOne({ where: { activateToken } });
+        if (!token) {
+            next(new ErrorHandler('Not Found', 404));
+        }
+        // @ts-ignore
+        const id = token.get('userId');
+        await model.User.update({ is_active: true }, { where: { id } });
+        await model.Token.update({ activateToken: 'User activated' }, { where: { userId: id } });
     }
 
     private static async _hashPassword(password: string): Promise<string> {

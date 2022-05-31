@@ -11,12 +11,26 @@ class EmailService {
         },
     });
 
-    async sendMail(userMail:string, context = {}):
+    // eslint-disable-next-line max-len
+    async sendMail(userMail:string, template: string, context?: { userName: any; surname?: any; }, token?: string):
         Promise<SentMessageInfo> {
-        const { subject, templateName } = emailInfo.WELCOME;
-        Object.assign(context, { frontendUrl: 'https://google.com' });
-
-        const html = await this.templateRenderer.render(templateName, context);
+        // @ts-ignore
+        let subject;
+        let templateName;
+        if (template === 'WELCOME') {
+            subject = emailInfo.WELCOME.subject;
+            templateName = emailInfo.WELCOME.templateName;
+        }
+        if (template === 'ACCOUNT_BLOCKED') {
+            subject = emailInfo.ACCOUNT_BLOCKED.subject;
+            templateName = emailInfo.ACCOUNT_BLOCKED.templateName;
+        }
+        if (template === 'ACCOUNT_UNLOCKED') {
+            subject = emailInfo.ACCOUNT_UNLOCKED.subject;
+            templateName = emailInfo.ACCOUNT_UNLOCKED.templateName;
+        }
+        Object.assign(context, { frontendUrl: 'http://localhost:5500', activateUrl: `http://localhost:5500/api/user/activateUser/${token}` });
+        const html = await this.templateRenderer.render(String(templateName), context);
         const emailTransporter = nodemailer.createTransport({
             from: 'No Reply Node.js',
             service: 'gmail',

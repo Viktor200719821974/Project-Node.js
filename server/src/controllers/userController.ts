@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { userService } from '../services/userService';
+import { IRequestExtended } from '../interfaces';
+import { ErrorHandler } from '../error/errorHandler';
 
 // const generateJwt = (id:number, email: string, role: string) => jwt.sign(
 //     { id, email, role },
@@ -45,6 +47,67 @@ class UserController {
             const { id } = req.params;
             await userService.deleteUser(id);
             res.status(204).end();
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async userManager(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            // @ts-ignore
+            const { userEmail } = req.user;
+            const { id } = req.params;
+            await userService.userManager(Number(id), userEmail, next);
+            res.json('User is manager');
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async userIsNotManager(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            // @ts-ignore
+            const { userEmail } = req.user;
+            const { id } = req.params;
+            await userService.userIsNotManager(Number(id), userEmail, next);
+            res.json('User is not manager');
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async userBlocked(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            // @ts-ignore
+            const { userEmail } = req.user;
+            const { id } = req.params;
+            await userService.userBlocked(Number(id), userEmail, next);
+            res.json('User is blocked');
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async userUnlocked(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            // @ts-ignore
+            const { userEmail } = req.user;
+            const { id } = req.params;
+            await userService.userUnlocked(Number(id), userEmail, next);
+            res.json('User is unlocked');
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async activateUser(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            const activateToken = req.params.token;
+            if (!activateToken) {
+                next(new ErrorHandler('Bad request'));
+            }
+            await userService.activateUser(activateToken, next);
+            res.json('User activated');
         } catch (e) {
             next(e);
         }

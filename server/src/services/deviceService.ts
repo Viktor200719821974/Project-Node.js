@@ -11,9 +11,9 @@ class DeviceService {
         });
         if (imageDevice) {
             const inf = JSON.parse(imageDevice);
-            inf.forEach((i: { image: string; }) => model.ImageDevice.create(
+            inf.forEach((i: { imageLocation: string; }) => model.ImageDevice.create(
                 {
-                    image: i.image,
+                    imageLocation: i.imageLocation,
                     deviceId: device.get('id'),
                 },
             ));
@@ -54,7 +54,7 @@ class DeviceService {
                 exclude: ['createdAt', 'updatedAt'],
             },
             where: { id },
-            include: [{ model: model.DeviceInfo, as: 'info' }],
+            include: [{ model: model.DeviceInfo, as: 'info' }, { model: model.ImageDevice, as: 'imageDevice' }],
         });
     }
 }
