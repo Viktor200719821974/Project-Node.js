@@ -29,6 +29,14 @@ class ImageDeviceService {
         });
     }
 
+    async getAllImage() {
+        return model.ImageDevice.findAll({
+            attributes: {
+                exclude: ['createdAt', 'updatedAt'],
+            },
+        });
+    }
+
     async getOneImage(id: number) {
         return model.ImageDevice.findAll({
             attributes: {

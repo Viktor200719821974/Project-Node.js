@@ -25,6 +25,7 @@ class AuthController {
     async logout(req: IRequestExtended, res: Response): Promise<Response<string>> {
         // @ts-ignore
         const { userId } = req.user as IUserPayload;
+        console.log(userId, 'userId');
         await tokenService.deleteUserTokenPair(userId);
         return res.json('Ok');
     }
@@ -34,7 +35,7 @@ class AuthController {
             const { email } = req.body;
             const user = await model.User.findOne({
                 attributes: {
-                    exclude: ['password', 'is_staff', 'is_active', 'is_superuser', 'createdAt', 'updatedAt'],
+                    exclude: ['password', 'is_active', 'createdAt', 'updatedAt'],
                 },
                 where: {
                     email,

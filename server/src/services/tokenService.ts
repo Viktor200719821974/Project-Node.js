@@ -4,7 +4,7 @@ import { ITokenPair, IUserPayload } from '../interfaces';
 import { model } from '../models/models';
 
 class TokenService {
-    async generateTokenPair(payload: IUserPayload):Promise<ITokenPair> {
+    async generateTokenPairActivate(payload: IUserPayload):Promise<ITokenPair> {
         const accessToken = jwt.sign(
             payload,
             config.SECRET_ACCESS_KEY!,
@@ -27,15 +27,39 @@ class TokenService {
         };
     }
 
+    async generateTokenPair(payload: IUserPayload):Promise<ITokenPair> {
+        const accessToken = jwt.sign(
+            payload,
+            config.SECRET_ACCESS_KEY!,
+            { expiresIn: '24h' },
+        );
+        const refreshToken = jwt.sign(
+            payload,
+            config.SECRET_REFRESH_KEY!,
+            { expiresIn: '24h' },
+        );
+        return {
+            accessToken,
+            refreshToken,
+        };
+    }
+
     // eslint-disable-next-line max-len
-    async saveToken(userId: number, refreshToken: string, accessToken: string, activateToken?: string) {
+    async saveTokenActivate(userId: number, refreshToken: string, accessToken: string, activateToken?: string) {
         return model.Token.create({
             refreshToken, accessToken, activateToken, userId,
         });
     }
 
+    // eslint-disable-next-line max-len
+    async saveToken(userId: number, refreshToken: string, accessToken: string) {
+        return model.Token.update({
+            refreshToken, accessToken,
+        }, { where: { userId } });
+    }
+
     async deleteUserTokenPair(userId: number) {
-        return model.Token.destroy({ where: { userId } });
+        return model.Token.update({ accessToken: 'null', refreshToken: 'null' }, { where: { userId } });
     }
 
     async deleteTokenPairByParams(refreshToken: string | undefined) {

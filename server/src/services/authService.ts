@@ -12,9 +12,10 @@ class AuthService {
         const userModel = await model.User.findOne({ where: { email } });
         // @ts-ignore
         const { id } = userModel;
-        const tokenPair = await tokenService.generateTokenPair({ userId: id, userEmail: email });
         // eslint-disable-next-line max-len
-        await tokenService.saveToken(id, tokenPair.refreshToken, tokenPair.accessToken, tokenPair.activateToken);
+        const tokenPair = await tokenService.generateTokenPairActivate({ userId: id, userEmail: email });
+        // eslint-disable-next-line max-len
+        await tokenService.saveTokenActivate(id, tokenPair.refreshToken, tokenPair.accessToken, tokenPair.activateToken);
 
         return {
             ...tokenPair,

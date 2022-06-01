@@ -2,14 +2,15 @@ import React from 'react';
 import {Card, Col, Image} from "react-bootstrap";
 import star from "../image/Star 1.png";
 import {useHistory} from "react-router-dom";
-import {DEVICE_ROUTE, REACT_APP_API_URL} from "../utils/constans";
+import {DEVICE_ROUTE} from "../utils/constans";
 
-const DeviceItem = ({device}) => {
+const DeviceItem = ({device, image}) => {
     const history = useHistory();
+    const img = image.map(c => c.imageLocation);
     return (
         <Col md={3} className={"mt-3"} onClick={() => history.push(DEVICE_ROUTE + '/' + device.id)}>
             <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
-                <Image width={150} height={150} src={REACT_APP_API_URL + device.image}/>
+                 <Image width={150} height={150} src={img[0]}/>
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div>Samsung...</div>
                     <div className="d-flex align-items-center">

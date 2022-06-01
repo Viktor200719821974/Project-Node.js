@@ -1,21 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import star from "../image/Star 1.png";
 import {fetchOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
-import {REACT_APP_API_URL} from "../utils/constans";
+import ImageDevice from "../components/ImageDevice";
+// import {REACT_APP_API_URL} from "../utils/constans";
 
 const DevicePage = () => {
-    const [device, setDevice] = useState({info: []});
+    const [device, setDevice] = useState({info: [], imageDevice: [],});
+    const [image, setImage] = useState([])
     const {id} = useParams();
     useEffect(() => {
-        fetchOneDevice(id).then(data => setDevice(data));
-    },[id]);
+        fetchOneDevice(id).then(data => {
+            setDevice(data);
+            setImage(data.imageDevice);
+        });
+    },[]);
     return (
         <Container className={"mt-3"}>
             <Row>
                 <Col md={4}>
-                    <Image width={300} height={300} src={REACT_APP_API_URL + device.image}/>
+                    {
+                        image && image.map(c => <ImageDevice key={c.id} image={c.imageLocation}/>)
+                    }
                 </Col>
                 <Col md={4}>
                     <Row className={"d-flex flex-column align-items-center"}>

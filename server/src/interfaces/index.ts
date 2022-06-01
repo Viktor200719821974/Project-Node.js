@@ -25,13 +25,13 @@ export interface IUser{
 export interface ITokenDataToSave {
     refreshToken: string;
     accessToken: string;
-    activateToken: string;
+    activateToken?: string;
     userId: number;
 }
 export interface ITokenPair {
     accessToken: string;
     refreshToken: string;
-    activateToken: string;
+    activateToken?: string;
 }
 
 export interface IUserPayload {
@@ -57,7 +57,6 @@ export interface IRequestExtended extends Request{
 
 export interface IImageDevice {
     id: number;
-    imageType: string;
     imageName: string;
-    imageData: {};
+    deviceId: number;
 }

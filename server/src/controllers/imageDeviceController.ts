@@ -41,6 +41,15 @@ class ImageDeviceController {
         }
     }
 
+    async getAllImage(req: Request, res: Response, next: NextFunction) {
+        try {
+            const image = await imageDeviceService.getAllImage();
+            res.json(image);
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async getOneImage(req: Request, res: Response, next: NextFunction) {
         try {
             const { id } = req.params;

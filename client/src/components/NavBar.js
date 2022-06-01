@@ -11,7 +11,8 @@ const NavBar = observer(() => {
     const logOut = () => {
         user.setUser({});
         user.setIsAuth(false);
-        localStorage.removeItem('token');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
     }
     return (
         <div>
