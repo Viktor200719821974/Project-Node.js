@@ -8,7 +8,7 @@ import { constants } from '../constants';
 import { emailService } from '../services/emailService';
 
 class AuthController {
-    async registration(req:Request, res:Response, next: NextFunction) {
+    async registration(req:Request, res:Response, next: NextFunction): Promise<void> {
         try {
             const createdUser = await userService.createUser(req.body, next);
             const tokenData = await authService.registration(createdUser);
@@ -16,7 +16,6 @@ class AuthController {
             const { email, name } = createdUser;
             await emailService.sendMail(email, 'WELCOME', { userName: name }, token);
             res.json(tokenData);
-            return;
         } catch (e) {
             next(e);
         }
@@ -25,7 +24,6 @@ class AuthController {
     async logout(req: IRequestExtended, res: Response): Promise<Response<string>> {
         // @ts-ignore
         const { userId } = req.user as IUserPayload;
-        console.log(userId, 'userId');
         await tokenService.deleteUserTokenPair(userId);
         return res.json('Ok');
     }

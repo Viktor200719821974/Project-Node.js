@@ -54,7 +54,7 @@ class DeviceService {
                 exclude: ['createdAt', 'updatedAt'],
             },
             where: { id },
-            include: [{ model: model.DeviceInfo, as: 'info' }, { model: model.ImageDevice, as: 'imageDevice' }],
+            include: [{ model: model.DeviceInfo, as: 'info' }, { model: model.ImageDeviceAws, as: 'imageDeviceAws' }],
         });
     }
 }

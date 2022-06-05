@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
 export interface IDevice{
     id: number;
@@ -10,7 +11,7 @@ export interface IDevice{
     info: string;
     imageDevice: string;
 }
-export interface IUser{
+export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;
     email: string;
     password: string;
@@ -25,38 +26,43 @@ export interface IUser{
 export interface ITokenDataToSave {
     refreshToken: string;
     accessToken: string;
-    activateToken?: string;
+    activateToken: string;
     userId: number;
 }
 export interface ITokenPair {
     accessToken: string;
     refreshToken: string;
-    activateToken?: string;
 }
-
+export interface ITokenPairActivate {
+    accessToken: string;
+    refreshToken: string;
+    activateToken: string;
+}
 export interface IUserPayload {
     userId: number,
     userEmail: string,
 }
 
-export type ITokenData = ITokenPair & IUserPayload;
+export type ITokenData = ITokenPairActivate & IUserPayload;
 
-export interface IToken {
+export interface IToken extends Model<InferAttributes<IToken>, InferCreationAttributes<IToken>>{
     refreshToken: string;
     accessToken: string;
     activateToken: string;
     userId: number;
     id: number;
-    createdAt: string;
-    deletedAt?: string;
+    // createdAt: string;
+    // deletedAt?: string;
 }
 
 export interface IRequestExtended extends Request{
     user?: IUser;
 }
 
-export interface IImageDevice {
+// eslint-disable-next-line max-len
+export interface IImageDevice extends Model<InferAttributes<IImageDevice>, InferCreationAttributes<IImageDevice>> {
     id: number;
-    imageName: string;
+    // imageName: string;
+    imageLocation: string;
     deviceId: number;
 }

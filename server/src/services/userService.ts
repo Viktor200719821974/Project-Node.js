@@ -7,12 +7,19 @@ import { ErrorHandler } from '../error/errorHandler';
 import { emailService } from './emailService';
 
 class UserService {
-    async getAll() {
-        return model.User.findAll();
+    async getAll(): Promise<IUser[]> {
+        return model.User.findAll({
+            attributes: {
+                exclude: ['password', 'createdAt', 'updatedAt'],
+            },
+        });
     }
 
-    async getOne(id: number) {
+    async getOne(id: number): Promise<IUser | null> {
         return model.User.findOne({
+            attributes: {
+                exclude: ['password', 'createdAt', 'updatedAt'],
+            },
             where: { id },
         });
     }
@@ -31,7 +38,7 @@ class UserService {
         return user;
     }
 
-    async updateUser(id: string, user: IUser) {
+    async updateUser(id: string, user: IUser): Promise<IUser | null> {
         await model.User.update(
             {
                 ...user,
@@ -47,7 +54,7 @@ class UserService {
         return model.User.destroy({ where: { id } });
     }
 
-    async getUserByEmail(email: string) {
+    async getUserByEmail(email: string): Promise<IUser | null> {
         return model.User.findOne({ where: { email } });
     }
 
@@ -106,10 +113,9 @@ class UserService {
         if (!token) {
             next(new ErrorHandler('Not Found', 404));
         }
-        // @ts-ignore
-        const id = token.get('userId');
+        const id = token?.userId;
         await model.User.update({ is_active: true }, { where: { id } });
-        await model.Token.update({ activateToken: 'User activated' }, { where: { userId: id } });
+        await model.Token.update({ activateToken: `User ${id} activated` }, { where: { userId: id } });
     }
 
     private static async _hashPassword(password: string): Promise<string> {

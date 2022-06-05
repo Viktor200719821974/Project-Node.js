@@ -11,3 +11,12 @@ export const sequelize = new Sequelize(
         port: Number(config.DB_PORT),
     },
 );
+// export function DeviceFactory(newSequelize: Sequelize): DeviceNewStatic {
+//     return <DeviceNewStatic>sequelize.define('device', {
+//         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+//         name: { type: DataTypes.STRING, unique: true, allowNull: false },
+//         price: { type: DataTypes.INTEGER, allowNull: false },
+//         rating: { type: DataTypes.INTEGER, defaultValue: 0 },
+//         // image: { type: DataTypes.STRING, allowNull: false },
+//     });
+// }

@@ -1,7 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db';
+import { IImageDevice, IToken, IUser } from '../interfaces';
 
-const User = sequelize.define('user', {
+const User = sequelize.define<IUser>('user', {
     id: {
         type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
     },
@@ -57,14 +58,21 @@ const TypeBrand = sequelize.define('type_brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 
-const Token = sequelize.define('token', {
+const Token = sequelize.define<IToken>('token', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     accessToken: { type: DataTypes.STRING, unique: true, allowNull: false },
     refreshToken: { type: DataTypes.STRING, unique: true, allowNull: false },
     activateToken: { type: DataTypes.STRING, unique: true, allowNull: false },
+    userId: { type: DataTypes.INTEGER },
 });
 
 const ImageDevice = sequelize.define('imageDevice', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    imageLocation: { type: DataTypes.STRING },
+    deviceId: { type: DataTypes.INTEGER },
+}, { createdAt: false, updatedAt: false });
+
+const ImageDeviceAws = sequelize.define<IImageDevice>('imageDeviceAws', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     imageLocation: { type: DataTypes.STRING },
     deviceId: { type: DataTypes.INTEGER },
@@ -100,6 +108,9 @@ DeviceInfo.belongsTo(Device);
 Device.hasMany(ImageDevice, { as: 'imageDevice' });
 ImageDevice.belongsTo(Device);
 
+Device.hasMany(ImageDeviceAws, { as: 'imageDeviceAws' });
+ImageDeviceAws.belongsTo(Device);
+
 Type.belongsToMany(Brand, { through: TypeBrand });
 Brand.belongsToMany(Type, { through: TypeBrand });
 
@@ -115,4 +126,5 @@ export const model = {
     TypeBrand,
     Token,
     ImageDevice,
+    ImageDeviceAws,
 };

@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config/config';
-import { ITokenPair, IUserPayload } from '../interfaces';
+import { ITokenPair, ITokenPairActivate, IUserPayload } from '../interfaces';
 import { model } from '../models/models';
 
 class TokenService {
-    async generateTokenPairActivate(payload: IUserPayload):Promise<ITokenPair> {
+    async generateTokenPairActivate(payload: IUserPayload):Promise<ITokenPairActivate> {
         const accessToken = jwt.sign(
             payload,
             config.SECRET_ACCESS_KEY!,
@@ -45,7 +45,8 @@ class TokenService {
     }
 
     // eslint-disable-next-line max-len
-    async saveTokenActivate(userId: number, refreshToken: string, accessToken: string, activateToken?: string) {
+    async saveTokenActivate(userId: number, refreshToken: string, accessToken: string, activateToken: string) {
+        // @ts-ignore
         return model.Token.create({
             refreshToken, accessToken, activateToken, userId,
         });

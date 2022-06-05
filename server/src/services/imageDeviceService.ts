@@ -4,6 +4,9 @@ import path from 'path';
 import { NextFunction } from 'express';
 import { UploadedFile } from 'express-fileupload';
 import { model } from '../models/models';
+import { s3Service } from './s3.service';
+import { IImageDevice } from '../interfaces';
+import { ErrorHandler } from '../error/errorHandler';
 
 class ImageDeviceService {
     // eslint-disable-next-line max-len
@@ -44,6 +47,16 @@ class ImageDeviceService {
             },
             where: { id },
         });
+    }
+
+    // eslint-disable-next-line max-len
+    async createImageAws(image: UploadedFile, id: number, next: NextFunction) : Promise<IImageDevice> {
+        if (!image) {
+            next(new ErrorHandler('Bad Request'));
+        }
+        const uploadImage = await s3Service.uploadFile(image, 'imageDevice', Number(id));
+        // @ts-ignore
+        return model.ImageDeviceAws.create({ imageLocation: uploadImage?.Location, deviceId: id });
     }
 }
 

@@ -2,11 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { UploadedFile } from 'express-fileupload';
 import { ErrorHandler } from '../error/errorHandler';
 import { imageDeviceService } from '../services/imageDeviceService';
-import { s3Service } from '../services/s3.service';
-import { model } from '../models/models';
 
 class ImageDeviceController {
-    async createImage(req: Request, res: Response, next: NextFunction) {
+    async createImage(req: Request, res: Response, next: NextFunction) :Promise<void> {
         try {
             const { id } = req.params;
             const image = req.files?.imageName as UploadedFile;
@@ -29,12 +27,7 @@ class ImageDeviceController {
         try {
             const image = req.files?.image as UploadedFile;
             const { id } = req.params;
-            let uploadImage;
-            if (image) {
-                uploadImage = await s3Service.uploadFile(image, 'imageDevice', Number(id));
-            }
-            // eslint-disable-next-line max-len
-            const imageDrop = await model.ImageDevice.create({ imageLocation: uploadImage?.Location, deviceId: id });
+            const imageDrop = await imageDeviceService.createImageAws(image, Number(id), next);
             res.json(imageDrop);
         } catch (e) {
             next(e);
