@@ -12,8 +12,8 @@ export const login = async (email, password) => {
     localStorage.setItem('refreshToken', data.refreshToken);
     return data;
 }
-export const logout = async () => {
-    return await $host.post('/auth/logout');
+export const logOutUser = async () => {
+    return await $authHost.post('/auth/logout');
 }
 export const check = async () => {
     const {data} = await $authHost.get('/user/auth');
@@ -22,5 +22,4 @@ export const check = async () => {
 }
 export const fetchUserId = async (id) => {
     return await $host.post('/user/' + id);
-
 }

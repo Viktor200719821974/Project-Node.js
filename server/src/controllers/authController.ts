@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { model } from '../models/models';
-import { IRequestExtended, IUser, IUserPayload } from '../interfaces';
+import { IRequestExtended, IUser } from '../interfaces';
 import { tokenService } from '../services/tokenService';
 import { userService } from '../services/userService';
 import { authService } from '../services/authService';
@@ -23,7 +22,7 @@ class AuthController {
 
     async logout(req: IRequestExtended, res: Response): Promise<Response<string>> {
         // @ts-ignore
-        const { userId } = req.user as IUserPayload;
+        const { userId } = req.user;
         await tokenService.deleteUserTokenPair(userId);
         return res.json('Ok');
     }
@@ -31,25 +30,8 @@ class AuthController {
     async login(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
         try {
             const { email } = req.body;
-            const user = await model.User.findOne({
-                attributes: {
-                    exclude: ['password', 'is_active', 'createdAt', 'updatedAt'],
-                },
-                where: {
-                    email,
-                },
-            });
-            // @ts-ignore
-            const { id } = user;
-            const { refreshToken, accessToken } = await tokenService.generateTokenPair(
-                { userId: id, userEmail: email },
-            );
-            await tokenService.saveToken(id, refreshToken, accessToken);
-            res.json({
-                refreshToken,
-                accessToken,
-                user,
-            });
+            const user = await authService.login(email, next);
+            res.json(user);
         } catch (e) {
             next(e);
         }

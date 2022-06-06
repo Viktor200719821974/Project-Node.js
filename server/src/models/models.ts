@@ -1,6 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db';
-import { IImageDevice, IToken, IUser } from '../interfaces';
+import {
+    IDevice, IImageDevice, IToken, IUser,
+} from '../interfaces';
 
 const User = sequelize.define<IUser>('user', {
     id: {
@@ -25,12 +27,15 @@ const BasketDevice = sequelize.define('basket_device', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 
-const Device = sequelize.define('device', {
+const Device = sequelize.define<IDevice>('device', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, unique: true, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
     rating: { type: DataTypes.INTEGER, defaultValue: 0 },
-    // image: { type: DataTypes.STRING, allowNull: false },
+    typeId: { type: DataTypes.INTEGER },
+    brandId: { type: DataTypes.INTEGER },
+    // info: { type: DataTypes.ARRAY },
+    // imageDeviceAws: { type: DataTypes.STRING },
 });
 
 const Type = sequelize.define('type', {
@@ -68,7 +73,7 @@ const Token = sequelize.define<IToken>('token', {
 
 const ImageDevice = sequelize.define('imageDevice', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    imageLocation: { type: DataTypes.STRING },
+    imageName: { type: DataTypes.STRING },
     deviceId: { type: DataTypes.INTEGER },
 }, { createdAt: false, updatedAt: false });
 

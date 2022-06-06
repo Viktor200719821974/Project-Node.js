@@ -1,15 +1,14 @@
 import { Request } from 'express';
 import { InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-export interface IDevice{
+export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAttributes<IDevice>>{
     id: number;
     name: string;
     typeId: number;
     brandId: number;
     price: string;
     rating: number;
-    info: string;
-    imageDevice: string;
+    // info: ;
 }
 export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;
@@ -65,4 +64,10 @@ export interface IImageDevice extends Model<InferAttributes<IImageDevice>, Infer
     // imageName: string;
     imageLocation: string;
     deviceId: number;
+}
+
+export interface IUserLogin{
+    accessToken: string;
+    refreshToken: string;
+    user: IUser | null;
 }

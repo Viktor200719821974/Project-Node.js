@@ -3,7 +3,7 @@ import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import star from "../image/Star 1.png";
 import {fetchOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
-import ImageDevice from "../components/ImageDevice";
+import ImageDevice from "../components/devices/imageDevices/ImageDevice";
 // import {REACT_APP_API_URL} from "../utils/constans";
 
 const DevicePage = () => {

@@ -1,0 +1,19 @@
+.brandBar_div{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+}
+.brandBar_card{
+    cursor: pointer;
+    margin: 5px;
+    width: auto;
+    font-size: 16px;
+    padding: 5px;
+}
+.navBar_navLink{
+    color: white;
+    text-decoration-line: none;
+}
+.navBar_navLink:hover{
+    color: white;
+}

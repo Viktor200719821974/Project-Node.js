@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { ErrorHandler } from '../error/errorHandler';
 import { config } from '../config/config';
-import { IRequestExtended, IUser, IUserPayload } from '../interfaces';
+import { IRequestExtended, IUserPayload } from '../interfaces';
 import { model } from '../models/models';
 
 class AuthMiddleware {
@@ -48,7 +48,6 @@ class AuthMiddleware {
                 next(new ErrorHandler('User not active'));
                 return;
             }
-            req.user as IUser;
             next();
         } catch (e) {
             next(e);
