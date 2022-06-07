@@ -6,9 +6,9 @@ export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAt
     name: string;
     typeId: number;
     brandId: number;
-    price: string;
+    price: number;
     rating: number;
-    // info: ;
+    // info: string;
 }
 export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;

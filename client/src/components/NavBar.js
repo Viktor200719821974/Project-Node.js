@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import '../style/style.css';
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {NavLink, useHistory} from "react-router-dom";
@@ -10,16 +10,14 @@ import {logOutUser} from "../http/userApi";
 const NavBar = observer(() => {
     const auth = useAuth();
     const history = useHistory();
-    const logOut = () => {
+
+    const logOut = async() => {
         auth.logOut();
-        logOutUser().then(date => console.log(date));
-        // if (remove){
-        //     localStorage.removeItem('accessToken');
-        //     localStorage.removeItem('refreshToken');
-        // }
+        await logOutUser().then(date => console.log(date));
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
     }
-    // useEffect(() => {
-    // }, []);
+
     return (
         <div>
             <Navbar bg="dark" variant="dark">

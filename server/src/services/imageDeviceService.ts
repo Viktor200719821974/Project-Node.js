@@ -1,6 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
-import fs from 'fs';
-import path from 'path';
+// import { v4 as uuidv4 } from 'uuid';
+// import fs from 'fs';
+// import path from 'path';
 import { NextFunction } from 'express';
 import { UploadedFile } from 'express-fileupload';
 import { model } from '../models/models';
@@ -10,30 +10,32 @@ import { ErrorHandler } from '../error/errorHandler';
 
 class ImageDeviceService {
     // eslint-disable-next-line max-len
-    async imageDeviceCreate(deviceId: string, image: UploadedFile, imageType: string, imageData: Buffer, next: NextFunction) {
-        const fileName = `${uuidv4()}.jpg`;
-        fs.mkdir(path.join(__dirname, '..', 'static', 'imageDevice', deviceId), { recursive: true }, (e) => {
-            if (e) {
-                next(e);
-            }
-        });
-        await image.mv(path.resolve(__dirname, '..', `static/imageDevice/${deviceId}`, fileName));
-        return model.ImageDevice.create({
-            imageName: fileName, imageType, imageData, deviceId,
-        });
-    }
+    // async imageDeviceCreate(deviceId: string, image: UploadedFile, imageType: string, imageData: Buffer, next: NextFunction) {
+    //     const fileName = `${uuidv4()}.jpg`;
+    // eslint-disable-next-line max-len
+    //     fs.mkdir(path.join(__dirname, '..', 'static', 'imageDevice', deviceId), { recursive: true }, (e) => {
+    //         if (e) {
+    //             next(e);
+    //         }
+    //     });
+    // eslint-disable-next-line max-len
+    //     await image.mv(path.resolve(__dirname, '..', `static/imageDevice/${deviceId}`, fileName));
+    //     return model.ImageDeviceAws.create({
+    //         imageName: fileName, imageType, imageData, deviceId,
+    //     });
+    // }
 
-    async findImage(imageId: number) {
-        return model.ImageDevice.findOne({
-            attributes: {
-                exclude: ['imageData', 'createdAt', 'updatedAt'],
-            },
-            where: { imageId },
-        });
-    }
+    // async findImage(imageId: number) {
+    //     return model.ImageDeviceAws.findOne({
+    //         attributes: {
+    //             exclude: ['imageData', 'createdAt', 'updatedAt'],
+    //         },
+    //         where: { imageId },
+    //     });
+    // }
 
     async getAllImage() {
-        return model.ImageDevice.findAll({
+        return model.ImageDeviceAws.findAll({
             attributes: {
                 exclude: ['createdAt', 'updatedAt'],
             },
@@ -41,7 +43,7 @@ class ImageDeviceService {
     }
 
     async getOneImage(id: number) {
-        return model.ImageDevice.findAll({
+        return model.ImageDeviceAws.findAll({
             attributes: {
                 exclude: ['createdAt', 'updatedAt'],
             },
@@ -51,6 +53,7 @@ class ImageDeviceService {
 
     // eslint-disable-next-line max-len
     async createImageAws(image: UploadedFile, id: number, next: NextFunction) : Promise<IImageDevice> {
+        console.log(image);
         if (!image) {
             next(new ErrorHandler('Bad Request'));
         }

@@ -34,7 +34,7 @@ const Device = sequelize.define<IDevice>('device', {
     rating: { type: DataTypes.INTEGER, defaultValue: 0 },
     typeId: { type: DataTypes.INTEGER },
     brandId: { type: DataTypes.INTEGER },
-    // info: { type: DataTypes.ARRAY },
+    // info: { type: DataTypes.STRING },
     // imageDeviceAws: { type: DataTypes.STRING },
 });
 
@@ -71,11 +71,11 @@ const Token = sequelize.define<IToken>('token', {
     userId: { type: DataTypes.INTEGER },
 });
 
-const ImageDevice = sequelize.define('imageDevice', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    imageName: { type: DataTypes.STRING },
-    deviceId: { type: DataTypes.INTEGER },
-}, { createdAt: false, updatedAt: false });
+// const ImageDevice = sequelize.define('imageDevice', {
+//     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+//     imageName: { type: DataTypes.STRING },
+//     deviceId: { type: DataTypes.INTEGER },
+// }, { createdAt: false, updatedAt: false });
 
 const ImageDeviceAws = sequelize.define<IImageDevice>('imageDeviceAws', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -110,8 +110,8 @@ BasketDevice.belongsTo(Device);
 Device.hasMany(DeviceInfo, { as: 'info' });
 DeviceInfo.belongsTo(Device);
 
-Device.hasMany(ImageDevice, { as: 'imageDevice' });
-ImageDevice.belongsTo(Device);
+// Device.hasMany(ImageDevice, { as: 'imageDevice' });
+// ImageDevice.belongsTo(Device);
 
 Device.hasMany(ImageDeviceAws, { as: 'imageDeviceAws' });
 ImageDeviceAws.belongsTo(Device);
@@ -130,6 +130,6 @@ export const model = {
     DeviceInfo,
     TypeBrand,
     Token,
-    ImageDevice,
+    // ImageDevice,
     ImageDeviceAws,
 };

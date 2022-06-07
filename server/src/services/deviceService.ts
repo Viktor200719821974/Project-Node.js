@@ -1,26 +1,26 @@
 import { model } from '../models/models';
-// import { IDevice } from '../interfaces';
+import { IDevice } from '../interfaces';
 
 class DeviceService {
     // eslint-disable-next-line max-len
-    async createDevice(deviceRequest: { name: any; price: any; typeId: any; brandId: any; info: any; }) {
+    async createDevice(deviceRequest: {name: string; price: number; typeId: number; brandId: number; info: string; }): Promise<IDevice> {
         const {
             name, price, typeId, brandId, info,
         } = deviceRequest;
-        console.log(deviceRequest);
-        console.log(typeof (deviceRequest));
+        Number(price);
         // @ts-ignore
         const device = await model.Device.create({
             name, price, brandId, typeId,
         });
         // if (imageDeviceAws) {
         //     const inf = JSON.parse(imageDeviceAws);
-        //     inf.forEach((i: { imageLocation: string; }) => model.ImageDevice.create(
-        //         {
-        //             imageLocation: i.imageLocation,
-        //             deviceId: device.get('id'),
-        //         },
-        //     ));
+        //     console.log(inf);
+            // inf.forEach((i: { imageLocation: string; }) => model.ImageDeviceAws.create(
+            //     {
+            //         imageLocation: i.imageLocation,
+            //         deviceId: 3,
+            //     },
+            // ));
         // }
         if (info) {
             const inf = JSON.parse(info);

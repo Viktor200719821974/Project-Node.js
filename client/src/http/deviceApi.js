@@ -28,3 +28,7 @@ export const fetchOneDevice = async (id) => {
     const {data} = await $host.get('/device/' + id);
     return data;
 }
+export const addImageDevice = async (id, formData) => {
+    const {data} = await $authHost.post(`/imageDevice/addImageAws/${id}`, formData);
+    return data;
+}

@@ -1,27 +1,27 @@
 import { NextFunction, Request, Response } from 'express';
 import { UploadedFile } from 'express-fileupload';
-import { ErrorHandler } from '../error/errorHandler';
+// import { ErrorHandler } from '../error/errorHandler';
 import { imageDeviceService } from '../services/imageDeviceService';
 
 class ImageDeviceController {
-    async createImage(req: Request, res: Response, next: NextFunction) :Promise<void> {
-        try {
-            const { id } = req.params;
-            const image = req.files?.imageName as UploadedFile;
-            const imageType = image.mimetype;
-            const imageData = image.data;
-            if (!image) {
-                next(new ErrorHandler('Not file image'));
-            }
-            // eslint-disable-next-line max-len
-            const imageDevice = await imageDeviceService.imageDeviceCreate(id, image, imageType, imageData, next);
-            const imageId = imageDevice.get('id');
-            const imageExclude = await imageDeviceService.findImage(Number(imageId));
-            res.json(imageExclude);
-        } catch (e) {
-            next();
-        }
-    }
+    // async createImage(req: Request, res: Response, next: NextFunction) :Promise<void> {
+    //     try {
+    //         const { id } = req.params;
+    //         const image = req.files?.imageName as UploadedFile;
+    //         const imageType = image.mimetype;
+    //         const imageData = image.data;
+    //         if (!image) {
+    //             next(new ErrorHandler('Not file image'));
+    //         }
+    // eslint-disable-next-line max-len
+    //         const imageDevice = await imageDeviceService.imageDeviceCreate(id, image, imageType, imageData, next);
+    //         const imageId = imageDevice.get('id');
+    //         const imageExclude = await imageDeviceService.findImage(Number(imageId));
+    //         res.json(imageExclude);
+    //     } catch (e) {
+    //         next();
+    //     }
+    // }
 
     async createImageAws(req: Request, res: Response, next: NextFunction) {
         try {
