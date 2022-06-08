@@ -17,3 +17,16 @@
 .navBar_navLink:hover{
     color: white;
 }
+.createDevice_button_addImage{
+    margin: 5px;
+}
+.createDevice_div_successfully{
+    position: absolute;
+    top: 70px;
+    right: 70px;
+    border: solid 1px #badbcc;
+    border-radius: 2px;
+    padding: 2px 4px;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}

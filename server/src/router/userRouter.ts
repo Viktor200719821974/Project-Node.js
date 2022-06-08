@@ -5,8 +5,7 @@ import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
-// router.post('/login', userController.login);
-// router.get('/auth', authMiddleware.checkAccessToken, userController.check);
+router.get('/auth', authMiddleware.checkAccessToken, userController.check);
 router.get('/', userController.getAll);
 router.get('/:id', userController.getOne);
 router.get('/activateUser/:token', userController.activateUser);

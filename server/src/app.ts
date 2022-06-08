@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import fileupload from 'express-fileupload';
+import fileUpload from 'express-fileupload';
 import path from 'path';
 import { config } from './config/config';
 import { sequelize } from './db';
@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'static')));
-app.use(fileupload());
+app.use(fileUpload());
 
 app.use('/api', apiRouter);
 
@@ -21,9 +21,11 @@ const start = async () => {
         await sequelize.authenticate();
         await sequelize.sync();
         app.listen(PORT, () => {
+            // eslint-disable-next-line no-console
             console.log(`Server has started !!!!!! on port ${PORT}`);
         });
     } catch (e) {
+        // eslint-disable-next-line no-console
         console.log(e);
     }
 };

@@ -12,16 +12,6 @@ class DeviceService {
         const device = await model.Device.create({
             name, price, brandId, typeId,
         });
-        // if (imageDeviceAws) {
-        //     const inf = JSON.parse(imageDeviceAws);
-        //     console.log(inf);
-            // inf.forEach((i: { imageLocation: string; }) => model.ImageDeviceAws.create(
-            //     {
-            //         imageLocation: i.imageLocation,
-            //         deviceId: 3,
-            //     },
-            // ));
-        // }
         if (info) {
             const inf = JSON.parse(info);
             inf.forEach((i: { title: string; description: string; }) => model.DeviceInfo.create(

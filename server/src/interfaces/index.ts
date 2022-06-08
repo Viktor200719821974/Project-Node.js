@@ -8,7 +8,6 @@ export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAt
     brandId: number;
     price: number;
     rating: number;
-    // info: string;
 }
 export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;

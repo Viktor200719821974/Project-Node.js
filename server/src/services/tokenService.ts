@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config/config';
-import { ITokenPair, ITokenPairActivate, IUserPayload } from '../interfaces';
+import {
+    ITokenDataToSave, ITokenPair, ITokenPairActivate, IUserPayload,
+} from '../interfaces';
 import { model } from '../models/models';
 
 class TokenService {
@@ -8,7 +10,7 @@ class TokenService {
         const accessToken = jwt.sign(
             payload,
             config.SECRET_ACCESS_KEY!,
-            { expiresIn: '24h' },
+            { expiresIn: '1h' },
         );
         const refreshToken = jwt.sign(
             payload,
@@ -31,7 +33,7 @@ class TokenService {
         const accessToken = jwt.sign(
             payload,
             config.SECRET_ACCESS_KEY!,
-            { expiresIn: '24h' },
+            { expiresIn: '1h' },
         );
         const refreshToken = jwt.sign(
             payload,
@@ -45,7 +47,7 @@ class TokenService {
     }
 
     // eslint-disable-next-line max-len
-    async saveTokenActivate(userId: number, refreshToken: string, accessToken: string, activateToken: string) {
+    async saveTokenActivate(userId: number, refreshToken: string, accessToken: string, activateToken: string): Promise<ITokenDataToSave> {
         // @ts-ignore
         return model.Token.create({
             refreshToken, accessToken, activateToken, userId,
@@ -67,16 +69,20 @@ class TokenService {
         return model.Token.findOne({ where: { refreshToken } });
     }
 
-    async verifyToken(authToken: string, tokenType = 'access') {
+    async verifyToken(authToken: string, tokenType = 'accessToken'): Promise<IUserPayload> {
         let secretWord = config.SECRET_ACCESS_KEY;
-        if (tokenType === 'refresh') {
+        if (tokenType === 'refreshToken') {
             secretWord = config.SECRET_REFRESH_KEY;
         }
         // @ts-ignore
         return jwt.verify(authToken, secretWord);
     }
 
-    async findByParams(refreshToken: string) {
+    async findByParamsAccess(accessToken: string) {
+        return model.Token.findOne({ where: { accessToken } });
+    }
+
+    async findByParamsRefresh(refreshToken: string) {
         return model.Token.findOne({ where: { refreshToken } });
     }
 }

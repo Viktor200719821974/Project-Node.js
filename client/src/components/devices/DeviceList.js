@@ -5,12 +5,17 @@ import {observer} from "mobx-react-lite";
 import useAuth from "../../hook/useAuth";
 
 const DeviceList = observer(({image}) => {
-    const auth = useAuth();
-    const devices = auth.devices;
+    const {devices, brands, types} = useAuth();
     return (
         <Row className={"d-flex"}>
             { devices && devices.map(device =>
-            <DeviceItem key={device.id} device={device} image={image}/>
+            <DeviceItem
+                key={device.id}
+                device={device}
+                image={image.filter(c => c.deviceId === device.id)}
+                type={types.filter(c => c.id === device.typeId).map(c => c.name)}
+                brand={brands.filter(c => c.id === device.brandId).map(c => c.name)}
+            />
             )}
         </Row>
     );

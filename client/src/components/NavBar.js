@@ -26,8 +26,14 @@ const NavBar = observer(() => {
                     {
                         auth.isLogin ?
                             <Nav className="ml-auto" style={{color: "white"}}>
-                                <Button variant={"outline-light"}
-                                        onClick={() => history.push(ADMIN_ROUTE)}>Адмін панель</Button>
+                                {
+                                    (auth.user.is_staff || auth.user.is_superuser) &&
+                                    <Button
+                                        variant={"outline-light"}
+                                        onClick={() => history.push(ADMIN_ROUTE)}>
+                                        Адмін панель
+                                    </Button>
+                                }
                                 <Button variant={"outline-light"}
                                         style={{marginLeft: 20}}
                                         onClick={() => logOut()}>Вийти</Button>

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Card, Container, Form, Row} from "react-bootstrap";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/constans";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
@@ -13,6 +13,10 @@ const Auth = observer(() => {
     const isLogin = location.pathname === LOGIN_ROUTE;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [phone, setPhone] = useState('');
+    const [age, setAge] = useState('');
 
     const click = async () => {
         try {
@@ -20,7 +24,10 @@ const Auth = observer(() => {
             if (isLogin) {
                 data = await login(email, password);
             } else {
-                await registration(email, password);
+               const res = await registration(email, password, name, surname, age, phone);
+               if (res){
+                   history.push(SHOP_ROUTE);
+               }
             }
             if (data) {
                 auth.setData(data);
@@ -53,6 +60,38 @@ const Auth = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                         type="password"
                     />
+                    {!isLogin &&
+                        <Form.Control
+                            className={"mt-3"}
+                            placeholder="Введіть ваше ім'я..."
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                        />
+                    }
+                    {!isLogin &&
+                        <Form.Control
+                            className={"mt-3"}
+                            placeholder="Введіть ваше прізвище..."
+                            value={surname}
+                            onChange={e => setSurname(e.target.value)}
+                        />
+                    }
+                    {!isLogin &&
+                        <Form.Control
+                            className={"mt-3"}
+                            placeholder="Введіть ваш вік..."
+                            value={age}
+                            onChange={e => setAge(e.target.value)}
+                        />
+                    }
+                    {!isLogin &&
+                        <Form.Control
+                            className={"mt-3"}
+                            placeholder="Введіть ваш телефон..."
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}
+                        />
+                    }
                     <Row className={"d-flex justify-content-between mt-3 pl-3 pr-3"}>
                         {isLogin ?
                             <div>

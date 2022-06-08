@@ -53,7 +53,6 @@ class ImageDeviceService {
 
     // eslint-disable-next-line max-len
     async createImageAws(image: UploadedFile, id: number, next: NextFunction) : Promise<IImageDevice> {
-        console.log(image);
         if (!image) {
             next(new ErrorHandler('Bad Request'));
         }

@@ -58,26 +58,29 @@ class UserService {
         return model.User.findOne({ where: { email } });
     }
 
-    async userManager(id: number, userEmail: string, next: NextFunction) {
-        const user = await model.User.findOne({ where: { email: userEmail } });
+    async userManager(id: number, email: string, next: NextFunction): Promise<IUser | null> {
+        const user = await model.User.findOne({ where: { email } });
         if (user) {
             const superuser = user.get('is_superuser');
             if (!superuser) {
                 next(new ErrorHandler('Forbidden', 403));
             }
         }
-        return model.User.update({ is_staff: true }, { where: { id } });
+        model.User.update({ is_staff: true }, { where: { id } });
+        return model.User.findOne({ where: { id } });
     }
 
-    async userIsNotManager(id: number, userEmail: string, next: NextFunction) {
-        const user = await model.User.findOne({ where: { email: userEmail } });
+    // eslint-disable-next-line max-len
+    async userIsNotManager(id: number, email: string, next: NextFunction): Promise<IUser | null> {
+        const user = await model.User.findOne({ where: { email } });
         if (user) {
             const superuser = user.get('is_superuser');
             if (!superuser) {
                 next(new ErrorHandler('Forbidden', 403));
             }
         }
-        return model.User.update({ is_staff: false }, { where: { id } });
+        model.User.update({ is_staff: false }, { where: { id } });
+        return model.User.findOne({ where: { id } });
     }
 
     async userBlocked(id: number, userEmail: string, next: NextFunction) {

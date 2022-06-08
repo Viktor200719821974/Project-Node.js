@@ -13,7 +13,7 @@ const DevicePage = () => {
     useEffect(() => {
         fetchOneDevice(id).then(data => {
             setDevice(data);
-            setImage(data.imageDevice);
+            setImage(data.imageDeviceAws);
         });
     },[]);
     return (

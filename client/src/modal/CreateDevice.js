@@ -1,26 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
-import {createDevice, fetchBrands, fetchTypes} from "../http/deviceApi";
+import {Alert, Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
+import {addImageDevice, createDevice, fetchBrands, fetchTypes} from "../http/deviceApi";
 import {observer} from "mobx-react-lite";
 import useAuth from "../hook/useAuth";
-import CreateImageDevice from "./CreateImageDevice";
 
 const CreateDevice = observer(({show, onHide}) => {
     const {types, brands} = useAuth();
     const device = useAuth();
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
-    // const [file, setFile] = useState([]);
+    const [file, setFile] = useState([]);
     const [info, setInfo] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedType, setSelectedType] = useState('');
     const [isAuth, setIsAuth] = useState(false);
     const [deviceId, setDeviceId] = useState();
+    const [loadedImage, setLoadedImage] = useState(false);
+    const [statusResponse, setStatusResponse] = useState(false);
 
     useEffect(() => {
         fetchTypes().then(data => device.setTypes(data));
         fetchBrands().then(data => device.setBrands(data));
-    }, [])
+    }, []);
 
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}]);
@@ -32,9 +33,9 @@ const CreateDevice = observer(({show, onHide}) => {
         setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i));
     }
 
-    // const selectFile = e => {
-    //     setFile(e.target.files[0]);
-    // }
+    const selectFile = e => {
+        setFile(e.target.files[0]);
+    }
 
     const addDevice = () => {
         try {
@@ -43,18 +44,32 @@ const CreateDevice = observer(({show, onHide}) => {
             formData.append('price', `${price}`);
             formData.append('brandId', selectedBrand.id);
             formData.append('typeId', selectedType.id);
-            // formData.append('imageDeviceAws', file);
             formData.append('info', JSON.stringify(info));
             createDevice(formData).then(data => Promise.resolve(data).then(function (data) {
                 if (data.name) {
                     setIsAuth(true);
+                    setStatusResponse(true);
                     setDeviceId(data.id);
                 }
             }));
         }catch (e) {
             console.log(e.message);
         }
+    }
 
+    const addImage = async () => {
+        try{
+            const formImage = new FormData();
+            formImage.append('image', file);
+            addImageDevice(deviceId, formImage).then(res => Promise.resolve(res).then(function (res) {
+                if (res.imageLocation) {
+                    setLoadedImage(true);
+                    setStatusResponse(false);
+                }
+            }));
+        }catch (e) {
+            console.log(e.message);
+        }
     }
     return (
         <Modal
@@ -68,30 +83,36 @@ const CreateDevice = observer(({show, onHide}) => {
                     Додати новий пристрій
                 </Modal.Title>
             </Modal.Header>
+            {/*{(statusResponse || loadedImage) && <Alert variant={'success'}>*/}
+            {/*    {statusResponse ? '* Пристрій був добавлений!!!' : '* Фото було добавлено!!!'}*/}
+            {/*</Alert>}*/}
+            {(statusResponse || loadedImage) && <div className={'createDevice_div_successfully'}>
+                {statusResponse ? '* Пристрій був добавлений!!!' : '* Фото було добавлено!!!'}
+            </div>}
             <Modal.Body>
                 <Form>
                     <Dropdown className={"mt-2 mb-2"}>
                         <Dropdown.Toggle>{selectedType.name || 'Виберіть тип'} </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {types.map(type => <div key={type.id} onClick={() => setSelectedType(type)}>
-                                    {type.name}
-                            </div>
-                            // <Dropdown.Item key={type.id} onClick={() => setSelectedType(type)}>
-                            //     {/*{type.name}*/}
-                            // </Dropdown.Item>
-                            )}
+                            {
+                                types && types.map(type => <Dropdown.Item
+                                    key={type.id}
+                                    onClick={() => setSelectedType(type)}>
+                                {type.name}
+                            </Dropdown.Item>
+                                )}
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown className={"mt-2 mb-2"}>
                         <Dropdown.Toggle>{selectedBrand.name || 'Виберіть бренд'}</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            {brands.map(brand => <div key={brand.id} onClick={() => setSelectedBrand(brand)}>
-                                    {brand.name}
-                            </div>
-                                // <Dropdown.Item key={brand.id} onClick={() => setSelectedBrand(brand)}>
-                                //     {/*{brand.name}*/}
-                                // </Dropdown.Item>
-                            )}
+                            {
+                                brands && brands.map(brand => <Dropdown.Item
+                                    key={brand.id}
+                                    onClick={() => setSelectedBrand(brand)}>
+                            {brand.name}
+                                </Dropdown.Item>
+                                )}
                         </Dropdown.Menu>
                     </Dropdown>
                     <Form.Control
@@ -106,11 +127,6 @@ const CreateDevice = observer(({show, onHide}) => {
                         value={price}
                         onChange={e => setPrice(e.target.value)}
                     />
-                    {/*<Form.Control*/}
-                    {/*    className={"mt-3"}*/}
-                    {/*    type={"file"}*/}
-                    {/*    onChange={selectFile}*/}
-                    {/*/>*/}
                     <hr/>
                     <Button variant={"outline-dark"} onClick={addInfo} className={"mb-2"}>Додати нову властивість
                     </Button>
@@ -139,13 +155,28 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Col>
                     </Row>
                     )}
+                    { isAuth &&
+                        <div className={'createDevice_div_addImage'}>
+                         <Form.Control
+                        className={"mt-3"}
+                        type={"file"}
+                        onChange={selectFile}
+                    />
+                        <Button
+                            variant={"outline-success"}
+                            onClick={addImage}
+                            className={'createDevice_button_addImage'}>
+                            Додати фото
+                    </Button>
+                    </div>
+                    }
+
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant={"outline-success"} onClick={addDevice}>Додати</Button>
+                <Button variant={"outline-success"} onClick={addDevice} style={{marginTop: 2}}>Додати</Button>
                 <Button variant={"outline-danger"} onClick={onHide}>Закрити</Button>
             </Modal.Footer>
-            {isAuth && <CreateImageDevice id={deviceId}/>}
         </Modal>
     );
 });
