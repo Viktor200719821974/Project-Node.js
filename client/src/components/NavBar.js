@@ -13,7 +13,7 @@ const NavBar = observer(() => {
 
     const logOut = async() => {
         auth.logOut();
-        await logOutUser().then(date => console.log(date));
+        await logOutUser();
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
     }

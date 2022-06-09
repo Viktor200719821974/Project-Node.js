@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { userService } from '../services/userService';
-import { IRequestExtended } from '../interfaces';
+import { IRequestExtended, IUser } from '../interfaces';
 import { ErrorHandler } from '../error/errorHandler';
 
 class UserController {
@@ -111,12 +111,12 @@ class UserController {
         }
     }
 
-    async check(req: Request, res: Response, next: NextFunction) {
+    async check(req:IRequestExtended, res: Response, next: NextFunction) {
         try {
-            res.json('All Right');
+            const user = req.user as IUser;
+            res.json(user);
         } catch (e: any) {
             next(e);
-            console.log(e.message);
         }
     }
 }

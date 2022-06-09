@@ -10,5 +10,6 @@ export const AuthContext = createContext({
     setDevices: () => {},
     setTypes: () => {},
     setBrands: () => {},
+    setIsAuth: () => {},
     logOut: () => {},
 });

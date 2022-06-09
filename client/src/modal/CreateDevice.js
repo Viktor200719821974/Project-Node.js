@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
-import {addImageDevice, createDevice, fetchBrands, fetchTypes} from "../http/deviceApi";
+import {createDevice} from "../http/deviceApi";
 import {observer} from "mobx-react-lite";
 import useAuth from "../hook/useAuth";
+import {fetchTypes} from "../http/typeApi";
+import {fetchBrands} from "../http/brandApi";
+import {addImageDevice} from "../http/imageDeviceApi";
 
 const CreateDevice = observer(({show, onHide}) => {
     const {types, brands} = useAuth();
     const device = useAuth();
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
     const [file, setFile] = useState([]);
     const [info, setInfo] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState('');
@@ -50,6 +53,7 @@ const CreateDevice = observer(({show, onHide}) => {
                     setIsAuth(true);
                     setStatusResponse(true);
                     setDeviceId(data.id);
+                    console.log(data);
                 }
             }));
         }catch (e) {

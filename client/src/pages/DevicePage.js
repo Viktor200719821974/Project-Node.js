@@ -4,10 +4,9 @@ import star from "../image/Star 1.png";
 import {fetchOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
-// import {REACT_APP_API_URL} from "../utils/constans";
 
 const DevicePage = () => {
-    const [device, setDevice] = useState({info: [], imageDevice: [],});
+    const [device, setDevice] = useState({info: [], imageDeviceAws: [],});
     const [image, setImage] = useState([])
     const {id} = useParams();
     useEffect(() => {

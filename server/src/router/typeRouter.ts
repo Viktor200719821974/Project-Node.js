@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import { typeController } from '../controllers/typeController';
 import { typeMiddleware } from '../middleware/typeMiddleware';
+import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
-router.post('/', typeController.createType);
+router.post('/', authMiddleware.checkAccessToken, authMiddleware.userStaff, typeController.createType);
 router.get('/', typeController.getAll);
-router.put('/:id', typeMiddleware.findType, typeController.updateType);
-router.delete('/:id', typeMiddleware.findType, typeController.deleteType);
+router.put('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, typeMiddleware.findType, typeController.updateType);
+router.delete('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, typeMiddleware.findType, typeController.deleteType);
 
 export const typeRouter = router;

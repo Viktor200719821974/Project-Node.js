@@ -33,7 +33,7 @@ class TokenService {
         const accessToken = jwt.sign(
             payload,
             config.SECRET_ACCESS_KEY!,
-            { expiresIn: '1h' },
+            { expiresIn: '60000' },
         );
         const refreshToken = jwt.sign(
             payload,

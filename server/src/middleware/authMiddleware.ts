@@ -18,6 +18,9 @@ class AuthMiddleware {
                 return;
             }
             const { userEmail } = await tokenService.verifyToken(token);
+            if (userEmail) {
+                next(new ErrorHandler('Unauthorized', 401));
+            }
             await tokenService.findByParamsAccess(token);
             // @ts-ignore
             req.user = await userService.getUserByEmail(userEmail);
@@ -83,12 +86,24 @@ class AuthMiddleware {
                 next(new ErrorHandler('Unauthorized', 401));
                 return;
             }
-            await tokenService.verifyToken(token);
-            const { userEmail } = await tokenService.verifyToken(token);
+            const { userEmail } = await tokenService.verifyToken(token, 'refreshToken');
             await tokenService.findByParamsRefresh(token);
-            await userService.getUserByEmail(userEmail);
+            // @ts-ignore
+            req.user = await userService.getUserByEmail(userEmail);
             next();
         } catch (e: any) {
+            next(e);
+        }
+    }
+
+    async userStaff(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            const { user } = req;
+            if (!user?.is_superuser && !user?.is_staff) {
+                next(new ErrorHandler('Forbidden', 403));
+            }
+            next();
+        } catch (e) {
             next(e);
         }
     }

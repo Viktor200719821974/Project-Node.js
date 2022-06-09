@@ -3,10 +3,12 @@ import {Col, Container, Row} from "react-bootstrap";
 import TypeBar from '../components/types/TypeBar';
 import BrandBar from "../components/brands/BrandBar";
 import DeviceList from "../components/devices/DeviceList";
-import {fetchBrands, fetchDevices, fetchTypes} from "../http/deviceApi";
+import {fetchDevices} from "../http/deviceApi";
 import {fetchImageDevice} from "../http/imageDeviceApi";
 import {observer} from "mobx-react-lite";
 import useAuth from "../hook/useAuth";
+import {fetchTypes} from "../http/typeApi";
+import {fetchBrands} from "../http/brandApi";
 
 const Shop = observer(() => {
     const devices = useAuth();

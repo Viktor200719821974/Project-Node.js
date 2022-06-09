@@ -1,5 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {AuthContext} from '../context';
+import {fetchRefresh} from "../http/userApi";
 
 const AuthProvider = (props) => {
 
@@ -15,6 +16,17 @@ const AuthProvider = (props) => {
         }
         setUser(data.user);
     },[]);
+
+    const setIsAuth = useCallback((data) => {
+        if (data) {
+            setIsLogin(true);
+            setUser(data);
+        }
+        const refresh = async () => {
+            await fetchRefresh().then(data => console.log(data));
+        }
+        refresh();
+    }, []);
 
     const setDevices = useCallback((data) => {
         setDevicesData(data);
@@ -45,8 +57,9 @@ const AuthProvider = (props) => {
             brands,
             setBrands,
             logOut,
+            setIsAuth,
         }),
-        [brands, devices, isLogin, logOut, setBrands, setData, setDevices, setTypes, types, user]
+        [brands, devices, isLogin, logOut, setBrands, setData, setDevices, setIsAuth, setTypes, types, user]
     );
     return (
         <AuthContext.Provider value={contextValue}>
