@@ -5,7 +5,7 @@ import {NavLink, useHistory} from "react-router-dom";
 import {ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../utils/constans";
 import {observer} from "mobx-react-lite";
 import useAuth from "../hook/useAuth";
-import {logOutUser} from "../http/userApi";
+import {logOutUser} from "../http/authApi";
 
 const NavBar = observer(() => {
     const auth = useAuth();

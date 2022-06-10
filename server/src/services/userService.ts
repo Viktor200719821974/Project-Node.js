@@ -55,7 +55,12 @@ class UserService {
     }
 
     async getUserByEmail(email: string): Promise<IUser | null> {
-        return model.User.findOne({ where: { email } });
+        return model.User.findOne({
+            attributes: {
+                exclude: ['password', 'createdAt', 'updatedAt'],
+            },
+            where: { email },
+        });
     }
 
     async userManager(id: number, email: string, next: NextFunction): Promise<IUser | null> {

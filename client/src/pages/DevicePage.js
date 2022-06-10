@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import star from "../image/Star 1.png";
-import {fetchOneDevice} from "../http/deviceApi";
+import {getOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
 
@@ -10,7 +10,7 @@ const DevicePage = () => {
     const [image, setImage] = useState([])
     const {id} = useParams();
     useEffect(() => {
-        fetchOneDevice(id).then(data => {
+        getOneDevice(id).then(data => {
             setDevice(data);
             setImage(data.imageDeviceAws);
         });

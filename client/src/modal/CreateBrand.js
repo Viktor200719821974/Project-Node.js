@@ -1,12 +1,24 @@
 import React, {useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
+import {Button, Form, Modal, Spinner} from "react-bootstrap";
 import {createBrand} from "../http/brandApi";
 
 const CreateBrand = ({show, onHide}) => {
     const [value, setValue] = useState('');
+    // const [statusResponse, setStatusResponse] = useState(false);
+    const [loading, setLoading] = useState(true);
+
     const addBrand = () => {
-        createBrand({name:value}).then(data => setValue(''));
+        createBrand({name:value}).then(data => {
+            setLoading(false);
+            // if (data.name){
+            //     setStatusResponse(true);
+            // }
+            setValue('');
+        });
         onHide();
+    }
+    if (loading){
+        return <Spinner animation={"grow"}/>
     }
     return (
         <Modal
@@ -20,6 +32,12 @@ const CreateBrand = ({show, onHide}) => {
                     Додати новий бренд
                 </Modal.Title>
             </Modal.Header>
+            {/*{statusResponse && <Alert variant={'success'}>*/}
+            {/*    * Бренд був добавлений!!!*/}
+            {/*</Alert>}*/}
+            {/*{statusResponse  && <div className={'createDevice_div_successfully'}>*/}
+            {/*   * Бренд був добавлений!!!*/}
+            {/*</div>}*/}
             <Modal.Body>
                 <Form>
                     <Form.Control

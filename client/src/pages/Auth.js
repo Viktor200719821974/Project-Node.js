@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Card, Container, Form, Row} from "react-bootstrap";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/constans";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
-import { login, registration} from "../http/userApi";
+import { login, registration} from "../http/authApi";
 import {observer} from "mobx-react-lite";
 import useAuth from "../hook/useAuth";
 
@@ -31,7 +31,6 @@ const Auth = observer(() => {
             }
             if (data) {
                 auth.setData(data);
-                auth.isLogin = true;
                 history.push(SHOP_ROUTE);
             }
         } catch (e) {

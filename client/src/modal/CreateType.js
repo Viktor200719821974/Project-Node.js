@@ -1,12 +1,24 @@
 import React, {useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
+import {Button, Form, Modal, Spinner} from "react-bootstrap";
 import {createType} from "../http/typeApi";
 
 const CreateType = ({show, onHide}) => {
     const [value, setValue] = useState('');
+    // const [statusResponse, setStatusResponse] = useState(false);
+    const [loading, setLoading] = useState(true);
+
     const addType = () => {
-        createType({name:value}).then(data => setValue(''));
+        createType({name:value}).then(data => {
+            setLoading(false);
+            // if (data.name){
+            //     setStatusResponse(true);
+            // }
+            setValue('');
+        });
         onHide();
+    }
+    if (loading){
+        return <Spinner animation={"grow"}/>
     }
     return (
         <Modal
@@ -20,6 +32,12 @@ const CreateType = ({show, onHide}) => {
                     Додати новий тип
                 </Modal.Title>
             </Modal.Header>
+            {/*{statusResponse && <Alert variant={'success'}>*/}
+            {/*    * Тип був добавлений!!!*/}
+            {/*</Alert>}*/}
+            {/*{statusResponse  && <div className={'createDevice_div_successfully'}>*/}
+            {/*    * Тип був добавлений!!!*/}
+            {/*</div>}*/}
             <Modal.Body>
                 <Form>
                    <Form.Control

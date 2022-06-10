@@ -34,28 +34,23 @@ $authHost.interceptors.request.use((config) => {
 
 $authHost.interceptors.response.use(
     (res) => {
-        console.log(res.data);
         return res;
     },
     async (err) => {
-        console.log(err);
         const refreshToken = localStorage.getItem("refreshToken");
         const originalConfig = err.config;
         if (refreshToken && originalConfig.url !== "/auth/login" && err.response ){
             if ((err.response.status === 401 || err.response.data.message === 'jwt expired') && !originalConfig._retry){
-                console.log(err.response.data.message);
                 originalConfig._retry = true;
 
                 try{
                     const rs = await $refreshHost.post("/auth/refresh",{
                         refreshToken: localStorage.getItem('refreshToken'),
                     });
-                    console.log(rs);
                     localStorage.setItem('accessToken', rs.data.accessToken);
                     localStorage.setItem('refreshToken', rs.data.refreshToken);
                     return $authHost(originalConfig);
                 }catch (_error) {
-                    console.log(_error);
                     return Promise.reject(_error);
                 }
             }

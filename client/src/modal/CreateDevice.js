@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
+import {Button, Col, Dropdown, Form, Modal, Row, Spinner} from "react-bootstrap";
 import {createDevice} from "../http/deviceApi";
 import {observer} from "mobx-react-lite";
 import useAuth from "../hook/useAuth";
-import {fetchTypes} from "../http/typeApi";
-import {fetchBrands} from "../http/brandApi";
-import {addImageDevice} from "../http/imageDeviceApi";
+import {getTypes} from "../http/typeApi";
+import {getBrands} from "../http/brandApi";
+import {createImageDevice} from "../http/imageDeviceApi";
 
 const CreateDevice = observer(({show, onHide}) => {
     const {types, brands} = useAuth();
@@ -20,10 +20,12 @@ const CreateDevice = observer(({show, onHide}) => {
     const [deviceId, setDeviceId] = useState();
     const [loadedImage, setLoadedImage] = useState(false);
     const [statusResponse, setStatusResponse] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchTypes().then(data => device.setTypes(data));
-        fetchBrands().then(data => device.setBrands(data));
+        getTypes().then(data => device.setTypes(data));
+        getBrands().then(data => device.setBrands(data));
+        setLoading(false);
     }, []);
 
     const addInfo = () => {
@@ -53,7 +55,6 @@ const CreateDevice = observer(({show, onHide}) => {
                     setIsAuth(true);
                     setStatusResponse(true);
                     setDeviceId(data.id);
-                    console.log(data);
                 }
             }));
         }catch (e) {
@@ -65,7 +66,7 @@ const CreateDevice = observer(({show, onHide}) => {
         try{
             const formImage = new FormData();
             formImage.append('image', file);
-            addImageDevice(deviceId, formImage).then(res => Promise.resolve(res).then(function (res) {
+            createImageDevice(deviceId, formImage).then(res => Promise.resolve(res).then(function (res) {
                 if (res.imageLocation) {
                     setLoadedImage(true);
                     setStatusResponse(false);
@@ -74,6 +75,24 @@ const CreateDevice = observer(({show, onHide}) => {
         }catch (e) {
             console.log(e.message);
         }
+    }
+    const clear = () => {
+        try{
+            setName('');
+            setPrice('');
+            setFile([]);
+            setInfo([]);
+            setSelectedBrand('');
+            setSelectedType('');
+            setLoadedImage(false);
+            setStatusResponse(false);
+            setIsAuth(false);
+        }catch (e) {
+            console.log(e);
+        }
+    }
+    if (loading){
+        return <Spinner animation={"grow"}/>
     }
     return (
         <Modal
@@ -179,6 +198,7 @@ const CreateDevice = observer(({show, onHide}) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant={"outline-success"} onClick={addDevice} style={{marginTop: 2}}>Додати</Button>
+                <Button variant={"outline-warning"} onClick={clear} style={{marginTop: 2}}>Очистити</Button>
                 <Button variant={"outline-danger"} onClick={onHide}>Закрити</Button>
             </Modal.Footer>
         </Modal>

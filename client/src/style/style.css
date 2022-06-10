@@ -9,7 +9,64 @@
     width: auto;
     font-size: 16px;
     padding: 5px;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
 }
+.brandBar_card_select{
+    cursor: pointer;
+    margin: 5px;
+    width: auto;
+    font-size: 16px;
+    padding: 5px;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    background: grey;
+    color: white;
+}
+.brandBar_card:hover {
+    background: #ededed;
+}
+.brandBar_div_item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+}
+.typeBar_listGroup_div{
+    display: flex;
+}
+/*.typeBar_div{*/
+/*    margin: 5px;*/
+/*}*/
+/*.typeBar_card{*/
+/*    cursor: pointer;*/
+/*    width: auto;*/
+/*    font-size: 16px;*/
+/*    padding: 5px;*/
+/*    background-color: #fff;*/
+/*    background-clip: border-box;*/
+/*    border: 1px solid rgba(0,0,0,.125);*/
+/*    border-radius: 0.25rem;*/
+/*}*/
+/*.typeBar_card_select{*/
+/*    cursor: pointer;*/
+/*    margin: 5px;*/
+/*    width: auto;*/
+/*    font-size: 18px;*/
+/*    padding: 5px;*/
+/*    background-clip: border-box;*/
+/*    border: 1px solid rgba(0,0,0,.125);*/
+/*    border-radius: 0.25rem;*/
+/*    background: grey;*/
+/*    color: white;*/
+/*}*/
+/*.typeBar_card:hover {*/
+/*    background: #ededed;*/
+/*}*/
 .navBar_navLink{
     color: white;
     text-decoration-line: none;

@@ -4,11 +4,11 @@ export const createDevice = async (device) => {
     const {data} = await $authHost.post('/device', device);
     return data;
 }
-export const fetchDevices = async () => {
-    const {data} = await $host.get('/device');
+export const getDevices = async (brandId?, typeId?) => {
+    const {data} = await $host.get(`/device?brandId=${brandId}&typeId=${typeId}`);
     return data.rows;
 }
-export const fetchOneDevice = async (id) => {
+export const getOneDevice = async (id) => {
     const {data} = await $host.get('/device/' + id);
     return data;
 }

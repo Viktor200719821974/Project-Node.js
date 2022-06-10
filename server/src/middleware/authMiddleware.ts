@@ -18,7 +18,7 @@ class AuthMiddleware {
                 return;
             }
             const { userEmail } = await tokenService.verifyToken(token);
-            if (userEmail) {
+            if (!userEmail) {
                 next(new ErrorHandler('Unauthorized', 401));
             }
             await tokenService.findByParamsAccess(token);
