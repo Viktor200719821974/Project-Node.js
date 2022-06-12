@@ -87,3 +87,10 @@
     background-color: #d1e7dd;
     color: #0f5132;
 }
+.shop_div_paginationDevice{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}

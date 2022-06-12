@@ -1,9 +1,11 @@
 import { model } from '../models/models';
-import { IDevice } from '../interfaces';
+import { IDevice, IPaginationResponse } from '../interfaces';
 
 class DeviceService {
-    // eslint-disable-next-line max-len
-    async createDevice(deviceRequest: {name: string; price: number; typeId: number; brandId: number; info: string; }): Promise<IDevice> {
+    async createDevice(deviceRequest: {
+        name: string; price: number; typeId: number; brandId: number; info: string;
+    })
+        : Promise<IDevice> {
         const {
             name, price, typeId, brandId, info,
         } = deviceRequest;
@@ -25,21 +27,31 @@ class DeviceService {
         return device;
     }
 
-    async getAll(brandId: number, typeId: number) {
+    async getAll(brandId: number, typeId: number, limit: number, page: number, offset: number)
+        : Promise<IPaginationResponse<IDevice>> {
         let devices;
         if (!brandId && !typeId) {
-            devices = await model.Device.findAndCountAll();
+            devices = await model.Device.findAndCountAll({ limit, offset });
         }
         if (brandId && !typeId) {
-            devices = await model.Device.findAndCountAll({ where: { brandId } });
+            devices = await model.Device.findAndCountAll({ where: { brandId }, limit, offset });
         }
         if (!brandId && typeId) {
-            devices = await model.Device.findAndCountAll({ where: { typeId } });
+            devices = await model.Device.findAndCountAll({ where: { typeId }, limit, offset });
         }
         if (brandId && typeId) {
-            devices = await model.Device.findAndCountAll({ where: { brandId, typeId } });
+            devices = await model.Device.findAndCountAll({
+                where: { brandId, typeId }, limit, offset,
+            });
         }
-        return devices;
+        // @ts-ignore
+        const { rows, count } = devices;
+        return {
+            page,
+            perPage: limit,
+            rows,
+            count,
+        };
     }
 
     async getOne(id: number) {

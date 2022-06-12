@@ -70,3 +70,11 @@ export interface IUserLogin{
     refreshToken: string;
     user: IUser | null;
 }
+
+export interface IPaginationResponse<T> {
+    page: number,
+    perPage: number,
+    count: number,
+    // offset: number,
+    rows: T[],
+}

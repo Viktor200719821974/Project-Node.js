@@ -13,11 +13,16 @@ class DeviceController {
 
     async getAll(req: Request, res: Response) {
         const { brandId, typeId } = req.query;
-        // let {limit, page} =req.query;
-        // page = Number(page) || 1;
-        // limit = Number(limit) || 9;
-        // let offset = page * limit - limit;
-        const devices = await deviceService.getAll(Number(brandId), Number(typeId));
+        let { limit, page } = req.query;
+        // @ts-ignore
+        page = +page || 1;
+        // @ts-ignore
+        limit = +limit || 12;
+        // @ts-ignore
+        const offset = page * limit - limit;
+        // @ts-ignore
+        // eslint-disable-next-line max-len
+        const devices = await deviceService.getAll(+brandId, +typeId, limit, page, offset);
         return res.json(devices);
     }
 
