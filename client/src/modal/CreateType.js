@@ -1,24 +1,19 @@
 import React, {useState} from 'react';
-import {Button, Form, Modal, Spinner} from "react-bootstrap";
+import {Button, Form, Modal} from "react-bootstrap";
 import {createType} from "../http/typeApi";
 
 const CreateType = ({show, onHide}) => {
     const [value, setValue] = useState('');
     // const [statusResponse, setStatusResponse] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     const addType = () => {
         createType({name:value}).then(data => {
-            setLoading(false);
             // if (data.name){
             //     setStatusResponse(true);
             // }
             setValue('');
         });
         onHide();
-    }
-    if (loading){
-        return <Spinner animation={"grow"}/>
     }
     return (
         <Modal

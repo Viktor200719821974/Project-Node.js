@@ -40,7 +40,7 @@ $authHost.interceptors.response.use(
         const refreshToken = localStorage.getItem("refreshToken");
         const originalConfig = err.config;
         if (refreshToken && originalConfig.url !== "/auth/login" && err.response ){
-            if ((err.response.status === 401 || err.response.data.message === 'jwt expired') && !originalConfig._retry){
+            if ((err.response.status === 401 || err.response.data?.message === 'jwt expired') && !originalConfig._retry){
                 originalConfig._retry = true;
 
                 try{

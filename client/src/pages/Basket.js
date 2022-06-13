@@ -1,9 +1,10 @@
 import React from 'react';
+import BasketComponent from "../components/BasketComponent";
 
 const Basket = () => {
     return (
         <div>
-           Basket
+           <BasketComponent/>
         </div>
     );
 };

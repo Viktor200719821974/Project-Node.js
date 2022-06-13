@@ -21,9 +21,12 @@ export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttrib
     is_staff: boolean;
     is_superuser: boolean;
 }
-export interface ITokenDataToSave {
-    refreshToken: string;
-    accessToken: string;
+// export interface ITokenDataToSave {
+//     refreshToken: string;
+//     accessToken: string;
+//     userId: number;
+// }
+export interface ITokenDataToSaveActivate {
     activateToken: string;
     userId: number;
 }
@@ -31,10 +34,18 @@ export interface ITokenPair {
     accessToken: string;
     refreshToken: string;
 }
+
 export interface ITokenPairActivate {
     accessToken: string;
     refreshToken: string;
     activateToken: string;
+}
+
+export interface ITokenActivate
+    extends Model<InferAttributes<ITokenActivate>, InferCreationAttributes<ITokenActivate>> {
+    activateToken: string;
+    userId: number;
+    id: number;
 }
 export interface IUserPayload {
     userId: number,
@@ -46,35 +57,36 @@ export type ITokenData = ITokenPairActivate & IUserPayload;
 export interface IToken extends Model<InferAttributes<IToken>, InferCreationAttributes<IToken>>{
     refreshToken: string;
     accessToken: string;
-    activateToken: string;
     userId: number;
     id: number;
-    // createdAt: string;
-    // deletedAt?: string;
 }
 
 export interface IRequestExtended extends Request{
     user?: IUser;
 }
 
-// eslint-disable-next-line max-len
-export interface IImageDevice extends Model<InferAttributes<IImageDevice>, InferCreationAttributes<IImageDevice>> {
+export interface IImageDevice
+    extends Model<InferAttributes<IImageDevice>, InferCreationAttributes<IImageDevice>> {
     id: number;
-    // imageName: string;
     imageLocation: string;
     deviceId: number;
 }
 
-export interface IUserLogin{
-    accessToken: string;
-    refreshToken: string;
-    user: IUser | null;
-}
+// export interface IUserLogin{
+//     accessToken: string;
+//     refreshToken: string;
+//     user: IUser | null;
+// }
 
 export interface IPaginationResponse<T> {
     page: number,
     perPage: number,
     count: number,
-    // offset: number,
     rows: T[],
 }
+
+// export interface IBasketUser
+//     extends Model<InferAttributes<IBasketUser>, InferCreationAttributes<IBasketUser>> {
+//     id: number;
+//     userId: number;
+// }

@@ -74,6 +74,25 @@
 .navBar_navLink:hover{
     color: white;
 }
+.navBar_navLink_div_basket_button{
+    display: flex;
+    position: relative;
+}
+.navBar_navLink_div_basket_button_count{
+    position: absolute;
+    top: -7px;
+    right: -13px;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    color: black;
+    border: white solid 1px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 1px;
+    /*display: inline-block;*/
+    /*margin: auto;*/
+}
 .createDevice_button_addImage{
     margin: 5px;
 }

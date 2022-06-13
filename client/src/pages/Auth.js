@@ -30,7 +30,7 @@ const Auth = observer(() => {
                }
             }
             if (data) {
-                auth.setData(data);
+                auth.setIsAuth(data.accessToken);
                 history.push(SHOP_ROUTE);
             }
         } catch (e) {

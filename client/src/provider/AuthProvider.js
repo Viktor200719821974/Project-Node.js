@@ -1,5 +1,7 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {AuthContext} from '../context';
+import {getUserId} from "../http/userApi";
+import {getBasketDevice} from "../http/basketApi";
 
 const AuthProvider = (props) => {
 
@@ -10,17 +12,30 @@ const AuthProvider = (props) => {
     const [brands, setBrandsData] = useState(null);
     const [selectedBrand, setSelectedBrandData] = useState(null);
     const [selectedType, setSelectedTypeData] = useState(null);
-    const setData = useCallback((data) => {
-        if (data){
-            setIsLogin(true);
-        }
-        setUser(data.user);
-    },[]);
+    const [basket, setBasket] = useState(null);
+    const [count, setCount] = useState(null);
 
-    const setIsAuth = useCallback((data) => {
-        if (data) {
-            setIsLogin(true);
-            setUser(data);
+    // const setData = useCallback((data) => {
+    //     if (data){
+    //         setIsLogin(true);
+    //     }
+    //     setUser(data.user);
+    // },[]);
+
+    const setIsAuth = useCallback((accessToken) => {
+        if (accessToken) {
+            getUserId(accessToken).then(data => {
+                if (data.request.status === 200){
+                    setUser(data.data);
+                    setIsLogin(true);
+                }
+                getBasketDevice(data.data.basket.id).then(data => {
+                    if (data){
+                        setBasket(data);
+                        setCount(data.length);
+                    }
+                });
+            });
         }
     }, []);
 
@@ -53,7 +68,7 @@ const AuthProvider = (props) => {
         () => ({
             isLogin,
             user,
-            setData,
+            // setData,
             devices,
             setTypes,
             setDevices,
@@ -65,9 +80,14 @@ const AuthProvider = (props) => {
             setSelectedBrand,
             selectedBrand,
             selectedType, 
-            setSelectedType
+            setSelectedType,
+            basket,
+            count
         }),
-        [brands, devices, isLogin, logOut, selectedBrand, selectedType, setBrands, setData, setDevices, setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user]
+        [
+            basket, brands, count, devices, isLogin, logOut, selectedBrand, selectedType, setBrands, setDevices,
+            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user,
+        ]
     );
     return (
         <AuthContext.Provider value={contextValue}>

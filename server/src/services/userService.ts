@@ -21,6 +21,7 @@ class UserService {
                 exclude: ['password', 'createdAt', 'updatedAt'],
             },
             where: { id },
+            include: [{ model: model.Basket, as: 'basket' }],
         });
     }
 
@@ -32,8 +33,7 @@ class UserService {
         }
         const hashedPassword = await UserService._hashPassword(password);
         const newUser = await model.User.create({ ...user, password: hashedPassword });
-        const id = newUser.get('id');
-        Number(id);
+        const { id } = newUser;
         await model.Basket.create({ userId: id });
         return user;
     }
@@ -117,13 +117,13 @@ class UserService {
     }
 
     async activateUser(activateToken: string, next: NextFunction) {
-        const token = await model.Token.findOne({ where: { activateToken } });
+        const token = await model.TokenActivate.findOne({ where: { activateToken } });
         if (!token) {
             next(new ErrorHandler('Not Found', 404));
         }
         const id = token?.userId;
         await model.User.update({ is_active: true }, { where: { id } });
-        await model.Token.update({ activateToken: `User ${id} activated` }, { where: { userId: id } });
+        await model.TokenActivate.destroy({ where: { userId: id } });
     }
 
     private static async _hashPassword(password: string): Promise<string> {

@@ -13,13 +13,11 @@ import PaginationDevice from "../components/Pagination";
 import Pagination from 'react-bootstrap/Pagination';
 
 const Shop = observer(() => {
-    const {setTypes, setBrands, setDevices, selectedBrand, selectedType, devices} = useAuth();
+    const {setTypes, setBrands, setDevices, selectedBrand, selectedType} = useAuth();
     const [image, setImage] = useState([]);
     const [page, setPage] = useState(1);
+    const [countPage, setCountPage] = useState();
 
-    const totalItems = devices?.count;
-    const itemPerPage = devices?.perPage;
-    const countPage = Math.ceil(totalItems/ itemPerPage);
     let numberPage = [];
     for (let i = 1; i <= countPage; i++ ){
         numberPage.push(i);
@@ -28,7 +26,13 @@ const Shop = observer(() => {
     useEffect (() => {
         getTypes().then(data => setTypes(data));
         getBrands().then(data => setBrands(data));
-        getDevices(selectedBrand, selectedType, page).then(data => setDevices(data));
+        getDevices(selectedBrand, selectedType, page).then(data => {
+            setDevices(data);
+            setCountPage(Math.ceil(data.count/ data.perPage));
+            if (countPage && countPage < page){
+                setPage(1);
+            }
+        });
         getImageDevice().then(data => setImage(data));
     },[selectedBrand, selectedType, page, countPage]);
 

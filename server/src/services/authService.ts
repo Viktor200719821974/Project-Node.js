@@ -1,5 +1,5 @@
 import { NextFunction } from 'express';
-import { ITokenData, IUser, IUserLogin } from '../interfaces';
+import { ITokenData, ITokenPair, IUser } from '../interfaces';
 import { tokenService } from './tokenService';
 import { model } from '../models/models';
 import { ErrorHandler } from '../error/errorHandler';
@@ -14,11 +14,11 @@ class AuthService {
         const userModel = await model.User.findOne({ where: { email } });
         // @ts-ignore
         const { id } = userModel;
-        // eslint-disable-next-line max-len
-        const tokenPair = await tokenService.generateTokenPairActivate({ userId: id, userEmail: email });
-        // eslint-disable-next-line max-len
-        await tokenService.saveTokenActivate(id, tokenPair.refreshToken, tokenPair.accessToken, tokenPair.activateToken);
-
+        const tokenPair = await tokenService.generateTokenPairActivate({
+            userId: id, userEmail: email,
+        });
+        await tokenService.saveToken(id, tokenPair.refreshToken, tokenPair.accessToken);
+        await tokenService.saveTokenActivate(id, tokenPair.activateToken);
         return {
             ...tokenPair,
             userId: id,
@@ -26,7 +26,7 @@ class AuthService {
         };
     }
 
-    async login(email: string, next: NextFunction): Promise<IUserLogin> {
+    async login(email: string, next: NextFunction): Promise<ITokenPair> {
         const user = await model.User.findOne({
             attributes: {
                 exclude: ['password', 'is_active', 'createdAt', 'updatedAt'],
@@ -44,7 +44,7 @@ class AuthService {
             { userId: id, userEmail: email },
         );
         await tokenService.saveToken(id, refreshToken, accessToken);
-        return { user, refreshToken, accessToken };
+        return { refreshToken, accessToken };
     }
 }
 

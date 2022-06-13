@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config/config';
 import {
-    ITokenDataToSave, ITokenPair, ITokenPairActivate, IUserPayload,
+    IToken,
+    ITokenDataToSaveActivate, ITokenPair, ITokenPairActivate, IUserPayload,
 } from '../interfaces';
 import { model } from '../models/models';
 
@@ -46,23 +47,20 @@ class TokenService {
         };
     }
 
-    // eslint-disable-next-line max-len
-    async saveTokenActivate(userId: number, refreshToken: string, accessToken: string, activateToken: string): Promise<ITokenDataToSave> {
+    async saveTokenActivate(userId: number, activateToken: string)
+        : Promise<ITokenDataToSaveActivate> {
         // @ts-ignore
-        return model.Token.create({
-            refreshToken, accessToken, activateToken, userId,
-        });
+        return model.TokenActivate.create({ activateToken, userId });
     }
 
-    // eslint-disable-next-line max-len
-    async saveToken(userId: number, refreshToken: string, accessToken: string) {
-        return model.Token.update({
-            refreshToken, accessToken,
-        }, { where: { userId } });
+    async saveToken(userId: number, refreshToken: string, accessToken: string)
+        : Promise<IToken> {
+        // @ts-ignore
+        return model.Token.create({ refreshToken, accessToken, userId });
     }
 
     async deleteUserTokenPair(userId: number) {
-        return model.Token.update({ accessToken: 'null', refreshToken: 'null' }, { where: { userId } });
+        return model.Token.destroy({ where: { userId } });
     }
 
     async deleteTokenPairByParams(refreshToken: string | undefined) {

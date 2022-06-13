@@ -3,7 +3,6 @@ import {BrowserRouter, useHistory} from "react-router-dom";
 import {Spinner} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import NavBar from "./components/NavBar";
-import {getUserId} from "./http/userApi";
 import AppRouter from "./components/AppRouter";
 import useAuth from "./hook/useAuth";
 import {LOGIN_ROUTE} from "./utils/constans";
@@ -16,16 +15,12 @@ const App = observer(() => {
         try{
             const accessToken = localStorage.getItem('accessToken');
             if (accessToken){
-                getUserId(accessToken).then(data => {
-                            if (data.request.status === 200){
-                                auth.setIsAuth(data.data);
-                            }else {
-                                history.push(LOGIN_ROUTE);
-                            }
-                });
+                auth.setIsAuth(accessToken);
             }
-
         }catch (e) {
+            if (e) {
+                history.push(LOGIN_ROUTE);
+            }
             console.log(e);
         }
         setLoading(false);

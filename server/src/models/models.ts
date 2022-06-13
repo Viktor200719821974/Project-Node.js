@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db';
 import {
-    IDevice, IImageDevice, IToken, IUser,
+    IDevice, IImageDevice, IToken, ITokenActivate, IUser,
 } from '../interfaces';
 
 const User = sequelize.define<IUser>('user', {
@@ -25,6 +25,7 @@ const Basket = sequelize.define('basket', {
 
 const BasketDevice = sequelize.define('basket_device', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    deviceId: { type: DataTypes.INTEGER },
 });
 
 const Device = sequelize.define<IDevice>('device', {
@@ -34,8 +35,6 @@ const Device = sequelize.define<IDevice>('device', {
     rating: { type: DataTypes.INTEGER, defaultValue: 0 },
     typeId: { type: DataTypes.INTEGER },
     brandId: { type: DataTypes.INTEGER },
-    // info: { type: DataTypes.STRING },
-    // imageDeviceAws: { type: DataTypes.STRING },
 });
 
 const Type = sequelize.define('type', {
@@ -64,9 +63,18 @@ const TypeBrand = sequelize.define('type_brand', {
 });
 
 const Token = sequelize.define<IToken>('token', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false,
+    },
     accessToken: { type: DataTypes.STRING, unique: true, allowNull: false },
     refreshToken: { type: DataTypes.STRING, unique: true, allowNull: false },
+    userId: { type: DataTypes.INTEGER },
+});
+
+const TokenActivate = sequelize.define<ITokenActivate>('token_activate', {
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false,
+    },
     activateToken: { type: DataTypes.STRING, unique: true, allowNull: false },
     userId: { type: DataTypes.INTEGER },
 });
@@ -88,6 +96,9 @@ Basket.belongsTo(User);
 
 User.hasOne(Token);
 Token.belongsTo(User);
+
+User.hasOne(Token);
+TokenActivate.belongsTo(User);
 
 User.hasMany(Rating);
 Rating.belongsTo(User);
@@ -132,4 +143,5 @@ export const model = {
     Token,
     // ImageDevice,
     ImageDeviceAws,
+    TokenActivate,
 };

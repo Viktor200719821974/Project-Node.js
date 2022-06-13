@@ -4,6 +4,7 @@ import { tokenService } from '../services/tokenService';
 import { userService } from '../services/userService';
 import { authService } from '../services/authService';
 import { constants } from '../constants';
+// import { basketService } from '../services/basketService';
 // import { emailService } from '../services/emailService';
 
 class AuthController {
@@ -31,8 +32,8 @@ class AuthController {
     async login(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
         try {
             const { email } = req.body;
-            const user = await authService.login(email, next);
-            res.json(user);
+            const tokenPair = await authService.login(email, next);
+            res.json(tokenPair);
         } catch (e) {
             next(e);
         }
