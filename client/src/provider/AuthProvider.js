@@ -28,13 +28,13 @@ const AuthProvider = (props) => {
                 if (data.request.status === 200){
                     setUser(data.data);
                     setIsLogin(true);
+                    getBasketDevice(data.data.basket.id).then(data => {
+                        if (data){
+                            setBasket(data);
+                            setCount(data.length);
+                        }
+                    });
                 }
-                getBasketDevice(data.data.basket.id).then(data => {
-                    if (data){
-                        setBasket(data);
-                        setCount(data.length);
-                    }
-                });
             });
         }
     }, []);

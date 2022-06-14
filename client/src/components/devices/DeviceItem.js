@@ -9,8 +9,8 @@ const DeviceItem = ({device, image, type, brand}) => {
     const img = image.map(c => c.imageLocation);
     return (
         <Col md={3} className={"mt-3"} onClick={() => history.push(DEVICE_ROUTE + '/' + device.id)}>
-            <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
-                <Image width={150} height={150} src={img[0]}/>
+            <Card style={{width: 202, cursor: 'pointer'}} border={"dark"}>
+                <Image width={200} height={250} src={img[0]}/>
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div>{type} {brand}</div>
                     <div className="d-flex align-items-center">

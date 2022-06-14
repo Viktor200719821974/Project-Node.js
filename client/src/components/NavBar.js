@@ -10,6 +10,7 @@ import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../utils/const
 import '../style/style.css';
 import useAuth from "../hook/useAuth";
 import {logOutUser} from "../http/authApi";
+import {SiTrendmicro} from "react-icons/si";
 
 const NavBar = observer(() => {
     const auth = useAuth();
@@ -22,34 +23,34 @@ const NavBar = observer(() => {
         localStorage.removeItem('refreshToken');
     }
     return (
-        <div>
-            <Navbar bg="dark" variant="dark">
+        <div className={'navbar_main_div'}>
+            <Navbar bg="primary" variant="dark">
                 <Container>
-                    <NavLink className={'navBar_navLink'} to={SHOP_ROUTE}>Купи собі техніку</NavLink>
+                    <NavLink className={'navBar_navLink'} to={SHOP_ROUTE}><div style={{marginRight: '20px'}}><SiTrendmicro/></div>Купи собі техніку</NavLink>
                     {
                         auth.isLogin ?
-                            <Nav className="ml-auto" style={{color: "white"}}>
+                            <Nav className="ml-auto">
                                 {
                                     (auth.user.is_staff || auth.user.is_superuser) &&
                                     <Button
-                                        variant={"outline-light"}
+                                        variant={"outline-warning"}
                                         onClick={() => history.push(ADMIN_ROUTE)}>
                                         <RiAdminLine/> Адмін панель
                                     </Button>
                                 }
-                                <Button variant={"outline-light"}
+                                <Button variant={"outline-warning"}
                                         style={{marginLeft: 20}}
                                         onClick={() => logOut()}><MdOutlineLogout/></Button>
                                 <div className={'navBar_navLink_div_basket_button'}>
-                                    <Button variant={"outline-light"}
+                                    <Button variant={"outline-warning"}
                                         style={{marginLeft: 20}}
                                         onClick={() => history.push(BASKET_ROUTE)}><BsBasket/></Button>
-                                    {auth.count !== 0 && <div className={'navBar_navLink_div_basket_button_count'}>{auth.count}</div>}
+                                    {auth.count && auth.count !== 0 && <div className={'navBar_navLink_div_basket_button_count'}>{auth.count}</div>}
                                 </div>
                             </Nav>
                             :
                             <Nav className="ml-auto" style={{color: "white"}}>
-                                <Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}><CgLogIn/></Button>
+                                <Button variant={"outline-warning"} onClick={() => history.push(LOGIN_ROUTE)}><CgLogIn/></Button>
                             </Nav>
                     }
                 </Container>

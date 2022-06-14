@@ -31,14 +31,14 @@ const TypeBar = observer(() => {
             {/*/>*/}
             {/*    <button>t</button>*/}
             {/*</div>*/}
-            <Button variant={"outline-secondary"} onClick={allDevices} className={"mb-2"}>
+            <Button onClick={allDevices} className={"typeBar_button_top"}>
                 Показати всі
             </Button>
             { types && types.map((type) =>
                 <ListGroup.Item
                 style={{cursor: 'pointer', textAlign: 'center'}}
-                // className={'typeBar_card'}
-                action variant="light"
+                className={'typeBar_card'}
+                variant="primary"
                 active={type.id === selectedType}
                 onClick={() => setSelectedType(type.id)}
                 key={type.id}>

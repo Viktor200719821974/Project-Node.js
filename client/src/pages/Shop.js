@@ -24,8 +24,16 @@ const Shop = observer(() => {
     }
 
     useEffect (() => {
-        getTypes().then(data => setTypes(data));
-        getBrands().then(data => setBrands(data));
+        getTypes().then(data => {
+            if (data) {
+                setTypes(data);
+            }
+        });
+        getBrands().then(data => {
+            if (data){
+                setBrands(data);
+            }
+        });
         getDevices(selectedBrand, selectedType, page).then(data => {
             setDevices(data);
             setCountPage(Math.ceil(data.count/ data.perPage));
@@ -37,7 +45,7 @@ const Shop = observer(() => {
     },[selectedBrand, selectedType, page, countPage]);
 
     return (
-        <Container>
+        <Container className={'shop_container'}>
           <Row className={"mt-2"}>
               <Col md={3}>
                 <TypeBar/>

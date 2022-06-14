@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Dropdown, Form, Modal, Row, Spinner} from "react-bootstrap";
+import {Button, Col, Dropdown, Form, Modal, Row, Spinner, Alert} from "react-bootstrap";
 import {createDevice} from "../http/deviceApi";
 import {observer} from "mobx-react-lite";
 import useAuth from "../hook/useAuth";
@@ -20,12 +20,10 @@ const CreateDevice = observer(({show, onHide}) => {
     const [deviceId, setDeviceId] = useState();
     const [loadedImage, setLoadedImage] = useState(false);
     const [statusResponse, setStatusResponse] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getTypes().then(data => device.setTypes(data));
         getBrands().then(data => device.setBrands(data));
-        setLoading(false);
     }, []);
 
     const addInfo = () => {
@@ -91,9 +89,6 @@ const CreateDevice = observer(({show, onHide}) => {
             console.log(e);
         }
     }
-    if (loading){
-        return <Spinner animation={"grow"}/>
-    }
     return (
         <Modal
             show={show}
@@ -106,9 +101,9 @@ const CreateDevice = observer(({show, onHide}) => {
                     Додати новий пристрій
                 </Modal.Title>
             </Modal.Header>
-            {/*{(statusResponse || loadedImage) && <Alert variant={'success'}>*/}
-            {/*    {statusResponse ? '* Пристрій був добавлений!!!' : '* Фото було добавлено!!!'}*/}
-            {/*</Alert>}*/}
+            {(statusResponse || loadedImage) && <Alert variant={'success'} style={{textAlign: 'center', fontSize: '20px'}}>
+                {statusResponse ? '* Пристрій був добавлений!!!' : 'Фото було добавлено!!!'}
+            </Alert>}
             {(statusResponse || loadedImage) && <div className={'createDevice_div_successfully'}>
                 {statusResponse ? '* Пристрій був добавлений!!!' : '* Фото було добавлено!!!'}
             </div>}

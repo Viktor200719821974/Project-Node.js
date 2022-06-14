@@ -1,3 +1,6 @@
+body {
+    background-color: #F0E68C;
+}
 .brandBar_div{
     display: flex;
     flex-wrap: wrap;
@@ -9,9 +12,9 @@
     width: auto;
     font-size: 16px;
     padding: 5px;
-    background-color: #fff;
+    background-color: #cfe2ff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid black;
     border-radius: 0.25rem;
 }
 .brandBar_card_select{
@@ -23,11 +26,12 @@
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 0.25rem;
-    background: grey;
+    background: #0d6efd;
     color: white;
 }
 .brandBar_card:hover {
-    background: #ededed;
+    background: gold;
+    color: white;
 }
 .brandBar_div_item{
     position: relative;
@@ -42,16 +46,29 @@
 /*.typeBar_div{*/
 /*    margin: 5px;*/
 /*}*/
-/*.typeBar_card{*/
-/*    cursor: pointer;*/
-/*    width: auto;*/
-/*    font-size: 16px;*/
-/*    padding: 5px;*/
-/*    background-color: #fff;*/
-/*    background-clip: border-box;*/
-/*    border: 1px solid rgba(0,0,0,.125);*/
-/*    border-radius: 0.25rem;*/
-/*}*/
+.typeBar_button_top{
+    margin-bottom: 2px;
+}
+.typeBar_button_top:hover{
+    background: gold;
+}
+.typeBar_card{
+    font-size: 16px;
+    color: black;
+    border: black 1px solid;
+    /*text-shadow: 1px 0 1px #fff,*/
+    /*0 1px 1px #fff,*/
+    /*-1px 0 1px #fff,*/
+    /*0 -1px 1px #fff;*/
+    /*cursor: pointer;*/
+    /*width: auto;*/
+    /*font-size: 16px;*/
+    /*padding: 5px;*/
+    /*background-color: #fff;*/
+    /*background-clip: border-box;*/
+    /*border: 1px solid rgba(0,0,0,.125);*/
+    /*border-radius: 0.25rem;*/
+}
 /*.typeBar_card_select{*/
 /*    cursor: pointer;*/
 /*    margin: 5px;*/
@@ -67,8 +84,22 @@
 /*.typeBar_card:hover {*/
 /*    background: #ededed;*/
 /*}*/
+.navbar_main_div{
+    border: black solid 1px;
+    text-shadow: 2px 0 2px #fff,
+    0 2px 2px #F0E68C,
+    -2px 0 2px #F0E68C,
+    0 -2px 2px #F0E68C;
+}
 .navBar_navLink{
-    color: white;
+    /*color: white;*/
+    display: flex;
+    font-size: 20px;
+    color: gold;
+    text-shadow: 1px 0 1px #000,
+    0 1px 1px #000,
+    -1px 0 1px #000,
+    0 -1px 1px #000;
     text-decoration-line: none;
 }
 .navBar_navLink:hover{
@@ -93,6 +124,14 @@
     /*display: inline-block;*/
     /*margin: auto;*/
 }
+/*.navBar_navLink_text{*/
+/*    font-size: 16px;*/
+/*    color: gold;*/
+/*    text-shadow: 1px 0 1px #000,*/
+/*    0 1px 1px #000,*/
+/*    -1px 0 1px #000,*/
+/*    0 -1px 1px #000;*/
+/*}*/
 .createDevice_button_addImage{
     margin: 5px;
 }
@@ -112,4 +151,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+}
+.shop_container{
+    /*background: gold;*/
 }
