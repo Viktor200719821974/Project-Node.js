@@ -4,11 +4,16 @@ import star from "../image/Star 1.png";
 import {getOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
+import {createBasketDevice} from "../http/basketApi";
 
 const DevicePage = () => {
     const [device, setDevice] = useState({info: [], imageDeviceAws: [],});
     const [image, setImage] = useState([])
     const {id} = useParams();
+
+    const addBasket = () => {
+        createBasketDevice(device.id).then(data => console.log(data));
+    }
     useEffect(() => {
         getOneDevice(id).then(data => {
             setDevice(data);
@@ -40,7 +45,7 @@ const DevicePage = () => {
                           style={{width: 300, height: 300, fontSize: 32, border: "5px solid lightgray"}}
                     >
                         <h3>Від {device.price} грн.</h3>
-                        <Button variant={"outline-dark"}>Додати в корзину</Button>
+                        <Button variant={"outline-dark"} onClick={addBasket}>Додати в корзину</Button>
                     </Card>
                 </Col>
             </Row>

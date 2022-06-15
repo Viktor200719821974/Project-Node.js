@@ -113,16 +113,22 @@ body {
     position: absolute;
     top: -7px;
     right: -13px;
-    height: 25px;
-    width: 25px;
-    background-color: white;
-    color: black;
+    height: 20px;
+    width: 20px;
+    background-color: gold;
+    /*color: black;*/
     border: white solid 1px;
     border-radius: 50%;
-    text-align: center;
-    padding: 1px;
+    /*text-align: center;*/
+    /*padding: 1px;*/
     /*display: inline-block;*/
     /*margin: auto;*/
+}
+.navBar_navLink_div_basket_button_count_p{
+    /*margin: -3px;*/
+    text-align: center;
+    color: black;
+    font-size: 12px;
 }
 /*.navBar_navLink_text{*/
 /*    font-size: 16px;*/

@@ -1,19 +1,19 @@
 import { NextFunction, Response } from 'express';
 import { IRequestExtended } from '../interfaces';
-import { basketService } from '../services/basketService';
+import { basketServices } from '../services/basketService';
 
 class BasketDeviceController {
     async createBasketDevice(req: IRequestExtended, res: Response, next: NextFunction) {
         // @ts-ignore
         const { id } = req.user;
-        const { deviceId } = req.body;
-        const basket = await basketService.createBasketDevice(deviceId, id, next);
+        const { deviceId } = req.params;
+        const basket = await basketServices.createBasketDevice(+deviceId, id, next);
         res.json(basket);
     }
 
     async getBasketDevice(req: IRequestExtended, res: Response, next: NextFunction) {
         const { id } = req.params;
-        const basketDevice = await basketService.getBasketDevice(+id);
+        const basketDevice = await basketServices.getBasketDevice(+id);
         res.json(basketDevice);
     }
 }

@@ -21,4 +21,4 @@ class BasketService {
     }
 }
 
-export const basketService = new BasketService();
+export const basketServices = new BasketService();

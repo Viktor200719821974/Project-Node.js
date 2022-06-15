@@ -15,7 +15,7 @@ import {SiTrendmicro} from "react-icons/si";
 const NavBar = observer(() => {
     const auth = useAuth();
     const history = useHistory();
-
+    console.log(auth.count);
     const logOut = async() => {
         auth.logOut();
         await logOutUser();
@@ -45,7 +45,7 @@ const NavBar = observer(() => {
                                     <Button variant={"outline-warning"}
                                         style={{marginLeft: 20}}
                                         onClick={() => history.push(BASKET_ROUTE)}><BsBasket/></Button>
-                                    {auth.count && auth.count !== 0 && <div className={'navBar_navLink_div_basket_button_count'}>{auth.count}</div>}
+                                    {auth.count > 0 && <div className={'navBar_navLink_div_basket_button_count'}><p className={'navBar_navLink_div_basket_button_count_p'}>{auth.count}</p></div>}
                                 </div>
                             </Nav>
                             :
