@@ -6,7 +6,6 @@ import useAuth from "../../hook/useAuth";
 
 const DeviceList = observer(({image}) => {
     const {devices, brands, types} = useAuth();
-
     return (
         <Row className={"d-flex"}>
             { devices && devices.rows.map(device =>

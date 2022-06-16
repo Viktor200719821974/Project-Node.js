@@ -12,9 +12,18 @@ class BasketDeviceController {
     }
 
     async getBasketDevice(req: IRequestExtended, res: Response, next: NextFunction) {
-        const { id } = req.params;
-        const basketDevice = await basketServices.getBasketDevice(+id);
+        // @ts-ignore
+        const { id } = req.user;
+        const basketDevice = await basketServices.getBasketDevice(id);
         res.json(basketDevice);
+    }
+
+    async deleteDeviceFromBasket(req: IRequestExtended, res: Response, next: NextFunction) {
+        const { deviceId } = req.params;
+        // @ts-ignore
+        const { id } = req.user;
+        await basketServices.deleteDeviceFromBasket(+deviceId, id);
+        res.json('Ok');
     }
 }
 

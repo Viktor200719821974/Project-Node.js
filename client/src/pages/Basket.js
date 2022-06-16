@@ -3,18 +3,22 @@ import BasketComponent from "../components/BasketComponent";
 import useAuth from "../hook/useAuth";
 
 const Basket = () => {
-    const {basket, devices} = useAuth();
+    const {basket, devices, count} = useAuth();
     const deviceId = basket.map(c => c.deviceId);
-    console.log(deviceId);
     const arr = [];
-    for (let i; i < devices.length; i++){
-        console.log(i);
-        arr.push(devices.filter(c => c.deviceId === i));
+    for (let i = 0; i < deviceId.length; i++){
+        const filter = devices.rows.filter(c => c.id === deviceId[i]);
+        arr.push(filter);
     }
-    console.log(arr);
     return (
         <div>
-           <BasketComponent/>
+            {
+                count === 0
+                    ?
+                    <div className={'basket_div_noContent'}>ВАША КОРЗИНА ПОРОЖНЯ</div>
+                :
+            arr.map((c, index) => <BasketComponent key={index} device={c} id={c.map(c => c.id)} total={index + 1}/>
+            )}
         </div>
     );
 };

@@ -2,12 +2,12 @@ import { createContext } from "react";
 
 export const AuthContext = createContext({
     isLogin: false,
-    user: null,
+    user: [],
     devices: null,
-    basket: null,
-    types: null,
-    brands: null,
-    count: null,
+    basket: [],
+    types: [],
+    brands: [],
+    count: 0,
     selectedBrand: null,
     selectedType: null,
     setData: () => {},
@@ -18,4 +18,5 @@ export const AuthContext = createContext({
     logOut: () => {},
     setSelectedBrand: () => {},
     setSelectedType: () => {},
+    setBasket: () => {},
 });

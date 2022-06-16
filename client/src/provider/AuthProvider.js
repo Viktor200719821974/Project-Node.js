@@ -6,21 +6,26 @@ import {getBasketDevice} from "../http/basketApi";
 const AuthProvider = (props) => {
 
     const [isLogin, setIsLogin] = useState(false);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState([]);
     const [devices, setDevicesData] = useState(null);
-    const [types, setTypesData] = useState(null);
-    const [brands, setBrandsData] = useState(null);
+    const [types, setTypesData] = useState([]);
+    const [brands, setBrandsData] = useState([]);
     const [selectedBrand, setSelectedBrandData] = useState(null);
     const [selectedType, setSelectedTypeData] = useState(null);
-    const [basket, setBasket] = useState(null);
-    const [count, setCount] = useState(null);
+    const [basket, setBasketData] = useState([]);
+    const [count, setCount] = useState(0);
 
-    // const setData = useCallback((data) => {
-    //     if (data){
-    //         setIsLogin(true);
-    //     }
-    //     setUser(data.user);
-    // },[]);
+    const setBasket = useCallback(() => {
+        getBasketDevice().then(value => {
+            if (value.length > 0) {
+                setBasketData(value);
+                setCount(value.length);
+            } else {
+                setBasketData([]);
+                setCount(0);
+            }
+        });
+    },[]);
 
     const setIsAuth = useCallback((accessToken) => {
         if (accessToken) {
@@ -28,12 +33,7 @@ const AuthProvider = (props) => {
                 if (data.request.status === 200){
                     setUser(data.data);
                     setIsLogin(true);
-                    getBasketDevice(data.data.basket.id).then(data => {
-                        if (data){
-                            setBasket(data);
-                            setCount(data.length);
-                        }
-                    });
+                    setBasket();
                 }
             });
         }
@@ -68,7 +68,6 @@ const AuthProvider = (props) => {
         () => ({
             isLogin,
             user,
-            // setData,
             devices,
             setTypes,
             setDevices,
@@ -82,11 +81,12 @@ const AuthProvider = (props) => {
             selectedType, 
             setSelectedType,
             basket,
-            count
+            count,
+            setBasket
         }),
         [
             basket, brands, count, devices, isLogin, logOut, selectedBrand, selectedType, setBrands, setDevices,
-            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user,
+            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user, setBasket,
         ]
     );
     return (

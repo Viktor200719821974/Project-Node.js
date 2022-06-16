@@ -1,6 +1,9 @@
 body {
     background-color: #F0E68C;
 }
+input[type='radio']{
+    display: none;
+}
 .brandBar_div{
     display: flex;
     flex-wrap: wrap;
@@ -43,9 +46,6 @@ body {
 .typeBar_listGroup_div{
     display: flex;
 }
-/*.typeBar_div{*/
-/*    margin: 5px;*/
-/*}*/
 .typeBar_button_top{
     margin-bottom: 2px;
 }
@@ -56,34 +56,7 @@ body {
     font-size: 16px;
     color: black;
     border: black 1px solid;
-    /*text-shadow: 1px 0 1px #fff,*/
-    /*0 1px 1px #fff,*/
-    /*-1px 0 1px #fff,*/
-    /*0 -1px 1px #fff;*/
-    /*cursor: pointer;*/
-    /*width: auto;*/
-    /*font-size: 16px;*/
-    /*padding: 5px;*/
-    /*background-color: #fff;*/
-    /*background-clip: border-box;*/
-    /*border: 1px solid rgba(0,0,0,.125);*/
-    /*border-radius: 0.25rem;*/
 }
-/*.typeBar_card_select{*/
-/*    cursor: pointer;*/
-/*    margin: 5px;*/
-/*    width: auto;*/
-/*    font-size: 18px;*/
-/*    padding: 5px;*/
-/*    background-clip: border-box;*/
-/*    border: 1px solid rgba(0,0,0,.125);*/
-/*    border-radius: 0.25rem;*/
-/*    background: grey;*/
-/*    color: white;*/
-/*}*/
-/*.typeBar_card:hover {*/
-/*    background: #ededed;*/
-/*}*/
 .navbar_main_div{
     border: black solid 1px;
     text-shadow: 2px 0 2px #fff,
@@ -92,7 +65,6 @@ body {
     0 -2px 2px #F0E68C;
 }
 .navBar_navLink{
-    /*color: white;*/
     display: flex;
     font-size: 20px;
     color: gold;
@@ -116,28 +88,14 @@ body {
     height: 20px;
     width: 20px;
     background-color: gold;
-    /*color: black;*/
     border: white solid 1px;
     border-radius: 50%;
-    /*text-align: center;*/
-    /*padding: 1px;*/
-    /*display: inline-block;*/
-    /*margin: auto;*/
 }
 .navBar_navLink_div_basket_button_count_p{
-    /*margin: -3px;*/
     text-align: center;
     color: black;
     font-size: 12px;
 }
-/*.navBar_navLink_text{*/
-/*    font-size: 16px;*/
-/*    color: gold;*/
-/*    text-shadow: 1px 0 1px #000,*/
-/*    0 1px 1px #000,*/
-/*    -1px 0 1px #000,*/
-/*    0 -1px 1px #000;*/
-/*}*/
 .createDevice_button_addImage{
     margin: 5px;
 }
@@ -158,6 +116,14 @@ body {
     align-items: center;
     padding: 10px;
 }
-.shop_container{
-    /*background: gold;*/
+.basket_div_noContent{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    font-size: 25px;
+    color: gold;
+    text-shadow: 1px 0 1px #000,
+    0 1px 1px #000,
+    -1px 0 1px #000,
+    0 -1px 1px #000;
 }

@@ -5,14 +5,17 @@ import {getOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
 import {createBasketDevice} from "../http/basketApi";
+import useAuth from "../hook/useAuth";
+import RatingDevice from "../components/devices/RatingDevice";
 
 const DevicePage = () => {
     const [device, setDevice] = useState({info: [], imageDeviceAws: [],});
     const [image, setImage] = useState([])
     const {id} = useParams();
+    const {setBasket} = useAuth();
 
     const addBasket = () => {
-        createBasketDevice(device.id).then(data => console.log(data));
+        createBasketDevice(device.id).then(data => setBasket(data));
     }
     useEffect(() => {
         getOneDevice(id).then(data => {
@@ -45,6 +48,7 @@ const DevicePage = () => {
                           style={{width: 300, height: 300, fontSize: 32, border: "5px solid lightgray"}}
                     >
                         <h3>Від {device.price} грн.</h3>
+                        <RatingDevice deviceId={id}/>
                         <Button variant={"outline-dark"} onClick={addBasket}>Додати в корзину</Button>
                     </Card>
                 </Col>

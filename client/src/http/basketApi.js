@@ -1,10 +1,14 @@
-import {$authHost, $host} from "./index";
+import {$authHost} from "./index";
 
 export const createBasketDevice = async (deviceId) => {
     const {data} = await $authHost.post('/basket/' + deviceId);
     return data;
 }
-export const getBasketDevice = async (id) => {
-    const {data} = await $host.get('/basket/' + id);
+export const getBasketDevice = async () => {
+    const {data} = await $authHost.get('/basket');
+    return data;
+}
+export const deleteDeviceFromBasket = async (id) => {
+    const {data} = await $authHost.delete('/basket/' + id);
     return data;
 }

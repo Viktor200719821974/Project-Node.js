@@ -16,8 +16,16 @@ class BasketService {
         return model.BasketDevice.create({ basketId, deviceId });
     }
 
-    async getBasketDevice(id: number) {
-        return model.BasketDevice.findAll({ where: { basketId: id } });
+    async getBasketDevice(userId: number) {
+        const basketUser = await model.Basket.findOne({ where: { userId } });
+        const basketId = basketUser?.get('id');
+        return model.BasketDevice.findAll({ where: { basketId } });
+    }
+
+    async deleteDeviceFromBasket(deviceId: number, userId: number) {
+        const basketUser = await model.Basket.findOne({ where: { userId } });
+        const basketId = basketUser?.get('id');
+        return model.BasketDevice.destroy({ where: { deviceId, basketId } });
     }
 }
 

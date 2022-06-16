@@ -6,6 +6,7 @@ import { deviceRouter } from './deviceRouter';
 import { authRouter } from './authRouter';
 import { imageDeviceRouter } from './imageDeviceRouter';
 import { basketRouter } from './basketRouter';
+import { ratingRouter } from './ratingRouter';
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.use('/type', typeRouter);
 router.use('/device', deviceRouter);
 router.use('/imageDevice', imageDeviceRouter);
 router.use('/basket', basketRouter);
+router.use('/rating', ratingRouter);
 // @ts-ignore
 router.use('*', (err, req, res, next) => {
     res.status(err.status || 500)
