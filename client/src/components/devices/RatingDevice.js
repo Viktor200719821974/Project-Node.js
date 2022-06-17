@@ -1,39 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {FaStar} from "react-icons/fa";
-import {getRatingDeviceId} from "../../http/ratingApi";
 
-const RatingDevice = ({deviceId}) => {
+const RatingDevice = ({sendRating, setSendRating}) => {
     // const [rating, setRating] = useState(null);
-    // const [hover, setHover] = useState(null);
-    const [rate, setRate] = useState([]);
-    useEffect(() => {
-        getRatingDeviceId(deviceId).then(data => {
-            setRate(data);
-        })
-    },[]);
-    const filter = rate.map(c => c.rate);
-
+    const [hover, setHover] = useState(null);
     return (
         <div>
             {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
-                    // <label>
-                    //     <input
-                    //         type="radio"
-                    //         name={'rating'}
-                    //         value={ratingValue}
-                    //         onClick={() => setRating(ratingValue)}
-                    //     />
+                    <label key={i}>
+                        <input
+                            type="radio"
+                            name={'rating'}
+                            value={ratingValue}
+                            onClick={() => setSendRating(ratingValue)}
+                        />
                         <FaStar
                             size={30}
-                            key={i}
-                            color={ratingValue <= filter ? '#ffc107' : '#e4e5e9'}
-                            // color={ratingValue <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
-                            // onMouseEnter={() => setHover(ratingValue)}
-                            // onMouseLeave={() => setHover(null)}
+                            color={ratingValue <= (hover || sendRating) ? '#ffc107' : '#e4e5e9'}
+                            onMouseEnter={() => setHover(ratingValue)}
+                            onMouseLeave={() => setHover(null)}
                         />
-                    // </label>
+                     </label>
                 );
             })}
         </div>

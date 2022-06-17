@@ -4,7 +4,7 @@ import star from "../../image/Star 1.png";
 import {useHistory} from "react-router-dom";
 import {DEVICE_ROUTE} from "../../utils/constans";
 
-const DeviceItem = ({device, image, type, brand}) => {
+const DeviceItem = ({device, image, type, brand, rating}) => {
     const history = useHistory();
     const img = image.map(c => c.imageLocation);
     return (
@@ -14,7 +14,7 @@ const DeviceItem = ({device, image, type, brand}) => {
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div>{type} {brand}</div>
                     <div className="d-flex align-items-center">
-                        <div>{device.rating}</div>
+                        <div>{rating}</div>
                         <Image src={star} style={{width:18, height:18}}/>
                     </div>
                 </div>

@@ -11,19 +11,23 @@ class DeviceController {
         }
     }
 
-    async getAll(req: Request, res: Response) {
-        const { brandId, typeId } = req.query;
-        let { limit, page } = req.query;
-        // @ts-ignore
-        page = +page || 1;
-        // @ts-ignore
-        limit = +limit || 12;
-        // @ts-ignore
-        const offset = page * limit - limit;
-        // @ts-ignore
-        // eslint-disable-next-line max-len
-        const devices = await deviceService.getAll(+brandId, +typeId, limit, page, offset);
-        return res.json(devices);
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { brandId, typeId } = req.query;
+            let { limit, page } = req.query;
+            // @ts-ignore
+            page = +page || 1;
+            // @ts-ignore
+            limit = +limit || 12;
+            // @ts-ignore
+            const offset = page * limit - limit;
+            // @ts-ignore
+            // eslint-disable-next-line max-len
+            const devices = await deviceService.getAll(+brandId, +typeId, limit, page, offset);
+            res.json(devices);
+        } catch (e) {
+            next(e);
+        }
     }
 
     async getOne(req: Request, res: Response) {

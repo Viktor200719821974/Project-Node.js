@@ -14,13 +14,15 @@ class DeviceService {
         const device = await model.Device.create({
             name, price, brandId, typeId,
         });
+        const deviceId = device.get('id');
+        await model.Rating.create({ deviceId });
         if (info) {
             const inf = JSON.parse(info);
             inf.forEach((i: { title: string; description: string; }) => model.DeviceInfo.create(
                 {
                     title: i.title,
                     description: i.description,
-                    deviceId: device.get('id'),
+                    deviceId,
                 },
             ));
         }
@@ -31,13 +33,27 @@ class DeviceService {
         : Promise<IPaginationResponse<IDevice>> {
         let devices;
         if (!brandId && !typeId) {
-            devices = await model.Device.findAndCountAll({ limit, offset });
+            devices = await model.Device.findAndCountAll({
+                limit,
+                offset,
+                include: [{ model: model.Rating, as: 'rating' }],
+            });
         }
         if (brandId && !typeId) {
-            devices = await model.Device.findAndCountAll({ where: { brandId }, limit, offset });
+            devices = await model.Device.findAndCountAll({
+                where: { brandId },
+                limit,
+                offset,
+                include: [{ model: model.Rating, as: 'rating' }],
+            });
         }
         if (!brandId && typeId) {
-            devices = await model.Device.findAndCountAll({ where: { typeId }, limit, offset });
+            devices = await model.Device.findAndCountAll({
+                where: { typeId },
+                limit,
+                offset,
+                include: [{ model: model.Rating, as: 'rating' }],
+            });
         }
         if (brandId && typeId) {
             devices = await model.Device.findAndCountAll({
@@ -60,7 +76,11 @@ class DeviceService {
                 exclude: ['createdAt', 'updatedAt'],
             },
             where: { id },
-            include: [{ model: model.DeviceInfo, as: 'info' }, { model: model.ImageDeviceAws, as: 'imageDeviceAws' }],
+            include: [
+                { model: model.DeviceInfo, as: 'info' },
+                { model: model.ImageDeviceAws, as: 'imageDeviceAws' },
+                { model: model.Rating, as: 'rating' },
+            ],
         });
     }
 }

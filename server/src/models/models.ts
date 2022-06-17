@@ -32,7 +32,7 @@ const Device = sequelize.define<IDevice>('device', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, unique: true, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
-    rating: { type: DataTypes.INTEGER, defaultValue: 0 },
+    // rating: { type: DataTypes.INTEGER, defaultValue: 0 },
     typeId: { type: DataTypes.INTEGER },
     brandId: { type: DataTypes.INTEGER },
 });
@@ -49,6 +49,12 @@ const Brand = sequelize.define('brand', {
 
 const Rating = sequelize.define('rating', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    averageRating: { type: DataTypes.INTEGER, defaultValue: 0 },
+});
+
+const RatingDevice = sequelize.define('rating_device', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    // deviceId: { type: DataTypes.INTEGER },
     rate: { type: DataTypes.INTEGER, allowNull: false },
 });
 
@@ -100,11 +106,14 @@ Token.belongsTo(User);
 User.hasOne(Token);
 TokenActivate.belongsTo(User);
 
-User.hasMany(Rating);
-Rating.belongsTo(User);
+// User.hasOne(Rating);
+// Rating.belongsTo(User);
 
 Basket.hasMany(BasketDevice);
 BasketDevice.belongsTo(Basket);
+
+Rating.hasMany(RatingDevice);
+RatingDevice.belongsTo(Rating);
 
 Type.hasMany(Device);
 Device.belongsTo(Type);
@@ -112,7 +121,7 @@ Device.belongsTo(Type);
 Brand.hasMany(Device);
 Device.belongsTo(Brand);
 
-Device.hasMany(Rating);
+Device.hasOne(Rating);
 Rating.belongsTo(Device);
 
 Device.hasMany(BasketDevice);
@@ -144,4 +153,5 @@ export const model = {
     // ImageDevice,
     ImageDeviceAws,
     TokenActivate,
+    RatingDevice,
 };
