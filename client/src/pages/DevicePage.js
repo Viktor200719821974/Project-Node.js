@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
-// import star from "../image/Star 1.png";
 import {getOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
@@ -14,7 +13,7 @@ const DevicePage = () => {
     const [device, setDevice] = useState({info: [], imageDeviceAws: [],});
     const [image, setImage] = useState([]);
     const [rating, setRating] = useState([]);
-    const [sendRating, setSendRating] = useState([]);
+    const [sendRating, setSendRating] = useState(0);
     const [comment, setComment] = useState('');
     const {id} = useParams();
     const {setBasket, isLogin} = useAuth();
@@ -23,27 +22,39 @@ const DevicePage = () => {
         createBasketDevice(device.id).then(data => setBasket(data));
     }
     const sendComment = () => {
-        const formData = new FormData();
-        // formData.append('comment', comment);
-        formData.append('rate', sendRating);
-        formData.append('deviceId', id);
-        createRatingDeviceId(formData).then(data => console.log(data));
+        try {
+            const formData = new FormData();
+            formData.append('comment', comment);
+            formData.append('rate', sendRating);
+            formData.append('deviceId', id);
+            createRatingDeviceId(formData).then(data => {
+                if (data.id) {
+                    setComment('');
+                    setSendRating(0);
+                }
+            });
+        } catch (e) {
+            console.log(e.message);
+        }
     }
     useEffect(() => {
-        getOneDevice(id).then(data => {
-            setDevice(data);
-            setImage(data.imageDeviceAws);
-            setRating(data.rating);
-        });
-    },[rating]);
+        try {
+            getOneDevice(id).then(data => {
+                if (data) {
+                    setDevice(data);
+                    setImage(data.imageDeviceAws);
+                    setRating(data.rating);
+                }
+            });
+        } catch (e) {
+            console.log(e.message);
+        }
+    },[id]);
     return (
         <Container className={"mt-3"}>
             <Row>
                 <Col md={5}>
-                    {/*{*/}
-                    {/*    image && image.map(c => <ImageDevice key={c.id} image={c.imageLocation}/>)*/}
-                    {/*}*/}
-                    <ImageDevice/>
+                        <ImageDevice image={image}/>
                 </Col>
                 <Col md={4}>
                     <Row className={"d-flex flex-column align-items-center"}>
@@ -66,14 +77,6 @@ const DevicePage = () => {
                                 {info.title}: {info.description}
                             </Row>
                         )}
-                        {/*<h2>{device.name}</h2>*/}
-                        {/*<div*/}
-                        {/*    className={"d-flex align-items-center justify-content-center"}*/}
-                        {/*    style={{background: `url(${star}) no-repeat center center`, width: 300, height: 240,*/}
-                        {/*        backgroundSize: "cover", fontSize: 64}}*/}
-                        {/*>*/}
-                        {/*    {rating.averageRating}*/}
-                        {/*</div>*/}
                     </Row>
                 </Col>
                 <Col md={3}>
@@ -112,7 +115,8 @@ const DevicePage = () => {
                 {/*    </Row>*/}
                 {/*)}*/}
             </Row>
-            <form className={'form_register'}>
+            {
+             isLogin && <form className={'form_register'}>
                 <legend>Коментар</legend>
                 <label htmlFor={'comments'}>
                     <textarea name="comments" id="text_box" cols="50" rows="4" value={comment}
@@ -122,13 +126,9 @@ const DevicePage = () => {
                 <label htmlFor="rating" style={{marginRight: '20px'}}>
                     Поставте оцінку
                     <RatingDevice sendRating={sendRating} setSendRating={setSendRating}/>
-                    {/*<input*/}
-                    {/*       name={'rating'}*/}
-                    {/*       type="number" onChange={e =>*/}
-                    {/*    setRating(e.target.value)} placeholder={'від 1 до 10'}/>*/}
                 </label>
                 <Button variant={"outline-primary"} onClick={sendComment}>Відправити</Button>
-            </form>
+            </form>}
         </Container>
     );
 };

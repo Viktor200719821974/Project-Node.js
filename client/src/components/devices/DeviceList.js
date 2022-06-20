@@ -15,7 +15,7 @@ const DeviceList = observer(({image}) => {
                 image={image.filter(c => c.deviceId === device.id)}
                 type={types.filter(c => c.id === device.typeId).map(c => c.name)}
                 brand={brands.filter(c => c.id === device.brandId).map(c => c.name)}
-                rating={device.rating.averageRating}
+                rating={device.rating?.averageRating}
             />
             )}
         </Row>

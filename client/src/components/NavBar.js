@@ -15,7 +15,7 @@ import {SiTrendmicro} from "react-icons/si";
 const NavBar = observer(() => {
     const auth = useAuth();
     const history = useHistory();
-    console.log(auth.count);
+
     const logOut = async() => {
         auth.logOut();
         await logOutUser();
@@ -40,7 +40,7 @@ const NavBar = observer(() => {
                                 }
                                 <Button variant={"outline-warning"}
                                         style={{marginLeft: 20}}
-                                        onClick={() => logOut()}><MdOutlineLogout/></Button>
+                                        onClick={() => logOut()}><MdOutlineLogout/> Вийти</Button>
                                 <div className={'navBar_navLink_div_basket_button'}>
                                     <Button variant={"outline-warning"}
                                         style={{marginLeft: 20}}
@@ -50,7 +50,7 @@ const NavBar = observer(() => {
                             </Nav>
                             :
                             <Nav className="ml-auto" style={{color: "white"}}>
-                                <Button variant={"outline-warning"} onClick={() => history.push(LOGIN_ROUTE)}><CgLogIn/></Button>
+                                <Button variant={"outline-warning"} onClick={() => history.push(LOGIN_ROUTE)}><CgLogIn/> Авторизація</Button>
                             </Nav>
                     }
                 </Container>

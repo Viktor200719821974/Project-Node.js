@@ -1,7 +1,10 @@
 body {
     background-color: #F0E68C;
 }
-input[type='radio']{
+/*input[type='radio']{*/
+/*    display: none;*/
+/*}*/
+.input_rating_device{
     display: none;
 }
 .brandBar_div{

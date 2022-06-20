@@ -15,10 +15,11 @@ class RatingController {
 
     async createRatingDevice(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
-            const { deviceId, rate } = req.body;
+            const { deviceId, rate, comment } = req.body;
             // @ts-ignore
             const { id } = req.user;
-            const rating = await ratingService.createRatingDevice(+deviceId, +rate, id, next);
+            // eslint-disable-next-line max-len
+            const rating = await ratingService.createRatingDevice(+deviceId, +rate, id, comment, next);
             res.json(rating);
         } catch (e) {
             next(e);

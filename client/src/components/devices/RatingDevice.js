@@ -11,6 +11,7 @@ const RatingDevice = ({sendRating, setSendRating}) => {
                 return (
                     <label key={i}>
                         <input
+                            className={'input_rating_device'}
                             type="radio"
                             name={'rating'}
                             value={ratingValue}

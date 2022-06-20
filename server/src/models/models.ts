@@ -21,7 +21,7 @@ const User = sequelize.define<IUser>('user', {
 
 const Basket = sequelize.define('basket', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-});
+}, { createdAt: false, updatedAt: false });
 
 const BasketDevice = sequelize.define('basket_device', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -50,12 +50,13 @@ const Brand = sequelize.define('brand', {
 const Rating = sequelize.define('rating', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     averageRating: { type: DataTypes.INTEGER, defaultValue: 0 },
-});
+}, { createdAt: false, updatedAt: false });
 
 const RatingDevice = sequelize.define('rating_device', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    // deviceId: { type: DataTypes.INTEGER },
+    userId: { type: DataTypes.INTEGER },
     rate: { type: DataTypes.INTEGER, allowNull: false },
+    comment: { type: DataTypes.STRING, allowNull: true },
 });
 
 const DeviceInfo = sequelize.define('device_info', {
