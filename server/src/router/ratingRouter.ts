@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ratingController } from '../controllers/ratingController';
 import { authMiddleware } from '../middleware/authMiddleware';
+// import { validators } from '../middleware/validation/validator';
 
 const router = Router();
 

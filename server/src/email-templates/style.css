@@ -1,6 +1,33 @@
-.footer{
+#id{
+    text-align: center;
+    font-size: 30px;
+    color: blue;
+    margin-bottom: 30px;
+}
+#id1{
+    text-align: center;
+    font-size: 25px;
+    color: gold;
+    margin-bottom: 100px;
+}
+#id2{
+    text-decoration-line: none;
+}
+#id3{
+    text-align: center;
     background-color: aqua;
 }
-#id{
-    background-color: cadetblue;
+#id4{
+    text-decoration-line: none;
+    cursor: pointer;
+}
+#id5{
+    color: red;
+    font-size: 25px;
+    text-align: center;
+}
+#id6{
+    color: green;
+    font-size: 25px;
+    text-align: center;
 }

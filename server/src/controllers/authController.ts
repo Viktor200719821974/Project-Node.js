@@ -5,7 +5,7 @@ import { userService } from '../services/userService';
 import { authService } from '../services/authService';
 import { constants } from '../constants';
 // import { basketService } from '../services/basketService';
-// import { emailService } from '../services/emailService';
+import { emailService } from '../services/emailService';
 
 class AuthController {
     async registration(req:Request, res:Response, next: NextFunction): Promise<void> {
@@ -14,8 +14,8 @@ class AuthController {
             const tokenData = await authService.registration(createdUser);
             const token = tokenData.activateToken;
             String(token);
-            // const { email, name } = createdUser;
-            // await emailService.sendMail(email, 'WELCOME', { userName: name }, token);
+            const { email, name } = createdUser;
+            await emailService.sendMail(email, 'WELCOME', { userName: name }, token);
             res.json(tokenData);
         } catch (e) {
             next(e);

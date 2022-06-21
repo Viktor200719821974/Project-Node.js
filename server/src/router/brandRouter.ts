@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { brandController } from '../controllers/brandController';
 import { brandMiddleware } from '../middleware/brandMiddleware';
 import { authMiddleware } from '../middleware/authMiddleware';
+// import { validators } from '../middleware/validation/validator';
 
 const router = Router();
 

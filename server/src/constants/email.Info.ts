@@ -2,15 +2,15 @@
 
 export const emailInfo = {
     WELCOME: {
-        subject: 'Welcome to Node.js',
+        subject: 'Вітаємо на нашому сайті',
         templateName: 'welcome',
     },
     ACCOUNT_BLOCKED: {
-        subject: 'You account was blocked',
+        subject: 'Акаунт заблокований',
         templateName: 'accountBlocked',
     },
     ACCOUNT_UNLOCKED: {
-        subject: 'You account was unlocked',
+        subject: 'Акаунт розблокований',
         templateName: 'accountUnlocked',
     },
 };
