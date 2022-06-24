@@ -16,6 +16,7 @@ class RatingController {
     async createRatingDevice(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
             const { deviceId, rate, comment } = req.body;
+            console.log(comment, 'comment');
             // @ts-ignore
             const { id } = req.user;
             // eslint-disable-next-line max-len

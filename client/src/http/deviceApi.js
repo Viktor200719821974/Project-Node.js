@@ -1,7 +1,7 @@
 import {$authHost, $host} from "./index";
 
-export const createDevice = async (device) => {
-    const {data} = await $authHost.post('/device', device);
+export const createDevice = async (formData) => {
+    const {data} = await $authHost.post('/device', formData);
     return data;
 }
 export const getDevices = async (brandId?, typeId?, page?) => {

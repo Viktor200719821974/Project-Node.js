@@ -24,24 +24,29 @@ const Shop = observer(() => {
     }
 
     useEffect (() => {
-        getTypes().then(data => {
-            if (data) {
-                setTypes(data);
-            }
-        });
-        getBrands().then(data => {
-            if (data){
-                setBrands(data);
-            }
-        });
-        getDevices(selectedBrand, selectedType, page).then(data => {
-            setDevices(data);
-            setCountPage(Math.ceil(data.count/ data.perPage));
-            if (countPage && countPage < page){
-                setPage(1);
-            }
-        });
-        getImageDevice().then(data => setImage(data));
+        try{
+            getTypes().then(data => {
+                if (data) {
+                    setTypes(data);
+                }
+            });
+            getBrands().then(data => {
+                if (data){
+                    setBrands(data);
+                }
+            });
+            getDevices(selectedBrand, selectedType, page).then(data => {
+                setDevices(data);
+                setCountPage(Math.ceil(data.count/ data.perPage));
+                if (countPage && countPage < page){
+                    setPage(1);
+                }
+            });
+            getImageDevice().then(data => setImage(data));
+        }catch (e) {
+            console.log(e.message);
+        }
+
     },[selectedBrand, selectedType, page, countPage]);
 
     return (

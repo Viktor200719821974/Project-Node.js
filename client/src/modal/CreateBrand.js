@@ -1,20 +1,30 @@
 import React, {useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
+import {Alert, Button, Form, Modal} from "react-bootstrap";
 import {createBrand} from "../http/brandApi";
 
 const CreateBrand = ({show, onHide}) => {
     const [value, setValue] = useState('');
-    // const [statusResponse, setStatusResponse] = useState(false);
-    // const [loading, setLoading] = useState(true);
+    const [statusResponse, setStatusResponse] = useState(false);
+    const [error, setError] = useState('');
 
     const addBrand = () => {
-        createBrand({name:value}).then(data => {
-            // if (data.name){
-            //     setStatusResponse(true);
-            // }
-            setValue('');
-        });
-        onHide();
+        try {
+            createBrand({name: value}).then(data => {
+                if (data.name) {
+                    setStatusResponse(true);
+                    setError('');
+                }
+                setValue('');
+            }).catch(err => {
+                if (err.response) {
+                    setError(err.response.data.message);
+                    setStatusResponse(false);
+                }
+            });
+            // onHide();
+        } catch (e) {
+            console.log(e.message);
+        }
     }
     return (
         <Modal
@@ -28,9 +38,10 @@ const CreateBrand = ({show, onHide}) => {
                     Додати новий бренд
                 </Modal.Title>
             </Modal.Header>
-            {/*{statusResponse && <Alert variant={'success'}>*/}
-            {/*    * Бренд був добавлений!!!*/}
-            {/*</Alert>}*/}
+            {statusResponse && <Alert variant={'success'} style={{textAlign: 'center', fontSize: '20px'}}>
+                * Бренд був добавлений!!!
+            </Alert>}
+            {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
             {/*{statusResponse  && <div className={'createDevice_div_successfully'}>*/}
             {/*   * Бренд був добавлений!!!*/}
             {/*</div>}*/}

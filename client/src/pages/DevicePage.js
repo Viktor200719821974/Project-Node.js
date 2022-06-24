@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Alert, Button, Card, Col, Container, Row} from "react-bootstrap";
 import {getOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
@@ -15,11 +15,17 @@ const DevicePage = () => {
     const [rating, setRating] = useState([]);
     const [sendRating, setSendRating] = useState(0);
     const [comment, setComment] = useState('');
+    const [error, setError] = useState('');
+    const [statusResponse, setStatusResponse] = useState(false);
     const {id} = useParams();
     const {setBasket, isLogin} = useAuth();
 
     const addBasket = () => {
-        createBasketDevice(device.id).then(data => setBasket(data));
+        try{
+            createBasketDevice(device.id).then(data => setBasket(data));
+        }catch (e) {
+            console.log(e.message);
+        }
     }
     const sendComment = () => {
         try {
@@ -31,6 +37,13 @@ const DevicePage = () => {
                 if (data.id) {
                     setComment('');
                     setSendRating(0);
+                    setStatusResponse(true);
+                    setError('');
+                }
+            }).catch(err => {
+                if (err.response) {
+                    setError(err.response.data.message);
+                    setStatusResponse(false);
                 }
             });
         } catch (e) {
@@ -49,9 +62,13 @@ const DevicePage = () => {
         } catch (e) {
             console.log(e.message);
         }
-    },[id]);
+    },[id, rating]);
     return (
         <Container className={"mt-3"}>
+            {statusResponse && <Alert variant={'success'} style={{textAlign: 'center', fontSize: '20px'}}>
+                * Дякуємо за Ваш відгук!!!
+            </Alert>}
+            {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
             <Row>
                 <Col md={5}>
                         <ImageDevice image={image}/>
@@ -60,16 +77,10 @@ const DevicePage = () => {
                     <Row className={"d-flex flex-column align-items-center"}>
                         {/*<h1>Властивості</h1>*/}
                         <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Модель: {device.name}</h4>
+                        <h4>Колір: {device.color}</h4>
+                        <h4>Ширина: {device.width} см</h4>
+                        <h4>Висота: {device.height} см</h4>
+                        <h4>Глубина: {device.depth} см</h4>
                         {device.info.map((info, index) =>
                             <Row key={info.id}
                                  style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}

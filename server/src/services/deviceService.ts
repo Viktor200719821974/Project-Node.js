@@ -4,15 +4,16 @@ import { IDevice, IPaginationResponse } from '../interfaces';
 class DeviceService {
     async createDevice(deviceRequest: {
         name: string; price: number; typeId: number; brandId: number; info: string;
+        color: string; width: number; height: number; depth: number;
     })
         : Promise<IDevice> {
         const {
-            name, price, typeId, brandId, info,
+            name, color, width, height, depth, price, typeId, brandId, info,
         } = deviceRequest;
         Number(price);
         // @ts-ignore
         const device = await model.Device.create({
-            name, price, brandId, typeId,
+            name, color, width, height, depth, price, brandId, typeId,
         });
         const deviceId = device.get('id');
         await model.Rating.create({ deviceId });
@@ -37,6 +38,7 @@ class DeviceService {
                 limit,
                 offset,
                 include: [{ model: model.Rating, as: 'rating' }],
+                order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
         if (brandId && !typeId) {
@@ -45,6 +47,7 @@ class DeviceService {
                 limit,
                 offset,
                 include: [{ model: model.Rating, as: 'rating' }],
+                order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
         if (!brandId && typeId) {
@@ -53,11 +56,16 @@ class DeviceService {
                 limit,
                 offset,
                 include: [{ model: model.Rating, as: 'rating' }],
+                order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
         if (brandId && typeId) {
             devices = await model.Device.findAndCountAll({
-                where: { brandId, typeId }, limit, offset,
+                where: { brandId, typeId },
+                limit,
+                offset,
+                include: [{ model: model.Rating, as: 'rating' }],
+                order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
         // @ts-ignore

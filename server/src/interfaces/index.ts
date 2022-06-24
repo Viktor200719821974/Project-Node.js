@@ -4,10 +4,13 @@ import { InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAttributes<IDevice>>{
     id: number;
     name: string;
+    color: string;
     typeId: number;
     brandId: number;
     price: number;
-    // rating: number;
+    width: number;
+    height: number;
+    depth: number;
 }
 export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;

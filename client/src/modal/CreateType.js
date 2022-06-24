@@ -1,19 +1,30 @@
 import React, {useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
+import {Alert, Button, Form, Modal} from "react-bootstrap";
 import {createType} from "../http/typeApi";
 
 const CreateType = ({show, onHide}) => {
     const [value, setValue] = useState('');
-    // const [statusResponse, setStatusResponse] = useState(false);
+    const [statusResponse, setStatusResponse] = useState(false);
+    const [error, setError] = useState('');
 
     const addType = () => {
-        createType({name:value}).then(data => {
-            // if (data.name){
-            //     setStatusResponse(true);
-            // }
-            setValue('');
-        });
-        onHide();
+        try{
+            createType({name:value}).then(data => {
+                if (data.name){
+                    setStatusResponse(true);
+                    setError('');
+                }
+                setValue('');
+            }).catch(err => {
+                if (err.response) {
+                    setError(err.response.data.message);
+                    setStatusResponse(false);
+                }
+            });
+            // onHide();
+        }catch (e) {
+            console.log(e.message);
+        }
     }
     return (
         <Modal
@@ -27,9 +38,10 @@ const CreateType = ({show, onHide}) => {
                     Додати новий тип
                 </Modal.Title>
             </Modal.Header>
-            {/*{statusResponse && <Alert variant={'success'}>*/}
-            {/*    * Тип був добавлений!!!*/}
-            {/*</Alert>}*/}
+            {statusResponse && <Alert variant={'success'} style={{textAlign: 'center', fontSize: '20px'}}>
+                * Тип був добавлений!!!
+            </Alert>}
+            {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
             {/*{statusResponse  && <div className={'createDevice_div_successfully'}>*/}
             {/*    * Тип був добавлений!!!*/}
             {/*</div>}*/}

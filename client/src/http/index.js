@@ -10,10 +10,6 @@ const $authHost = axios.create({
 const $refreshHost = axios.create({
     baseURL: REACT_APP_API_URL
 });
-// const authInterceptor = config => {
-//     config.headers.authorization = `Bearer ${localStorage.getItem('accessToken')}`;
-//     return config
-// }
 const refreshInterceptor = config => {
     config.headers.authorization = localStorage.getItem('refreshToken');
     return config
