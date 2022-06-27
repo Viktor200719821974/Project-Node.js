@@ -25,6 +25,21 @@ class BasketDeviceController {
         await basketServices.deleteDeviceFromBasket(+deviceId, id);
         res.json('Ok');
     }
+
+    async updateAmountDeviceBasket(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            // @ts-ignore
+            const { id } = req.user;
+            const { amount } = req.body;
+            const deviceId = 8;
+            console.log(deviceId, amount);
+            // eslint-disable-next-line max-len
+            const deviceBasket = await basketServices.updateDeviceAmountBasket(id, +deviceId, +amount, next);
+            res.json(deviceBasket);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 export const basketController = new BasketDeviceController();

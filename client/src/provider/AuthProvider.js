@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {AuthContext} from '../context';
 import {getUserId} from "../http/userApi";
-import {getBasketDevice} from "../http/basketApi";
+import {getBasketDevice, updateDeviceAmountBasket} from "../http/basketApi";
 
 const AuthProvider = (props) => {
 
@@ -14,6 +14,7 @@ const AuthProvider = (props) => {
     const [selectedType, setSelectedTypeData] = useState(null);
     const [basket, setBasketData] = useState([]);
     const [count, setCount] = useState(0);
+    const [amount, setAmountData] = useState(1);
 
     const setBasket = useCallback(() => {
         getBasketDevice().then(value => {
@@ -37,6 +38,20 @@ const AuthProvider = (props) => {
                 }
             });
         }
+    }, []);
+
+    const setAmount = useCallback((amount, deviceId) => {
+        console.log(deviceId, amount);
+        const formData = new FormData();
+        formData.append('deviceId', `${deviceId}`);
+        formData.append('amount', `${amount}`);
+        updateDeviceAmountBasket(deviceId, amount).then(data => {
+            console.log(data);
+            if (data.response.status === 200) {
+                setBasket();
+                setAmountData(data.amount);
+            }
+        })
     }, []);
 
     const setDevices = useCallback((data) => {
@@ -82,11 +97,13 @@ const AuthProvider = (props) => {
             setSelectedType,
             basket,
             count,
-            setBasket
+            setBasket,
+            setAmount,
+            amount
         }),
         [
             basket, brands, count, devices, isLogin, logOut, selectedBrand, selectedType, setBrands, setDevices,
-            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user, setBasket,
+            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user, setBasket, setAmount, amount,
         ]
     );
     return (

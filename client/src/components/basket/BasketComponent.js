@@ -5,8 +5,7 @@ import useAuth from "../../hook/useAuth";
 import {deleteDeviceFromBasket} from "../../http/basketApi";
 
 const BasketComponent = ({device, number, price}) => {
-    const {types, brands, setBasket} = useAuth();
-    const [amount, setAmount] = useState(1);
+    const {types, brands, setBasket, amount, setAmount} = useAuth();
     const [total, setTotal] = useState();
     // const a = price.concat();
     // const pr = device.map(c => c.price);
@@ -44,7 +43,7 @@ const BasketComponent = ({device, number, price}) => {
                         <br/>
                         {c.name}</td>
                     <td>
-                        <input type={'number'} value={amount} min={'1'} onChange={(e) => setAmount(e.target.value)}/>
+                        <input type={'number'} value={amount} min={'1'} onChange={(e) => setAmount(e.target.value, c.id)}/>
                     </td>
                     <td>
                         {c.price * amount} грн.
