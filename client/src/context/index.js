@@ -8,7 +8,6 @@ export const AuthContext = createContext({
     types: [],
     brands: [],
     count: 0,
-    amount: 1,
     selectedBrand: null,
     selectedType: null,
     setData: () => {},

@@ -22,7 +22,12 @@ const DevicePage = () => {
 
     const addBasket = () => {
         try{
-            createBasketDevice(device.id).then(data => setBasket(data));
+            createBasketDevice(device.id).then(data => setBasket(data))
+                .catch(err => {
+                    if (err.response.status === 404){
+                        setError(err.response.data.message);
+                    }
+                });
         }catch (e) {
             console.log(e.message);
         }

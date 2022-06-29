@@ -7,7 +7,7 @@ class BasketDeviceController {
         // @ts-ignore
         const { id } = req.user;
         const { deviceId } = req.params;
-        const basket = await basketServices.createBasketDevice(+deviceId, id, next);
+        const basket = await basketServices.createBasketDevice(+deviceId, +id, next);
         res.json(basket);
     }
 
@@ -31,8 +31,7 @@ class BasketDeviceController {
             // @ts-ignore
             const { id } = req.user;
             const { amount } = req.body;
-            const deviceId = 8;
-            console.log(deviceId, amount);
+            const { deviceId } = req.params;
             // eslint-disable-next-line max-len
             const deviceBasket = await basketServices.updateDeviceAmountBasket(id, +deviceId, +amount, next);
             res.json(deviceBasket);

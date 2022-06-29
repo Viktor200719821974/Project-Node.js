@@ -1,6 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db';
 import {
+    IBasket,
+    IBasketDevice,
     IDevice, IImageDevice, IToken, ITokenActivate, IUser,
 } from '../interfaces';
 
@@ -19,13 +21,19 @@ const User = sequelize.define<IUser>('user', {
     is_superuser: { type: DataTypes.BOOLEAN, defaultValue: 'false' },
 });
 
-const Basket = sequelize.define('basket', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+const Basket = sequelize.define<IBasket>('basket', {
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false,
+    },
+    userId: { type: DataTypes.INTEGER },
 }, { createdAt: false, updatedAt: false });
 
-const BasketDevice = sequelize.define('basket_device', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+const BasketDevice = sequelize.define<IBasketDevice>('basket_device', {
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false,
+    },
     deviceId: { type: DataTypes.INTEGER },
+    basketId: { type: DataTypes.INTEGER },
     amount: { type: DataTypes.INTEGER, defaultValue: 1 },
 });
 
@@ -110,9 +118,6 @@ Token.belongsTo(User);
 
 User.hasOne(Token);
 TokenActivate.belongsTo(User);
-
-// User.hasOne(Rating);
-// Rating.belongsTo(User);
 
 Basket.hasMany(BasketDevice);
 BasketDevice.belongsTo(Basket);

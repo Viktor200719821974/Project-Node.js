@@ -14,13 +14,12 @@ const AuthProvider = (props) => {
     const [selectedType, setSelectedTypeData] = useState(null);
     const [basket, setBasketData] = useState([]);
     const [count, setCount] = useState(0);
-    const [amount, setAmountData] = useState(1);
 
     const setBasket = useCallback(() => {
         getBasketDevice().then(value => {
             if (value.length > 0) {
-                setBasketData(value);
-                setCount(value.length);
+                setBasketData(value.sort((a, b) => a.id - b.id));
+                setCount(value.map(c => c.amount).reduce((result, number) => result + number));
             } else {
                 setBasketData([]);
                 setCount(0);
@@ -36,20 +35,23 @@ const AuthProvider = (props) => {
                     setIsLogin(true);
                     setBasket();
                 }
+            }).catch(err => {
+                if (accessToken){
+                    if (err.response.status === 500) {
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
+                    }
+                }
             });
         }
     }, []);
 
     const setAmount = useCallback((amount, deviceId) => {
-        console.log(deviceId, amount);
         const formData = new FormData();
-        formData.append('deviceId', `${deviceId}`);
         formData.append('amount', `${amount}`);
-        updateDeviceAmountBasket(deviceId, amount).then(data => {
-            console.log(data);
-            if (data.response.status === 200) {
+        updateDeviceAmountBasket(deviceId, formData).then(data => {
+            if (data) {
                 setBasket();
-                setAmountData(data.amount);
             }
         })
     }, []);
@@ -99,11 +101,10 @@ const AuthProvider = (props) => {
             count,
             setBasket,
             setAmount,
-            amount
         }),
         [
             basket, brands, count, devices, isLogin, logOut, selectedBrand, selectedType, setBrands, setDevices,
-            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user, setBasket, setAmount, amount,
+            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user, setBasket, setAmount,
         ]
     );
     return (

@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
+import '../style/style.css';
 import BasketComponent from "../components/basket/BasketComponent";
 import useAuth from "../hook/useAuth";
 import Delivery from "../components/basket/Delivery";
 import PayDevice from "../components/basket/PayDevice";
-import {Button} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
+import TestComponent from "../components/basket/TestComponent";
 
 const Basket = () => {
     const {basket, devices, count} = useAuth();
@@ -13,17 +15,13 @@ const Basket = () => {
         const filter = devices.rows.filter(c => c.id === deviceId[i]);
         arr.push(filter);
     }
+    const amount = basket.map(c => c.amount).reduce((result, number) => result + number);
     const arrayPrice = arr.map(c => c.map(c => c.price)[0]);
-    // const b = pr.map(c => console.log(c));
-    // let sum = 0;
-    // for(let i=0; i <= pr.length; i++ ){
-    //     sum = sum + pr[i];
-    //     console.log(pr[i]);
-    // }
-    // useEffect(() => {
-    //     setTotal(price);
-    //     arr.push(total);
-    // }, []);
+    const arrayAmount = basket.map(c => c.amount);
+    let sum = 0;
+    for(var i=0; i< arrayPrice.length; i++) {
+        sum += arrayPrice[i]*arrayAmount[i];
+    }
     return (
         <div>
             {count === 0
@@ -34,15 +32,40 @@ const Basket = () => {
                         key={index}
                         device={c}
                         number={index + 1}
-                        price={arrayPrice}/>)
-            }
-            {count > 0 && <div>
+                    />
+                    )}
+            {count > 0 &&
+                <div>
+                    <div className={'basket_div_total_amount'}>
+                        <div className={'basket_div_div_total_amount'}>
+                            <div ><strong>Кількість:</strong> {amount} шт.</div>
+                            <div><strong>До сплати:</strong> {sum} грн.</div>
+                        </div>
+                    </div>
                 <Delivery/>
                 <hr/>
                 <PayDevice/>
                 <hr/>
                 <Button variant={'outline-primary'} className={'mgb-30px'}>Замовити</Button>
             </div>}
+            <Table responsive>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Продукт</th>
+                    <th>Кількість</th>
+                    <th>Вартість</th>
+                    <th>Дія</th>
+                </tr>
+                </thead>
+                <tbody>
+                { arr.map((c, index) => <TestComponent
+                    key={index}
+                    device={c}
+                    number={index + 1}
+                />)}
+                </tbody>
+            </Table>
         </div>
     );
 };

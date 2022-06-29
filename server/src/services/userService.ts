@@ -34,6 +34,8 @@ class UserService {
         const hashedPassword = await UserService._hashPassword(password);
         const newUser = await model.User.create({ ...user, password: hashedPassword });
         const { id } = newUser;
+        Number(id);
+        // @ts-ignore
         await model.Basket.create({ userId: id });
         return user;
     }

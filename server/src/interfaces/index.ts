@@ -24,11 +24,6 @@ export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttrib
     is_staff: boolean;
     is_superuser: boolean;
 }
-// export interface ITokenDataToSave {
-//     refreshToken: string;
-//     accessToken: string;
-//     userId: number;
-// }
 export interface ITokenDataToSaveActivate {
     activateToken: string;
     userId: number;
@@ -74,13 +69,6 @@ export interface IImageDevice
     imageLocation: string;
     deviceId: number;
 }
-
-// export interface IUserLogin{
-//     accessToken: string;
-//     refreshToken: string;
-//     user: IUser | null;
-// }
-
 export interface IPaginationResponse<T> {
     page: number,
     perPage: number,
@@ -88,8 +76,14 @@ export interface IPaginationResponse<T> {
     rows: T[],
 }
 
-// export interface IBasketUser
-//     extends Model<InferAttributes<IBasketUser>, InferCreationAttributes<IBasketUser>> {
-//     id: number;
-//     userId: number;
-// }
+export interface IBasketDevice
+    extends Model<InferAttributes<IBasketDevice>, InferCreationAttributes<IBasketDevice>> {
+    id: number;
+    basketId: number;
+    deviceId: number;
+    amount: number;
+}
+export interface IBasket extends Model<InferAttributes<IBasket>, InferCreationAttributes<IBasket>> {
+    id: number;
+    userId: number;
+}

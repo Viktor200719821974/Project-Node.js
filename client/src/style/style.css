@@ -130,3 +130,14 @@ body {
     -1px 0 1px #000,
     0 -1px 1px #000;
 }
+.basket_div_total_amount{
+    display: flex;
+    justify-content: end;
+    border-bottom: solid 2px #dee2e6;
+}
+.basket_div_div_total_amount{
+    /*border: solid 2px #dee2e6;*/
+    /*border-top: none;*/
+    margin: 0 150px 10px 0;
+    padding: 0 10px;
+}
