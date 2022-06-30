@@ -1,13 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const Delivery = () => {
-    const [type, setType] = useState('');
-    const [city, setCity] = useState('');
-    const [street, setStreet] = useState('');
-    const [house, setHouse] = useState('');
-    const [room, setRoom] = useState('');
-    const [comment, setComment] = useState('');
-    const [department, setDepartment] = useState('');
+const Delivery = ({
+                      setType, setCity, setStreet, setHouse, setRoom, setComment, setDepartment, type, city, street,
+                      house, room, comment, department
+                  }) => {
+
     return (
         <div>
             <form>
@@ -86,7 +83,7 @@ const Delivery = () => {
                               onChange={(e) => setComment(e.target.value)}
                               placeholder={'Коментар для курьєра'}/>
                 </div>}
-                {type === 'Нова Пошта' && <div style={{padding: '10px'}}>
+                {type === ('Нова Пошта' || 'УкрПошта') && <div style={{padding: '10px'}}>
                     <legend>Адреса доставки:</legend>
                     <input type="text"
                            value={city}
@@ -102,22 +99,22 @@ const Delivery = () => {
                            style={{marginBottom: '5px'}}
                     />
                 </div>}
-                {type === 'УкрПошта' && <div style={{padding: '10px'}}>
-                    <legend>Адреса доставки:</legend>
-                    <input type="text"
-                           value={city}
-                           onChange={(e) => setCity(e.target.value)}
-                           placeholder={'Місто'}
-                           style={{marginBottom: '5px'}}
-                    />
-                    <br/>
-                    <input type="number"
-                           value={department}
-                           onChange={(e) => setDepartment(e.target.value)}
-                           placeholder={'Відділення №'}
-                           style={{marginBottom: '5px'}}
-                    />
-                </div>}
+                {/*{type === 'УкрПошта' && <div style={{padding: '10px'}}>*/}
+                {/*    <legend>Адреса доставки:</legend>*/}
+                {/*    <input type="text"*/}
+                {/*           value={city}*/}
+                {/*           onChange={(e) => setCity(e.target.value)}*/}
+                {/*           placeholder={'Місто'}*/}
+                {/*           style={{marginBottom: '5px'}}*/}
+                {/*    />*/}
+                {/*    <br/>*/}
+                {/*    <input type="number"*/}
+                {/*           value={department}*/}
+                {/*           onChange={(e) => setDepartment(e.target.value)}*/}
+                {/*           placeholder={'Відділення №'}*/}
+                {/*           style={{marginBottom: '5px'}}*/}
+                {/*    />*/}
+                {/*</div>}*/}
             </form>
         </div>
     );

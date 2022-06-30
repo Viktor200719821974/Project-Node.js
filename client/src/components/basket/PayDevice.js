@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const PayDevice = () => {
-    const [type, setType] = useState('');
+const PayDevice = ({setTypePay, typePay}) => {
 
     return (
         <div>
@@ -12,7 +11,7 @@ const PayDevice = () => {
                            id="payChoice1"
                            name="pay"
                            value="Готівка"
-                           onChange={(e) => setType(e.target.value)}
+                           onChange={(e) => setTypePay(e.target.value)}
                     />
                     <label htmlFor="payChoice1" style={{marginRight: '10px'}}>Готівка</label>
 
@@ -20,10 +19,10 @@ const PayDevice = () => {
                            id="payChoice2"
                            name="pay"
                            value="Банківський переказ"
-                           onChange={(e) => setType(e.target.value)}/>
+                           onChange={(e) => setTypePay(e.target.value)}/>
                     <label htmlFor="payChoice2" style={{marginRight: '10px'}}>Банківський переказ</label>
 
-                    {type === 'Банківський переказ' && <div
+                    {typePay === 'Банківський переказ' && <div
                         style={{width: '250px', marginTop: '10px', marginLeft: '10px'}}>
                         <strong>На цей момент доступна тільки готівкова форма оплати</strong>
                     </div>}

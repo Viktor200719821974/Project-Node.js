@@ -12,10 +12,10 @@ class BasketService {
         }
         const basketId = basket?.id;
         Number(basketId);
-        const findDevice = await model.BasketDevice.findOne({ where: { deviceId, basketId } });
-        if (findDevice) {
-            next(new ErrorHandler('The device is already in the basket', 404));
-        }
+        // const findDevice = await model.BasketDevice.findOne({ where: { deviceId, basketId } });
+        // if (findDevice) {
+        //     next(new ErrorHandler('The device is already in the basket', 404));
+        // }
         // @ts-ignore
         return model.BasketDevice.create({ basketId, deviceId });
     }

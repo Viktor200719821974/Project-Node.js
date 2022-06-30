@@ -110,8 +110,40 @@ const ImageDeviceAws = sequelize.define<IImageDevice>('imageDeviceAws', {
     deviceId: { type: DataTypes.INTEGER },
 }, { createdAt: false, updatedAt: false });
 
+const OrderUser = sequelize.define('order', {
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
+    },
+});
+
+const Delivery = sequelize.define('delivery', {
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
+    },
+    type: { type: DataTypes.STRING, allowNull: false },
+    city: { type: DataTypes.STRING, allowNull: true },
+    street: { type: DataTypes.STRING, allowNull: true },
+    house: { type: DataTypes.INTEGER, allowNull: true },
+    room: { type: DataTypes.INTEGER, allowNull: true },
+    department: { type: DataTypes.INTEGER, allowNull: true },
+    comment: { type: DataTypes.STRING, allowNull: true },
+});
+
+const OrderDevice = sequelize.define('order_device', {
+    id: {
+        type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
+    },
+    deviceId: { type: DataTypes.INTEGER, allowNull: false },
+    amountDevice: { type: DataTypes.INTEGER, allowNull: false },
+    priceDevice: { type: DataTypes.INTEGER, allowNull: false },
+    sumOrder: { type: DataTypes.INTEGER, allowNull: false },
+});
+
 User.hasOne(Basket);
 Basket.belongsTo(User);
+
+User.hasMany(OrderUser);
+OrderUser.belongsTo(User);
 
 User.hasOne(Token);
 Token.belongsTo(User);
@@ -146,6 +178,12 @@ DeviceInfo.belongsTo(Device);
 Device.hasMany(ImageDeviceAws, { as: 'imageDeviceAws' });
 ImageDeviceAws.belongsTo(Device);
 
+OrderUser.hasOne(Delivery);
+Delivery.belongsTo(OrderUser);
+
+OrderUser.hasMany(OrderDevice);
+OrderDevice.belongsTo(OrderUser);
+
 Type.belongsToMany(Brand, { through: TypeBrand });
 Brand.belongsToMany(Type, { through: TypeBrand });
 
@@ -164,4 +202,7 @@ export const model = {
     ImageDeviceAws,
     TokenActivate,
     RatingDevice,
+    OrderUser,
+    Delivery,
+    OrderDevice,
 };

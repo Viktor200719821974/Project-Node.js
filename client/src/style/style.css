@@ -132,7 +132,7 @@ body {
 }
 .basket_div_total_amount{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     border-bottom: solid 2px #dee2e6;
 }
 .basket_div_div_total_amount{
@@ -140,4 +140,17 @@ body {
     /*border-top: none;*/
     margin: 0 150px 10px 0;
     padding: 0 10px;
+}
+.basket_div_button_order{
+    margin-top: 10px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.basket_div_delivery_payDevice{
+    border-bottom: solid 2px #dee2e6;
+    margin: 10px;
+}
+.basket_button_order{
+
 }
