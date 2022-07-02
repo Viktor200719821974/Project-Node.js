@@ -87,3 +87,37 @@ export interface IBasket extends Model<InferAttributes<IBasket>, InferCreationAt
     id: number;
     userId: number;
 }
+export interface IOrder extends Model<InferAttributes<IOrder>, InferCreationAttributes<IOrder>> {
+    id: number;
+    sumaOrder?: number;
+    // userId: number;
+}
+export interface IOrderOne {
+    id: number;
+    sumaOrder: number;
+    userId: number;
+    delivery: [];
+    deviceOrder: [];
+}
+export interface IOrderDevice
+    extends Model<InferAttributes<IOrderDevice>, InferCreationAttributes<IOrderDevice>> {
+    id: number;
+    deviceId: number;
+    amountDevice: number;
+    priceDevice: number;
+    sumPriceDevice: number;
+    deliveryId: number;
+    orderId: number;
+}
+export interface IDelivery
+    extends Model<InferAttributes<IDelivery>, InferCreationAttributes<IDelivery>> {
+    id: number;
+    type: string;
+    city?: string;
+    street?: string;
+    house?: number;
+    room?: number;
+    department?: number;
+    comment?: string;
+    orderId: number;
+}

@@ -13,7 +13,7 @@ class EmailService {
     });
 
     // eslint-disable-next-line max-len
-    async sendMail(userMail:string, template: string, context?: { userName: any; surname?: any; }, token?: string):
+    async sendMail(userMail:string, template: string, context: { userName: any; surname?: any; }, token?: string):
         Promise<SentMessageInfo> {
         const { OAuth2 } = google.auth;
         const myOAuth2Client = new OAuth2(
@@ -44,12 +44,6 @@ class EmailService {
         Object.assign(context, { frontendUrl: config.FRONTEND_URL, activateUrl: `${config.FRONTEND_URL}/api/user/activateUser/${token}` });
         const html = await this.templateRenderer.render(String(templateName), context);
         const emailTransporter = nodemailer.createTransport({
-            // from: 'No Reply Node.js',
-            // service: 'gmail',
-            // auth: {
-            //     user: config.NO_REPLY_EMAIL,
-            //     pass: config.NO_REPLY_EMAIL_PASSWORD,
-            // },
             service: 'gmail',
             auth: {
                 type: 'OAuth2',
@@ -57,7 +51,8 @@ class EmailService {
                 clientId: config.CLIENT_ID_EMAIL,
                 clientSecret: config.CLIENT_SECRET_KEY_EMAIL,
                 refreshToken: config.REFRESH_TOKEN_EMAIL,
-                accessToken: config.ACCESS_TOKEN_EMAIL,
+                // accessToken: config.ACCESS_TOKEN_EMAIL,
+                // expires: 60000,
             },
         });
         return emailTransporter.sendMail({

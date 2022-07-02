@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import { IRequestExtended } from '../interfaces';
-import { orderService } from '../services/orderService';
+import { orderService } from '../services/orderService/orderService';
 
 class OrderController {
     async createOrder(req: IRequestExtended, res: Response, next: NextFunction) {
@@ -11,7 +11,7 @@ class OrderController {
                 type, city, street, house, room, comment, department,
             } = req.body;
             const order = await orderService.createOrder(
-                id,
+                +id,
                 type,
                 city,
                 street,
@@ -19,8 +19,8 @@ class OrderController {
                 +room,
                 comment,
                 +department,
-                next,
-            );
+                // next,
+            ).then((data) => data);
             res.json(order);
         } catch (e) {
             next();

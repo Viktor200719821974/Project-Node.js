@@ -49,7 +49,7 @@ const Basket = () => {
             const arrayPrice = arr.map(c => c.map(c => c.price)[0]);
             const arrayAmount = basket.map(c => c.amount);
             let num = 0;
-            for(var i=0; i< arrayPrice.length; i++) {
+            for(let i=0; i< arrayPrice.length; i++) {
                 num += arrayPrice[i]*arrayAmount[i];
             }
             setSum(num);
