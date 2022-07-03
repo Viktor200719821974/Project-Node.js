@@ -4,6 +4,7 @@ import EmailTemplate from 'email-templates';
 import { google } from 'googleapis';
 import { config } from '../config/config';
 import { emailInfo } from '../constants';
+// import { IOrderDevice } from '../interfaces';
 
 class EmailService {
     templateRenderer = new EmailTemplate({
@@ -13,8 +14,18 @@ class EmailService {
     });
 
     // eslint-disable-next-line max-len
-    async sendMail(userMail:string, template: string, context: { userName: any; surname?: any; }, token?: string):
-        Promise<SentMessageInfo> {
+    async sendMail(
+        userMail:string,
+        template: string,
+        context: {
+            userName: string;
+            surname?: string;
+            sumaOrder?: number,
+            devicesString?: string,
+            devicesJson?: string
+        },
+        token?: string,
+    ): Promise<SentMessageInfo> {
         const { OAuth2 } = google.auth;
         const myOAuth2Client = new OAuth2(
             config.CLIENT_ID_EMAIL,
@@ -38,6 +49,10 @@ class EmailService {
             subject = emailInfo.ACCOUNT_UNLOCKED.subject;
             templateName = emailInfo.ACCOUNT_UNLOCKED.templateName;
         }
+        if (template === 'ORDER_DEVICE') {
+            subject = emailInfo.ORDER_DEVICE.subject;
+            templateName = emailInfo.ORDER_DEVICE.templateName;
+        }
         Object.assign(context, { frontendUrl: config.FRONTEND_URL, activateUrl: `${config.FRONTEND_URL}/api/user/activateUser/${token}` });
         const html = await this.templateRenderer.render(String(templateName), context);
         const emailTransporter = nodemailer.createTransport({
@@ -55,6 +70,7 @@ class EmailService {
             to: userMail,
             subject,
             html,
+            // text: JSON.stringify(devices),
         });
     }
 }

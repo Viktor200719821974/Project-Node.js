@@ -5,8 +5,9 @@ import { orderService } from '../services/orderService/orderService';
 class OrderController {
     async createOrder(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
-            // @ts-ignore
-            const { id } = req.user;
+            const {
+                id, email, name, surname,
+            } = req.user;
             const {
                 type, city, street, house, room, comment, department,
             } = req.body;
@@ -19,6 +20,9 @@ class OrderController {
                 +room,
                 comment,
                 +department,
+                email,
+                name,
+                surname,
                 // next,
             ).then((data) => data);
             res.json(order);

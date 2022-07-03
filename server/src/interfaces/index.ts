@@ -12,6 +12,18 @@ export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAt
     height: number;
     depth: number;
 }
+export interface IDeviceImage {
+    id: number;
+    name: string;
+    color: string;
+    typeId: number;
+    brandId: number;
+    price: number;
+    width: number;
+    height: number;
+    depth: number;
+    imageDeviceAws: [];
+}
 export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;
     email: string;
@@ -60,7 +72,7 @@ export interface IToken extends Model<InferAttributes<IToken>, InferCreationAttr
 }
 
 export interface IRequestExtended extends Request{
-    user?: IUser;
+    user: IUser;
 }
 
 export interface IImageDevice
@@ -92,12 +104,9 @@ export interface IOrder extends Model<InferAttributes<IOrder>, InferCreationAttr
     sumaOrder?: number;
     userId: number;
 }
-export interface IOrderOne {
-    id: number;
+export interface IOrderSendMail {
     sumaOrder: number;
-    userId: number;
-    delivery: [];
-    deviceOrder: [];
+    devices: IDevice[];
 }
 export interface IOrderDevice
     extends Model<InferAttributes<IOrderDevice>, InferCreationAttributes<IOrderDevice>> {

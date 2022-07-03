@@ -1,7 +1,7 @@
 import { model } from '../../models/models';
 
 class OrderDeviceService {
-    async createOrderDevice(userId: number, deliveryId: number, orderId: number): Promise<number> {
+    async createOrderDevice(userId: number, deliveryId: number, orderId: number) {
         const basketId = await model.Basket.findOne({ where: { userId } })
             .then((data) => data?.id);
         const devicesBasket = await model.BasketDevice.findAll({ where: { basketId } })
@@ -12,6 +12,9 @@ class OrderDeviceService {
             where: {
                 id: deviceId,
             },
+            include: [
+                { model: model.ImageDeviceAws, as: 'imageDeviceAws' },
+            ],
         }).then((data) => data);
         const price = devices.map((c) => c.price);
         // eslint-disable-next-line no-plusplus
@@ -29,7 +32,11 @@ class OrderDeviceService {
                 deliveryId,
             }).then((data) => data);
         }
-        return (price.reduce((r, a, i) => r + a * amount[i], 0));
+        const sumaOrder = price.reduce((r, a, i) => r + a * amount[i], 0);
+        return {
+            sumaOrder,
+            devices,
+        };
     }
 }
 

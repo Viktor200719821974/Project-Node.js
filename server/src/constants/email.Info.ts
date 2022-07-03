@@ -13,4 +13,8 @@ export const emailInfo = {
         subject: 'Акаунт розблокований',
         templateName: 'accountUnlocked',
     },
+    ORDER_DEVICE: {
+        subject: 'Дякуємо за покупку, в нашому магазині!',
+        templateName: 'orderDevice',
+    },
 };
