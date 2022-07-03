@@ -2,8 +2,8 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../db';
 import {
     IBasket,
-    IBasketDevice,
-    IDevice, IImageDevice, IToken, ITokenActivate, IUser,
+    IBasketDevice, IDelivery,
+    IDevice, IImageDevice, IOrder, IOrderDevice, IToken, ITokenActivate, IUser,
 } from '../interfaces';
 
 const User = sequelize.define<IUser>('user', {
@@ -110,13 +110,15 @@ const ImageDeviceAws = sequelize.define<IImageDevice>('imageDeviceAws', {
     deviceId: { type: DataTypes.INTEGER },
 }, { createdAt: false, updatedAt: false });
 
-const OrderUser = sequelize.define('order', {
+const OrderUser = sequelize.define<IOrder>('order', {
     id: {
         type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
     },
+    sumaOrder: { type: DataTypes.INTEGER, allowNull: true },
+    userId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
-const Delivery = sequelize.define('delivery', {
+const Delivery = sequelize.define<IDelivery>('delivery', {
     id: {
         type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
     },
@@ -127,16 +129,19 @@ const Delivery = sequelize.define('delivery', {
     room: { type: DataTypes.INTEGER, allowNull: true },
     department: { type: DataTypes.INTEGER, allowNull: true },
     comment: { type: DataTypes.STRING, allowNull: true },
+    orderId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
-const OrderDevice = sequelize.define('order_device', {
+const OrderDevice = sequelize.define<IOrderDevice>('order_device', {
     id: {
         type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
     },
     deviceId: { type: DataTypes.INTEGER, allowNull: false },
     amountDevice: { type: DataTypes.INTEGER, allowNull: false },
     priceDevice: { type: DataTypes.INTEGER, allowNull: false },
-    sumOrder: { type: DataTypes.INTEGER, allowNull: false },
+    sumPriceDevice: { type: DataTypes.INTEGER, allowNull: false },
+    deliveryId: { type: DataTypes.INTEGER, allowNull: false },
+    orderId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
 User.hasOne(Basket);

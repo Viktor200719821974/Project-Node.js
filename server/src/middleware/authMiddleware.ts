@@ -22,8 +22,13 @@ class AuthMiddleware {
                 next(new ErrorHandler('Unauthorized', 401));
             }
             await tokenService.findByParamsAccess(token);
-            // @ts-ignore
-            req.user = await userService.getUserByEmail(userEmail);
+            const user = await userService.getUserByEmail(userEmail)
+                .then((data) => data);
+            if (user) {
+                req.user = user;
+            } else {
+                next(new ErrorHandler('Not found', 404));
+            }
             next();
         } catch (e) {
             next(e);
