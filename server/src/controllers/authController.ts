@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { IRequestExtended, IUser } from '../interfaces';
 import { tokenService } from '../services/tokenService';
 import { userService } from '../services/userService';
 import { authService } from '../services/authService';
 import { constants } from '../constants';
-// import { basketService } from '../services/basketService';
 import { emailService } from '../services/emailService';
+import { IRequestExtended, IUser } from '../interfaces';
 
 class AuthController {
     async registration(req:Request, res:Response, next: NextFunction): Promise<void> {
@@ -29,7 +28,7 @@ class AuthController {
         return res.json('Ok');
     }
 
-    async login(req: IRequestExtended, res: Response, next: NextFunction): Promise<void> {
+    async login(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { email } = req.body;
             const tokenPair = await authService.login(email, next);

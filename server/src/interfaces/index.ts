@@ -36,6 +36,14 @@ export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttrib
     is_staff: boolean;
     is_superuser: boolean;
 }
+export interface IBrand extends Model<InferAttributes<IBrand>, InferCreationAttributes<IBrand>> {
+    id: number;
+    name: string;
+}
+export interface IType extends Model<InferAttributes<IType>, InferCreationAttributes<IType>> {
+    id: number;
+    name: string;
+}
 export interface ITokenDataToSaveActivate {
     activateToken: string;
     userId: number;
@@ -72,7 +80,7 @@ export interface IToken extends Model<InferAttributes<IToken>, InferCreationAttr
 }
 
 export interface IRequestExtended extends Request{
-    user: IUser;
+    user?: IUser;
 }
 
 export interface IImageDevice

@@ -1,10 +1,9 @@
-import { NextFunction, Response } from 'express';
-import { IRequestExtended } from '../../interfaces';
+import { NextFunction, Request, Response } from 'express';
 import { ErrorHandler } from '../../error/errorHandler';
 import { validators } from '../../validators/validators';
 
 class RegistrationValidate {
-    registration(req: IRequestExtended, res: Response, next: NextFunction) {
+    registration(req: Request, res: Response, next: NextFunction) {
         try {
             const { error } = validators.registration.validate(req.body);
             if (error) {

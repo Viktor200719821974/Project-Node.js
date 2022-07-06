@@ -1,11 +1,13 @@
 import { model } from '../models/models';
+import { IBrand } from '../interfaces';
 
 class BrandService {
     async getAll() {
         return model.Brand.findAll();
     }
 
-    async createBrand(name: string) {
+    async createBrand(name: string): Promise<IBrand> {
+        // @ts-ignore
         return model.Brand.create({ name });
     }
 

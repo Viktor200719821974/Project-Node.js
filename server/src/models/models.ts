@@ -2,8 +2,8 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../db';
 import {
     IBasket,
-    IBasketDevice, IDelivery,
-    IDevice, IImageDevice, IOrder, IOrderDevice, IToken, ITokenActivate, IUser,
+    IBasketDevice, IBrand, IDelivery,
+    IDevice, IImageDevice, IOrder, IOrderDevice, IToken, ITokenActivate, IType, IUser,
 } from '../interfaces';
 
 const User = sequelize.define<IUser>('user', {
@@ -49,12 +49,12 @@ const Device = sequelize.define<IDevice>('device', {
     brandId: { type: DataTypes.INTEGER },
 });
 
-const Type = sequelize.define('type', {
+const Type = sequelize.define<IType>('type', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
-const Brand = sequelize.define('brand', {
+const Brand = sequelize.define<IBrand>('brand', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, unique: true, allowNull: false },
 });

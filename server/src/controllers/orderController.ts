@@ -1,5 +1,5 @@
 import { NextFunction, Response } from 'express';
-import { IRequestExtended } from '../interfaces';
+import { IRequestExtended, IUser } from '../interfaces';
 import { orderService } from '../services/orderService/orderService';
 
 class OrderController {
@@ -7,7 +7,7 @@ class OrderController {
         try {
             const {
                 id, email, name, surname,
-            } = req.user;
+            } = req.user as IUser;
             const {
                 type, city, street, house, room, comment, department,
             } = req.body;

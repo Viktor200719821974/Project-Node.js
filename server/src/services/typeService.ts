@@ -1,11 +1,13 @@
 import { model } from '../models/models';
+import { IType } from '../interfaces';
 
 class TypeService {
     async getAll() {
         return model.Type.findAll();
     }
 
-    async createType(name: string) {
+    async createType(name: string): Promise<IType> {
+        // @ts-ignore
         return model.Type.create({ name });
     }
 

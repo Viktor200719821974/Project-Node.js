@@ -4,7 +4,6 @@ import EmailTemplate from 'email-templates';
 import { google } from 'googleapis';
 import { config } from '../config/config';
 import { emailInfo } from '../constants';
-// import { IOrderDevice } from '../interfaces';
 
 class EmailService {
     templateRenderer = new EmailTemplate({
@@ -13,7 +12,6 @@ class EmailService {
         },
     });
 
-    // eslint-disable-next-line max-len
     async sendMail(
         userMail:string,
         template: string,
@@ -22,7 +20,10 @@ class EmailService {
             surname?: string;
             sumaOrder?: number,
             devicesString?: string,
-            devicesJson?: string
+            devicesJson?: string,
+            typeJson?: string,
+            brandJson?: string,
+            imageJson?: string,
         },
         token?: string,
     ): Promise<SentMessageInfo> {
@@ -70,7 +71,6 @@ class EmailService {
             to: userMail,
             subject,
             html,
-            // text: JSON.stringify(devices),
         });
     }
 }

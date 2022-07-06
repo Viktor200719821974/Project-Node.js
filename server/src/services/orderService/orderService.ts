@@ -39,12 +39,54 @@ class OrderService {
         const deviceOrder = await orderDeviceService.createOrderDevice(userId, +deliveryId, orderId)
             .then((data) => data);
         const { sumaOrder, devices } = deviceOrder;
+        const deviceId = devices.map((c) => c.id);
+        const typeId = devices.map((c) => c.typeId);
+        const typeDevice = await model.Type.findAll({
+            attributes: {
+                exclude: ['createdAt', 'updatedAt'],
+            },
+            where: { id: typeId },
+        }).then((data) => data.map((c) => c.name));
+        const brandId = devices.map((c) => c.brandId);
+        const brand = await model.Brand.findAll({
+            attributes: {
+                exclude: ['createdAt', 'updatedAt'],
+            },
+            where: { id: brandId },
+        }).then((data) => data.map((c) => c.name));
         await model.OrderUser.update({ sumaOrder }, { where: { id: orderId } });
-        const devicesOrder = await model.OrderDevice.findAll({ where: { orderId } });
+        const devicesOrder = await model.OrderDevice.findAll({
+            attributes: {
+                exclude: ['createdAt', 'updatedAt'],
+            },
+            where: { orderId },
+        });
+        const image = await model.ImageDeviceAws.findAll({ where: { deviceId } })
+            .then((data) => data);
+        // const image = imageData.map((c) => c.imageLocation);
+        // if (image) {
+        //     console.log(image);
+        // }
+        if (typeId.length > typeDevice.length) {
+            typeDevice.push(typeDevice[0]);
+        }
+        if (brandId.length > brand.length) {
+            brand.push(brand[0]);
+        }
         const devicesString = JSON.stringify(devicesOrder);
         const devicesJson = JSON.stringify(devices);
+        const typeJson = JSON.stringify(typeDevice);
+        const brandJson = JSON.stringify(brand);
+        const imageJson = JSON.stringify(image);
         await emailService.sendMail(email, 'ORDER_DEVICE', {
-            userName: name, surname, sumaOrder, devicesString, devicesJson,
+            userName: name,
+            surname,
+            sumaOrder,
+            devicesString,
+            devicesJson,
+            typeJson,
+            brandJson,
+            imageJson,
         });
         return model.OrderUser.findOne({
             where: { id: orderId },

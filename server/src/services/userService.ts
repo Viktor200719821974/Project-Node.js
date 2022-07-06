@@ -62,7 +62,7 @@ class UserService {
                 exclude: ['password', 'createdAt', 'updatedAt'],
             },
             where: { email },
-        });
+        }).then((data) => data);
     }
 
     async userManager(id: number, email: string, next: NextFunction): Promise<IUser | null> {

@@ -2,23 +2,36 @@ extends container
 block content
     div#id
         | Дякуємо за покупку на нашому сайті #{userName} #{surname}!!!!!!!
-    div
-        div
-            div
+    div#id8
+        each item, index in JSON.parse(devicesJson)
+            div#id9
+                //img( src=#{JSON.parse(imageJson).imageLocation} alt='device')
                 div
+                    img( src='https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-23.jpg' alt='device' style={width: '200px', height: 'auto'})
+                ul
+                    li
+                        | Тип: #{JSON.parse(typeJson)[index]}
+                    li
+                        | Бренд: #{JSON.parse(brandJson)[index]}
+                    li
+                        | Модель: #{item.name}
+                    li
+                        | Колір: #{item.color}
+                    li
+                        | Ширина: #{item.width} см
+                    li
+                        | Висота: #{item.height} см
+                    li
+                        | Глубина: #{item.depth} см
+            div#id10
+                ul
+                    li
+                        | Вартість за штуку: #{JSON.parse(devicesString)[index].priceDevice} грн.
+                    li
+                        | Кількість: #{JSON.parse(devicesString)[index].amountDevice} шт.
+                    li
+                        | Вартість за #{JSON.parse(devicesString)[index].amountDevice} шт.: #{JSON.parse(devicesString)[index].sumPriceDevice} грн.
 
-                    img(src='../static/image/no_image.jpg' alt='device')
-                each item, index in JSON.parse(devicesJson)
-                    div
-                        |Модель: #{item.name}
-                        |Колір: #{item.color}
-                        |Ширина: #{item.width}
-                        |Висота: #{item.height}
-                        |Глубина: #{item.depth}
-                        div
-                            | Вартість за штуку: #{JSON.parse(devicesString)[index].priceDevice} грн.
-                            | Кількість: #{JSON.parse(devicesString)[index].amountDevice} шт.
-                            | Вартість за #{JSON.parse(devicesString)[index].amountDevice} шт.: #{JSON.parse(devicesString)[index].sumPriceDevice} грн.
-
-    div
+    div#id11
         |Сума замовлення:  #{sumaOrder} грн.
+

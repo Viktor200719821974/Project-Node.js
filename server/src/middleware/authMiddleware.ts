@@ -1,10 +1,10 @@
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { ErrorHandler } from '../error/errorHandler';
-import { IRequestExtended } from '../interfaces';
 import { model } from '../models/models';
 import { tokenService } from '../services/tokenService';
 import { userService } from '../services/userService';
+import { IRequestExtended } from '../interfaces';
 
 class AuthMiddleware {
     async checkAccessToken(req: IRequestExtended, res: Response, next: NextFunction) {
@@ -35,7 +35,7 @@ class AuthMiddleware {
         }
     }
 
-    async findUser(req: IRequestExtended, res: Response, next: NextFunction) {
+    async findUser(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
             const user = await model.User.findOne({ where: { email } });
@@ -62,25 +62,6 @@ class AuthMiddleware {
         }
     }
 
-    // async updatedToken(req: Request, res: Response, next: NextFunction) {
-    //     try {
-    //         const { email } = req.body;
-    //         const user = await model.User.findOne({ where: { email } });
-    //         if (!user) {
-    //             next(new ErrorHandler('Not found'));
-    //         }
-    //         // @ts-ignore
-    //         const userId = user.get('id');
-    //         const token = await model.Token.findAll({ where: { userId } });
-    //         if (token) {
-    //             await model.Token.destroy({ where: { userId } });
-    //         }
-    //         next();
-    //     } catch (e) {
-    //         next(e);
-    //     }
-    // }
-
     async checkRefreshToken(req: IRequestExtended, res: Response, next: NextFunction) {
         if (req.method === 'OPTIONS') {
             next();
@@ -93,8 +74,12 @@ class AuthMiddleware {
             }
             const { userEmail } = await tokenService.verifyToken(token, 'refreshToken');
             await tokenService.findByParamsRefresh(token);
-            // @ts-ignore
-            req.user = await userService.getUserByEmail(userEmail);
+            const user = await userService.getUserByEmail(userEmail).then((data) => data);
+            if (user) {
+                req.user = user;
+            } else {
+                next(new ErrorHandler('Not found', 404));
+            }
             next();
         } catch (e: any) {
             next(e);
