@@ -27,6 +27,7 @@ class TypeController {
         try {
             const { id } = req.params;
             const { name } = req.body;
+            console.log(name);
             const updateType = await typeService.updateType(name, id);
             res.json(updateType);
         } catch (e) {

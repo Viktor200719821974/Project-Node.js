@@ -42,9 +42,6 @@ const CreateBrand = ({show, onHide}) => {
                 * Бренд був добавлений!!!
             </Alert>}
             {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
-            {/*{statusResponse  && <div className={'createDevice_div_successfully'}>*/}
-            {/*   * Бренд був добавлений!!!*/}
-            {/*</div>}*/}
             <Modal.Body>
                 <Form>
                     <Form.Control

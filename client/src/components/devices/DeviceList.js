@@ -21,5 +21,5 @@ const DeviceList = observer(({image}) => {
         </Row>
     );
 });
-// .filter(c => c.deviceId === device.id)
+
 export default DeviceList;

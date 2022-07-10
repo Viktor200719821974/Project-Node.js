@@ -20,6 +20,7 @@ const Shop = observer(() => {
 
     let numberPage = [];
     for (let i = 1; i <= countPage; i++ ){
+        Number(i);
         numberPage.push(i);
     }
 
@@ -35,9 +36,13 @@ const Shop = observer(() => {
                     setBrands(data);
                 }
             });
-            getDevices(selectedBrand, selectedType, page).then(data => {
+            getDevices(page, selectedBrand, selectedType).then(data => {
                 setDevices(data);
-                setCountPage(Math.ceil(data.count/ data.perPage));
+                if (data.count && data.perPage){
+                    Number(data.count);
+                    Number(data.perPage);
+                    setCountPage(Math.ceil(data.count/ data.perPage));
+                }
                 if (countPage && countPage < page){
                     setPage(1);
                 }
@@ -68,7 +73,7 @@ const Shop = observer(() => {
                           {page !== 1 && <Pagination.Prev onClick={() => {
                               setPage(page - 1)
                           }}/>}
-                          {numberPage.map((c, index) => <PaginationDevice key={index} item={c} setPage={setPage}
+                          {numberPage && numberPage.map((c, index) => <PaginationDevice key={index} item={c} setPage={setPage}
                                                                           page={page}/>)}
                           {countPage !== page && <Pagination.Next onClick={() => {
                               setPage(page + 1)

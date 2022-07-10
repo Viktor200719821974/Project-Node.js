@@ -4,7 +4,7 @@ export const createDevice = async (formData) => {
     const {data} = await $authHost.post('/device', formData);
     return data;
 }
-export const getDevices = async (brandId?, typeId?, page?) => {
+export const getDevices = async (page, brandId, typeId) => {
     const {data} = await $host.get(`/device?page=${page}&brandId=${brandId}&typeId=${typeId}`);
     return data;
 }
