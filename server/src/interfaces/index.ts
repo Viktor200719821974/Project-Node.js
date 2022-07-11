@@ -11,6 +11,7 @@ export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAt
     width: number;
     height: number;
     depth: number;
+    // description: string;
 }
 export interface IDeviceImage {
     id: number;

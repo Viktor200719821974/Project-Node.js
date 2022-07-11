@@ -17,6 +17,7 @@ const Shop = observer(() => {
     const [image, setImage] = useState([]);
     const [page, setPage] = useState(1);
     const [countPage, setCountPage] = useState();
+    const [name] = useState('');
 
     let numberPage = [];
     for (let i = 1; i <= countPage; i++ ){
@@ -30,13 +31,21 @@ const Shop = observer(() => {
                 if (data) {
                     setTypes(data);
                 }
+            }).catch(err => {
+                if (err.response) {
+                    alert(err.response.data.message);
+                }
             });
             getBrands().then(data => {
                 if (data){
                     setBrands(data);
                 }
+            }).catch(err => {
+                if (err.response) {
+                    alert(err.response.data.message);
+                }
             });
-            getDevices(page, selectedBrand, selectedType).then(data => {
+            getDevices(page, name, selectedBrand, selectedType).then(data => {
                 setDevices(data);
                 if (data.count && data.perPage){
                     Number(data.count);
@@ -45,6 +54,10 @@ const Shop = observer(() => {
                 }
                 if (countPage && countPage < page){
                     setPage(1);
+                }
+            }).catch(err => {
+                if (err.response) {
+                    alert(err.response.data.message);
                 }
             });
             getImageDevice().then(data => setImage(data));

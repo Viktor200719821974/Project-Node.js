@@ -45,6 +45,7 @@ const Device = sequelize.define<IDevice>('device', {
     height: { type: DataTypes.INTEGER, allowNull: false },
     depth: { type: DataTypes.INTEGER, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
+    // description: {type: DataTypes.STRING, allowNull: false },
     typeId: { type: DataTypes.INTEGER },
     brandId: { type: DataTypes.INTEGER },
 });

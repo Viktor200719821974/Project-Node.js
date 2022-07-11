@@ -2,7 +2,7 @@ import { model } from '../models/models';
 import { IBrand } from '../interfaces';
 
 class BrandService {
-    async getAll() {
+    async getAll(): Promise<IBrand[]> {
         return model.Brand.findAll();
     }
 
@@ -11,7 +11,7 @@ class BrandService {
         return model.Brand.create({ name });
     }
 
-    async updateBrand(name: string, id: string) {
+    async updateBrand(name: string, id: string): Promise<IBrand | null> {
         await model.Brand.update(
             {
                 name,
@@ -23,8 +23,8 @@ class BrandService {
         return model.Brand.findByPk(id);
     }
 
-    async deleteBrand(id: string) {
-        await model.Brand.destroy({ where: { id } });
+    async deleteBrand(id: string): Promise<number> {
+        return model.Brand.destroy({ where: { id } });
     }
 }
 export const brandService = new BrandService();

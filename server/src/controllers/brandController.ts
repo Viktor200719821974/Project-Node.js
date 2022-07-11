@@ -28,7 +28,7 @@ class BrandController {
         try {
             const { id } = req.params;
             await brandService.deleteBrand(id);
-            res.status(204).end();
+            res.json('Ok');
         } catch (e) {
             next(e);
         }

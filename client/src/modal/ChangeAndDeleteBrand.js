@@ -3,17 +3,16 @@ import {Modal} from "react-bootstrap";
 import useAuth from "../hook/useAuth";
 import TypeBrandCardAdmin from "../components/TypeBrandCardAdmin";
 import {getBrands} from "../http/brandApi";
-import {getTypes} from "../http/typeApi";
 
-const ChangeAndDeleteType = ({show, onHide}) => {
-    const {types, setTypes} = useAuth();
+const ChangeAndDeleteBrand = ({show, onHide}) => {
+    const {brands, setBrands} = useAuth();
     const [statusResponse, setStatusResponse] = useState(false);
-
+    
     useEffect(() => {
         if (statusResponse){
-            getTypes().then(data => {
+            getBrands().then(data => {
                 if (data){
-                    setTypes(data);
+                    setBrands(data);
                 }
             }).catch(err => {
                 if (err.response) {
@@ -32,21 +31,21 @@ const ChangeAndDeleteType = ({show, onHide}) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Змінити або видалити тип
+                    Змінити або видалити бренд
                 </Modal.Title>
             </Modal.Header>
-        <div className={'brandBar_div'} >
-            { types && types.map((type) =>
-                <TypeBrandCardAdmin
-                    key={type.id}
-                    value={type}
-                    type={'type'}
-                    setStatusResponse={setStatusResponse}
-                />
-            )}
-        </div>
+            <div className={'brandBar_div'}>
+                { brands && brands.map((brand) =>
+                    <TypeBrandCardAdmin
+                        key={brand.id}
+                        value={brand}
+                        type={'brand'}
+                        setStatusResponse={setStatusResponse}
+                    />
+                )}
+            </div>
         </Modal>
     );
 };
 
-export default ChangeAndDeleteType;
+export default ChangeAndDeleteBrand;

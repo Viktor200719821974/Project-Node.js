@@ -26,6 +26,8 @@ export const validators = {
             .messages({ 'any.only': 'Depth not valid, min 1' }),
         price: Joi.number().required().greater(0)
             .messages({ 'any.only': 'Price not valid, min 1' }),
+        // eslint-disable-next-line max-len
+        // description: Joi.string().required().messages({ 'any.only': 'Description is not valid' }),
         brandId: Joi.number().required().messages({ 'any.only': 'BrandId is not valid' }),
         typeId: Joi.number().required().messages({ 'any.only': 'TypeId is not valid' }),
         info: Joi.string(),

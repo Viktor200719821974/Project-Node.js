@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Card, Container, Form, Row} from "react-bootstrap";
+import {Alert, Button, Card, Container, Form, Row} from "react-bootstrap";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/constans";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
 import { login, registration} from "../http/authApi";
@@ -17,14 +17,25 @@ const Auth = observer(() => {
     const [surname, setSurname] = useState('');
     const [phone, setPhone] = useState('');
     const [age, setAge] = useState('');
+    const [error, setError] = useState('');
 
     const click = async () => {
         try {
             let data;
             if (isLogin) {
-                data = await login(email, password);
+                data = await login(email, password)
+                    .catch(err => {
+                        if (err.response) {
+                            setError(err.response.data.message);
+                        }
+                    });
             } else {
-               const res = await registration(email, password, name, surname, age, phone);
+               const res = await registration(email, password, name, surname, age, phone)
+                   .catch(err => {
+                        if (err.response) {
+                            setError(err.response.data.message);
+                        }
+                   });
                if (res){
                    history.push(SHOP_ROUTE);
                }
@@ -32,17 +43,18 @@ const Auth = observer(() => {
             if (data) {
                 auth.setIsAuth(data.accessToken);
                 history.push(SHOP_ROUTE);
+                setError('');
             }
         } catch (e) {
-            alert(e.response.data.message);
-            console.log(e);
+            alert(e.message);
         }
     }
     return (
+        <>
+            {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
         <Container
             className={"d-flex justify-content-center align-items-center"}
                    style={{height: window.innerHeight - 54}}>
-
             <Card style={{width: 600}} className="p-5">
                 <h2 className={"m-auto"}>{isLogin ? 'Авторизація' : "Реєстрація"}</h2>
                 <Form className={"d-flex flex-column"}>
@@ -113,6 +125,7 @@ const Auth = observer(() => {
                 </Form>
             </Card>
         </Container>
+        </>
     );
 });
 

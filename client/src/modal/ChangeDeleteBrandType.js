@@ -4,11 +4,11 @@ import {changeBrand} from "../http/brandApi";
 import {changeType} from "../http/typeApi";
 import ConfirmDelete from "./ConfirmDelete";
 
-const ChangeDeleteBrandType = ({show, onHide, id, name, type}) => {
+const ChangeDeleteBrandType = ({show, onHide, id, name, type, setStatusResponse}) => {
     const [value, setValue] = useState('');
     const [confirmDelete, setConfirmDelete] = useState(false);
-    // const [statusResponse, setStatusResponse] = useState(false);
     const [error, setError] = useState('');
+    console.log(id);
     const change = () => {
         const formData = new FormData();
         formData.append('name', value);
@@ -16,7 +16,7 @@ const ChangeDeleteBrandType = ({show, onHide, id, name, type}) => {
             if (type === 'type'){
                 changeType(id, formData).then(data => {
                     if (data){
-                        // setStatusResponse(true);
+                        setStatusResponse(true);
                         setError('');
                         // onHide();
                     }
@@ -24,20 +24,18 @@ const ChangeDeleteBrandType = ({show, onHide, id, name, type}) => {
                 ).catch(err => {
                     if (err.response){
                         setError(err.response.data.message);
-                        // setStatusResponse(false);
                     }
                 });
             }
             if (type === 'brand'){
                changeBrand(id, formData).then(data => {
                    if (data){
-                       // setStatusResponse(true);
+                       setStatusResponse(true);
                        setError('');
                    }
                }).catch(err => {
                    if (err.response){
                        setError(err.response.data.message);
-                       // setStatusResponse(false);
                    }
                });
             }
@@ -54,9 +52,6 @@ const ChangeDeleteBrandType = ({show, onHide, id, name, type}) => {
             centered
         >
             <Modal.Header closeButton/>
-            {/*{statusResponse && <Alert variant={'success'} style={{textAlign: 'center', fontSize: '20px'}}>*/}
-            {/*    Змінено !!!*/}
-            {/*</Alert>}*/}
             {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
             <Modal.Body>
                 <Form>
@@ -74,8 +69,9 @@ const ChangeDeleteBrandType = ({show, onHide, id, name, type}) => {
                 <ConfirmDelete
                     show={confirmDelete}
                     onHide={() => setConfirmDelete(false)}
-                    id={value.id}
+                    id={id}
                     type={type}
+                    setStatusResponse={setStatusResponse}
                 />
             </Modal.Footer>
         </Modal>

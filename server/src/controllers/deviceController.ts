@@ -13,7 +13,7 @@ class DeviceController {
 
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const { brandId, typeId } = req.query;
+            const { brandId, typeId, name } = req.query;
             let { limit, page } = req.query;
             // @ts-ignore
             page = +page || 1;
@@ -23,17 +23,42 @@ class DeviceController {
             const offset = page * limit - limit;
             // @ts-ignore
             // eslint-disable-next-line max-len
-            const devices = await deviceService.getAll(+brandId, +typeId, limit, page, offset);
+            const devices = await deviceService.getAll(+brandId, +typeId, name, limit, page, offset);
             res.json(devices);
         } catch (e) {
             next(e);
         }
     }
 
-    async getOne(req: Request, res: Response) {
-        const { id } = req.params;
-        const device = await deviceService.getOne(Number(id));
-        return res.json(device);
+    async getOne(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const device = await deviceService.getOne(Number(id));
+            res.json(device);
+        } catch (e) {
+            next();
+        }
+    }
+
+    async updateDevice(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const device = req.body;
+            const updateDevice = await deviceService.updateDevice(+id, device);
+            res.json(updateDevice);
+        } catch (e) {
+            next();
+        }
+    }
+
+    async deleteDevice(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            await deviceService.deleteDevice(+id);
+            res.json('Ok');
+        } catch (e) {
+            next();
+        }
     }
 }
 

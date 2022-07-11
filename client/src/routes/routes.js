@@ -12,6 +12,7 @@ import Auth from "../pages/Auth";
 import DevicePage from "../pages/DevicePage";
 import Shop from "../pages/Shop";
 import ChangeAndDeleteDevice from "../pages/ChangeAndDeleteDevice";
+import DevicePageAdmin from "../pages/DevicePageAdmin";
 
 export const authRoutes = [
     {
@@ -25,6 +26,10 @@ export const authRoutes = [
     {
         path: DEVICE_CARD_ADMIN_ROUTE,
         Component: ChangeAndDeleteDevice
+    },
+    {
+        path: DEVICE_CARD_ADMIN_ROUTE + '/:id',
+        Component: DevicePageAdmin
     }
 ]
 export const publicRoutes = [

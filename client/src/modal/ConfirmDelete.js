@@ -3,17 +3,22 @@ import {Button, Modal} from "react-bootstrap";
 import {deleteType} from "../http/typeApi";
 import {deleteBrand} from "../http/brandApi";
 
-const ConfirmDelete = ({show, onHide, type, id}) => {
+const ConfirmDelete = ({show, onHide, type, id, setStatusResponse}) => {
+    console.log(id);
     const del = () => {
         try {
             if (type === 'type'){
                 deleteType(id).then(data => {
-                    console.log(data);
+                    if (data === 'Ok'){
+                       setStatusResponse(true);
+                    }
                 });
             }
             if (type === 'brand'){
                 deleteBrand(id).then(data => {
-                    console.log(data);
+                    if (data === 'Ok'){
+                        setStatusResponse(true);
+                    }
                 });
             }
         } catch (e) {

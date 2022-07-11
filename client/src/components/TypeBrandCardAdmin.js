@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import ChangeDeleteBrandType from "../modal/ChangeDeleteBrandType";
 
-const TypeBrandCardAdmin = ({value, type}) => {
+const TypeBrandCardAdmin = ({value, type, setStatusResponse}) => {
     const [changeDelete, setChangeDelete] = useState(false);
-
+    console.log(value.id);
     return (
         <div className={'brandBar_card'}>
         <div onClick={() => setChangeDelete(true)}>
@@ -15,6 +15,7 @@ const TypeBrandCardAdmin = ({value, type}) => {
                 id={value.id}
                 name={value.name}
                 type={type}
+                setStatusResponse={setStatusResponse}
             />
         </div>
     );

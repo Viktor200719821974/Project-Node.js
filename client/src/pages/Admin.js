@@ -6,7 +6,6 @@ import CreateType from "../modal/CreateType";
 import CreateDevice from "../modal/CreateDevice";
 import ChangeAndDeleteBrand from "../modal/ChangeAndDeleteBrand";
 import ChangeAndDeleteType from "../modal/ChangeAndDeleteType";
-import ChangeAndDeleteDevice from "./ChangeAndDeleteDevice";
 import {DEVICE_CARD_ADMIN_ROUTE} from "../utils/constans";
 
 const Admin = () => {
@@ -16,7 +15,6 @@ const Admin = () => {
     const [changeAndDeleteTypeVisible, setChangeAndDeleteTypeVisible] = useState(false);
     const [typeVisible, setTypeVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
-    const [changeAndDeleteDeviceVisible, setChangeAndDeleteDeviceVisible] = useState(false);
     return (
         <Container className={"d-flex flex-column"}>
           <Button
@@ -52,7 +50,6 @@ const Admin = () => {
             <Button
                 variant={"primary"}
                 className={"mt-4 p-2"}
-                // onClick={() => setChangeAndDeleteDeviceVisible(true)}
                 onClick={() => history.push(DEVICE_CARD_ADMIN_ROUTE)}
             >
                 Змінити або видалити пристрій
@@ -77,10 +74,6 @@ const Admin = () => {
                 show={deviceVisible}
                 onHide={() => setDeviceVisible(false)}
             />
-            {/*<ChangeAndDeleteDevice*/}
-            {/*    show={changeAndDeleteDeviceVisible}*/}
-            {/*    onHide={() => setChangeAndDeleteDeviceVisible(false)}*/}
-            {/*/>*/}
         </Container>
     );
 };

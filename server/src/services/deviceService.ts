@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { model } from '../models/models';
 import { IDevice, IPaginationResponse } from '../interfaces';
 
@@ -30,10 +31,16 @@ class DeviceService {
         return device;
     }
 
-    async getAll(brandId: number, typeId: number, limit: number, page: number, offset: number)
-        : Promise<IPaginationResponse<IDevice>> {
+    async getAll(
+        brandId: number,
+        typeId: number,
+        name: string,
+        limit: number,
+        page: number,
+        offset: number,
+    ): Promise<IPaginationResponse<IDevice>> {
         let devices;
-        if (!brandId && !typeId) {
+        if (!brandId && !typeId && !name) {
             devices = await model.Device.findAndCountAll({
                 limit,
                 offset,
@@ -68,6 +75,19 @@ class DeviceService {
                 order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
+        if (name && !brandId && !typeId) {
+            devices = await model.Device.findAndCountAll({
+                where: {
+                    name: {
+                        [Op.like]: `%${name}%`,
+                    },
+                },
+                limit,
+                offset,
+                include: [{ model: model.Rating, as: 'rating' }],
+                order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
+            });
+        }
         // @ts-ignore
         const { rows, count } = devices;
         return {
@@ -90,6 +110,22 @@ class DeviceService {
                 { model: model.Rating, as: 'rating' },
             ],
         });
+    }
+
+    async updateDevice(id: number, device: IDevice): Promise<IDevice | null> {
+        await model.Device.update(
+            {
+                ...device,
+            },
+            {
+                where: { id },
+            },
+        );
+        return model.Device.findByPk(id);
+    }
+
+    async deleteDevice(id: number): Promise<number> {
+        return model.Device.destroy({ where: { id } });
     }
 }
 
