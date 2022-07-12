@@ -18,7 +18,9 @@ const DevicePage = () => {
     const [error, setError] = useState('');
     const [statusResponse, setStatusResponse] = useState(false);
     const {id} = useParams();
-    const {setBasket, isLogin} = useAuth();
+    const {setBasket, isLogin, types, brands} = useAuth();
+    const type = types.filter(c => c.id === device.typeId).map(c => c.name);
+    const brand = brands.filter(c => c.id === device.brandId).map(c => c.name);
 
     const addBasket = () => {
         try{
@@ -78,14 +80,22 @@ const DevicePage = () => {
                 <Col md={5}>
                         <ImageDevice image={image}/>
                 </Col>
-                <Col md={4}>
-                    <Row className={"d-flex flex-column align-items-center"}>
-                        {/*<h1>Властивості</h1>*/}
-                        <h4>Модель: {device.name}</h4>
-                        <h4>Колір: {device.color}</h4>
-                        <h4>Ширина: {device.width} см</h4>
-                        <h4>Висота: {device.height} см</h4>
-                        <h4>Глубина: {device.depth} см</h4>
+                <Col md={4} >
+                    {/*<Row className={'devicePageAdmin_row_1'}>Тип: {type}</Row>*/}
+                    {/*<Row className={'devicePageAdmin_row_2'}>Бренд: {brand}</Row>*/}
+                    {/*<Row className={'devicePageAdmin_row_1'}>Модель: {device.name}</Row>*/}
+                    {/*<Row className={'devicePageAdmin_row_2'}>Колір: {device.color}</Row>*/}
+                    {/*<Row className={'devicePageAdmin_row_1'}>Ширина: {device.width} см</Row>*/}
+                    {/*<Row className={'devicePageAdmin_row_2'}>Висота: {device.height} см</Row>*/}
+                    {/*<Row className={'devicePageAdmin_row_1'}>Глубина: {device.depth} см</Row>*/}
+                    {/*<Row className={'devicePageAdmin_row_2'}>Вартість: {device.price} грн.</Row>*/}
+                    {/*<Row className={"d-flex flex-column align-items-center"}>*/}
+                    {/*    /!*<h1>Властивості</h1>*!/*/}
+                    {/*    <h4>Модель: {device.name}</h4>*/}
+                    {/*    <h4>Колір: {device.color}</h4>*/}
+                    {/*    <h4>Ширина: {device.width} см</h4>*/}
+                    {/*    <h4>Висота: {device.height} см</h4>*/}
+                    {/*    <h4>Глубина: {device.depth} см</h4>*/}
                         {device.info.map((info, index) =>
                             <Row key={info.id}
                                  style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}
@@ -93,7 +103,7 @@ const DevicePage = () => {
                                 {info.title}: {info.description}
                             </Row>
                         )}
-                    </Row>
+                    {/*</Row>*/}
                 </Col>
                 <Col md={3}>
                     <Card className={"d-flex flex-column align-items-center justify-content-around"}
@@ -120,6 +130,14 @@ const DevicePage = () => {
                     </Card>
                 </Col>
             </Row>
+            <Row className={'devicePageAdmin_row_1'}>Тип: {type}</Row>
+            <Row className={'devicePageAdmin_row_2'}>Бренд: {brand}</Row>
+            <Row className={'devicePageAdmin_row_1'}>Модель: {device.name}</Row>
+            <Row className={'devicePageAdmin_row_2'}>Колір: {device.color}</Row>
+            <Row className={'devicePageAdmin_row_1'}>Ширина: {device.width} см</Row>
+            <Row className={'devicePageAdmin_row_2'}>Висота: {device.height} см</Row>
+            <Row className={'devicePageAdmin_row_1'}>Глубина: {device.depth} см</Row>
+            <Row className={'devicePageAdmin_row_2'}>Вартість: {device.price} грн.</Row>
             <Row className={"d-flex flex-column m-3"}>
                 {/*<h1>Властивості</h1>*/}
                 {/*<h3>Модель: {device.name}</h3>*/}

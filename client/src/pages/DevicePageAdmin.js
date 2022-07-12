@@ -39,18 +39,21 @@ const DevicePageAdmin = () => {
         <Container className={"mt-3"}>
             {/*{error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}*/}
             <Row>
-                <Col md={4}>
-                    <ImageDevice image={image}/>
+                <Col md={5}>
+                    <div style={{marginTop: '10px'}}>
+                        <ImageDevice image={image}/>
+                    </div>
                 </Col>
                 <Col md={3}>
-                        <Row className={'devicePageAdmin_row_1'}>Тип: {type}</Row>
-                        <Row className={'devicePageAdmin_row_2'}>Бренд: {brand}</Row>
-                        <Row className={'devicePageAdmin_row_1'}>Модель: {device.name}</Row>
-                        <Row className={'devicePageAdmin_row_2'}>Колір: {device.color}</Row>
-                        <Row className={'devicePageAdmin_row_1'}>Ширина: {device.width} см</Row>
-                        <Row className={'devicePageAdmin_row_2'}>Висота: {device.height} см</Row>
-                        <Row className={'devicePageAdmin_row_1'}>Глубина: {device.depth} см</Row>
-                        <Row className={'devicePageAdmin_row_2'}>Вартість: {device.price} грн.</Row>
+                    {/*<h3>Властивості:</h3>*/}
+                    {/*    <Row className={'devicePageAdmin_row_1'}>Тип: {type}</Row>*/}
+                    {/*    <Row className={'devicePageAdmin_row_2'}>Бренд: {brand}</Row>*/}
+                    {/*    <Row className={'devicePageAdmin_row_1'}>Модель: {device.name}</Row>*/}
+                    {/*    <Row className={'devicePageAdmin_row_2'}>Колір: {device.color}</Row>*/}
+                    {/*    <Row className={'devicePageAdmin_row_1'}>Ширина: {device.width} см</Row>*/}
+                    {/*    <Row className={'devicePageAdmin_row_2'}>Висота: {device.height} см</Row>*/}
+                    {/*    <Row className={'devicePageAdmin_row_1'}>Глубина: {device.depth} см</Row>*/}
+                    {/*    <Row className={'devicePageAdmin_row_2'}>Вартість: {device.price} грн.</Row>*/}
                         {device.info.map((info, index) =>
                             <Row key={info.id}
                                  style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}
@@ -65,7 +68,7 @@ const DevicePageAdmin = () => {
                             variant={"outline-primary"}
                             onClick={() => setChangeAllDevice(true)}
                         >
-                            Змінити все в пристрої
+                            Змінити все або щось одне в пристрої
                         </Button>
                         <ChangeAllDevice
                         show={changeAllDevice}
@@ -80,13 +83,19 @@ const DevicePageAdmin = () => {
                                 variant={"outline-primary"}
                                 onClick={() => setChangeDevice(true)}
                             >
-                                Змінити щось в пристрої
+                                Змінити  в пристрої
                             </Button>
                         </Row>
                 </Col>
             </Row>
-            <Row className={"d-flex flex-column m-3"}>
-            </Row>
+            <Row className={'devicePageAdmin_row_1'}>Тип: {type}</Row>
+            <Row className={'devicePageAdmin_row_2'}>Бренд: {brand}</Row>
+            <Row className={'devicePageAdmin_row_1'}>Модель: {device.name}</Row>
+            <Row className={'devicePageAdmin_row_2'}>Колір: {device.color}</Row>
+            <Row className={'devicePageAdmin_row_1'}>Ширина: {device.width} см</Row>
+            <Row className={'devicePageAdmin_row_2'}>Висота: {device.height} см</Row>
+            <Row className={'devicePageAdmin_row_1'}>Глубина: {device.depth} см</Row>
+            <Row className={'devicePageAdmin_row_2'}>Вартість: {device.price} грн.</Row>
         </Container>
     );
 };

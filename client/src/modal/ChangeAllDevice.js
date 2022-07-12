@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Alert, Button, Dropdown, Form, Modal} from "react-bootstrap";
 import useAuth from "../hook/useAuth";
-import {getTypes} from "../http/typeApi";
-import {getBrands} from "../http/brandApi";
 import {updateDevice} from "../http/deviceApi";
 
 const ChangeAllDevice = ({show, onHide, id, device, setStatusResponse}) => {
-    const {types, brands, setTypes, setBrands} = useAuth();
+    const {types, brands} = useAuth();
     const [name, setName] = useState('');
     const [color, setColor] = useState('');
     const [width, setWidth] = useState('');
@@ -17,26 +15,17 @@ const ChangeAllDevice = ({show, onHide, id, device, setStatusResponse}) => {
     const [selectedType, setSelectedType] = useState('');
     const [error, setError] = useState('');
 
-    // useEffect(() => {
-    //     try{
-    //         getTypes().then(data => setTypes(data));
-    //         getBrands().then(data => setBrands(data));
-    //     }catch (e) {
-    //         console.log(e.message);
-    //     }
-    // }, []);
-
     const update = async () => {
         try {
             const formData = new FormData();
-            formData.append('name', name);
-            formData.append('color', color);
-            formData.append('width', `${width}`);
-            formData.append('height', `${height}`);
-            formData.append('depth', `${depth}`);
-            formData.append('price', `${price}`);
-            formData.append('brandId', selectedBrand.id);
-            formData.append('typeId', selectedType.id);
+            formData.append('name', name || device.name);
+            formData.append('color', color || device.color);
+            formData.append('width', `${width}` || device.width);
+            formData.append('height', `${height}` || device.height);
+            formData.append('depth', `${depth}` || device.depth);
+            formData.append('price', `${price}` || device.price);
+            formData.append('brandId', selectedBrand.id || device.brandId);
+            formData.append('typeId', selectedType.id || device.typeId);
             updateDevice(id, formData).then(data => {
                 if (data.name) {
                     setError('');
