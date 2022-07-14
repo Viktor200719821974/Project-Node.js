@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Modal} from "react-bootstrap";
-import useAuth from "../hook/useAuth";
-import TypeBrandCardAdmin from "../components/TypeBrandCardAdmin";
-import {getBrands} from "../http/brandApi";
-import {getTypes} from "../http/typeApi";
+import useAuth from "../../hook/useAuth";
+import TypeBrandCardAdmin from "../../components/TypeBrandCardAdmin";
+import {getBrands} from "../../http/brandApi";
+import {getTypes} from "../../http/typeApi";
 
 const ChangeAndDeleteType = ({show, onHide}) => {
     const {types, setTypes} = useAuth();

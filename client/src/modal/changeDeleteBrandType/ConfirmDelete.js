@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Modal} from "react-bootstrap";
-import {deleteType} from "../http/typeApi";
-import {deleteBrand} from "../http/brandApi";
+import {deleteType} from "../../http/typeApi";
+import {deleteBrand} from "../../http/brandApi";
 
 const ConfirmDelete = ({show, onHide, type, id, setStatusResponse}) => {
     console.log(id);

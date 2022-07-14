@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import ChangeDeleteBrandType from "../modal/ChangeDeleteBrandType";
+import ChangeDeleteBrandType from "../modal/changeDeleteBrandType/ChangeDeleteBrandType";
 
 const TypeBrandCardAdmin = ({value, type, setStatusResponse}) => {
     const [changeDelete, setChangeDelete] = useState(false);

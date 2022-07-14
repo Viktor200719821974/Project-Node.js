@@ -184,3 +184,28 @@ body {
 .devicePageAdmin_row_3{
     margin: 10px 20px;
 }
+.changeInfoDevice_div{
+    background: aliceblue;
+    padding: 5px;
+    border-radius: 5px;
+}
+.devicePage_main_div_comments{
+    margin: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.commentDevice_div_main{
+    border: solid 1px blue;
+    padding: 5px;
+    margin: 5px;
+    background: white;
+    border-radius: 10px;
+}
+.commentDevice_dive_rate{
+    display: flex;
+    justify-content: flex-end;
+}
+.devicePage_div_sendComment{
+    margin: 30px 10px 10px 10px;
+}

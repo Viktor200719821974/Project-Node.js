@@ -20,3 +20,15 @@ export const deleteDevice = async(id) => {
     const {data} = await $authHost.delete('/device/' + id);
     return data;
 }
+export const addInfoDevice = async(id, formData) => {
+    const {data} = await $authHost.post(`/device/info/${id}`, formData);
+    return data;
+}
+export const changeInfoDevice = async(id, formData) => {
+    const {data} = await $authHost.patch(`/device/info/${id}`, formData);
+    return data;
+}
+export const deleteInfoDevice = async(id) => {
+    const {data} = await $authHost.delete(`/device/info/${id}`);
+    return data;
+}

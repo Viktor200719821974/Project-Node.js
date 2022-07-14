@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { model } from '../models/models';
-import { IDevice, IPaginationResponse } from '../interfaces';
+import { IDevice, IDeviceInfo, IPaginationResponse } from '../interfaces';
 
 class DeviceService {
     async createDevice(deviceRequest: {
@@ -16,7 +16,8 @@ class DeviceService {
         const device = await model.Device.create({
             name, color, width, height, depth, price, brandId, typeId,
         });
-        const deviceId = device.get('id');
+        const deviceId = device.id;
+        Number(deviceId);
         await model.Rating.create({ deviceId });
         if (info) {
             const inf = JSON.parse(info);
@@ -98,7 +99,7 @@ class DeviceService {
         };
     }
 
-    async getOne(id: number) {
+    async getOne(id: number): Promise<IDevice | null> {
         return model.Device.findOne({
             attributes: {
                 exclude: ['createdAt', 'updatedAt'],
@@ -126,6 +127,29 @@ class DeviceService {
 
     async deleteDevice(id: number): Promise<number> {
         return model.Device.destroy({ where: { id } });
+    }
+
+    async addInfoDevice(deviceId: number, title: string, description: string)
+        : Promise<IDeviceInfo> {
+        // @ts-ignore
+        return await model.DeviceInfo.create({ title, description, deviceId }) as IDeviceInfo;
+    }
+
+    async changeDeviceInfo(id: number, deviceInfo: IDeviceInfo) {
+        // @ts-ignore
+        await model.DeviceInfo.update(
+            {
+                ...deviceInfo,
+            },
+            {
+                where: { id },
+            },
+        );
+        return model.DeviceInfo.findByPk(id);
+    }
+
+    async deleteDeviceInfo(id: number): Promise<number> {
+        return model.DeviceInfo.destroy({ where: { id } });
     }
 }
 

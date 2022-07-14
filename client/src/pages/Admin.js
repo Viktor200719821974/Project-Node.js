@@ -4,8 +4,8 @@ import {useHistory} from "react-router-dom";
 import CreateBrand from "../modal/CreateBrand";
 import CreateType from "../modal/CreateType";
 import CreateDevice from "../modal/CreateDevice";
-import ChangeAndDeleteBrand from "../modal/ChangeAndDeleteBrand";
-import ChangeAndDeleteType from "../modal/ChangeAndDeleteType";
+import ChangeAndDeleteBrand from "../modal/changeDeleteBrandType/ChangeAndDeleteBrand";
+import ChangeAndDeleteType from "../modal/changeDeleteBrandType/ChangeAndDeleteType";
 import {DEVICE_CARD_ADMIN_ROUTE} from "../utils/constans";
 
 const Admin = () => {

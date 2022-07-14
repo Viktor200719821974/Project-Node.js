@@ -60,6 +60,37 @@ class DeviceController {
             next();
         }
     }
+
+    async addInfoDevice(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const { title, description } = req.body;
+            const deviceInfo = await deviceService.addInfoDevice(+id, title, description);
+            res.json(deviceInfo);
+        } catch (e) {
+            next();
+        }
+    }
+
+    async changeDeviceInfo(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const deviceInfo = await deviceService.changeDeviceInfo(+id, req.body);
+            res.json(deviceInfo);
+        } catch (e) {
+            next();
+        }
+    }
+
+    async deleteDeviceInfo(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            await deviceService.deleteDeviceInfo(+id);
+            res.json('Ok');
+        } catch (e) {
+            next();
+        }
+    }
 }
 
 export const deviceController = new DeviceController();

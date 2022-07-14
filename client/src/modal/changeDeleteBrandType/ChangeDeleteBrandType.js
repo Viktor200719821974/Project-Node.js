@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Button, Form, Modal} from "react-bootstrap";
-import {changeBrand} from "../http/brandApi";
-import {changeType} from "../http/typeApi";
+import {changeBrand} from "../../http/brandApi";
+import {changeType} from "../../http/typeApi";
 import ConfirmDelete from "./ConfirmDelete";
 
 const ChangeDeleteBrandType = ({show, onHide, id, name, type, setStatusResponse}) => {

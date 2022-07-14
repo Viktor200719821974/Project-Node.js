@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Modal} from "react-bootstrap";
-import useAuth from "../hook/useAuth";
-import TypeBrandCardAdmin from "../components/TypeBrandCardAdmin";
-import {getBrands} from "../http/brandApi";
+import useAuth from "../../hook/useAuth";
+import TypeBrandCardAdmin from "../../components/TypeBrandCardAdmin";
+import {getBrands} from "../../http/brandApi";
 
 const ChangeAndDeleteBrand = ({show, onHide}) => {
     const {brands, setBrands} = useAuth();

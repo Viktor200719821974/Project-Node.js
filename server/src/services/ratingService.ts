@@ -9,12 +9,19 @@ class RatingService {
         return model.RatingDevice.findAll({ where: { ratingId } });
     }
 
-    // eslint-disable-next-line max-len
-    async createRatingDevice(deviceId: number, rate: number, userId: number, comment: string, next: NextFunction) {
+    async createRatingDevice(
+        deviceId: number,
+        rate: number,
+        userId: number,
+        comment: string,
+        next: NextFunction,
+    ) {
         const rating = await RatingService._getErrorData(deviceId, next);
+        const userName = await model.User.findOne({ where: { id: userId } })
+            .then((data) => data?.name);
         const ratingId = rating?.get('id');
         const ratingDevice = await model.RatingDevice.create({
-            rate, ratingId, userId, comment,
+            rate, ratingId, userId, comment, userName,
         });
         const count = await model.RatingDevice.count({ where: { ratingId }, col: 'rate' });
         const sum = await model.RatingDevice.sum('rate', { where: { ratingId } });

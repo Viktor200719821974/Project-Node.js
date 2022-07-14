@@ -13,18 +13,18 @@ export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAt
     depth: number;
     // description: string;
 }
-export interface IDeviceImage {
-    id: number;
-    name: string;
-    color: string;
-    typeId: number;
-    brandId: number;
-    price: number;
-    width: number;
-    height: number;
-    depth: number;
-    imageDeviceAws: [];
-}
+// export interface IDeviceImage {
+//     id: number;
+//     name: string;
+//     color: string;
+//     typeId: number;
+//     brandId: number;
+//     price: number;
+//     width: number;
+//     height: number;
+//     depth: number;
+//     imageDeviceAws: [];
+// }
 export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;
     email: string;
@@ -139,3 +139,15 @@ export interface IDelivery
     comment?: string;
     orderId: number;
 }
+export interface IDeviceInfo {
+    id: number;
+    title: string;
+    description: string;
+    deviceId: number;
+}
+// export interface IRating
+//     extends Model<InferAttributes<IRating>, InferCreationAttributes<IRating>> {
+//     id: number;
+//     deviceId: number;
+//     averageRating: number;
+// }

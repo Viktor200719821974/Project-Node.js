@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Button, Dropdown, Form, Modal} from "react-bootstrap";
-import useAuth from "../hook/useAuth";
-import {updateDevice} from "../http/deviceApi";
+import useAuth from "../../hook/useAuth";
+import {updateDevice} from "../../http/deviceApi";
 
 const ChangeAllDevice = ({show, onHide, id, device, setStatusResponse}) => {
     const {types, brands} = useAuth();
