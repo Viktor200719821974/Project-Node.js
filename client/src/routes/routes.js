@@ -5,7 +5,7 @@ import {
     DEVICE_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
-    SHOP_ROUTE
+    SHOP_ROUTE, USER_BLOCKED_ADMIN_ROUTE
 } from "../utils/constans";
 import Basket from "../pages/Basket";
 import Auth from "../pages/Auth";
@@ -13,6 +13,7 @@ import DevicePage from "../pages/DevicePage";
 import Shop from "../pages/Shop";
 import ChangeAndDeleteDevice from "../pages/ChangeAndDeleteDevice";
 import DevicePageAdmin from "../pages/DevicePageAdmin";
+import BlockedAndUnblockedUser from "../pages/BlockedAndUnblockedUser";
 
 export const authRoutes = [
     {
@@ -30,6 +31,10 @@ export const authRoutes = [
     {
         path: DEVICE_CARD_ADMIN_ROUTE + '/:id',
         Component: DevicePageAdmin
+    },
+    {
+        path: USER_BLOCKED_ADMIN_ROUTE,
+        Component: BlockedAndUnblockedUser
     }
 ]
 export const publicRoutes = [

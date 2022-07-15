@@ -30,6 +30,22 @@ class RatingService {
         return ratingDevice;
     }
 
+    async updateRatingDevice(id: number, comment: string) {
+        await model.RatingDevice.update(
+            {
+                comment,
+            },
+            {
+                where: { id },
+            },
+        );
+        return model.RatingDevice.findByPk(id);
+    }
+
+    async deleteRatingDevice(id: number) {
+        return model.RatingDevice.destroy({ where: { id } });
+    }
+
     static async _getErrorData(deviceId: number, next: NextFunction) {
         const device = await model.Device.findOne({ where: { id: deviceId } });
         if (!device) {

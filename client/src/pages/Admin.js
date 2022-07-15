@@ -6,7 +6,7 @@ import CreateType from "../modal/CreateType";
 import CreateDevice from "../modal/CreateDevice";
 import ChangeAndDeleteBrand from "../modal/changeDeleteBrandType/ChangeAndDeleteBrand";
 import ChangeAndDeleteType from "../modal/changeDeleteBrandType/ChangeAndDeleteType";
-import {DEVICE_CARD_ADMIN_ROUTE} from "../utils/constans";
+import {DEVICE_CARD_ADMIN_ROUTE, USER_BLOCKED_ADMIN_ROUTE} from "../utils/constans";
 
 const Admin = () => {
     const history = useHistory();
@@ -15,6 +15,7 @@ const Admin = () => {
     const [changeAndDeleteTypeVisible, setChangeAndDeleteTypeVisible] = useState(false);
     const [typeVisible, setTypeVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
+    // const [userVisible, setUserVisible] = useState(false);
     return (
         <Container className={"d-flex flex-column"}>
           <Button
@@ -54,6 +55,13 @@ const Admin = () => {
             >
                 Змінити або видалити пристрій
             </Button>
+            <Button
+                variant={"primary"}
+                className={"mt-4 p-2"}
+                onClick={() => history.push(USER_BLOCKED_ADMIN_ROUTE)}
+            >
+                Заблокувати або розблокувати користувача
+            </Button>
             <CreateBrand
                 show={brandVisible}
                 onHide={() => setBrandVisible(false)}
@@ -74,6 +82,10 @@ const Admin = () => {
                 show={deviceVisible}
                 onHide={() => setDeviceVisible(false)}
             />
+            {/*<BlockedAndUnblockedUser*/}
+            {/*    show={userVisible}*/}
+            {/*    onHide={() => setUserVisible(false)}*/}
+            {/*/>*/}
         </Container>
     );
 };

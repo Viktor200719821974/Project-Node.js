@@ -1,10 +1,9 @@
-import { NextFunction, Response } from 'express';
-import { IRequestExtended } from '../../interfaces';
+import { NextFunction, Request, Response } from 'express';
 import { validators } from '../../validators/validators';
 import { ErrorHandler } from '../../error/errorHandler';
 
 class BrandValidate {
-    brand(req: IRequestExtended, res: Response, next: NextFunction) {
+    brand(req: Request, res: Response, next: NextFunction) {
         try {
             const { error } = validators.brand.validate(req.body);
             if (error) {

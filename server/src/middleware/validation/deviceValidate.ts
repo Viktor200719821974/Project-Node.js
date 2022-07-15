@@ -1,10 +1,9 @@
-import { NextFunction, Response } from 'express';
-import { IRequestExtended } from '../../interfaces';
+import { NextFunction, Response, Request } from 'express';
 import { ErrorHandler } from '../../error/errorHandler';
 import { validators } from '../../validators/validators';
 
 class DeviceValidate {
-    device(req: IRequestExtended, res: Response, next: NextFunction) {
+    device(req: Request, res: Response, next: NextFunction) {
         try {
             const { error } = validators.device.validate(req.body);
             if (error) {

@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import { ErrorHandler } from '../../error/errorHandler';
 import { validators } from '../../validators/validators';
+import { ErrorHandler } from '../../error/errorHandler';
 
-class TypeValidate {
-    type(req: Request, res: Response, next: NextFunction) {
+class DeviceInfoValidate {
+    deviceInfo(req: Request, res: Response, next: NextFunction) {
         try {
-            const { error } = validators.type.validate(req.body);
+            const { error } = validators.deviceInfo.validate(req.body);
             if (error) {
                 next(new ErrorHandler(error.details[0].message, 400));
             }
@@ -16,4 +16,4 @@ class TypeValidate {
     }
 }
 
-export const typeValidate = new TypeValidate();
+export const deviceInfoValidate = new DeviceInfoValidate();

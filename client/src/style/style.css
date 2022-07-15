@@ -209,3 +209,25 @@ body {
 .devicePage_div_sendComment{
     margin: 30px 10px 10px 10px;
 }
+.devicePage_div_text_noComment{
+    color: cornflowerblue;
+    font-size: 20px;
+    /*text-transform: uppercase;*/
+    margin-top: 20px;
+}
+.blockedAndUnlockedUser_main_div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /*width: 90%;*/
+    padding: 10px;
+}
+.blockedAndUnlockedUser_div_map{
+    /*border: solid 2px cornflowerblue;*/
+    background: cornflowerblue;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}

@@ -25,6 +25,27 @@ class RatingController {
             next(e);
         }
     }
+
+    async updateRatingDevice(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const { comment } = req.body;
+            const updateRating = await ratingService.updateRatingDevice(+id, comment);
+            res.json(updateRating);
+        } catch (e) {
+            next();
+        }
+    }
+
+    async deleteRatingDevice(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            await ratingService.deleteRatingDevice(+id);
+            res.json('Ok');
+        } catch (e) {
+            next();
+        }
+    }
 }
 
 export const ratingController = new RatingController();

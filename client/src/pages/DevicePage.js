@@ -8,10 +8,9 @@ import useAuth from "../hook/useAuth";
 import {FaStar} from "react-icons/fa";
 import RatingDevice from "../components/devices/RatingDevice";
 import {createRatingDeviceId, getRatingDeviceId} from "../http/ratingApi";
-import {observer} from "mobx-react-lite";
 import CommentDevice from "../components/comment/CommentDevice";
 
-const DevicePage = observer(() => {
+const DevicePage = () => {
     const [device, setDevice] = useState({info: [], imageDeviceAws: [],});
     const [image, setImage] = useState([]);
     const [rating, setRating] = useState([]);
@@ -21,6 +20,7 @@ const DevicePage = observer(() => {
     const [sendComment, setSendComment] = useState('');
     const [error, setError] = useState('');
     const [statusResponse, setStatusResponse] = useState(false);
+    const [response, setResponse] = useState(false);
     const {id} = useParams();
     const {setBasket, isLogin, types, brands} = useAuth();
     const type = types.filter(c => c.id === device.typeId).map(c => c.name);
@@ -51,8 +51,9 @@ const DevicePage = observer(() => {
                 if (data.id) {
                     setSendComment('');
                     setSendRating(0);
-                    setStatusResponse(true);
+                    setResponse(true);
                     setError('');
+                    setStatusResponse(true);
                 }
             }).catch(err => {
                 if (err.response) {
@@ -86,15 +87,21 @@ const DevicePage = observer(() => {
                if (data.length === 0){
                    setNoComment(true);
                }
+               if (data.length > 0){
+                   setNoComment(false);
+               }
             }).catch(err => {
                 if (err.response) {
                     setError(err.response.data.message);
                 }
             });
+            if (response){
+            setResponse(false);
+            }
         } catch (e) {
             setError(e.message);
         }
-    },[]);
+    },[response, noComment]);
     return (
         <Container className={"mt-3"}>
             {statusResponse && <Alert variant={'success'} style={{textAlign: 'center', fontSize: '20px'}}>
@@ -158,7 +165,9 @@ const DevicePage = observer(() => {
                 <Col md={5}>
                     <div className={'devicePage_main_div_comments'}>
                         {noComment ?
-                            <div>У цього пристрою відсутні коментарі</div>
+                            <div className={'devicePage_div_text_noComment'}>
+                                У цього пристрою відсутні коментарі
+                            </div>
                             :
                             <div>
                                 <h3>Коментарі:</h3>
@@ -167,6 +176,7 @@ const DevicePage = observer(() => {
                                         key={index}
                                         comment={c.comment}
                                         rate={c.rate}
+                                        userName={c.userName}
                                     />
                                 )}
                             </div>
@@ -197,6 +207,6 @@ const DevicePage = observer(() => {
             </Row>
         </Container>
     );
-});
+};
 
 export default DevicePage;

@@ -26,8 +26,6 @@ export const validators = {
             .messages({ 'any.only': 'Depth not valid, min 1' }),
         price: Joi.number().required().greater(0)
             .messages({ 'any.only': 'Price not valid, min 1' }),
-        // eslint-disable-next-line max-len
-        // description: Joi.string().required().messages({ 'any.only': 'Description is not valid' }),
         brandId: Joi.number().required().messages({ 'any.only': 'BrandId is not valid' }),
         typeId: Joi.number().required().messages({ 'any.only': 'TypeId is not valid' }),
         info: Joi.string(),
@@ -45,5 +43,9 @@ export const validators = {
         rate: Joi.number().required().messages({ 'any.only': 'Rate is not valid' }),
         comment: Joi.string().max(150).empty('')
             .messages({ 'any.only': 'Comment is not valid, max 150' }),
+    }),
+    deviceInfo: Joi.object({
+        title: Joi.string().max(30).messages({ 'any.only': 'Comment is not valid, max 30' }),
+        description: Joi.string().max(30).messages({ 'any.only': 'Comment is not valid, max 30' }),
     }),
 };

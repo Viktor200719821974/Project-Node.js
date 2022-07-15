@@ -1,10 +1,9 @@
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { validators } from '../../validators/validators';
-import { IRequestExtended } from '../../interfaces';
 import { ErrorHandler } from '../../error/errorHandler';
 
 class RatingValidate {
-    rating(req: IRequestExtended, res: Response, next: NextFunction) {
+    rating(req: Request, res: Response, next: NextFunction) {
         try {
             const { error } = validators.rating.validate(req.body);
             if (error) {

@@ -6,7 +6,7 @@ const ChangeInfoDevice = ({show, onHide, id, title, description, setStatusRespon
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
     const [error, setError] = useState('');
-    console.log(title, description);
+
     const changeInfo = () => {
         try {
             const formData = new FormData();

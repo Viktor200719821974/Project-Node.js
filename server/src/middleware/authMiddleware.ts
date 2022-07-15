@@ -97,6 +97,18 @@ class AuthMiddleware {
             next(e);
         }
     }
+
+    async superUser(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            const { user } = req;
+            if (!user?.is_superuser) {
+                next(new ErrorHandler('Forbidden', 403));
+            }
+            next();
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 export const authMiddleware = new AuthMiddleware();

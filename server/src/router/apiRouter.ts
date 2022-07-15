@@ -12,7 +12,7 @@ import { orderRouter } from './orderRouter';
 const router = Router();
 
 router.use('/auth', authRouter);
-router.use('/user', userRouter);
+router.use('/users', userRouter);
 router.use('/brand', brandRouter);
 router.use('/type', typeRouter);
 router.use('/device', deviceRouter);

@@ -53,6 +53,10 @@ class UserService {
     }
 
     async deleteUser(id:string) {
+        const tokenActivate = await model.TokenActivate.findOne({ where: { userId: id } });
+        if (tokenActivate) {
+            await model.TokenActivate.destroy({ where: { userId: id } });
+        }
         return model.User.destroy({ where: { id } });
     }
 
@@ -65,57 +69,30 @@ class UserService {
         }).then((data) => data);
     }
 
-    async userManager(id: number, email: string, next: NextFunction): Promise<IUser | null> {
-        const user = await model.User.findOne({ where: { email } });
-        if (user) {
-            const superuser = user.get('is_superuser');
-            if (!superuser) {
-                next(new ErrorHandler('Forbidden', 403));
-            }
-        }
-        model.User.update({ is_staff: true }, { where: { id } });
-        return model.User.findOne({ where: { id } });
+    async userManager(id: number): Promise<IUser | null> {
+        await model.User.update({ is_staff: true }, { where: { id } });
+        return model.User.findByPk(id);
     }
 
-    // eslint-disable-next-line max-len
-    async userIsNotManager(id: number, email: string, next: NextFunction): Promise<IUser | null> {
-        const user = await model.User.findOne({ where: { email } });
-        if (user) {
-            const superuser = user.get('is_superuser');
-            if (!superuser) {
-                next(new ErrorHandler('Forbidden', 403));
-            }
-        }
-        model.User.update({ is_staff: false }, { where: { id } });
-        return model.User.findOne({ where: { id } });
+    async userIsNotManager(id: number): Promise<IUser | null> {
+        await model.User.update({ is_staff: false }, { where: { id } });
+        return model.User.findByPk(id);
     }
 
-    async userBlocked(id: number, userEmail: string, next: NextFunction) {
-        const user = await model.User.findOne({ where: { email: userEmail } });
-        if (user) {
-            const manager = user.get('is_staff');
-            if (!manager) {
-                next(new ErrorHandler('Forbidden', 403));
-            }
-        }
+    async userBlocked(id: number): Promise<IUser | null> {
         // @ts-ignore
         const { email, name, surname } = await model.User.findOne({ where: { id } });
         await emailService.sendMail(email, 'ACCOUNT_BLOCKED', { userName: name, surname });
-        return model.User.update({ is_active: false }, { where: { id } });
+        await model.User.update({ is_active: false }, { where: { id } });
+        return model.User.findByPk(id);
     }
 
-    async userUnlocked(id: number, userEmail: string, next: NextFunction) {
-        const user = await model.User.findOne({ where: { email: userEmail } });
-        if (user) {
-            const manager = user.get('is_staff');
-            if (!manager) {
-                next(new ErrorHandler('Forbidden', 403));
-            }
-        }
+    async userUnlocked(id: number): Promise<IUser | null> {
         // @ts-ignore
         const { email, name, surname } = await model.User.findOne({ where: { id } });
         await emailService.sendMail(email, 'ACCOUNT_UNLOCKED', { userName: name, surname });
-        return model.User.update({ is_active: true }, { where: { id } });
+        await model.User.update({ is_active: true }, { where: { id } });
+        return model.User.findByPk(id);
     }
 
     async activateUser(activateToken: string, next: NextFunction) {

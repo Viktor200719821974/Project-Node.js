@@ -8,7 +8,7 @@ const router = Router();
 
 router.post('/', authMiddleware.checkAccessToken, authMiddleware.userStaff, brandValidate.brand, brandController.create);
 router.get('/', brandController.getAll);
-router.put('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, brandMiddleware.findBrand, brandController.updateBrand);
+router.put('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, brandMiddleware.findBrand, brandValidate.brand, brandController.updateBrand);
 router.delete('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, brandMiddleware.findBrand, brandController.deleteBrand);
 
 export const brandRouter = router;

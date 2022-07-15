@@ -7,6 +7,8 @@ import ChangeAllDevice from "../modal/changeDevice/ChangeAllDevice";
 import useAuth from "../hook/useAuth";
 import ChangeDeleteInfoDevice from "../modal/changeDevice/ChangeDeleteInfoDevice";
 import AddInfoDevice from "../modal/changeDevice/AddInfoDevice";
+import CommentDevice from "../components/comment/CommentDevice";
+import {getRatingDeviceId} from "../http/ratingApi";
 
 const DevicePageAdmin = () => {
     const {types, brands} = useAuth();
@@ -16,7 +18,8 @@ const DevicePageAdmin = () => {
     const [changeInfoDevice, setChangeInfoDevice] = useState(false);
     const [addInfoDevice, setAddInfoDevice] = useState(false);
     const [noInfo, setNoInfo] = useState(false);
-    // const [comment, setComment] = useState('');
+    const [noComment, setNoComment] = useState(false);
+    const [comment, setComment] = useState([]);
     const [error, setError] = useState('');
     const [statusResponse, setStatusResponse] = useState(false);
     const {id} = useParams();
@@ -32,6 +35,26 @@ const DevicePageAdmin = () => {
                 }
                 if (data.info.length > 0){
                     setNoInfo(true);
+                }
+            }).catch(err => {
+                if (err.response) {
+                    setError(err.response.data.message);
+                }
+            });
+            getRatingDeviceId(id).then(data => {
+                if (data) {
+                    setComment(data);
+                    setError('');
+                }
+                if (data.length === 0){
+                    setNoComment(true);
+                }
+                if (data.length > 0){
+                    setNoComment(false);
+                }
+            }).catch(err => {
+                if (err.response) {
+                    setError(err.response.data.message);
                 }
             });
             if (statusResponse){
@@ -116,6 +139,34 @@ const DevicePageAdmin = () => {
                             {info.title}: {info.description}
                         </Row>
                     )}
+                </Col>
+                <Col md={2}>
+
+                </Col>
+                <Col md={5}>
+                    <div className={'devicePage_main_div_comments'}>
+                        {noComment ?
+                            <div className={'devicePage_div_text_noComment'}>
+                                У цього пристрою відсутні коментарі
+                            </div>
+                            :
+                            <div>
+                                <h3>Коментарі:</h3>
+                                {comment && comment.map((c, index) =>
+                                    <CommentDevice
+                                        key={index}
+                                        comment={c.comment}
+                                        rate={c.rate}
+                                        userName={c.userName}
+                                        id={c.id}
+                                        deviceId={id}
+                                        setStatusResponse={setStatusResponse}
+                                        setError={setError}
+                                    />
+                                )}
+                            </div>
+                        }
+                    </div>
                 </Col>
             </Row>
         </Container>

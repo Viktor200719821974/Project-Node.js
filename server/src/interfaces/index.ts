@@ -145,9 +145,12 @@ export interface IDeviceInfo {
     description: string;
     deviceId: number;
 }
-// export interface IRating
-//     extends Model<InferAttributes<IRating>, InferCreationAttributes<IRating>> {
+// export interface IRatingDevice
+//     extends Model<InferAttributes<IRatingDevice>, InferCreationAttributes<IRatingDevice>> {
 //     id: number;
-//     deviceId: number;
-//     averageRating: number;
+//     userId: number;
+//     rate: number;
+//     comment: string;
+//     userName?: string;
+//     ratingId: number;
 // }

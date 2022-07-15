@@ -3,7 +3,8 @@ import { sequelize } from '../db';
 import {
     IBasket,
     IBasketDevice, IBrand, IDelivery,
-    IDevice, IImageDevice, IOrder, IOrderDevice, IToken, ITokenActivate, IType, IUser,
+    IDevice, IImageDevice, IOrder, IOrderDevice,
+    IToken, ITokenActivate, IType, IUser,
 } from '../interfaces';
 
 const User = sequelize.define<IUser>('user', {
@@ -71,6 +72,7 @@ const RatingDevice = sequelize.define('rating_device', {
     rate: { type: DataTypes.INTEGER, allowNull: false },
     comment: { type: DataTypes.STRING, allowNull: true },
     userName: { type: DataTypes.STRING, allowNull: false },
+    // ratingId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
 const DeviceInfo = sequelize.define('device_info', {

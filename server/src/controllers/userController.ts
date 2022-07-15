@@ -40,7 +40,7 @@ class UserController {
         try {
             const { id } = req.params;
             await userService.deleteUser(id);
-            res.status(204).end();
+            res.json('Ok');
         } catch (e) {
             next(e);
         }
@@ -48,11 +48,8 @@ class UserController {
 
     async userManager(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
-            // @ts-ignore
-            const { email } = req.user;
             const { id } = req.params;
-            await userService.userManager(Number(id), email, next);
-            const user = await userService.getOne(Number(id));
+            const user = await userService.userManager(+id);
             res.json(user);
         } catch (e) {
             next(e);
@@ -61,11 +58,8 @@ class UserController {
 
     async userIsNotManager(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
-            // @ts-ignore
-            const { email } = req.user;
             const { id } = req.params;
-            await userService.userIsNotManager(Number(id), email, next);
-            const user = await userService.getOne(Number(id));
+            const user = await userService.userIsNotManager(+id);
             res.json(user);
         } catch (e) {
             next(e);
@@ -74,11 +68,8 @@ class UserController {
 
     async userBlocked(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
-            // @ts-ignore
-            const { email } = req.user;
             const { id } = req.params;
-            await userService.userBlocked(Number(id), email, next);
-            const user = await userService.getOne(Number(id));
+            const user = await userService.userBlocked(+id);
             res.json(user);
         } catch (e) {
             next(e);
@@ -87,11 +78,8 @@ class UserController {
 
     async userUnlocked(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
-            // @ts-ignore
-            const { email } = req.user;
             const { id } = req.params;
-            await userService.userUnlocked(Number(id), email, next);
-            const user = await userService.getOne(Number(id));
+            const user = await userService.userUnlocked(+id);
             res.json(user);
         } catch (e) {
             next(e);

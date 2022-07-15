@@ -4,7 +4,6 @@ import {deleteType} from "../../http/typeApi";
 import {deleteBrand} from "../../http/brandApi";
 
 const ConfirmDelete = ({show, onHide, type, id, setStatusResponse}) => {
-    console.log(id);
     const del = () => {
         try {
             if (type === 'type'){
@@ -30,7 +29,6 @@ const ConfirmDelete = ({show, onHide, type, id, setStatusResponse}) => {
             show={show}
             onHide={onHide}
             size="lg"
-            // style={{width: '300px'}}
             centered
         >
 
