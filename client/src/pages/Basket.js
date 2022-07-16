@@ -4,11 +4,10 @@ import BasketComponent from "../components/basket/BasketComponent";
 import useAuth from "../hook/useAuth";
 import Delivery from "../components/basket/Delivery";
 import PayDevice from "../components/basket/PayDevice";
-import {Button, Table} from "react-bootstrap";
-// import TestComponent from "../components/basket/TestComponent";
+import {Button} from "react-bootstrap";
 
 const Basket = () => {
-    const [sum, setSum] = useState('');
+    const [sum, setSum] = useState();
     const [amountData, setAmountData] = useState();
     const [type, setType] = useState('');
     const [city, setCity] = useState('');
@@ -37,10 +36,10 @@ const Basket = () => {
         formData.append('comment', comment);
         formData.append('department', `${department}`);
         formData.append('typePay', typePay);
-        formData.append('', );
-        formData.append('', );
-        formData.append('', );
-        formData.append('', );
+        // formData.append('', );
+        // formData.append('', );
+        // formData.append('', );
+        // formData.append('', );
     }
 
     useEffect(() => {
@@ -109,24 +108,6 @@ const Basket = () => {
                     </div>
 
             </div>}
-            {/*<Table responsive>*/}
-            {/*    <thead>*/}
-            {/*    <tr>*/}
-            {/*        <th>#</th>*/}
-            {/*        <th>Продукт</th>*/}
-            {/*        <th>Кількість</th>*/}
-            {/*        <th>Вартість</th>*/}
-            {/*        <th>Дія</th>*/}
-            {/*    </tr>*/}
-            {/*    </thead>*/}
-            {/*    <tbody>*/}
-            {/*    { arr.map((c, index) => <TestComponent*/}
-            {/*        key={index}*/}
-            {/*        device={c}*/}
-            {/*        number={index + 1}*/}
-            {/*    />)}*/}
-            {/*    </tbody>*/}
-            {/*</Table>*/}
         </div>
     );
 };

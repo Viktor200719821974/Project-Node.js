@@ -22,19 +22,21 @@ const DeviceCardAdmin = ({device, type, image, brand, rating, setStatusResponse}
         });
     }
     return (
-        <Col md={3} className={"mt-3"} onClick={() => history.push(DEVICE_CARD_ADMIN_ROUTE + '/' + device.id)}>
+        <Col md={3} className={"mt-3"} >
             <Card style={{width: 202, cursor: 'pointer'}} border={"dark"}>
                 <Button variant={"outline-danger"}
                         onClick={del}><MdOutlineDeleteForever/>Видалити</Button>
-                <Image width={200} height={250} src={img[0] || noImage}/>
-                <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
-                    <div className={'deviceItem_div'}>{type} {brand}</div>
-                    <div className="d-flex align-items-center">
-                        <div>{rating}</div>
-                        <Image src={star} style={{width:18, height:18}}/>
+                <div onClick={() => history.push(DEVICE_CARD_ADMIN_ROUTE + '/' + device.id)}>
+                    <Image width={200} height={250} src={img[0] || noImage}/>
+                    <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
+                        <div className={'deviceItem_div'}>{type} {brand}</div>
+                        <div className="d-flex align-items-center">
+                            <div>{rating}</div>
+                            <Image src={star} style={{width:18, height:18}}/>
+                        </div>
                     </div>
+                    <div className={'deviceItem_div'}>Модель: {device.name}</div>
                 </div>
-                <div className={'deviceItem_div'}>Модель: {device.name}</div>
             </Card>
         </Col>
     );

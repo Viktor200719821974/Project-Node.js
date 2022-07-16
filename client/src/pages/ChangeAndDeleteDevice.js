@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Container, Form, Row} from "react-bootstrap";
-// import {observer} from "mobx-react-lite";
 import Pagination from "react-bootstrap/Pagination";
 import PaginationDevice from "../components/Pagination";
-// import {ImSearch} from "react-icons/im";
 import useAuth from "../hook/useAuth";
 import {getImageDevice} from "../http/imageDeviceApi";
 import DeviceCardAdmin from "../components/devices/DeviceCardAdmin";
@@ -62,13 +60,6 @@ const ChangeAndDeleteDevice =() => {
                             type="text"
                             placeholder={"Введіть модель..."}
                             onChange={(e) => setName(e.target.value)}/>
-                            {/*<Button*/}
-                            {/*    style={{margin: '4px'}}*/}
-                            {/*    variant={"outline-primary"}*/}
-                            {/*    onClick={search}*/}
-                            {/*>*/}
-                            {/*    <ImSearch/>*/}
-                            {/*</Button>*/}
                         </Form>
                     </Col>
                     <Col md={9}>

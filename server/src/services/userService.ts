@@ -1,18 +1,49 @@
 import bcrypt from 'bcrypt';
 import { NextFunction } from 'express';
-import { IUser } from '../interfaces';
+import { Op } from 'sequelize';
+import { IPaginationResponse, IUser } from '../interfaces';
 import { config } from '../config/config';
 import { model } from '../models/models';
 import { ErrorHandler } from '../error/errorHandler';
 import { emailService } from './emailService';
 
 class UserService {
-    async getAll(): Promise<IUser[]> {
-        return model.User.findAll({
-            attributes: {
-                exclude: ['password', 'createdAt', 'updatedAt'],
-            },
-        });
+    async getAll(page: number, offset: number, limit: number, email: string)
+        : Promise<IPaginationResponse<IUser>> {
+        let user;
+        if (email) {
+            user = await model.User.findAndCountAll({
+                attributes: {
+                    exclude: ['password', 'createdAt', 'updatedAt'],
+                },
+                limit,
+                offset,
+                order: [['id', 'DESC']],
+                where: {
+                    email: {
+                        [Op.like]: `%${email}%`,
+                    },
+                },
+            });
+        }
+        if (!email) {
+            user = await model.User.findAndCountAll({
+                attributes: {
+                    exclude: ['password', 'createdAt', 'updatedAt'],
+                },
+                limit,
+                offset,
+                order: [['id', 'DESC']],
+            });
+        }
+        // @ts-ignore
+        const { rows, count } = user;
+        return {
+            page,
+            perPage: limit,
+            rows,
+            count,
+        };
     }
 
     async getOne(id: number): Promise<IUser | null> {

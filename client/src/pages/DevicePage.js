@@ -159,10 +159,10 @@ const DevicePage = () => {
                         </Row>
                     )}
                 </Col>
-                <Col md={2}>
+                <Col md={3}>
 
                 </Col>
-                <Col md={5}>
+                <Col md={3}>
                     <div className={'devicePage_main_div_comments'}>
                         {noComment ?
                             <div className={'devicePage_div_text_noComment'}>

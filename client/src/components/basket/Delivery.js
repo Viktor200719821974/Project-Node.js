@@ -4,7 +4,6 @@ const Delivery = ({
                       setType, setCity, setStreet, setHouse, setRoom, setComment, setDepartment, type, city, street,
                       house, room, comment, department
                   }) => {
-
     return (
         <div>
             <form>
@@ -21,16 +20,16 @@ const Delivery = ({
                         <input type="radio"
                                id="deliveryChoice2"
                                name="delivery"
-                               value="Курєр"
+                               value="Кур'єр"
                                onChange={(e) => setType(e.target.value)}/>
                             <label htmlFor="deliveryChoice2" style={{marginRight: '10px'}}>Кур'єр</label>
 
                             <input type="radio"
                                    id="deliveryChoice3"
                                    name="delivery"
-                                   value="Нова Пошта"
+                                   value="НоваПошта"
                                    onChange={(e) => setType(e.target.value)}/>
-                                <label htmlFor="deliveryChoice3" style={{marginRight: '10px'}}>Нова Пошта</label>
+                                <label htmlFor="deliveryChoice3" style={{marginRight: '10px'}}>НоваПошта</label>
                     <input type="radio"
                            id="deliveryChoice4"
                            name="delivery"
@@ -46,7 +45,7 @@ const Delivery = ({
                             Нд. вихідний
                         </p>
                 </div>}
-                {type === 'Курєр' && <div style={{padding: '10px'}}>
+                {type === "Кур'єр" && <div style={{padding: '10px'}}>
                     <legend>Адреса доставки:</legend>
                     <input type="text"
                            value={city}
@@ -81,9 +80,9 @@ const Delivery = ({
                               rows="2"
                               value={comment}
                               onChange={(e) => setComment(e.target.value)}
-                              placeholder={'Коментар для курьєра'}/>
+                              placeholder={"Коментар для кур'єра"}/>
                 </div>}
-                {type === ('Нова Пошта' || 'УкрПошта') && <div style={{padding: '10px'}}>
+                {type === 'НоваПошта' && <div style={{padding: '10px'}}>
                     <legend>Адреса доставки:</legend>
                     <input type="text"
                            value={city}
@@ -99,22 +98,22 @@ const Delivery = ({
                            style={{marginBottom: '5px'}}
                     />
                 </div>}
-                {/*{type === 'УкрПошта' && <div style={{padding: '10px'}}>*/}
-                {/*    <legend>Адреса доставки:</legend>*/}
-                {/*    <input type="text"*/}
-                {/*           value={city}*/}
-                {/*           onChange={(e) => setCity(e.target.value)}*/}
-                {/*           placeholder={'Місто'}*/}
-                {/*           style={{marginBottom: '5px'}}*/}
-                {/*    />*/}
-                {/*    <br/>*/}
-                {/*    <input type="number"*/}
-                {/*           value={department}*/}
-                {/*           onChange={(e) => setDepartment(e.target.value)}*/}
-                {/*           placeholder={'Відділення №'}*/}
-                {/*           style={{marginBottom: '5px'}}*/}
-                {/*    />*/}
-                {/*</div>}*/}
+                {type === 'УкрПошта' && <div style={{padding: '10px'}}>
+                    <legend>Адреса доставки:</legend>
+                    <input type="text"
+                           value={city}
+                           onChange={(e) => setCity(e.target.value)}
+                           placeholder={'Місто'}
+                           style={{marginBottom: '5px'}}
+                    />
+                    <br/>
+                    <input type="number"
+                           value={department}
+                           onChange={(e) => setDepartment(e.target.value)}
+                           placeholder={'Відділення №'}
+                           style={{marginBottom: '5px'}}
+                    />
+                </div>}
             </form>
         </div>
     );

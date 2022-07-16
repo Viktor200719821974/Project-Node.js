@@ -6,7 +6,16 @@ import { ErrorHandler } from '../error/errorHandler';
 class UserController {
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const users = await userService.getAll();
+            const { email } = req.query;
+            let { limit, page } = req.query;
+            // @ts-ignore
+            page = +page || 1;
+            // @ts-ignore
+            limit = +limit || 12;
+            // @ts-ignore
+            const offset = page * limit - limit;
+            // @ts-ignore
+            const users = await userService.getAll(+page, offset, +limit, email);
             res.json(users);
             return;
         } catch (e) {

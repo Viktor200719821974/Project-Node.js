@@ -31,12 +31,12 @@ export const validators = {
         info: Joi.string(),
     }),
     type: Joi.object({
-        name: Joi.string().required().alphanum().min(2)
-            .messages({ 'any.only': 'Name is not valid, min 2, az, AZ and 0-9' }),
+        name: Joi.string().required().min(2)
+            .messages({ 'any.only': 'Name is not valid, min 2, az, AZ, ая, АЯ and 0-9' }),
     }),
     brand: Joi.object({
-        name: Joi.string().required().alphanum().min(2)
-            .messages({ 'any.only': 'Name is not valid, min 2, az, AZ and 0-9' }),
+        name: Joi.string().required().min(2)
+            .messages({ 'any.only': 'Name is not valid, min 2, az, AZ, ая, АЯ and 0-9' }),
     }),
     rating: Joi.object({
         deviceId: Joi.number().required().messages({ 'any.only': 'DeviceId is not valid' }),

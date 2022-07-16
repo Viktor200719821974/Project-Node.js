@@ -5,8 +5,8 @@ export const getUserId = async (accessToken) => {
        const {userId} = jwt_decode(accessToken);
     return await $authHost.get('/users/' + userId);
 }
-export const getUsers = async () => {
-    const {data} = await $authHost.get('/users');
+export const getUsers = async (page, email) => {
+    const {data} = await $authHost.get(`/users?page=${page}&email=${email}`);
     return data;
 }
 export const userManager = async (id) => {
