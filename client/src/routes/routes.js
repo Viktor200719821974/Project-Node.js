@@ -3,7 +3,7 @@ import {
     ADMIN_ROUTE,
     BASKET_ROUTE, DEVICE_CARD_ADMIN_ROUTE,
     DEVICE_ROUTE,
-    LOGIN_ROUTE,
+    LOGIN_ROUTE, REGISTER_ROUTE,
     REGISTRATION_ROUTE,
     SHOP_ROUTE, USER_BLOCKED_ADMIN_ROUTE
 } from "../utils/constans";
@@ -14,6 +14,7 @@ import Shop from "../pages/Shop";
 import ChangeAndDeleteDevice from "../pages/ChangeAndDeleteDevice";
 import DevicePageAdmin from "../pages/DevicePageAdmin";
 import BlockedAndUnblockedUser from "../pages/BlockedAndUnblockedUser";
+import Register from "../components/Register";
 
 export const authRoutes = [
     {
@@ -53,5 +54,9 @@ export const publicRoutes = [
     {
         path: DEVICE_ROUTE + '/:id',
         Component: DevicePage
+    },
+    {
+        path: REGISTER_ROUTE,
+        Component: Register
     }
 ]

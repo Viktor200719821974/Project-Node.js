@@ -1,9 +1,13 @@
-import {$authHost} from "./index";
+import {$authHost, $host} from "./index";
 import jwt_decode from "jwt-decode";
 
 export const getUserId = async (accessToken) => {
        const {userId} = jwt_decode(accessToken);
     return await $authHost.get('/users/' + userId);
+}
+export const activateAccount = async (token) => {
+    const {data} = await $host.get(`/users/activateUser/${token}`);
+    return data;
 }
 export const getUsers = async (page, email) => {
     const {data} = await $authHost.get(`/users?page=${page}&email=${email}`);

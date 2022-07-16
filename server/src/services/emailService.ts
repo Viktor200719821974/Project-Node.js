@@ -54,7 +54,10 @@ class EmailService {
             subject = emailInfo.ORDER_DEVICE.subject;
             templateName = emailInfo.ORDER_DEVICE.templateName;
         }
-        Object.assign(context, { frontendUrl: config.FRONTEND_URL, activateUrl: `${config.FRONTEND_URL}/api/user/activateUser/${token}` });
+        Object.assign(context, {
+            frontendUrl: config.FRONTEND_URL,
+            activateUrl: `${config.FRONTEND_URL}/register/activate/${token}`,
+        });
         const html = await this.templateRenderer.render(String(templateName), context);
         const emailTransporter = nodemailer.createTransport({
             service: 'gmail',

@@ -136,8 +136,6 @@ body {
     border-bottom: solid 2px #dee2e6;
 }
 .basket_div_div_total_amount{
-    /*border: solid 2px #dee2e6;*/
-    /*border-top: none;*/
     margin: 0 150px 10px 0;
     padding: 0 10px;
 }
@@ -212,22 +210,42 @@ body {
 .devicePage_div_text_noComment{
     color: cornflowerblue;
     font-size: 20px;
-    /*text-transform: uppercase;*/
     margin-top: 20px;
 }
 .blockedAndUnlockedUser_main_div{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /*width: 90%;*/
     padding: 10px;
 }
 .blockedAndUnlockedUser_div_map{
-    /*border: solid 2px cornflowerblue;*/
     background: #244c93;
     color: white;
     margin: 10px;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
+}
+.div_register{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-top: 170px;
+
+}
+.div_register_welcome{
+    color: #04fc0a;
+    text-shadow: 1px 0 1px #000,
+    0 1px 1px #000,
+    -1px 0 1px #000,
+    0 -1px 1px #000;
+}
+.div_register_error{
+    color: red;
+    text-shadow: 1px 0 1px #000,
+    0 1px 1px #000,
+    -1px 0 1px #000,
+    0 -1px 1px #000;
 }
