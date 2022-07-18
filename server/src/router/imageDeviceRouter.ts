@@ -7,6 +7,7 @@ const router = Router();
 router.get('/', imageDeviceController.getAllImage);
 router.get('/:id', imageDeviceController.getOneImage);
 // router.post('/addImage/:id', deviceMiddleware.findDevice, imageDeviceController.createImage);
-router.post('/addImageAws/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, deviceMiddleware.findDevice, imageDeviceController.createImageAws);
+router.post('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, deviceMiddleware.findDevice, imageDeviceController.createImageAws);
+router.delete('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, imageDeviceController.deleteImageAws);
 
 export const imageDeviceRouter = router;

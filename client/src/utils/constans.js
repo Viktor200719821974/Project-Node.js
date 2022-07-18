@@ -8,5 +8,5 @@ export const DEVICE_CARD_ADMIN_ROUTE = '/deviceCardAdmin';
 export const USER_BLOCKED_ADMIN_ROUTE = '/userBlocked';
 export const REGISTER_ROUTE = '/register/activate/:token';
 export const REACT_APP_API_URL = 'http://localhost:5500/api';
-export const IMAGE_DEVICE_ROUTE = '/imageDevice';
+// export const IMAGE_DEVICE_ROUTE = '/imageDevice';
 

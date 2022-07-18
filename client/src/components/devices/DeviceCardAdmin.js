@@ -25,7 +25,7 @@ const DeviceCardAdmin = ({device, type, image, brand, rating, setStatusResponse}
         <Col md={3} className={"mt-3"} >
             <Card style={{width: 202, cursor: 'pointer'}} border={"dark"}>
                 <Button variant={"outline-danger"}
-                        onClick={del}><MdOutlineDeleteForever/>Видалити</Button>
+                        onClick={del}><MdOutlineDeleteForever size={'25px'}/>Видалити</Button>
                 <div onClick={() => history.push(DEVICE_CARD_ADMIN_ROUTE + '/' + device.id)}>
                     <Image width={200} height={250} src={img[0] || noImage}/>
                     <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">

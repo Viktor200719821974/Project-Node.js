@@ -21,11 +21,15 @@ class AuthController {
         }
     }
 
-    async logout(req: IRequestExtended, res: Response): Promise<Response<string>> {
-        // @ts-ignore
-        const { id } = req.user;
-        await tokenService.deleteUserTokenPair(Number(id));
-        return res.json('Ok');
+    async logout(req: IRequestExtended, res: Response, next: NextFunction) {
+        try {
+            // @ts-ignore
+            const { id } = req.user;
+            await tokenService.deleteUserTokenPair(Number(id));
+            res.json('Ok');
+        } catch (e) {
+            next(e);
+        }
     }
 
     async login(req: Request, res: Response, next: NextFunction): Promise<void> {

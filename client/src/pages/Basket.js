@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import {Button} from "react-bootstrap";
 import '../style/style.css';
 import BasketComponent from "../components/basket/BasketComponent";
 import useAuth from "../hook/useAuth";
 import Delivery from "../components/basket/Delivery";
 import PayDevice from "../components/basket/PayDevice";
-import {Button} from "react-bootstrap";
+import {getImageDevice} from "../http/imageDeviceApi";
 
 const Basket = () => {
     const [sum, setSum] = useState();
@@ -17,6 +18,7 @@ const Basket = () => {
     const [comment, setComment] = useState('');
     const [department, setDepartment] = useState('');
     const [typePay, setTypePay] = useState('');
+    const [image, setImage] = useState([]);
     const {basket, devices, count} = useAuth();
 
     const deviceId = basket.map(c => c.deviceId);
@@ -24,6 +26,11 @@ const Basket = () => {
     for (let i = 0; i < deviceId.length; i++){
         const filter = devices.rows.filter(c => c.id === deviceId[i]);
         arr.push(filter);
+    }
+    const img = [];
+    for (let i = 0; i < deviceId.length; i++){
+        const filterImage = image.filter(c => c.deviceId === deviceId[i]);
+        img.push(filterImage);
     }
 
     const order = () => {
@@ -53,6 +60,7 @@ const Basket = () => {
             }
             setSum(num);
         }
+        getImageDevice().then(data => setImage(data));
     }, [basket]);
 
     return (
@@ -66,6 +74,7 @@ const Basket = () => {
                         key={index}
                         device={c}
                         number={index + 1}
+                        image={img}
                     />)}
                     <div className={'basket_div_total_amount'}>
                         <div className={'basket_div_div_total_amount'}>

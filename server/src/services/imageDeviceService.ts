@@ -51,14 +51,31 @@ class ImageDeviceService {
         });
     }
 
-    // eslint-disable-next-line max-len
-    async createImageAws(image: UploadedFile, id: number, next: NextFunction) : Promise<IImageDevice> {
+    async createImageAws(
+        image: UploadedFile,
+        id: number,
+        next: NextFunction,
+    ) : Promise<IImageDevice> {
         if (!image) {
             next(new ErrorHandler('Bad Request'));
         }
         const uploadImage = await s3Service.uploadFile(image, 'imageDevice', Number(id));
         // @ts-ignore
-        return model.ImageDeviceAws.create({ imageLocation: uploadImage?.Location, deviceId: id });
+        return model.ImageDeviceAws.create({
+            imageLocation: uploadImage?.Location,
+            deviceId: id,
+            key: uploadImage.Key,
+        });
+    }
+
+    async deleteImageAws(id: number, next: NextFunction) {
+        const key = await model.ImageDeviceAws.findOne({ where: { id } }).then((data) => data?.key);
+        if (key) {
+            await s3Service.deleteFile(key);
+        } else {
+            next(new ErrorHandler('Not found key image device', 404));
+        }
+        return model.ImageDeviceAws.destroy({ where: { key } });
     }
 }
 

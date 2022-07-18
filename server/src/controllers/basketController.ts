@@ -4,26 +4,38 @@ import { basketServices } from '../services/basketService';
 
 class BasketDeviceController {
     async createBasketDevice(req: IRequestExtended, res: Response, next: NextFunction) {
-        // @ts-ignore
-        const { id } = req.user;
-        const { deviceId } = req.params;
-        const basket = await basketServices.createBasketDevice(+deviceId, +id, next);
-        res.json(basket);
+        try {
+            // @ts-ignore
+            const { id } = req.user;
+            const { deviceId } = req.params;
+            const basket = await basketServices.createBasketDevice(+deviceId, +id, next);
+            res.json(basket);
+        } catch (e) {
+            next(e);
+        }
     }
 
     async getBasketDevice(req: IRequestExtended, res: Response, next: NextFunction) {
-        // @ts-ignore
-        const { id } = req.user;
-        const basketDevice = await basketServices.getBasketDevice(id);
-        res.json(basketDevice);
+        try {
+            // @ts-ignore
+            const { id } = req.user;
+            const basketDevice = await basketServices.getBasketDevice(id);
+            res.json(basketDevice);
+        } catch (e) {
+            next(e);
+        }
     }
 
     async deleteDeviceFromBasket(req: IRequestExtended, res: Response, next: NextFunction) {
-        const { deviceId } = req.params;
-        // @ts-ignore
-        const { id } = req.user;
-        await basketServices.deleteDeviceFromBasket(+deviceId, id);
-        res.json('Ok');
+        try {
+            const { deviceId } = req.params;
+            // @ts-ignore
+            const { id } = req.user;
+            await basketServices.deleteDeviceFromBasket(+deviceId, id);
+            res.json('Ok');
+        } catch (e) {
+            next(e);
+        }
     }
 
     async updateAmountDeviceBasket(req: IRequestExtended, res: Response, next: NextFunction) {

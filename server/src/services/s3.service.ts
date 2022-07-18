@@ -28,6 +28,14 @@ class S3Service {
             .promise(); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
+    deleteFile(key: string) {
+        this.Bucket.deleteObject({
+            Bucket: config.S3_NAME as string,
+            Key: key,
+        })
+            .promise().then((c) => c);
+    }
+
     private fileNameBuilder(fileName: string, type: string, id: number): string {
         const fileExtension = path.extname(fileName); // .png
         return `${type}/${id}/${uuidv4()}${fileExtension}`;

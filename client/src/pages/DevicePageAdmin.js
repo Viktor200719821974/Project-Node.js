@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {getOneDevice} from "../http/deviceApi";
-import {Alert, Button, Col, Container, Row} from "react-bootstrap";
+import {Alert, Button, Carousel, Col, Container, Image, Row} from "react-bootstrap";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
 import ChangeAllDevice from "../modal/changeDevice/ChangeAllDevice";
 import useAuth from "../hook/useAuth";
@@ -9,11 +9,14 @@ import ChangeDeleteInfoDevice from "../modal/changeDevice/ChangeDeleteInfoDevice
 import AddInfoDevice from "../modal/changeDevice/AddInfoDevice";
 import CommentDevice from "../components/comment/CommentDevice";
 import {getRatingDeviceId} from "../http/ratingApi";
+import AddImageDeviceModal from "../modal/imageDeviceModal/AddImageDeviceModal";
+import noImage from "../image/no_image.jpg";
 
 const DevicePageAdmin = () => {
     const {types, brands} = useAuth();
     const [device, setDevice] = useState({info: [], imageDeviceAws: [],});
     const [image, setImage] = useState([]);
+    const [addImageModal, setAddImageModal] = useState(false);
     const [changeAllDevice, setChangeAllDevice] = useState(false);
     const [changeInfoDevice, setChangeInfoDevice] = useState(false);
     const [addInfoDevice, setAddInfoDevice] = useState(false);
@@ -70,7 +73,16 @@ const DevicePageAdmin = () => {
             <Row>
                 <Col md={5}>
                     <div style={{margin: '10px 0 0 10px'}}>
-                        <ImageDevice image={image}/>
+                        {image.length > 0 ? <Carousel>
+                            {image.map(c => <Carousel.Item key={c.id} >
+                                <ImageDevice
+                                    image={c.imageLocation}
+                                    id={c.id}
+                                    setStatusResponse={setStatusResponse}
+                                    deviceId={id}
+                                />
+                            </Carousel.Item>)}
+                        </Carousel> : <Image width={300} height={300} src={noImage}/>}
                     </div>
                 </Col>
                 <Col md={3}>
@@ -103,6 +115,18 @@ const DevicePageAdmin = () => {
                                 show={changeInfoDevice}
                                 onHide={() => setChangeInfoDevice(false)}
                                 setStatusResponse={setStatusResponse}
+                            />
+                            <Button
+                                variant={"outline-primary"}
+                                onClick={() => setAddImageModal(true)}
+                            >
+                                Додати фото пристрою
+                            </Button>
+                            <AddImageDeviceModal
+                                show={addImageModal}
+                                onHide={()  => setAddImageModal(false)}
+                                setStatusResponse={setStatusResponse}
+                                id={id}
                             />
                         </Row>
                     <Row className={'devicePageAdmin_row_3'}>
@@ -144,26 +168,29 @@ const DevicePageAdmin = () => {
 
                 </Col>
                 <Col md={5}>
-                    <div className={'devicePage_main_div_comments'}>
+                    <div>
                         {noComment ?
                             <div className={'devicePage_div_text_noComment'}>
                                 У цього пристрою відсутні коментарі
                             </div>
                             :
                             <div>
-                                <h3>Коментарі:</h3>
-                                {comment && comment.map((c, index) =>
-                                    <CommentDevice
-                                        key={index}
-                                        comment={c.comment}
-                                        rate={c.rate}
-                                        userName={c.userName}
-                                        id={c.id}
-                                        deviceId={id}
-                                        setStatusResponse={setStatusResponse}
-                                        setError={setError}
-                                    />
-                                )}
+                                <h3 style={{margin: '10px'}}>Коментарі:</h3>
+                                <div className={'devicePage_div_comments'}>
+                                    {comment && comment.map((c, index) =>
+                                        <CommentDevice
+                                            key={index}
+                                            comment={c.comment}
+                                            rate={c.rate}
+                                            userName={c.userName}
+                                            id={c.id}
+                                            deviceId={id}
+                                            setStatusResponse={setStatusResponse}
+                                            setError={setError}
+                                        />
+                                    )}
+                                </div>
+
                             </div>
                         }
                     </div>

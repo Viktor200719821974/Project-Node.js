@@ -88,6 +88,7 @@ export interface IImageDevice
     extends Model<InferAttributes<IImageDevice>, InferCreationAttributes<IImageDevice>> {
     id: number;
     imageLocation: string;
+    key: string;
     deviceId: number;
 }
 export interface IPaginationResponse<T> {

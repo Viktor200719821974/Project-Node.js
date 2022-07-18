@@ -134,9 +134,6 @@ const CreateDevice = observer(({show, onHide}) => {
                 {statusResponse ? '* Пристрій був добавлений!!!' : 'Фото було добавлено!!!'}
             </Alert>}
             {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
-            {/*{(statusResponse || loadedImage) && <div className={'createDevice_div_successfully'}>*/}
-            {/*    {statusResponse ? '* Пристрій був добавлений!!!' : '* Фото було добавлено!!!'}*/}
-            {/*</div>}*/}
             <Modal.Body>
                 <Form>
                     <Dropdown className={"mt-2 mb-2"}>
@@ -231,19 +228,21 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Col>
                     </Row>
                     )}
-                    { isAuth &&
-                        <div className={'createDevice_div_addImage'}>
+                    { isAuth && <div className={'createDevice_div_addImage'}>
                          <Form.Control
                         className={"mt-3"}
                         type={"file"}
                         onChange={selectFile}
                     />
-                        <Button
-                            variant={"outline-success"}
-                            onClick={addImage}
-                            className={'createDevice_button_addImage'}>
-                            Додати фото
-                    </Button>
+                            <div className={'createDevice_button_addImage'}>
+                                <Button
+                                    variant={"outline-success"}
+                                    onClick={addImage}
+
+                                >
+                                    Додати фото
+                                </Button>
+                            </div>
                     </div>
                     }
 

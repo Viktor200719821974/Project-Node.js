@@ -112,6 +112,7 @@ const TokenActivate = sequelize.define<ITokenActivate>('token_activate', {
 const ImageDeviceAws = sequelize.define<IImageDevice>('imageDeviceAws', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     imageLocation: { type: DataTypes.STRING },
+    key: { type: DataTypes.STRING },
     deviceId: { type: DataTypes.INTEGER },
 }, { createdAt: false, updatedAt: false });
 

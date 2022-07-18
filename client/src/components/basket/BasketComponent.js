@@ -1,12 +1,17 @@
 import React from 'react';
-import {Button, Table} from "react-bootstrap";
+import {Button, Image, Table} from "react-bootstrap";
 import {MdDeleteForever} from "react-icons/md";
 import useAuth from "../../hook/useAuth";
 import {deleteDeviceFromBasket} from "../../http/basketApi";
 import AmountComponent from "./AmountComponent";
+import noImage from "../../image/no_image.jpg";
+import ImageBasketComponent from "./ImageBasketComponent";
 
-const BasketComponent = ({device, number}) => {
+const BasketComponent = ({device, number, image}) => {
     const {types, brands, setBasket, setAmount, basket} = useAuth();
+    const img = image.map(c => c.map(b => b.imageLocation)[0]);
+    console.log(img);
+    console.log(image);
     return (
         <div>
             <Table striped bordered hover>
@@ -22,11 +27,26 @@ const BasketComponent = ({device, number}) => {
                 <tbody>
             {device.map(c => <tr key={c.id}>
                     <td>{number}</td>
-                    <td>{types.filter(r => r.id === c.typeId).map(r => r.name)} {
-                        brands.filter(r => r.id === c.brandId).map(r => r.name)
-                    }
-                        <br/>
-                        {c.name}</td>
+                    <td style={{display: 'flex', alignItems: 'center'}}>
+                        {/*{image.map((b, index) =>*/}
+                        {/*    <ImageBasketComponent*/}
+                        {/*        image={image[0]}*/}
+                        {/*    />*/}
+                        <Image src={noImage} alt='' style={{width: '150px', height: 'auto', marginRight: '20px'}}/>
+                        <div>
+                            <div style={{display: 'flex'}}>
+                                <div style={{marginRight: '5px'}}>
+                                    {types.filter(r => r.id === c.typeId).map(r => r.name)}
+                                </div>
+                                <div>
+                                    {brands.filter(r => r.id === c.brandId).map(r => r.name)}
+                                </div>
+                            </div>
+                            <div>
+                                {c.name}
+                            </div>
+                        </div>
+                    </td>
                     <td>
                         {basket.filter(a => a.deviceId === c.id).map((a, index) =>
                             <AmountComponent

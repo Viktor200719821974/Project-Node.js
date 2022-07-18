@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Alert, Button, Card, Carousel, Col, Container, Image, Row} from "react-bootstrap";
 import {getOneDevice} from "../http/deviceApi";
 import {useParams} from "react-router-dom";
 import ImageDevice from "../components/devices/imageDevices/ImageDevice";
@@ -9,6 +9,7 @@ import {FaStar} from "react-icons/fa";
 import RatingDevice from "../components/devices/RatingDevice";
 import {createRatingDeviceId, getRatingDeviceId} from "../http/ratingApi";
 import CommentDevice from "../components/comment/CommentDevice";
+import noImage from "../image/no_image.jpg";
 
 const DevicePage = () => {
     const [device, setDevice] = useState({info: [], imageDeviceAws: [],});
@@ -109,8 +110,18 @@ const DevicePage = () => {
             </Alert>}
             {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
             <Row>
-                <Col md={5} style={{marginLeft: '10px'}}>
-                        <ImageDevice image={image}/>
+                <Col md={5}>
+                    <div style={{margin: '10px 0 0 10px'}}>
+                        {image.length > 0 ? <Carousel>
+                            {image.map(c => <Carousel.Item key={c.id} >
+                                <ImageDevice
+                                    image={c.imageLocation}
+                                    id={c.id}
+                                    setStatusResponse={setStatusResponse}
+                                />
+                            </Carousel.Item>)}
+                        </Carousel> : <Image width={300} height={300} src={noImage}/>}
+                    </div>
                 </Col>
                 <Col md={3}>
                 </Col>
@@ -163,22 +174,24 @@ const DevicePage = () => {
 
                 </Col>
                 <Col md={3}>
-                    <div className={'devicePage_main_div_comments'}>
+                    <div>
                         {noComment ?
                             <div className={'devicePage_div_text_noComment'}>
                                 У цього пристрою відсутні коментарі
                             </div>
                             :
                             <div>
-                                <h3>Коментарі:</h3>
-                                {comment && comment.map((c, index) =>
-                                    <CommentDevice
-                                        key={index}
-                                        comment={c.comment}
-                                        rate={c.rate}
-                                        userName={c.userName}
-                                    />
-                                )}
+                                <h3 style={{margin: '10px'}}>Коментарі:</h3>
+                                <div className={'devicePage_div_comments'}>
+                                    {comment && comment.map((c, index) =>
+                                        <CommentDevice
+                                            key={index}
+                                            comment={c.comment}
+                                            rate={c.rate}
+                                            userName={c.userName}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         }
                     </div>

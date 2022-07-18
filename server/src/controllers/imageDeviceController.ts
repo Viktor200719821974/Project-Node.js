@@ -52,6 +52,16 @@ class ImageDeviceController {
             next(e);
         }
     }
+
+    async deleteImageAws(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            await imageDeviceService.deleteImageAws(+id, next);
+            res.json('Ok');
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 export const imageDeviceController = new ImageDeviceController();
