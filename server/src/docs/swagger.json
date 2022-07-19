@@ -1,0 +1,1404 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "June-2021",
+    "description": "This documentation to site 'Buy yourself equipment'",
+    "version": "0.1",
+    "contact": {
+      "email": "antonov23334vik@gmail.com",
+      "name": "Viktor Myronenko"
+    }
+  },
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "description": "Login",
+        "operationId": "login",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "body",
+            "pattern": "email@email.com",
+            "description": "This is email",
+            "required": true,
+            "name": "email"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "pattern": "Hello_wOrLd",
+            "description": "This is password, minimum 8 symbols",
+            "required": true,
+            "name": "password"
+          }
+        ],
+        "responses": {
+          "200": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "refreshToken": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "description": "Successfully login response"
+              },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/registration": {
+      "post": {
+        "description": "Registration",
+        "operationId": "registration",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "body",
+            "pattern": "email@email.com",
+            "description": "This is email",
+            "required": true,
+            "name": "email"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "pattern": "Hello_wOrLd",
+            "description": "This is password, minimum 8 symbols",
+            "required": true,
+            "name": "password"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "pattern": "Viktor",
+            "description": "This is name, min 2, az, AZ and 0-9",
+            "required": true,
+            "name": "name"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "pattern": "Popov",
+            "description": "This is surname, min 2, az, AZ and 0-9",
+            "required": true,
+            "name": "surname"
+          },
+          {
+            "type": "integer",
+            "in": "body",
+            "description": "This is age, minimum 18",
+            "required": true,
+            "name": "age"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "description": "This is phone",
+            "required": true,
+            "name": "phone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "accessToken": {
+                  "type": "string"
+                },
+                "refreshToken": {
+                  "type": "string"
+                },
+                "activateToken": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "integer"
+                },
+                "userEmail": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successfully registration response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "description": "Logout",
+        "operationId": "logout",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "description": "Refresh Token",
+        "operationId": "refresh",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "accessToken": {
+                  "type": "string"
+                },
+                "refreshToken": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      },
+                      "is_staff": {
+                        "type": "boolean"
+                      },
+                      "is_superuser": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully refresh response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "description": "All users",
+        "operationId": "users",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "perPage": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      },
+                      "is_staff": {
+                        "type": "boolean"
+                      },
+                      "is_superuser": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully refresh response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "description": "UserId",
+        "operationId": "userId",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      },
+                      "is_staff": {
+                        "type": "boolean"
+                      },
+                      "is_superuser": {
+                        "type": "boolean"
+                      },
+                      "basket": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "userId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully userId response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/activateUser/{token}": {
+      "get": {
+        "description": "Activate user",
+        "operationId": "activateUser",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "User activate"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/userManager/{id}": {
+      "patch": {
+        "description": "User is manager ",
+        "operationId": "managerUser",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      },
+                      "is_staff": {
+                        "type": "boolean"
+                      },
+                      "is_superuser": {
+                        "type": "boolean"
+                      },
+                      "basket": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "userId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully user is manager response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/userIsNotManager/{id}": {
+      "patch": {
+        "description": "User is not manager",
+        "operationId": "userIsNotManager",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      },
+                      "is_staff": {
+                        "type": "boolean"
+                      },
+                      "is_superuser": {
+                        "type": "boolean"
+                      },
+                      "basket": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "userId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully user is not manager response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/userBlocked/{id}": {
+      "patch": {
+        "description": "User is block ",
+        "operationId": "userBlock",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      },
+                      "is_staff": {
+                        "type": "boolean"
+                      },
+                      "is_superuser": {
+                        "type": "boolean"
+                      },
+                      "basket": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "userId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully user is block response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/userUnlocked/{id}": {
+      "patch": {
+        "description": "User is unlock ",
+        "operationId": "userUnlock",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "age": {
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      },
+                      "is_staff": {
+                        "type": "boolean"
+                      },
+                      "is_superuser": {
+                        "type": "boolean"
+                      },
+                      "basket": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "userId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully user is unlock response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}/": {
+      "delete": {
+        "description": "Delete user",
+        "operationId": "deleteUser",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/brands": {
+      "get": {
+        "description": "All brands",
+        "operationId": "brands",
+        "tags": ["Brands"],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully all brands response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/brands/": {
+      "post": {
+        "description": "Create brand",
+        "operationId": "createBrand",
+        "tags": ["Brands"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
+            "required": true,
+            "name": "name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create brand response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/brands/{id}": {
+      "put": {
+        "description": "Change brand",
+        "operationId": "changeBrand",
+        "tags": ["Brands"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
+            "required": true,
+            "name": "name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully change brand response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/brands/{id}/": {
+      "delete": {
+        "description": "Delete brand",
+        "operationId": "deleteBrand",
+        "tags": ["Brands"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/types": {
+      "get": {
+        "description": "All types",
+        "operationId": "types",
+        "tags": ["Types"],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully all types response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/types/": {
+      "post": {
+        "description": "Create type",
+        "operationId": "createType",
+        "tags": ["Types"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
+            "required": true,
+            "name": "name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create type response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/types/{id}": {
+      "put": {
+        "description": "Change type",
+        "operationId": "changeType",
+        "tags": ["Types"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "type": "string",
+            "in": "body",
+            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
+            "required": true,
+            "name": "name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brands": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully change type response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/types/{id}/": {
+      "delete": {
+        "description": "Delete type",
+        "operationId": "deleteType",
+        "tags": ["Types"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/basket": {
+      "get": {
+        "description": "All basket device",
+        "operationId": "basketDevices",
+        "tags": ["Basket"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "basket": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "deviceId": {
+                        "type": "integer"
+                      },
+                      "basketId": {
+                        "type": "integer"
+                      },
+                      "amount": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully all basket devices response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/basket/{deviceId}": {
+      "post": {
+        "description": "Create basket device",
+        "operationId": "createBasketDevice",
+        "tags": ["Basket"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "name": "deviceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "basket": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "deviceId": {
+                        "type": "integer"
+                      },
+                      "basketId": {
+                        "type": "integer"
+                      },
+                      "amount": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create basket device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/basket/amount/{deviceId}": {
+      "patch": {
+        "description": "Change amount devices in the basket",
+        "operationId": "changeAmount",
+        "tags": ["Basket"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "type": "integer",
+            "in": "body",
+            "description": "This is amount",
+            "required": true,
+            "name": "amount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "basket": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "deviceId": {
+                        "type": "integer"
+                      },
+                      "basketId": {
+                        "type": "integer"
+                      },
+                      "amount": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully change amount devices response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/basket/{deviceId}/": {
+      "delete": {
+        "description": "Delete device from the basket",
+        "operationId": "deleteDeviceBasket",
+        "tags": ["Basket"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "errorResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string",
+          "example": "Something went wrong",
+          "description": "Standard error response"
+        }
+      }
+    }
+  }
+}

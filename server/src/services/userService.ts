@@ -71,17 +71,17 @@ class UserService {
         return user;
     }
 
-    async updateUser(id: string, user: IUser): Promise<IUser | null> {
-        await model.User.update(
-            {
-                ...user,
-            },
-            {
-                where: { id },
-            },
-        );
-        return model.User.findByPk(id);
-    }
+    // async updateUser(id: string, user: IUser): Promise<IUser | null> {
+    //     await model.User.update(
+    //         {
+    //             ...user,
+    //         },
+    //         {
+    //             where: { id },
+    //         },
+    //     );
+    //     return model.User.findByPk(id);
+    // }
 
     async deleteUser(id:string) {
         const tokenActivate = await model.TokenActivate.findOne({ where: { userId: id } });

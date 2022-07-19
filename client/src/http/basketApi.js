@@ -13,6 +13,6 @@ export const deleteDeviceFromBasket = async (id) => {
     return data;
 }
 export const updateDeviceAmountBasket = async (deviceId, amount) => {
-    const {data} = await $authHost.patch(`/basket/${deviceId}`, amount);
+    const {data} = await $authHost.patch(`/basket/amount/${deviceId}`, amount);
     return data;
 }

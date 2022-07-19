@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { userService } from '../services/userService';
-import { IRequestExtended, IUser } from '../interfaces';
+import { IRequestExtended } from '../interfaces';
 import { ErrorHandler } from '../error/errorHandler';
 
 class UserController {
@@ -34,16 +34,16 @@ class UserController {
         }
     }
 
-    async updateUser(req: Request, res: Response, next: NextFunction) {
-        try {
-            const { id } = req.params;
-            const user = req.body;
-            const updateUser = await userService.updateUser(id, user);
-            res.json(updateUser);
-        } catch (e) {
-            next(e);
-        }
-    }
+    // async updateUser(req: Request, res: Response, next: NextFunction) {
+    //     try {
+    //         const { id } = req.params;
+    //         const user = req.body;
+    //         const updateUser = await userService.updateUser(id, user);
+    //         res.json(updateUser);
+    //     } catch (e) {
+    //         next(e);
+    //     }
+    // }
 
     async deleteUser(req: Request, res: Response, next: NextFunction) {
         try {
@@ -108,14 +108,14 @@ class UserController {
         }
     }
 
-    async check(req:IRequestExtended, res: Response, next: NextFunction) {
-        try {
-            const user = req.user as IUser;
-            res.json(user);
-        } catch (e: any) {
-            next(e);
-        }
-    }
+    // async check(req:IRequestExtended, res: Response, next: NextFunction) {
+    //     try {
+    //         const user = req.user as IUser;
+    //         res.json(user);
+    //     } catch (e: any) {
+    //         next(e);
+    //     }
+    // }
 }
 
 export const userController = new UserController();

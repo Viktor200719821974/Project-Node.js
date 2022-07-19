@@ -74,7 +74,7 @@ const Basket = () => {
                         key={index}
                         device={c}
                         number={index + 1}
-                        image={img}
+                        image={img.map(b => b.map(a => a.imageLocation))}
                     />)}
                     <div className={'basket_div_total_amount'}>
                         <div className={'basket_div_div_total_amount'}>

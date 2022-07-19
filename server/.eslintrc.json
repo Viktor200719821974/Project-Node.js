@@ -21,7 +21,10 @@
             "error",
             {
                 "js": "never",
-                "ts": "never"
+                "ts": "never",
+                "jsx": "never",
+                "tsx": "never",
+                "json": "always"
             }
         ],
         //        "max-len": [ "warning", {"code": 140}],

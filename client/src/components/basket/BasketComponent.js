@@ -9,8 +9,8 @@ import ImageBasketComponent from "./ImageBasketComponent";
 
 const BasketComponent = ({device, number, image}) => {
     const {types, brands, setBasket, setAmount, basket} = useAuth();
-    const img = image.map(c => c.map(b => b.imageLocation)[0]);
-    console.log(img);
+    // const img = image.map(c => c.map(b => b.imageLocation)[0]);
+    // console.log(img);
     console.log(image);
     return (
         <div>
@@ -32,7 +32,8 @@ const BasketComponent = ({device, number, image}) => {
                         {/*    <ImageBasketComponent*/}
                         {/*        image={image[0]}*/}
                         {/*    />*/}
-                        <Image src={noImage} alt='' style={{width: '150px', height: 'auto', marginRight: '20px'}}/>
+                        {image.map((c, index) => <Image src={c[0] || noImage} alt='' key={index}
+                                          style={{width: '150px', height: 'auto', marginRight: '20px'}}/>)}
                         <div>
                             <div style={{display: 'flex'}}>
                                 <div style={{marginRight: '5px'}}>

@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import swaggerUi from 'swagger-ui-express';
+import docs from '../docs/swagger.json';
 import { userRouter } from './userRouter';
 import { brandRouter } from './brandRouter';
 import { typeRouter } from './typeRouter';
@@ -11,10 +13,11 @@ import { orderRouter } from './orderRouter';
 
 const router = Router();
 
+router.use('/docs', swaggerUi.serve, swaggerUi.setup(docs));
 router.use('/auth', authRouter);
 router.use('/users', userRouter);
-router.use('/brand', brandRouter);
-router.use('/type', typeRouter);
+router.use('/brands', brandRouter);
+router.use('/types', typeRouter);
 router.use('/device', deviceRouter);
 router.use('/imageDevice', imageDeviceRouter);
 router.use('/basket', basketRouter);
