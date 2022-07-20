@@ -5,7 +5,7 @@ import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 router.get('/', imageDeviceController.getAllImage);
-router.get('/:id', imageDeviceController.getOneImage);
+router.get('/:id', imageDeviceController.getImagesDevice);
 // router.post('/addImage/:id', deviceMiddleware.findDevice, imageDeviceController.createImage);
 router.post('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, deviceMiddleware.findDevice, imageDeviceController.createImageAws);
 router.delete('/:id', authMiddleware.checkAccessToken, authMiddleware.userStaff, imageDeviceController.deleteImageAws);

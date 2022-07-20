@@ -263,6 +263,18 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1005,7 +1017,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "brands": {
+                "types": {
                   "type": "array",
                   "items": {
                     "properties": {
@@ -1057,7 +1069,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "brands": {
+                "types": {
                   "type": "array",
                   "items": {
                     "properties": {
@@ -1115,7 +1127,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "brands": {
+                "type": {
                   "type": "array",
                   "items": {
                     "properties": {
@@ -1375,6 +1387,1383 @@
               "type": "string"
             },
             "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices": {
+      "get": {
+        "description": "All devices",
+        "operationId": "devices",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "perPage": {
+                  "type": "integer"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": "string"
+                      },
+                      "height": {
+                        "type": "string"
+                      },
+                      "depth": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "integer"
+                      },
+                      "typeId": {
+                        "type": "integer"
+                      },
+                      "brandId": {
+                        "type": "integer"
+                      },
+                      "rating": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "averageRating": {
+                              "type": "integer"
+                            },
+                            "deviceId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      },
+                      "imageDeviceAws": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "imageLocation": {
+                              "type": "string"
+                            },
+                            "key": {
+                              "type": "string"
+                            },
+                            "deviceId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully all devices response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/{deviceId}": {
+      "get": {
+        "description": "Device one",
+        "operationId": "device",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "device": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": "string"
+                      },
+                      "height": {
+                        "type": "string"
+                      },
+                      "depth": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "integer"
+                      },
+                      "typeId": {
+                        "type": "integer"
+                      },
+                      "brandId": {
+                        "type": "integer"
+                      },
+                      "rating": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "averageRating": {
+                              "type": "integer"
+                            },
+                            "deviceId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      },
+                      "imageDeviceAws": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "imageLocation": {
+                              "type": "string"
+                            },
+                            "key": {
+                              "type": "string"
+                            },
+                            "deviceId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully one device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/": {
+      "post": {
+        "description": "Create device",
+        "operationId": "createDevice",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "This is name, no space and min 2"
+          },
+          {
+            "name": "color",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "This is color, no space and min 2"
+          },
+          {
+            "name": "width",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "This is width, min 1"
+          },
+          {
+            "name": "height",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "This is height, min 1"
+          },
+          {
+            "name": "depth",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "This is depth, min 1"
+          },
+          {
+            "name": "price",
+            "in": "body",
+            "required": true,
+            "type": "integer",
+            "description": "This is price, min 1"
+          },
+          {
+            "name": "brandId",
+            "in": "body",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "typeId",
+            "in": "body",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "info",
+            "in": "body",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "title : description"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "device": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": "string"
+                      },
+                      "height": {
+                        "type": "string"
+                      },
+                      "depth": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "integer"
+                      },
+                      "typeId": {
+                        "type": "integer"
+                      },
+                      "brandId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/{id}": {
+      "patch": {
+        "description": "Change device",
+        "operationId": "changeDevice",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is name, no space and min 2"
+          },
+          {
+            "name": "color",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is color, no space and min 2"
+          },
+          {
+            "name": "width",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is width, min 1"
+          },
+          {
+            "name": "height",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is height, min 1"
+          },
+          {
+            "name": "depth",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is depth, min 1"
+          },
+          {
+            "name": "price",
+            "in": "body",
+            "required": false,
+            "type": "integer",
+            "description": "This is price, min 1"
+          },
+          {
+            "name": "brandId",
+            "in": "body",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "typeId",
+            "in": "body",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "device": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": "string"
+                      },
+                      "height": {
+                        "type": "string"
+                      },
+                      "depth": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "integer"
+                      },
+                      "typeId": {
+                        "type": "integer"
+                      },
+                      "brandId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully update device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/{id}/": {
+      "delete": {
+        "description": "Delete device",
+        "operationId": "deleteDevice",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/info/{id}": {
+      "post": {
+        "description": "Create device info",
+        "operationId": "createDeviceInfo",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "body",
+            "description": "This is title, max 30",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "body",
+            "description": "This is description, max 30",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "info": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create device info response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/info/{id}/": {
+      "patch": {
+        "description": "Change device info",
+        "operationId": "changeDeviceInfo",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "body",
+            "description": "This is title, max 30",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "body",
+            "description": "This is description, max 30",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "info": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully update device info response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/devices/info/{deviceId}/": {
+      "delete": {
+        "description": "Delete device info",
+        "operationId": "deleteDeviceInfo",
+        "tags": ["Devices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/imageDevice": {
+      "get": {
+        "description": "All images devices",
+        "operationId": "imagesDevices",
+        "tags": ["ImagesDevices"],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imageDeviceAws": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "imageLocation": {
+                        "type": "string"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "deviceId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully all devices response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/imageDevice/{deviceId}": {
+      "get": {
+        "description": "Images device",
+        "operationId": "imagesDevice",
+        "tags": ["ImagesDevices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imageDeviceAws": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "imageLocation": {
+                        "type": "string"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "deviceId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully images device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/imageDevice/{id}": {
+      "post": {
+        "description": "Create image device",
+        "operationId": "createImageDevice",
+        "tags": ["ImagesDevices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imageDeviceAws": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "imageLocation": {
+                        "type": "string"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "deviceId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/imageDevice/{deviceId}/": {
+      "delete": {
+        "description": "Delete image device",
+        "operationId": "deleteImageDevice",
+        "tags": ["ImagesDevices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/rating/": {
+      "get": {
+        "description": "Ratings device",
+        "operationId": "ratingsDevice",
+        "tags": ["RatingsCommentsDevices"],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ratings": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "comment": {
+                        "type": "string"
+                      },
+                      "userName": {
+                        "type": "string"
+                      },
+                      "userId": {
+                        "type": "integer"
+                      },
+                      " rate": {
+                        "type": "integer"
+                      },
+                      "ratingId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully all ratings device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/rating/{deviceId}": {
+      "post": {
+        "description": "Create rating device",
+        "operationId": "createRatingDevice",
+        "tags": ["RatingsCommentsDevices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "body",
+            "required": true,
+            "type": "integer",
+            "description": "This is deviceId"
+          },
+          {
+            "name": "rate",
+            "in": "body",
+            "required": true,
+            "type": "integer",
+            "description": "This is rate"
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is comment, max 150"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rating": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "comment": {
+                        "type": "string"
+                      },
+                      "userName": {
+                        "type": "string"
+                      },
+                      "userId": {
+                        "type": "integer"
+                      },
+                      " rate": {
+                        "type": "integer"
+                      },
+                      "ratingId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create rating device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/rating/{id}": {
+      "patch": {
+        "description": "Change rating device",
+        "operationId": "changeRatingDevice",
+        "tags": ["RatingsCommentsDevices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "This is comment, max 150"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rating": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "comment": {
+                        "type": "string"
+                      },
+                      "userName": {
+                        "type": "string"
+                      },
+                      "userId": {
+                        "type": "integer"
+                      },
+                      " rate": {
+                        "type": "integer"
+                      },
+                      "ratingId": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully update rating device response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/rating/{id}/": {
+      "delete": {
+        "description": "Delete rating device",
+        "operationId": "deleteRatingDevice",
+        "tags": ["RatingsCommentsDevices"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/order": {
+      "post": {
+        "description": "Create order",
+        "operationId": "createOrder",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "description": "This is type, default value: Самовивіз, Кур'єр, НоваПошта, УкрПошта"
+          },
+          {
+            "name": "city",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is city, if type (Кур'єр, НоваПошта, УкрПошта), min 2"
+          },
+          {
+            "name": "street",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is street, if type (Кур'єр), min 2"
+          },
+          {
+            "name": "house",
+            "in": "body",
+            "required": false,
+            "type": "integer",
+            "description": "This is house, if type (Кур'єр), min 1"
+          },
+          {
+            "name": "room",
+            "in": "body",
+            "required": false,
+            "type": "integer",
+            "description": "This is room, if type (Кур'єр), min 1 "
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "This is comment, if type (Кур'єр), max 150"
+          },
+          {
+            "name": "department",
+            "in": "body",
+            "required": false,
+            "type": "integer",
+            "description": "This is department, if type (НоваПошта, УкрПошта), min 1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "order": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "sumaOrder": {
+                        "type": "integer"
+                      },
+                      "userId": {
+                        "type": "integer"
+                      },
+                      "delivery": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "street": {
+                              "type": "string"
+                            },
+                            "house": {
+                              "type": "integer"
+                            },
+                            "room": {
+                              "type": "integer"
+                            },
+                            "department": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "orderDevice": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "deviceId": {
+                              "type": "integer"
+                            },
+                            "amountDevice": {
+                              "type": "integer"
+                            },
+                            "priceDevice": {
+                              "type": "integer"
+                            },
+                            "sumPriceDevice": {
+                              "type": "integer"
+                            },
+                            "orderId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully create order response"
+          },
+          "400": {
+            "description": "Unify error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/order/{id}": {
+      "get": {
+        "description": "Get order id",
+        "operationId": "getOrderId",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "pattern": "Bearer eyJhbGciOiJ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "order": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "sumaOrder": {
+                        "type": "integer"
+                      },
+                      "userId": {
+                        "type": "integer"
+                      },
+                      "delivery": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "street": {
+                              "type": "string"
+                            },
+                            "house": {
+                              "type": "integer"
+                            },
+                            "room": {
+                              "type": "integer"
+                            },
+                            "department": {
+                              "type": "integer"
+                            },
+                            "comment": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "orderDevice": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "deviceId": {
+                              "type": "integer"
+                            },
+                            "amountDevice": {
+                              "type": "integer"
+                            },
+                            "priceDevice": {
+                              "type": "integer"
+                            },
+                            "sumPriceDevice": {
+                              "type": "integer"
+                            },
+                            "orderId": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Successfully get order id response"
           },
           "400": {
             "description": "Unify error",

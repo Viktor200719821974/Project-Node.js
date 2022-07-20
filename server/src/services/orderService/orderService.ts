@@ -1,4 +1,3 @@
-// import { NextFunction } from 'express';
 import { model } from '../../models/models';
 import { orderDeliveryService } from './orderDeliveryService';
 import { orderDeviceService } from './orderDeviceService';
@@ -18,12 +17,11 @@ class OrderService {
         email: string,
         name: string,
         surname: string,
-        // next: NextFunction,
-    ): Promise<IOrder | null> {
+    ) : Promise<IOrder | null> {
         // @ts-ignore
         const order = await model.OrderUser.create({ userId }).then((data) => data);
         const orderId = order.id;
-        const delivery = await orderDeliveryService.createDelivery(
+        await orderDeliveryService.createDelivery(
             type,
             city,
             street,
@@ -31,12 +29,9 @@ class OrderService {
             room,
             comment,
             department,
-            // next,
             orderId,
         ).then((data) => data);
-        // @ts-ignore
-        const deliveryId = delivery.id;
-        const deviceOrder = await orderDeviceService.createOrderDevice(userId, +deliveryId, orderId)
+        const deviceOrder = await orderDeviceService.createOrderDevice(userId, orderId)
             .then((data) => data);
         const { sumaOrder, devices } = deviceOrder;
         const deviceId = devices.map((c) => c.id);
@@ -63,10 +58,7 @@ class OrderService {
         });
         const image = await model.ImageDeviceAws.findAll({ where: { deviceId } })
             .then((data) => data);
-        // const image = imageData.map((c) => c.imageLocation);
-        // if (image) {
-        //     console.log(image);
-        // }
+        // console.log(image);
         if (typeId.length > typeDevice.length) {
             typeDevice.push(typeDevice[0]);
         }
@@ -78,6 +70,7 @@ class OrderService {
         const typeJson = JSON.stringify(typeDevice);
         const brandJson = JSON.stringify(brand);
         const imageJson = JSON.stringify(image);
+        // console.log(imageJson);
         await emailService.sendMail(email, 'ORDER_DEVICE', {
             userName: name,
             surname,
@@ -88,10 +81,31 @@ class OrderService {
             brandJson,
             imageJson,
         });
-        return model.OrderUser.findOne({
+        const ordered = await model.OrderUser.findOne({
             where: { id: orderId },
-            // eslint-disable-next-line max-len
-            // include: [{ model: model.Delivery, as: 'delivery' }, { model: model.OrderDevice, as: 'deviceOrder' }],
+            include: [
+                { model: model.Delivery, as: 'delivery' },
+                { model: model.OrderDevice, as: 'orderDevice' },
+            ],
+        });
+        if (ordered) {
+            // eslint-disable-next-line no-plusplus
+            for (let i = 0; i < deviceId.length; i++) {
+                model.BasketDevice.destroy({
+                    where: { deviceId: deviceId[i] },
+                }).then((data) => data);
+            }
+        }
+        return ordered;
+    }
+
+    async getOrderId(id: number) : Promise<IOrder | null> {
+        return model.OrderUser.findOne({
+            where: { id },
+            include: [
+                { model: model.Delivery, as: 'delivery' },
+                { model: model.OrderDevice, as: 'orderDevice' },
+            ],
         });
     }
 }

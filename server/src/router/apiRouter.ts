@@ -18,7 +18,7 @@ router.use('/auth', authRouter);
 router.use('/users', userRouter);
 router.use('/brands', brandRouter);
 router.use('/types', typeRouter);
-router.use('/device', deviceRouter);
+router.use('/devices', deviceRouter);
 router.use('/imageDevice', imageDeviceRouter);
 router.use('/basket', basketRouter);
 router.use('/rating', ratingRouter);

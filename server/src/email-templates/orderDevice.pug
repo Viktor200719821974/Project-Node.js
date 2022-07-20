@@ -5,9 +5,9 @@ block content
     div#id8
         each item, index in JSON.parse(devicesJson)
             div#id9
-                //img( src=#{JSON.parse(imageJson).imageLocation} alt='device')
                 div
-                    img( src='https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-23.jpg' alt='device' style={width: '200px', height: 'auto'})
+                    //img( src='https://sep-202121.s3.amazonaws.com/imageDevice/1/09373d2c-c738-469e-9121-66c8bc1e64c3.webp' alt='Image device' style={width: '200px', height: 'auto'})
+                    img( src='https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-23.jpg' alt='Image device' style={width: '200px', height: 'auto'})
                 ul
                     li
                         | Тип: #{JSON.parse(typeJson)[index]}

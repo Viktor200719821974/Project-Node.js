@@ -138,7 +138,7 @@ const Delivery = sequelize.define<IDelivery>('delivery', {
     orderId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
-const OrderDevice = sequelize.define<IOrderDevice>('order_device', {
+const OrderDevice = sequelize.define<IOrderDevice>('orderDevice', {
     id: {
         type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true,
     },
@@ -146,7 +146,7 @@ const OrderDevice = sequelize.define<IOrderDevice>('order_device', {
     amountDevice: { type: DataTypes.INTEGER, allowNull: false },
     priceDevice: { type: DataTypes.INTEGER, allowNull: false },
     sumPriceDevice: { type: DataTypes.INTEGER, allowNull: false },
-    deliveryId: { type: DataTypes.INTEGER, allowNull: false },
+    // deliveryId: { type: DataTypes.INTEGER, allowNull: false },
     orderId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
@@ -192,7 +192,7 @@ ImageDeviceAws.belongsTo(Device);
 OrderUser.hasOne(Delivery);
 Delivery.belongsTo(OrderUser);
 
-OrderUser.hasMany(OrderDevice);
+OrderUser.hasMany(OrderDevice, { as: 'orderDevice' });
 OrderDevice.belongsTo(OrderUser);
 
 Type.belongsToMany(Brand, { through: TypeBrand });

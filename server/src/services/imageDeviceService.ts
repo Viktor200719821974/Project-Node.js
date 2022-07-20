@@ -42,12 +42,12 @@ class ImageDeviceService {
         });
     }
 
-    async getOneImage(id: number) {
+    async getImagesDevice(id: number) {
         return model.ImageDeviceAws.findAll({
             attributes: {
                 exclude: ['createdAt', 'updatedAt'],
             },
-            where: { id },
+            where: { deviceId: id },
         });
     }
 

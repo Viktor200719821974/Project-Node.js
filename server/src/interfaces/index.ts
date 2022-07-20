@@ -11,20 +11,7 @@ export interface IDevice extends Model<InferAttributes<IDevice>, InferCreationAt
     width: number;
     height: number;
     depth: number;
-    // description: string;
 }
-// export interface IDeviceImage {
-//     id: number;
-//     name: string;
-//     color: string;
-//     typeId: number;
-//     brandId: number;
-//     price: number;
-//     width: number;
-//     height: number;
-//     depth: number;
-//     imageDeviceAws: [];
-// }
 export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>>{
     id: number;
     email: string;
@@ -114,10 +101,6 @@ export interface IOrder extends Model<InferAttributes<IOrder>, InferCreationAttr
     sumaOrder?: number;
     userId: number;
 }
-export interface IOrderSendMail {
-    sumaOrder: number;
-    devices: IDevice[];
-}
 export interface IOrderDevice
     extends Model<InferAttributes<IOrderDevice>, InferCreationAttributes<IOrderDevice>> {
     id: number;
@@ -125,7 +108,6 @@ export interface IOrderDevice
     amountDevice: number;
     priceDevice: number;
     sumPriceDevice: number;
-    deliveryId: number;
     orderId: number;
 }
 export interface IDelivery
@@ -146,12 +128,3 @@ export interface IDeviceInfo {
     description: string;
     deviceId: number;
 }
-// export interface IRatingDevice
-//     extends Model<InferAttributes<IRatingDevice>, InferCreationAttributes<IRatingDevice>> {
-//     id: number;
-//     userId: number;
-//     rate: number;
-//     comment: string;
-//     userName?: string;
-//     ratingId: number;
-// }

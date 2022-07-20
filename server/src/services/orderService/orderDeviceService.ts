@@ -1,7 +1,7 @@
 import { model } from '../../models/models';
 
 class OrderDeviceService {
-    async createOrderDevice(userId: number, deliveryId: number, orderId: number) {
+    async createOrderDevice(userId: number, orderId: number) {
         const basketId = await model.Basket.findOne({ where: { userId } })
             .then((data) => data?.id);
         const devicesBasket = await model.BasketDevice.findAll({ where: { basketId } })
@@ -29,7 +29,6 @@ class OrderDeviceService {
                 priceDevice: price[i],
                 sumPriceDevice: price[i] * amount[i],
                 orderId,
-                deliveryId,
             }).then((data) => data);
         }
         const sumaOrder = price.reduce((r, a, i) => r + a * amount[i], 0);
