@@ -17,20 +17,12 @@
         "tags": ["Auth"],
         "parameters": [
           {
-            "type": "string",
             "in": "body",
-            "pattern": "email@email.com",
-            "description": "This is email",
-            "required": true,
-            "name": "email"
-          },
-          {
-            "type": "string",
-            "in": "body",
-            "pattern": "Hello_wOrLd",
-            "description": "This is password, minimum 8 symbols",
-            "required": true,
-            "name": "password"
+            "name": "login",
+            "description": "This is login",
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
           }
         ],
         "responses": {
@@ -64,50 +56,12 @@
         "tags": ["Auth"],
         "parameters": [
           {
-            "type": "string",
             "in": "body",
-            "pattern": "email@email.com",
-            "description": "This is email",
-            "required": true,
-            "name": "email"
-          },
-          {
-            "type": "string",
-            "in": "body",
-            "pattern": "Hello_wOrLd",
-            "description": "This is password, minimum 8 symbols",
-            "required": true,
-            "name": "password"
-          },
-          {
-            "type": "string",
-            "in": "body",
-            "pattern": "Viktor",
-            "description": "This is name, min 2, az, AZ and 0-9",
-            "required": true,
-            "name": "name"
-          },
-          {
-            "type": "string",
-            "in": "body",
-            "pattern": "Popov",
-            "description": "This is surname, min 2, az, AZ and 0-9",
-            "required": true,
-            "name": "surname"
-          },
-          {
-            "type": "integer",
-            "in": "body",
-            "description": "This is age, minimum 18",
-            "required": true,
-            "name": "age"
-          },
-          {
-            "type": "string",
-            "in": "body",
-            "description": "This is phone",
-            "required": true,
-            "name": "phone"
+            "name": "registration",
+            "description": "This is registration",
+            "schema": {
+              "$ref": "#/definitions/registration"
+            }
           }
         ],
         "responses": {
@@ -875,11 +829,12 @@
             "type": "string"
           },
           {
-            "type": "string",
             "in": "body",
-            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
-            "required": true,
-            "name": "name"
+            "name": "createBrand",
+            "description": "This is create brand",
+            "schema": {
+              "$ref": "#/definitions/createBrand"
+            }
           }
         ],
         "responses": {
@@ -933,11 +888,12 @@
             "type": "integer"
           },
           {
-            "type": "string",
             "in": "body",
-            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
-            "required": true,
-            "name": "name"
+            "name": "changeBrand",
+            "description": "This is change brand",
+            "schema": {
+              "$ref": "#/definitions/changeBrand"
+            }
           }
         ],
         "responses": {
@@ -1057,11 +1013,12 @@
             "type": "string"
           },
           {
-            "type": "string",
             "in": "body",
-            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
-            "required": true,
-            "name": "name"
+            "name": "createType",
+            "description": "This is create type",
+            "schema": {
+              "$ref": "#/definitions/createType"
+            }
           }
         ],
         "responses": {
@@ -1115,11 +1072,12 @@
             "type": "integer"
           },
           {
-            "type": "string",
             "in": "body",
-            "description": "This is name, min 2, az, AZ, ая, АЯ and 0-9",
-            "required": true,
-            "name": "name"
+            "name": "changeType",
+            "description": "This is change type",
+            "schema": {
+              "$ref": "#/definitions/changeType"
+            }
           }
         ],
         "responses": {
@@ -1317,11 +1275,12 @@
             "type": "integer"
           },
           {
-            "type": "integer",
             "in": "body",
-            "description": "This is amount",
-            "required": true,
-            "name": "amount"
+            "name": "changeAmountBasket",
+            "description": "This is change amount basket",
+            "schema": {
+              "$ref": "#/definitions/changeAmountBasket"
+            }
           }
         ],
         "responses": {
@@ -1641,67 +1600,11 @@
             "type": "string"
           },
           {
-            "name": "name",
             "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "This is name, no space and min 2"
-          },
-          {
-            "name": "color",
-            "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "This is color, no space and min 2"
-          },
-          {
-            "name": "width",
-            "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "This is width, min 1"
-          },
-          {
-            "name": "height",
-            "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "This is height, min 1"
-          },
-          {
-            "name": "depth",
-            "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "This is depth, min 1"
-          },
-          {
-            "name": "price",
-            "in": "body",
-            "required": true,
-            "type": "integer",
-            "description": "This is price, min 1"
-          },
-          {
-            "name": "brandId",
-            "in": "body",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "typeId",
-            "in": "body",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "info",
-            "in": "body",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "pattern": "title : description"
+            "name": "createDevice",
+            "description": "This is create device",
+            "schema": {
+              "$ref": "#/definitions/createDevice"
             }
           }
         ],
@@ -1771,58 +1674,12 @@
             "type": "string"
           },
           {
-            "name": "name",
             "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is name, no space and min 2"
-          },
-          {
-            "name": "color",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is color, no space and min 2"
-          },
-          {
-            "name": "width",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is width, min 1"
-          },
-          {
-            "name": "height",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is height, min 1"
-          },
-          {
-            "name": "depth",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is depth, min 1"
-          },
-          {
-            "name": "price",
-            "in": "body",
-            "required": false,
-            "type": "integer",
-            "description": "This is price, min 1"
-          },
-          {
-            "name": "brandId",
-            "in": "body",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "typeId",
-            "in": "body",
-            "required": false,
-            "type": "integer"
+            "name": "changeDevice",
+            "description": "This is change device",
+            "schema": {
+              "$ref": "#/definitions/changeDevice"
+            }
           }
         ],
         "responses": {
@@ -1933,18 +1790,12 @@
             "type": "string"
           },
           {
-            "name": "title",
             "in": "body",
-            "description": "This is title, max 30",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "description",
-            "in": "body",
-            "description": "This is description, max 30",
-            "required": true,
-            "type": "string"
+            "name": "createDeviceInfo",
+            "description": "This is create device info",
+            "schema": {
+              "$ref": "#/definitions/createDeviceInfo"
+            }
           }
         ],
         "responses": {
@@ -2001,18 +1852,12 @@
             "type": "string"
           },
           {
-            "name": "title",
             "in": "body",
-            "description": "This is title, max 30",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "description",
-            "in": "body",
-            "description": "This is description, max 30",
-            "required": false,
-            "type": "string"
+            "name": "changeDeviceInfo",
+            "description": "This is change device info",
+            "schema": {
+              "$ref": "#/definitions/changeDeviceInfo"
+            }
           }
         ],
         "responses": {
@@ -2353,25 +2198,12 @@
             "type": "string"
           },
           {
-            "name": "deviceId",
             "in": "body",
-            "required": true,
-            "type": "integer",
-            "description": "This is deviceId"
-          },
-          {
-            "name": "rate",
-            "in": "body",
-            "required": true,
-            "type": "integer",
-            "description": "This is rate"
-          },
-          {
-            "name": "comment",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is comment, max 150"
+            "name": "createRatingDevice",
+            "description": "This is create rating device",
+            "schema": {
+              "$ref": "#/definitions/createRatingDevice"
+            }
           }
         ],
         "responses": {
@@ -2431,11 +2263,12 @@
             "type": "string"
           },
           {
-            "name": "comment",
             "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "This is comment, max 150"
+            "name": "changeRatingDevice",
+            "description": "This is change rating device",
+            "schema": {
+              "$ref": "#/definitions/changeRatingDevice"
+            }
           }
         ],
         "responses": {
@@ -2525,53 +2358,12 @@
             "type": "string"
           },
           {
-            "name": "type",
             "in": "body",
-            "required": true,
-            "type": "string",
-            "description": "This is type, default value: Самовивіз, Кур'єр, НоваПошта, УкрПошта"
-          },
-          {
-            "name": "city",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is city, if type (Кур'єр, НоваПошта, УкрПошта), min 2"
-          },
-          {
-            "name": "street",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is street, if type (Кур'єр), min 2"
-          },
-          {
-            "name": "house",
-            "in": "body",
-            "required": false,
-            "type": "integer",
-            "description": "This is house, if type (Кур'єр), min 1"
-          },
-          {
-            "name": "room",
-            "in": "body",
-            "required": false,
-            "type": "integer",
-            "description": "This is room, if type (Кур'єр), min 1 "
-          },
-          {
-            "name": "comment",
-            "in": "body",
-            "required": false,
-            "type": "string",
-            "description": "This is comment, if type (Кур'єр), max 150"
-          },
-          {
-            "name": "department",
-            "in": "body",
-            "required": false,
-            "type": "integer",
-            "description": "This is department, if type (НоваПошта, УкрПошта), min 1"
+            "name": "order",
+            "description": "This is order",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
           }
         ],
         "responses": {
@@ -2786,6 +2578,269 @@
           "type": "string",
           "example": "Something went wrong",
           "description": "Standard error response"
+        }
+      }
+    },
+    "login": {
+      "type": "object",
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "pattern": "email@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "pattern": "This is password, minimum 8 symbols"
+        }
+      }
+    },
+    "registration": {
+      "type": "object",
+      "required": ["email", "password", "name", "surname", "age", "phone"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "pattern": "email@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "pattern": "This is password, minimum 8 symbols"
+        },
+        "name": {
+          "type": "string",
+          "pattern": " min 2, az, AZ and 0-9"
+        },
+        "surname": {
+          "type": "string",
+          "pattern": "min 2, az, AZ and 0-9"
+        },
+        "age": {
+          "type": "integer",
+          "pattern": "minimum 18"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "This is password, minimum 8 symbols"
+        }
+      }
+    },
+    "createBrand": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "min 2, az, AZ, ая, АЯ and 0-9"
+        }
+      }
+    },
+    "changeBrand": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "min 2, az, AZ, ая, АЯ and 0-9"
+        }
+      }
+    },
+    "createType": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "min 2, az, AZ, ая, АЯ and 0-9"
+        }
+      }
+    },
+    "changeType": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "min 2, az, AZ, ая, АЯ and 0-9"
+        }
+      }
+    },
+    "changeAmountBasket": {
+      "type": "object",
+      "required": ["amount"],
+      "properties": {
+        "amount": {
+          "type": "integer"
+        }
+      }
+    },
+    "createDevice": {
+      "type": "object",
+      "required": ["name", "color", "width", "height", "depth", "price", "brandId", "typeId"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "no space and min 2"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "no space and min 2"
+        },
+        "width": {
+          "type": "integer",
+          "pattern": " min 1"
+        },
+        "height": {
+          "type": "integer",
+          "pattern": "min 1"
+        },
+        "depth": {
+          "type": "integer",
+          "pattern": "min 1"
+        },
+        "price": {
+          "type": "integer",
+          "pattern": "min 1"
+        },
+        "brandId": {
+          "type": "integer"
+        },
+        "typeId": {
+          "type": "integer"
+        },
+        "info": {
+          "type": "array",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "changeDevice": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "no space and min 2"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "no space and min 2"
+        },
+        "width": {
+          "type": "integer",
+          "pattern": " min 1"
+        },
+        "height": {
+          "type": "integer",
+          "pattern": "min 1"
+        },
+        "depth": {
+          "type": "integer",
+          "pattern": "min 1"
+        },
+        "price": {
+          "type": "integer",
+          "pattern": "min 1"
+        },
+        "brandId": {
+          "type": "integer"
+        },
+        "typeI": {
+          "type": "integer"
+        }
+      }
+    },
+    "createDeviceInfo": {
+      "type": "object",
+      "required": ["title", "description"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "max 30"
+        },
+        "description": {
+          "type": "string",
+          "pattern": "max 30"
+        }
+      }
+    },
+    "changeDeviceInfo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "pattern": "max 30"
+        },
+        "description": {
+          "type": "string",
+          "pattern": "max 30"
+        }
+      }
+    },
+    "createRatingDevice": {
+      "type": "object",
+      "required": ["deviceId", "rate"],
+      "properties": {
+        "deviceId": {
+          "type": "integer"
+        },
+        "rate": {
+          "type": "integer",
+          "pattern": "max 5"
+        },
+        "comment": {
+          "type": "string",
+          "pattern": "max 150"
+        }
+      }
+    },
+    "changeRatingDevice": {
+      "type": "object",
+      "required": ["comment"],
+      "properties": {
+        "comment": {
+          "type": "string",
+          "pattern": "max 150"
+        }
+      }
+    },
+    "order": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "default value: Самовивіз, Кур'єр, НоваПошта, УкрПошта"
+        },
+        "city": {
+          "type": "string",
+          "pattern": "if type (Кур'єр, НоваПошта, УкрПошта), min 2"
+        },
+        "street": {
+          "type": "string",
+          "pattern": " if type (Кур'єр), min 2"
+        },
+        "house": {
+          "type": "integer",
+          "pattern": "if type (Кур'єр), min 1"
+        },
+        "room": {
+          "type": "integer",
+          "pattern": " if type (Кур'єр), min 1"
+        },
+        "comment": {
+          "type": "string",
+          "pattern": "if type (Кур'єр), max 150"
+        },
+        "department": {
+          "type": "integer",
+          "pattern": "if type (НоваПошта, УкрПошта), min 1"
         }
       }
     }

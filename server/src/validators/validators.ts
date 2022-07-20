@@ -40,7 +40,7 @@ export const validators = {
     }),
     rating: Joi.object({
         deviceId: Joi.number().required().messages({ 'any.only': 'DeviceId is not valid' }),
-        rate: Joi.number().required().messages({ 'any.only': 'Rate is not valid' }),
+        rate: Joi.number().required().max(5).messages({ 'any.only': 'Rate is not valid, max 5' }),
         comment: Joi.string().max(150).empty('')
             .messages({ 'any.only': 'Comment is not valid, max 150' }),
     }),
