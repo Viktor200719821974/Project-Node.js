@@ -1,17 +1,13 @@
 import React from 'react';
-import {Button, Image, Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import {MdDeleteForever} from "react-icons/md";
 import useAuth from "../../hook/useAuth";
 import {deleteDeviceFromBasket} from "../../http/basketApi";
 import AmountComponent from "./AmountComponent";
-import noImage from "../../image/no_image.jpg";
 import ImageBasketComponent from "./ImageBasketComponent";
 
-const BasketComponent = ({device, number, image}) => {
+const BasketComponent = ({device, number}) => {
     const {types, brands, setBasket, setAmount, basket} = useAuth();
-    // const img = image.map(c => c.map(b => b.imageLocation)[0]);
-    // console.log(img);
-    console.log(image);
     return (
         <div>
             <Table striped bordered hover>
@@ -28,12 +24,7 @@ const BasketComponent = ({device, number, image}) => {
             {device.map(c => <tr key={c.id}>
                     <td>{number}</td>
                     <td style={{display: 'flex', alignItems: 'center'}}>
-                        {/*{image.map((b, index) =>*/}
-                        {/*    <ImageBasketComponent*/}
-                        {/*        image={image[0]}*/}
-                        {/*    />*/}
-                        {image.map((c, index) => <Image src={c[0] || noImage} alt='' key={index}
-                                          style={{width: '150px', height: 'auto', marginRight: '20px'}}/>)}
+                            <ImageBasketComponent deviceId={c.id}/>
                         <div>
                             <div style={{display: 'flex'}}>
                                 <div style={{marginRight: '5px'}}>
@@ -53,20 +44,27 @@ const BasketComponent = ({device, number, image}) => {
                             <AmountComponent
                                 key={index}
                                 amount={a.amount}
-                                deviceId={a.deviceId}/>)}
+                                deviceId={a.deviceId}
+                            />
+                        )}
                     </td>
                     <td>
-                        {c.price * basket.filter(a => a.deviceId === c.id).map(c => c.amount)} грн.
+                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                            {c.price * basket.filter(a => a.deviceId === c.id).map(c => c.amount)} грн.
+                        </div>
                     </td>
                     <td>
+                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <Button
                             variant={'danger'}
                             onClick={() => deleteDeviceFromBasket(c.id).then(data => {
-                                setBasket();
-                                setAmount(1, c.id);
+                                if(data === 'Ok'){
+                                    setBasket();
+                                    setAmount(1, c.id);
+                                }
                             })}>
                             <MdDeleteForever/> Видалити
-                        </Button>
+                        </Button></div>
                     </td>
                 </tr>)}
                 </tbody>

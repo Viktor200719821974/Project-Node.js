@@ -17,9 +17,10 @@ class OrderService {
         email: string,
         name: string,
         surname: string,
+        typePay: string,
     ) : Promise<IOrder | null> {
         // @ts-ignore
-        const order = await model.OrderUser.create({ userId }).then((data) => data);
+        const order = await model.OrderUser.create({ userId, typePay }).then((data) => data);
         const orderId = order.id;
         await orderDeliveryService.createDelivery(
             type,
@@ -56,9 +57,20 @@ class OrderService {
             },
             where: { orderId },
         });
-        const image = await model.ImageDeviceAws.findAll({ where: { deviceId } })
+        const imageDeviceId = await model.ImageDeviceAws.findAll({ where: { deviceId } })
             .then((data) => data);
-        // console.log(image);
+        // const arr = imageDeviceId.filter((v, i, a) => a.indexOf(v) === i);
+        const arr: any[] = [];
+        // eslint-disable-next-line array-callback-return
+        imageDeviceId.filter((item) => {
+            const i = arr.findIndex((x) => (x.deviceId === item.deviceId));
+            if (i <= -1) {
+                arr.push(item);
+            }
+            return null;
+        });
+        const image = arr.map((c) => c.imageLocation);
+        console.log(image);
         if (typeId.length > typeDevice.length) {
             typeDevice.push(typeDevice[0]);
         }
@@ -88,14 +100,14 @@ class OrderService {
                 { model: model.OrderDevice, as: 'orderDevice' },
             ],
         });
-        if (ordered) {
-            // eslint-disable-next-line no-plusplus
-            for (let i = 0; i < deviceId.length; i++) {
-                model.BasketDevice.destroy({
-                    where: { deviceId: deviceId[i] },
-                }).then((data) => data);
-            }
-        }
+        // if (ordered) {
+        //     // eslint-disable-next-line no-plusplus
+        //     for (let i = 0; i < deviceId.length; i++) {
+        //         model.BasketDevice.destroy({
+        //             where: { deviceId: deviceId[i] },
+        //         }).then((data) => data);
+        //     }
+        // }
         return ordered;
     }
 

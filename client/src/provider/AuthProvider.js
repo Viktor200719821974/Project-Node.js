@@ -13,16 +13,16 @@ const AuthProvider = (props) => {
     const [selectedBrand, setSelectedBrandData] = useState(null);
     const [selectedType, setSelectedTypeData] = useState(null);
     const [basket, setBasketData] = useState([]);
-    const [count, setCount] = useState(0);
+    const [count, setCountData] = useState(0);
 
     const setBasket = useCallback(() => {
         getBasketDevice().then(value => {
             if (value.length > 0) {
                 setBasketData(value.sort((a, b) => a.id - b.id));
-                setCount(value.map(c => c.amount).reduce((result, number) => result + number));
+                setCountData(value.map(c => c.amount).reduce((result, number) => result + number));
             } else {
                 setBasketData([]);
-                setCount(0);
+                setCountData(0);
             }
         });
     },[]);
@@ -75,6 +75,10 @@ const AuthProvider = (props) => {
     const setSelectedType = useCallback((data) => {
         setSelectedTypeData(data);
     },[]);
+
+    const setCount = useCallback((data) => {
+        setCountData(data);
+    },[]);
     
     const logOut = useCallback(() => {
         setUser(null);
@@ -101,10 +105,11 @@ const AuthProvider = (props) => {
             count,
             setBasket,
             setAmount,
+            setCount,
         }),
         [
             basket, brands, count, devices, isLogin, logOut, selectedBrand, selectedType, setBrands, setDevices,
-            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user, setBasket, setAmount,
+            setIsAuth, setSelectedBrand, setSelectedType, setTypes, types, user, setBasket, setAmount, setCount,
         ]
     );
     return (

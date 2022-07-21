@@ -10,10 +10,17 @@ class OrderController {
                 id, email, name, surname,
             } = req.user as IUser;
             const {
-                type, city, street, house, room, comment, department,
+                type, city, street, house, room, comment, department, typePay,
             } = req.body;
-            if (type !== ('Самовивіз' || "Кур'єр" || 'НоваПошта' || 'УкрПошта')) {
-                next(new ErrorHandler("Тип доставки повинен бути такий: Самовивіз, Кур'єр, НоваПошта, УкрПошта"));
+            if (type !== 'Самовивіз') {
+                if (type !== "Кур'єр") {
+                    if (type !== 'НоваПошта') {
+                        if (type !== 'УкрПошта') {
+                            next(new ErrorHandler("Тип доставки повинен бути такий: Самовивіз, Кур'єр, НоваПошта, УкрПошта"));
+                            return;
+                        }
+                    }
+                }
             }
             const order = await orderService.createOrder(
                 id,
@@ -27,6 +34,7 @@ class OrderController {
                 email,
                 name,
                 surname,
+                typePay,
             );
             res.json(order);
         } catch (e) {

@@ -100,6 +100,7 @@ export interface IOrder extends Model<InferAttributes<IOrder>, InferCreationAttr
     id: number;
     sumaOrder?: number;
     userId: number;
+    typePay: string;
 }
 export interface IOrderDevice
     extends Model<InferAttributes<IOrderDevice>, InferCreationAttributes<IOrderDevice>> {

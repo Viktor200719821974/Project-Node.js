@@ -20,4 +20,5 @@ export const AuthContext = createContext({
     setSelectedBrand: () => {},
     setSelectedType: () => {},
     setBasket: () => {},
+    setCount: () => {},
 });

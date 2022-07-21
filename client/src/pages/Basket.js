@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Button} from "react-bootstrap";
+import {Alert, Button} from "react-bootstrap";
 import '../style/style.css';
 import BasketComponent from "../components/basket/BasketComponent";
 import useAuth from "../hook/useAuth";
 import Delivery from "../components/basket/Delivery";
 import PayDevice from "../components/basket/PayDevice";
 import {getImageDevice} from "../http/imageDeviceApi";
+import {orderDevice} from "../http/orderApi";
 
 const Basket = () => {
     const [sum, setSum] = useState();
@@ -19,9 +20,11 @@ const Basket = () => {
     const [department, setDepartment] = useState('');
     const [typePay, setTypePay] = useState('');
     const [image, setImage] = useState([]);
-    const {basket, devices, count} = useAuth();
+    const [error, setError] = useState('');
+    const {basket, devices, count, setCount} = useAuth();
 
     const deviceId = basket.map(c => c.deviceId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const arr = [];
     for (let i = 0; i < deviceId.length; i++){
         const filter = devices.rows.filter(c => c.id === deviceId[i]);
@@ -34,19 +37,34 @@ const Basket = () => {
     }
 
     const order = () => {
-        const formData = new FormData();
-        formData.append('type', type);
-        formData.append('city', city);
-        formData.append('street', street);
-        formData.append('house', `${house}`);
-        formData.append('room', `${room}`);
-        formData.append('comment', comment);
-        formData.append('department', `${department}`);
-        formData.append('typePay', typePay);
-        // formData.append('', );
-        // formData.append('', );
-        // formData.append('', );
-        // formData.append('', );
+        try {
+            const formData = new FormData();
+            formData.append('type', type);
+            if(type === "Кур'єр"){
+                formData.append('city', city);
+                formData.append('street', street);
+                formData.append('house', house);
+                formData.append('room', room);
+                formData.append('comment', comment);
+            }
+            if(type === 'УкрПошта'){
+                formData.append('city', city);
+                formData.append('department', department);
+            }
+            if(type === 'НоваПошта'){
+                formData.append('city', city);
+                formData.append('department', department);
+            }
+            formData.append('typePay', typePay);
+            orderDevice(formData).then(data => {
+                if(data){
+                    setCount(0);
+                    setError('');
+                }
+            }).catch(err => setError(err.response.data.message));
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     useEffect(() => {
@@ -61,10 +79,11 @@ const Basket = () => {
             setSum(num);
         }
         getImageDevice().then(data => setImage(data));
-    }, [basket]);
+    }, [arr, basket]);
 
     return (
         <div>
+            {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
             {count === 0
                 ?
                     <div className={'basket_div_noContent'}>ВАША КОРЗИНА ПОРОЖНЯ</div>

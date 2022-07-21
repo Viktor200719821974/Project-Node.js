@@ -72,7 +72,6 @@ const RatingDevice = sequelize.define('rating_device', {
     rate: { type: DataTypes.INTEGER, allowNull: false },
     comment: { type: DataTypes.STRING, allowNull: true },
     userName: { type: DataTypes.STRING, allowNull: false },
-    // ratingId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
 const DeviceInfo = sequelize.define('device_info', {
@@ -122,6 +121,7 @@ const OrderUser = sequelize.define<IOrder>('order', {
     },
     sumaOrder: { type: DataTypes.INTEGER, allowNull: true },
     userId: { type: DataTypes.INTEGER, allowNull: false },
+    typePay: { type: DataTypes.STRING, allowNull: false },
 });
 
 const Delivery = sequelize.define<IDelivery>('delivery', {
@@ -146,7 +146,6 @@ const OrderDevice = sequelize.define<IOrderDevice>('orderDevice', {
     amountDevice: { type: DataTypes.INTEGER, allowNull: false },
     priceDevice: { type: DataTypes.INTEGER, allowNull: false },
     sumPriceDevice: { type: DataTypes.INTEGER, allowNull: false },
-    // deliveryId: { type: DataTypes.INTEGER, allowNull: false },
     orderId: { type: DataTypes.INTEGER, allowNull: false },
 });
 

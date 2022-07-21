@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
-import path from 'path';
+// import path from 'path';
 // import bodyParser from 'body-parser';
 import { config } from './config/config';
 import { sequelize } from './db';
@@ -11,7 +11,8 @@ const app = express();
 // app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
-app.use('/static', express.static(path.resolve(__dirname, 'static')));
+// app.use('/static', express.static(path.resolve(__dirname, 'static')));
+app.use(express.static('static'));
 app.use(fileUpload());
 
 app.use('/api', apiRouter);

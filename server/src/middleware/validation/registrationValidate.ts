@@ -7,7 +7,7 @@ class RegistrationValidate {
         try {
             const { error } = validators.registration.validate(req.body);
             if (error) {
-                next(new ErrorHandler(error.details[0].message, 400));
+                next(new ErrorHandler(error.message, 400));
             }
             next();
         } catch (e) {

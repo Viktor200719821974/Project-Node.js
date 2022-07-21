@@ -7,7 +7,7 @@ class DeviceInfoValidate {
         try {
             const { error } = validators.deviceInfo.validate(req.body);
             if (error) {
-                next(new ErrorHandler(error.details[0].message, 400));
+                next(new ErrorHandler(error.message, 400));
             }
             next();
         } catch (e) {

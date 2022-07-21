@@ -106,9 +106,9 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Bearer eyJhbGciOiJ"
           }
         ],
         "responses": {
@@ -208,9 +208,9 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Bearer eyJhbGciOiJ"
           },
           {
             "name": "email",
@@ -298,7 +298,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -412,7 +412,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -497,7 +497,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -582,7 +582,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -667,7 +667,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -752,7 +752,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -824,7 +824,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -877,7 +877,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -936,7 +936,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1008,7 +1008,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1061,7 +1061,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1120,7 +1120,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1156,7 +1156,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           }
@@ -1207,7 +1207,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1264,7 +1264,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1329,7 +1329,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1595,7 +1595,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1669,7 +1669,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1743,7 +1743,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1779,7 +1779,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1841,7 +1841,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1903,7 +1903,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -1981,7 +1981,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -2038,7 +2038,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -2101,7 +2101,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -2193,7 +2193,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -2258,7 +2258,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -2323,7 +2323,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           }
@@ -2353,7 +2353,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -2465,7 +2465,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "pattern": "Bearer eyJhbGciOiJ",
+            "description": "Bearer eyJhbGciOiJ",
             "required": true,
             "type": "string"
           },
@@ -2812,7 +2812,7 @@
     },
     "order": {
       "type": "object",
-      "required": ["type"],
+      "required": ["type", "typePay"],
       "properties": {
         "type": {
           "type": "string",
@@ -2841,6 +2841,10 @@
         "department": {
           "type": "integer",
           "pattern": "if type (НоваПошта, УкрПошта), min 1"
+        },
+        "typePay": {
+          "type": "string",
+          "pattern": "Виберіть спосіб оплати, default value: Готівка або Банківський переказ"
         }
       }
     }
