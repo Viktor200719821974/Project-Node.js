@@ -3,13 +3,12 @@ block content
     div#id
         | Дякуємо за покупку на нашому сайті #{userName} #{surname}!!!!!!!
     div#id8
-
         each item, index in JSON.parse(devicesJson)
             div#id9
                 div
                     //img(src=require('/static/no_image.jpg'))
                     //img( src='#{imageJson[index]}' alt='Image device' style={width: '200px', height: 'auto'})
-                    img( src='https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-23.jpg' alt='Image device' style={width: '200px', height: 'auto'})
+                    img(src='https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-23.jpg' alt='Image device' style={width: '200px', height: 'auto'})
                 ul
                     li
                         | Тип: #{JSON.parse(typeJson)[index]}

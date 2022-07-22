@@ -1,7 +1,5 @@
-// import { NextFunction } from 'express';
 import { model } from '../../models/models';
 import { IDelivery } from '../../interfaces';
-// import { ErrorHandler } from '../error/errorHandler';
 
 class OrderDeliveryService {
     async createDelivery(
@@ -12,7 +10,6 @@ class OrderDeliveryService {
         room: number,
         comment: string,
         department: number,
-        // next: NextFunction,
         orderId: number,
     ): Promise<IDelivery | undefined> {
         let delivery;

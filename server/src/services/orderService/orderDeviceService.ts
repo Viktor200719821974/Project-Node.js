@@ -1,7 +1,11 @@
 import { model } from '../../models/models';
+import { IDevice } from '../../interfaces';
 
 class OrderDeviceService {
-    async createOrderDevice(userId: number, orderId: number) {
+    async createOrderDevice(
+        userId: number,
+        orderId: number,
+    ): Promise<{sumaOrder: number, devices: IDevice[]}> {
         const basketId = await model.Basket.findOne({ where: { userId } })
             .then((data) => data?.id);
         const devicesBasket = await model.BasketDevice.findAll({ where: { basketId } })

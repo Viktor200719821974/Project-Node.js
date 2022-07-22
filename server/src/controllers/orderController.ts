@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { IRequestExtended, IUser } from '../interfaces';
 import { orderService } from '../services/orderService/orderService';
 import { ErrorHandler } from '../error/errorHandler';
+import { orderDeliveryService } from '../services/orderService/orderDeliveryService';
+import { orderDeviceService } from '../services/orderService/orderDeviceService';
+import { orderEmailService } from '../services/orderService/orderEmailService';
 
 class OrderController {
     async createOrder(req: IRequestExtended, res: Response, next: NextFunction) {
@@ -22,20 +25,37 @@ class OrderController {
                     }
                 }
             }
-            const order = await orderService.createOrder(
-                id,
+            const orderId = await orderService.createOrder(id, typePay);
+            await orderDeliveryService.createDelivery(
                 type,
                 city,
                 street,
-                +house,
-                +room,
+                house,
+                room,
                 comment,
-                +department,
-                email,
+                department,
+                orderId,
+            ).then((data) => data);
+            const deviceOrder = await orderDeviceService.createOrderDevice(+id, orderId)
+                .then((data) => data);
+            const { sumaOrder, devices } = deviceOrder;
+            const deviceId = devices.map((c) => c.id);
+            await orderService.updateOrderDevice(sumaOrder, orderId);
+            const sendEmail = await orderEmailService.sendOrderEmail(
+                devices,
+                orderId,
                 name,
                 surname,
-                typePay,
-            );
+                sumaOrder,
+                email,
+                deviceId,
+                // eslint-disable-next-line no-console
+            ).catch(console.error);
+            if (!sendEmail) {
+                next(new ErrorHandler('Problems is send email', 404));
+                return;
+            }
+            const order = await orderService.deleteBasketDevice(orderId, deviceId);
             res.json(order);
         } catch (e) {
             next();
