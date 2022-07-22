@@ -57,12 +57,11 @@ class OrderService {
             },
             where: { orderId },
         });
-        const imageDeviceId = await model.ImageDeviceAws.findAll({ where: { deviceId } })
+        const imageDevice = await model.ImageDeviceAws.findAll({ where: { deviceId } })
             .then((data) => data);
-        // const arr = imageDeviceId.filter((v, i, a) => a.indexOf(v) === i);
         const arr: any[] = [];
         // eslint-disable-next-line array-callback-return
-        imageDeviceId.filter((item) => {
+        imageDevice.filter((item) => {
             const i = arr.findIndex((x) => (x.deviceId === item.deviceId));
             if (i <= -1) {
                 arr.push(item);
@@ -70,7 +69,6 @@ class OrderService {
             return null;
         });
         const image = arr.map((c) => c.imageLocation);
-        console.log(image);
         if (typeId.length > typeDevice.length) {
             typeDevice.push(typeDevice[0]);
         }
@@ -82,7 +80,6 @@ class OrderService {
         const typeJson = JSON.stringify(typeDevice);
         const brandJson = JSON.stringify(brand);
         const imageJson = JSON.stringify(image);
-        // console.log(imageJson);
         await emailService.sendMail(email, 'ORDER_DEVICE', {
             userName: name,
             surname,
@@ -100,14 +97,14 @@ class OrderService {
                 { model: model.OrderDevice, as: 'orderDevice' },
             ],
         });
-        // if (ordered) {
-        //     // eslint-disable-next-line no-plusplus
-        //     for (let i = 0; i < deviceId.length; i++) {
-        //         model.BasketDevice.destroy({
-        //             where: { deviceId: deviceId[i] },
-        //         }).then((data) => data);
-        //     }
-        // }
+        if (ordered) {
+            // eslint-disable-next-line no-plusplus
+            for (let i = 0; i < deviceId.length; i++) {
+                model.BasketDevice.destroy({
+                    where: { deviceId: deviceId[i] },
+                }).then((data) => data);
+            }
+        }
         return ordered;
     }
 
