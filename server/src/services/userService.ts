@@ -2,17 +2,18 @@ import bcrypt from 'bcrypt';
 import { NextFunction } from 'express';
 import { Op } from 'sequelize';
 import { IPaginationResponse, IUser } from '../interfaces';
-import { config } from '../config/config';
-import { model } from '../models/models';
+import { config } from '../constants/config';
+// import { model } from '../models/models';
 import { ErrorHandler } from '../error/errorHandler';
 import { emailService } from './emailService';
+import models from '../../models';
 
 class UserService {
     async getAll(page: number, offset: number, limit: number, email: string)
         : Promise<IPaginationResponse<IUser>> {
         let user;
         if (email) {
-            user = await model.User.findAndCountAll({
+            user = await models.User.findAndCountAll({
                 attributes: {
                     exclude: ['password', 'createdAt', 'updatedAt'],
                 },
@@ -27,7 +28,7 @@ class UserService {
             });
         }
         if (!email) {
-            user = await model.User.findAndCountAll({
+            user = await models.User.findAndCountAll({
                 attributes: {
                     exclude: ['password', 'createdAt', 'updatedAt'],
                 },
@@ -47,27 +48,27 @@ class UserService {
     }
 
     async getOne(id: number): Promise<IUser | null> {
-        return model.User.findOne({
+        return models.User.findOne({
             attributes: {
                 exclude: ['password', 'createdAt', 'updatedAt'],
             },
             where: { id },
-            include: [{ model: model.Basket, as: 'basket' }],
+            include: [{ model: models.Basket, as: 'basket' }],
         });
     }
 
     async createUser(user: IUser, next: NextFunction): Promise<IUser> {
         const { password, email } = user;
-        const userEmail = await model.User.findOne({ where: { email } });
+        const userEmail = await models.User.findOne({ where: { email } });
         if (userEmail) {
             next(new ErrorHandler(`User with email: ${email} already exists`));
         }
         const hashedPassword = await UserService._hashPassword(password);
-        const newUser = await model.User.create({ ...user, password: hashedPassword });
+        const newUser = await models.User.create({ ...user, password: hashedPassword });
         const { id } = newUser;
         Number(id);
         // @ts-ignore
-        await model.Basket.create({ userId: id });
+        await models.Basket.create({ userId: id });
         return user;
     }
 
@@ -83,57 +84,57 @@ class UserService {
     //     return model.User.findByPk(id);
     // }
 
-    async deleteUser(id:string) {
-        const tokenActivate = await model.TokenActivate.findOne({ where: { userId: id } });
+    async deleteUser(id:number) {
+        const tokenActivate = await models.TokenActivate.findOne({ where: { userId: id } });
         if (tokenActivate) {
-            await model.TokenActivate.destroy({ where: { userId: id } });
+            await models.TokenActivate.destroy({ where: { userId: id } });
         }
-        return model.User.destroy({ where: { id } });
+        return models.User.destroy({ where: { id } });
     }
 
     async getUserByEmail(email: string): Promise<IUser | null> {
-        return model.User.findOne({
+        return models.User.findOne({
             attributes: {
                 exclude: ['password', 'createdAt', 'updatedAt'],
             },
             where: { email },
-        }).then((data) => data);
+        });
     }
 
     async userManager(id: number): Promise<IUser | null> {
-        await model.User.update({ is_staff: true }, { where: { id } });
-        return model.User.findByPk(id);
+        await models.User.update({ is_staff: true }, { where: { id } });
+        return models.User.findByPk(id);
     }
 
     async userIsNotManager(id: number): Promise<IUser | null> {
-        await model.User.update({ is_staff: false }, { where: { id } });
-        return model.User.findByPk(id);
+        await models.User.update({ is_staff: false }, { where: { id } });
+        return models.User.findByPk(id);
     }
 
     async userBlocked(id: number): Promise<IUser | null> {
         // @ts-ignore
-        const { email, name, surname } = await model.User.findOne({ where: { id } });
+        const { email, name, surname } = await models.User.findOne({ where: { id } });
         await emailService.sendMail(email, 'ACCOUNT_BLOCKED', { userName: name, surname });
-        await model.User.update({ is_active: false }, { where: { id } });
-        return model.User.findByPk(id);
+        await models.User.update({ is_active: false }, { where: { id } });
+        return models.User.findByPk(id);
     }
 
     async userUnlocked(id: number): Promise<IUser | null> {
         // @ts-ignore
-        const { email, name, surname } = await model.User.findOne({ where: { id } });
+        const { email, name, surname } = await models.User.findOne({ where: { id } });
         await emailService.sendMail(email, 'ACCOUNT_UNLOCKED', { userName: name, surname });
-        await model.User.update({ is_active: true }, { where: { id } });
-        return model.User.findByPk(id);
+        await models.User.update({ is_active: true }, { where: { id } });
+        return models.User.findByPk(id);
     }
 
     async activateUser(activateToken: string, next: NextFunction) {
-        const token = await model.TokenActivate.findOne({ where: { activateToken } });
+        const token = await models.TokenActivate.findOne({ where: { activateToken } });
         if (!token) {
             next(new ErrorHandler('Not Found', 404));
         }
         const id = token?.userId;
-        await model.User.update({ is_active: true }, { where: { id } });
-        await model.TokenActivate.destroy({ where: { userId: id } });
+        await models.User.update({ is_active: true }, { where: { id } });
+        await models.TokenActivate.destroy({ where: { userId: id } });
     }
 
     private static async _hashPassword(password: string): Promise<string> {

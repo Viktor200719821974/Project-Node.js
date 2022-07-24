@@ -2,7 +2,7 @@ import S3, { ManagedUpload } from 'aws-sdk/clients/s3';
 import { UploadedFile } from 'express-fileupload';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import { config } from '../config/config';
+import { config } from '../../config/config';
 
 class S3Service {
     Bucket;

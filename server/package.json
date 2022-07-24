@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev_migrate": "tsnd --respawn app.ts",
     "start": "rimraf dist && copyfiles -f src/email-templates/*.* dist/email-templates/ && copyfiles -f src/docs/*.json dist/docs/ && tsc-watch --onSuccess && npm run dev",
-    "watch:server": "nodemon './src/app.ts' --watch './src'",
+    "watch:server": "nodemon 'app.ts' --watch './src'",
     "dev": "nodemon './src'",
     "lint": "eslint --cache --ext .js,.ts src",
     "lint:fix": "npm run lint -- --fix"
@@ -32,6 +33,7 @@
     "sequelize": "^6.19.0",
     "sequelize-cli": "^6.4.1",
     "swagger-ui-express": "^4.5.0",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.6.3",
     "uuid": "^8.3.2"
   },

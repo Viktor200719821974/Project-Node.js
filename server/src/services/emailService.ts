@@ -2,7 +2,7 @@ import nodemailer, { SentMessageInfo } from 'nodemailer';
 import path from 'path';
 import EmailTemplate from 'email-templates';
 import { google } from 'googleapis';
-import { config } from '../config/config';
+import { config } from '../../config/config';
 import { emailInfo } from '../constants';
 
 class EmailService {
