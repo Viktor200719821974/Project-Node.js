@@ -21,6 +21,7 @@ const { PORT } = config;
 
 const start = async () => {
     try {
+        console.log(process.env.DB_NAME);
         await sequelize.authenticate();
         await sequelize.sync();
         app.listen(PORT, () => {

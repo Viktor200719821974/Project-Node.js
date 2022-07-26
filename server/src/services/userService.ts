@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { NextFunction } from 'express';
 import { Op } from 'sequelize';
-import { IPaginationResponse, IUser } from '../interfaces';
+import {IPaginationResponse, ITokenActivate, IUser} from '../interfaces';
 import { config } from '../config/config';
 import { model } from '../models/models';
 import { ErrorHandler } from '../error/errorHandler';
@@ -127,13 +127,14 @@ class UserService {
     }
 
     async activateUser(activateToken: string, next: NextFunction) {
-        const token = await model.TokenActivate.findOne({ where: { activateToken } });
-        if (!token) {
+        const tokenUserId = await model.TokenActivate.findOne({ where: { activateToken } })
+            .then((data: ITokenActivate | null) => data?.userId);
+        if (!tokenUserId) {
             next(new ErrorHandler('Not Found', 404));
         }
-        const id = token?.userId;
-        await model.User.update({ is_active: true }, { where: { id } });
-        await model.TokenActivate.destroy({ where: { userId: id } });
+        // const id = token?.userId;
+        await model.User.update({ is_active: true }, { where: { id: tokenUserId } });
+        await model.TokenActivate.destroy({ where: { userId: tokenUserId } });
     }
 
     private static async _hashPassword(password: string): Promise<string> {

@@ -158,7 +158,7 @@ OrderUser.belongsTo(User);
 User.hasOne(Token);
 Token.belongsTo(User);
 
-User.hasOne(Token);
+User.hasOne(TokenActivate);
 TokenActivate.belongsTo(User);
 
 Basket.hasMany(BasketDevice);
