@@ -1,14 +1,15 @@
 import { Sequelize } from 'sequelize';
-import { config } from './config/config';
+import { constants } from './constants';
+// import { config } from './config/config';
 
 export const sequelize = new Sequelize(
-    config.DB_NAME!,
-    config.DB_USER!,
-    config.DB_PASSWORD,
+    constants.POSTGRES_DB,
+    constants.POSTGRES_USER,
+    constants.POSTGRES_PASSWORD,
     {
         dialect: 'postgres',
-        host: config.DB_HOST,
-        port: Number(config.DB_PORT),
+        host: constants.POSTGRES_HOST,
+        port: constants.POSTGRES_PORT,
     },
 );
 // export function DeviceFactory(newSequelize: Sequelize): DeviceNewStatic {
