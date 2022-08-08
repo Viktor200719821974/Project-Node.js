@@ -93,9 +93,6 @@ const DevicePage = () => {
                if (data.length > 0){
                    setNoComment(false);
                }
-               if (data.map(c => (c.comment).map(a => a === ''))) {
-                   console.log("ok");
-               }
             }).catch(err => {
                 if (err.response) {
                     setError(err.response.data.message);

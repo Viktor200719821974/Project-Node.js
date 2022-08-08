@@ -45,7 +45,10 @@ class DeviceService {
             devices = await model.Device.findAndCountAll({
                 limit,
                 offset,
-                include: [{ model: model.Rating, as: 'rating' }, { model: model.ImageDeviceAws, as: 'imageDeviceAws' }],
+                include: [
+                    { model: model.Rating, as: 'rating' },
+                    // { model: model.ImageDeviceAws, as: 'imageDeviceAws' }
+                ],
                 order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
@@ -54,7 +57,10 @@ class DeviceService {
                 where: { brandId },
                 limit,
                 offset,
-                include: [{ model: model.Rating, as: 'rating' }, { model: model.ImageDeviceAws, as: 'imageDeviceAws' }],
+                include: [
+                    { model: model.Rating, as: 'rating' },
+                    // { model: model.ImageDeviceAws, as: 'imageDeviceAws' }
+                ],
                 order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
@@ -63,7 +69,10 @@ class DeviceService {
                 where: { typeId },
                 limit,
                 offset,
-                include: [{ model: model.Rating, as: 'rating' }, { model: model.ImageDeviceAws, as: 'imageDeviceAws' }],
+                include: [
+                    { model: model.Rating, as: 'rating' },
+                    // { model: model.ImageDeviceAws, as: 'imageDeviceAws' }
+                ],
                 order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
@@ -72,7 +81,10 @@ class DeviceService {
                 where: { brandId, typeId },
                 limit,
                 offset,
-                include: [{ model: model.Rating, as: 'rating' }, { model: model.ImageDeviceAws, as: 'imageDeviceAws' }],
+                include: [
+                    { model: model.Rating, as: 'rating' },
+                    // { model: model.ImageDeviceAws, as: 'imageDeviceAws' }
+                ],
                 order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
@@ -85,12 +97,16 @@ class DeviceService {
                 },
                 limit,
                 offset,
-                include: [{ model: model.Rating, as: 'rating' }, { model: model.ImageDeviceAws, as: 'imageDeviceAws' }],
+                include: [
+                    { model: model.Rating, as: 'rating' },
+                    // { model: model.ImageDeviceAws, as: 'imageDeviceAws' }
+                ],
                 order: [[{ model: model.Rating, as: 'rating' }, 'averageRating', 'DESC']],
             });
         }
         // @ts-ignore
         const { rows, count } = devices;
+        // const count = await model.Device.count({ col: 'name' });
         return {
             page,
             perPage: limit,

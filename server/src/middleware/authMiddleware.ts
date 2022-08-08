@@ -39,13 +39,16 @@ class AuthMiddleware {
         try {
             const { email, password } = req.body;
             const user = await model.User.findOne({ where: { email } });
+            console.log(user);
             if (!user) {
                 next(new ErrorHandler('Bad email or password'));
                 return;
             }
             const userPassword = user.get('password');
+            console.log(userPassword);
             if (typeof userPassword === 'string') {
                 const comparePassword = bcrypt.compareSync(password, userPassword);
+                console.log(comparePassword);
                 if (!comparePassword) {
                     next(new ErrorHandler('Bad email or password'));
                     return;

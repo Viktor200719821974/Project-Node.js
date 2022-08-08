@@ -44,6 +44,7 @@ const AuthProvider = (props) => {
                 }
             });
         }
+        // eslint-disable-next-line
     }, []);
 
     const setAmount = useCallback((amount, deviceId) => {
@@ -54,6 +55,7 @@ const AuthProvider = (props) => {
                 setBasket();
             }
         })
+        // eslint-disable-next-line
     }, []);
 
     const setDevices = useCallback((data) => {

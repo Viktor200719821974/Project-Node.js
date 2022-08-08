@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="docker working">
+      <change beforePath="$PROJECT_DIR$/.env.-db" beforeDir="false" afterPath="$PROJECT_DIR$/.env.-db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/comment/CommentDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/comment/CommentDevice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/devices/DeviceItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/DeviceItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/http/authApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/http/authApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/CreateDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/CreateDevice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/ChangeAndDeleteDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/ChangeAndDeleteDevice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/DevicePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/DevicePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/provider/AuthProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/provider/AuthProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/middleware/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/middleware/authMiddleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/deviceService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/deviceService.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2CObr3M9qkkJ5jwR69UBfBZ1gG6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/viktor/.nvm/versions/node/v16.16.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;/home/viktor/.nvm/versions/node/v16.16.0/bin/npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/viktor/WebstormProjects/Project-Node.js/server/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="SwaggerCodegen">
+      <option name="activeConfigurationType" value="FILE" />
+      <option name="configurationPath" value="" />
+      <option name="customJreEnabled" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="enableDebugLogging" value="false" />
+      <option name="generateToPath" value="$PROJECT_DIR$/gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
+      <option name="jdkPath" value="" />
+      <option name="language" value="java" />
+      <option name="specificationPath" value="$PROJECT_DIR$/server/src/docs/swagger.json" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="" />
+      <created>1658676780762</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1658676780762</updated>
+      <workItem from="1658676785797" duration="467000" />
+      <workItem from="1658677549880" duration="2606000" />
+      <workItem from="1658852765940" duration="1618000" />
+      <workItem from="1658854752047" duration="2969000" />
+      <workItem from="1658858948460" duration="6664000" />
+      <workItem from="1658919028720" duration="1247000" />
+      <workItem from="1658930949572" duration="23510000" />
+      <workItem from="1659001011355" duration="2951000" />
+      <workItem from="1659035566349" duration="1632000" />
+      <workItem from="1659089430330" duration="5472000" />
+      <workItem from="1659180045171" duration="15944000" />
+      <workItem from="1659199485359" duration="8675000" />
+      <workItem from="1659210111099" duration="1434000" />
+      <workItem from="1659213402929" duration="6237000" />
+      <workItem from="1659267212981" duration="21675000" />
+      <workItem from="1659875399351" duration="787000" />
+      <workItem from="1659879258916" duration="13745000" />
+      <workItem from="1659896658748" duration="9519000" />
+      <workItem from="1659913136802" duration="4323000" />
+      <workItem from="1659958158317" duration="10191000" />
+      <workItem from="1659978049379" duration="15140000" />
+      <workItem from="1659997152721" duration="1185000" />
+    </task>
+    <task id="LOCAL-00001" summary="new linux system">
+      <created>1658873037157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658873037199</updated>
+    </task>
+    <task id="LOCAL-00002" summary="docker">
+      <created>1658959116998</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1658959116998</updated>
+    </task>
+    <task id="LOCAL-00003" summary="docker">
+      <created>1658959168003</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1658959168003</updated>
+    </task>
+    <task id="LOCAL-00004" summary="docker working">
+      <created>1659983744089</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659983744089</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="new linux system" />
+    <MESSAGE value="docker" />
+    <MESSAGE value="docker working" />
+    <option name="LAST_COMMIT_MESSAGE" value="docker working" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

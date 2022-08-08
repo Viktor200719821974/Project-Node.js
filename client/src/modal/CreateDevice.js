@@ -33,6 +33,7 @@ const CreateDevice = observer(({show, onHide}) => {
         }catch (e) {
             console.log(e.message);
         }
+        // eslint-disable-next-line
     }, []);
 
     const addInfo = () => {

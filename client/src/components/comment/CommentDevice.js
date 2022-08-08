@@ -30,6 +30,7 @@ const CommentDevice = ({comment, rate, userName, id, deviceId, setStatusResponse
         if (history.location.pathname === `/deviceCardAdmin/${deviceId}`){
             setAdmin(true);
         }
+        // eslint-disable-next-line
     },[admin]);
 
     return (

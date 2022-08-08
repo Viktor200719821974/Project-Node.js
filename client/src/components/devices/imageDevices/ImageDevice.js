@@ -8,7 +8,7 @@ const ImageDevice = ({image, id, setStatusResponse, deviceId}) => {
         <>
             <Image
                 width={300}
-                height={300}
+                height={'auto'}
                 className="d-block w-100"
                 style={{cursor: 'pointer'}}
                 src={image}

@@ -39,6 +39,9 @@ const ChangeAndDeleteDevice =() => {
                 if (countPage && countPage < page){
                     setPage(1);
                 }
+                if (data.count === 0) {
+                    setCountPage(0);
+                }
             }).catch(err => {
                     if (err.response) {
                         alert(err.response.data.message);
@@ -50,6 +53,7 @@ const ChangeAndDeleteDevice =() => {
         } catch (e) {
             alert(e.message);
         }
+        // eslint-disable-next-line
     }, [page, countPage, statusResponse, name]);
     return (
             <Container className={'shop_container'}>
@@ -62,6 +66,10 @@ const ChangeAndDeleteDevice =() => {
                             onChange={(e) => setName(e.target.value)}/>
                         </Form>
                     </Col>
+                    {devices.rows.length === 0
+                        ?
+                        <div style={{fontSize: '36px', display: 'flex', justifyContent: 'center', color: 'blue'}}>Not Found</div>
+                        :
                     <Col md={9}>
                         <Row className={"d-flex"}>
                         { devices && devices.rows.map((device) =>
@@ -77,6 +85,7 @@ const ChangeAndDeleteDevice =() => {
                         )}
                         </Row>
                     </Col>
+                    }
                     {
                         countPage > 1 && <div className={'shop_div_paginationDevice'}>
                             <Pagination>

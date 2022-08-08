@@ -19,6 +19,7 @@ const App = observer(() => {
             console.log(e);
         }
         setLoading(false);
+        // eslint-disable-next-line
     },[]);
     if (loading){
         return <Spinner animation={"grow"}/>

@@ -1,4 +1,4 @@
-import {$authHost, $host, $refreshHost} from "./index";
+import {$authHost, $host} from "./index";
 
 export const registration = async (email, password, name, surname, age, phone) => {
     const {data} = await $host.post('/auth/registration', {email, password, name, surname, age, phone});

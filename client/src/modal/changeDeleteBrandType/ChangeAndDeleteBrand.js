@@ -21,6 +21,7 @@ const ChangeAndDeleteBrand = ({show, onHide}) => {
             });
             setStatusResponse(false);
         }
+        // eslint-disable-next-line
     },[statusResponse]);
     return (
         <Modal
