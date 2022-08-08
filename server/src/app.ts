@@ -21,13 +21,15 @@ const { PORT } = config;
 
 const start = async () => {
     try {
-        console.log(process.env.DB_NAME);
-        await sequelize.authenticate();
+        // console.log(process.env.POSTGRES_DB);
+        // console.log(process.env.POSTGRES_PASSWORD);
+        // console.log(process.env.POSTGRES_USER);
+        // await sequelize.authenticate();
         await sequelize.sync();
         app.listen(PORT, () => {
             // eslint-disable-next-line no-console
             console.log(`Server has started !!!!!! on port ${PORT}`);
-        });
+            });
     } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);

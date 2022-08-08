@@ -5,7 +5,7 @@ import {deleteInfoDevice} from "../../http/deviceApi";
 
 const ChangeInfoDeviceComponent = ({setStatusResponse, title, description, id}) => {
     const [changeInfo, setChangeInfo] = useState(false);
-    console.log(id);
+
     const del = () => {
         deleteInfoDevice(id).then(data => {
             if (data === 'Ok'){

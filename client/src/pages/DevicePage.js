@@ -27,6 +27,8 @@ const DevicePage = () => {
     const type = types.filter(c => c.id === device.typeId).map(c => c.name);
     const brand = brands.filter(c => c.id === device.brandId).map(c => c.name);
 
+    const filter = comment.filter(c => c.comment !== '');
+
     const addBasket = () => {
         try{
             createBasketDevice(device.id).then(data => {
@@ -91,6 +93,9 @@ const DevicePage = () => {
                if (data.length > 0){
                    setNoComment(false);
                }
+               if (data.map(c => (c.comment).map(a => a === ''))) {
+                   console.log("ok");
+               }
             }).catch(err => {
                 if (err.response) {
                     setError(err.response.data.message);
@@ -102,6 +107,7 @@ const DevicePage = () => {
         } catch (e) {
             setError(e.message);
         }
+        // eslint-disable-next-line
     },[response, noComment]);
     return (
         <Container className={"mt-3"}>
@@ -183,7 +189,7 @@ const DevicePage = () => {
                             <div>
                                 <h3 style={{margin: '10px'}}>Коментарі:</h3>
                                 <div className={'devicePage_div_comments'}>
-                                    {comment && comment.map((c, index) =>
+                                    {filter && filter.map((c, index) =>
                                         <CommentDevice
                                             key={index}
                                             comment={c.comment}

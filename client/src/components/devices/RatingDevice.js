@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {FaStar} from "react-icons/fa";
 
 const RatingDevice = ({sendRating, setSendRating}) => {
-    // const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
     return (
         <div>

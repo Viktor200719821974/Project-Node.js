@@ -1,9 +1,9 @@
+* {
+    scroll-behavior: smooth;
+}
 body {
     background-color: rgba(240, 230, 140, 0.7);
 }
-/*input[type='radio']{*/
-/*    display: none;*/
-/*}*/
 .input_rating_device{
     display: none;
 }
@@ -66,6 +66,10 @@ body {
     0 2px 2px #F0E68C,
     -2px 0 2px #F0E68C,
     0 -2px 2px #F0E68C;
+    /*position: fixed;*/
+    /*box-sizing: border-box;*/
+    /*width: 100%;*/
+
 }
 .navBar_navLink{
     display: flex;

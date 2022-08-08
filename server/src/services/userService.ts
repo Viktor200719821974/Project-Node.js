@@ -5,7 +5,6 @@ import {IPaginationResponse, ITokenActivate, IUser} from '../interfaces';
 import { config } from '../config/config';
 import { model } from '../models/models';
 import { ErrorHandler } from '../error/errorHandler';
-import { emailService } from './emailService';
 
 class UserService {
     async getAll(page: number, offset: number, limit: number, email: string)
@@ -111,17 +110,11 @@ class UserService {
     }
 
     async userBlocked(id: number): Promise<IUser | null> {
-        // @ts-ignore
-        const { email, name, surname } = await model.User.findOne({ where: { id } });
-        await emailService.sendMail(email, 'ACCOUNT_BLOCKED', { userName: name, surname });
         await model.User.update({ is_active: false }, { where: { id } });
         return model.User.findByPk(id);
     }
 
     async userUnlocked(id: number): Promise<IUser | null> {
-        // @ts-ignore
-        const { email, name, surname } = await model.User.findOne({ where: { id } });
-        await emailService.sendMail(email, 'ACCOUNT_UNLOCKED', { userName: name, surname });
         await model.User.update({ is_active: true }, { where: { id } });
         return model.User.findByPk(id);
     }

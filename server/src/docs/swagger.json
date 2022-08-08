@@ -2582,7 +2582,7 @@
       }
     },
     "login": {
-      "type": "object",
+      "type": "array",
       "required": ["email", "password"],
       "properties": {
         "email": {
@@ -2596,7 +2596,7 @@
       }
     },
     "registration": {
-      "type": "object",
+      "type": "array",
       "required": ["email", "password", "name", "surname", "age", "phone"],
       "properties": {
         "email": {
@@ -2626,7 +2626,7 @@
       }
     },
     "createBrand": {
-      "type": "object",
+      "type": "array",
       "required": ["name"],
       "properties": {
         "name": {
@@ -2636,7 +2636,7 @@
       }
     },
     "changeBrand": {
-      "type": "object",
+      "type": "array",
       "required": ["name"],
       "properties": {
         "name": {
@@ -2646,7 +2646,7 @@
       }
     },
     "createType": {
-      "type": "object",
+      "type": "array",
       "required": ["name"],
       "properties": {
         "name": {
@@ -2656,7 +2656,7 @@
       }
     },
     "changeType": {
-      "type": "object",
+      "type": "array",
       "required": ["name"],
       "properties": {
         "name": {
@@ -2666,7 +2666,7 @@
       }
     },
     "changeAmountBasket": {
-      "type": "object",
+      "type": "array",
       "required": ["amount"],
       "properties": {
         "amount": {
@@ -2675,7 +2675,7 @@
       }
     },
     "createDevice": {
-      "type": "object",
+      "type": "array",
       "required": ["name", "color", "width", "height", "depth", "price", "brandId", "typeId"],
       "properties": {
         "name": {
@@ -2722,7 +2722,7 @@
       }
     },
     "changeDevice": {
-      "type": "object",
+      "type": "array",
       "properties": {
         "name": {
           "type": "string",
@@ -2757,7 +2757,7 @@
       }
     },
     "createDeviceInfo": {
-      "type": "object",
+      "type": "array",
       "required": ["title", "description"],
       "properties": {
         "title": {
@@ -2771,7 +2771,7 @@
       }
     },
     "changeDeviceInfo": {
-      "type": "object",
+      "type": "array",
       "properties": {
         "title": {
           "type": "string",
@@ -2784,7 +2784,7 @@
       }
     },
     "createRatingDevice": {
-      "type": "object",
+      "type": "array",
       "required": ["deviceId", "rate"],
       "properties": {
         "deviceId": {
@@ -2801,7 +2801,7 @@
       }
     },
     "changeRatingDevice": {
-      "type": "object",
+      "type": "array",
       "required": ["comment"],
       "properties": {
         "comment": {
@@ -2811,7 +2811,7 @@
       }
     },
     "order": {
-      "type": "object",
+      "type": "array",
       "required": ["type", "typePay"],
       "properties": {
         "type": {

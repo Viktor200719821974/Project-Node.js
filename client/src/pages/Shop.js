@@ -55,6 +55,9 @@ const Shop = observer(() => {
                 if (countPage && countPage < page){
                     setPage(1);
                 }
+                if (data.count === 0) {
+                    setCountPage(0);
+                }
             }).catch(err => {
                 if (err.response) {
                     alert(err.response.data.message || err.message);
@@ -64,7 +67,7 @@ const Shop = observer(() => {
         }catch (e) {
             console.log(e.message);
         }
-
+        // eslint-disable-next-line
     },[selectedBrand, selectedType, page, countPage]);
 
     return (

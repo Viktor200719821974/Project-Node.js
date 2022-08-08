@@ -62,7 +62,6 @@ const AddImageDeviceModal = ({show, onHide, setStatusResponse, id}) => {
                                 Додати фото
                             </Button>
                         </div>
-
                     </div>
                 </Form>
             </Modal.Body>

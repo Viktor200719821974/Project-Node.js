@@ -13,10 +13,3 @@ export const login = async (email, password) => {
 export const logOutUser = async () => {
     return await $authHost.post('/auth/logout');
 }
-// export const check = async () => {
-//     const {data} = await $authHost.get('/user/auth');
-//     return data;
-// }
-export const fetchRefresh = async () => {
-    return await $refreshHost.post('/auth/refresh');
-}

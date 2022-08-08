@@ -1,23 +1,24 @@
 import { Sequelize } from 'sequelize';
-import { constants } from './constants';
+import dotenv from 'dotenv';
 // import { config } from './config/config';
 
+dotenv.config();
+
 export const sequelize = new Sequelize(
-    constants.POSTGRES_DB,
-    constants.POSTGRES_USER,
-    constants.POSTGRES_PASSWORD,
+    // process.env.POSTGRES_DB!,
+    // process.env.POSTGRES_USER!,
+    // process.env.POSTGRES_PASSWORD,
+    // {
+    //     dialect: 'postgres',
+    //     host: 'postgres',
+    //     port: Number(process.env.POSTGRES_PORT),
+    // },
+    'project_node',
+    'postgres',
+    'root',
     {
         dialect: 'postgres',
-        host: constants.POSTGRES_HOST,
-        port: constants.POSTGRES_PORT,
+        host: 'postgres',
+        // port: 5432,
     },
 );
-// export function DeviceFactory(newSequelize: Sequelize): DeviceNewStatic {
-//     return <DeviceNewStatic>sequelize.define('device', {
-//         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-//         name: { type: DataTypes.STRING, unique: true, allowNull: false },
-//         price: { type: DataTypes.INTEGER, allowNull: false },
-//         rating: { type: DataTypes.INTEGER, defaultValue: 0 },
-//         // image: { type: DataTypes.STRING, allowNull: false },
-//     });
-// }

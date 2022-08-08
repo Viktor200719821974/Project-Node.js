@@ -15,7 +15,7 @@ const Admin = () => {
     const [changeAndDeleteTypeVisible, setChangeAndDeleteTypeVisible] = useState(false);
     const [typeVisible, setTypeVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
-    // const [userVisible, setUserVisible] = useState(false);
+
     return (
         <Container className={"d-flex flex-column"}>
           <Button
@@ -82,10 +82,6 @@ const Admin = () => {
                 show={deviceVisible}
                 onHide={() => setDeviceVisible(false)}
             />
-            {/*<BlockedAndUnblockedUser*/}
-            {/*    show={userVisible}*/}
-            {/*    onHide={() => setUserVisible(false)}*/}
-            {/*/>*/}
         </Container>
     );
 };

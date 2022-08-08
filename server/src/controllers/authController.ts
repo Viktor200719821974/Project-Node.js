@@ -5,6 +5,7 @@ import { authService } from '../services/authService';
 import { constants } from '../constants';
 import { emailService } from '../services/emailService';
 import { IRequestExtended, IUser } from '../interfaces';
+import {ErrorHandler} from "../error/errorHandler";
 
 class AuthController {
     async registration(req:Request, res:Response, next: NextFunction): Promise<void> {
@@ -14,7 +15,12 @@ class AuthController {
             const token = tokenData.activateToken;
             String(token);
             const { email, name } = createdUser;
-            await emailService.sendMail(email, 'WELCOME', { userName: name }, token);
+            const sendEmail = await emailService.sendMail(email, 'WELCOME', { userName: name }, token)
+                .catch(console.error);
+            if (!sendEmail) {
+                next(new ErrorHandler('Problems is send email', 404));
+                return;
+            }
             res.json(tokenData);
         } catch (e) {
             next(e);

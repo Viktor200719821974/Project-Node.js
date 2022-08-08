@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { userService } from '../services/userService';
 import { IRequestExtended } from '../interfaces';
 import { ErrorHandler } from '../error/errorHandler';
+import { emailService } from '../services/emailService';
 
 class UserController {
     async getAll(req: Request, res: Response, next: NextFunction) {
@@ -78,7 +79,15 @@ class UserController {
     async userBlocked(req: IRequestExtended, res: Response, next: NextFunction) {
         try {
             const { id } = req.params;
-            const user = await userService.userBlocked(+id);
+             const user = await userService.userBlocked(+id);
+            // @ts-ignore
+            const { email, name, surname } = user;
+            const sendEmail = await emailService.sendMail(email, 'ACCOUNT_BLOCKED', { userName: name, surname })
+                .catch(console.error);
+            if (!sendEmail) {
+                next(new ErrorHandler('Problems is send email', 404));
+                return;
+            }
             res.json(user);
         } catch (e) {
             next(e);
@@ -89,6 +98,14 @@ class UserController {
         try {
             const { id } = req.params;
             const user = await userService.userUnlocked(+id);
+            // @ts-ignore
+            const { email, name, surname } = user;
+            const sendEmail =  await emailService.sendMail(email, 'ACCOUNT_UNLOCKED', { userName: name, surname })
+                .catch(console.error);
+            if (!sendEmail) {
+                next(new ErrorHandler('Problems is send email', 404));
+                return;
+            }
             res.json(user);
         } catch (e) {
             next(e);

@@ -3,7 +3,7 @@ import ChangeDeleteBrandType from "../modal/changeDeleteBrandType/ChangeDeleteBr
 
 const TypeBrandCardAdmin = ({value, type, setStatusResponse}) => {
     const [changeDelete, setChangeDelete] = useState(false);
-    console.log(value.id);
+
     return (
         <div className={'brandBar_card'}>
         <div onClick={() => setChangeDelete(true)}>

@@ -3,15 +3,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const config = {
-    PORT: process.env.PORT || 5000,
+    PORT: process.env.PORT || 5500,
     SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY,
     SECRET_REFRESH_KEY: process.env.SECRET_REFRESH_KEY,
     SECRET_ACTIVATE_KEY: process.env.SECRET_ACTIVATE_KEY,
-    DB_NAME: process.env.DB_NAME,
-    DB_HOST: process.env.DB_HOST,
-    DB_PORT: process.env.DB_PORT,
-    DB_USER: process.env.DB_USER,
-    DB_PASSWORD: process.env.DB_PASSWORD,
+    POSTGRES_DB: process.env.POSTGRES_DB,
+    POSTGRES_HOST: process.env.POSTGRES_HOST,
+    POSTGRES_PORT: process.env.POSTGRES_PORT,
+    POSTGRES_USER: process.env.POSTGRES_USER,
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
     USER_SALT_ROUNDS: process.env.USER_SALT_ROUNDS,
     FRONTEND_URL: process.env.FRONTEND_URL,
     NO_REPLY_EMAIL: process.env.NO_REPLY_EMAIL,

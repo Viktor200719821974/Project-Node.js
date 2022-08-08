@@ -8,7 +8,7 @@ const ChangeDeleteBrandType = ({show, onHide, id, name, type, setStatusResponse}
     const [value, setValue] = useState('');
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [error, setError] = useState('');
-    console.log(id);
+
     const change = () => {
         const formData = new FormData();
         formData.append('name', value);

@@ -46,7 +46,7 @@ const Auth = observer(() => {
                 setError('');
             }
         } catch (e) {
-            alert(e.message);
+            console.log(e.message);
         }
     }
     return (
