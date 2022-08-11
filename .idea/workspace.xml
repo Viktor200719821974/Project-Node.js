@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="docker working">
-      <change afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Shop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/constans.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/constans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/config/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/validators/validators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/validators/validators.ts" afterDir="false" />
-    </list>
+    <list default="true" id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="project done" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +104,7 @@
       <workItem from="1659997152721" duration="1387000" />
       <workItem from="1660216194034" duration="16287000" />
       <workItem from="1660242041734" duration="5653000" />
-      <workItem from="1660251276622" duration="2150000" />
+      <workItem from="1660251276622" duration="2586000" />
     </task>
     <task id="LOCAL-00001" summary="new linux system">
       <created>1658873037157</created>
@@ -161,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660233169271</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="project done">
+      <created>1660255268803</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1660255268803</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +179,8 @@
     <MESSAGE value="new linux system" />
     <MESSAGE value="docker" />
     <MESSAGE value="docker working" />
-    <option name="LAST_COMMIT_MESSAGE" value="docker working" />
+    <MESSAGE value="project done" />
+    <option name="LAST_COMMIT_MESSAGE" value="project done" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
