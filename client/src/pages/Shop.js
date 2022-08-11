@@ -33,7 +33,7 @@ const Shop = observer(() => {
                 }
             }).catch(err => {
                 if (err.response) {
-                    alert(err.response.data.message || err.message);
+                    console.log(err.response.data.message);
                 }
             });
             getBrands().then(data => {
@@ -42,7 +42,7 @@ const Shop = observer(() => {
                 }
             }).catch(err => {
                 if (err.response) {
-                    alert(err.response.data.message || err.message);
+                    console.log(err.response.data.message);
                 }
             });
             getDevices(page, name, selectedBrand, selectedType).then(data => {
@@ -60,7 +60,7 @@ const Shop = observer(() => {
                 }
             }).catch(err => {
                 if (err.response) {
-                    alert(err.response.data.message || err.message);
+                    console.log(err.response.data.message);
                 }
             });
             getImageDevice().then(data => setImage(data));

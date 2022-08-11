@@ -12,7 +12,5 @@ RUN chown node:node /wait-for-it.sh
 USER node
 WORKDIR /app
 
-EXPOSE 5500
-
 COPY ./server/package.json .
 RUN npm install

@@ -5,19 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="docker working">
+      <change afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/basket/ImageBasketComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/basket/ImageBasketComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/devices/DeviceItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/DeviceItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/constans.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/constans.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/config/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/validators/validators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/validators/validators.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,6 +44,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
@@ -103,7 +115,9 @@
       <workItem from="1659958158317" duration="10191000" />
       <workItem from="1659978049379" duration="15140000" />
       <workItem from="1659997152721" duration="1387000" />
-      <workItem from="1660216194034" duration="10389000" />
+      <workItem from="1660216194034" duration="16287000" />
+      <workItem from="1660242041734" duration="5653000" />
+      <workItem from="1660251276622" duration="2150000" />
     </task>
     <task id="LOCAL-00001" summary="new linux system">
       <created>1658873037157</created>
@@ -140,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659998522712</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="docker working">
+      <created>1660233169271</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660233169271</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
