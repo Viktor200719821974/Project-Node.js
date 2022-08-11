@@ -5,22 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="docker working">
-      <change beforePath="$PROJECT_DIR$/.env.-db" beforeDir="false" afterPath="$PROJECT_DIR$/.env.-db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/comment/CommentDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/comment/CommentDevice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/basket/ImageBasketComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/basket/ImageBasketComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/devices/DeviceItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/DeviceItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/http/authApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/http/authApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/CreateDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/CreateDevice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/ChangeAndDeleteDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/ChangeAndDeleteDevice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/DevicePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/DevicePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/provider/AuthProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/provider/AuthProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/middleware/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/middleware/authMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/deviceService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/deviceService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +51,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/server" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/server" />
     </key>
   </component>
   <component name="RunManager">
@@ -110,7 +102,8 @@
       <workItem from="1659913136802" duration="4323000" />
       <workItem from="1659958158317" duration="10191000" />
       <workItem from="1659978049379" duration="15140000" />
-      <workItem from="1659997152721" duration="1185000" />
+      <workItem from="1659997152721" duration="1387000" />
+      <workItem from="1660216194034" duration="10389000" />
     </task>
     <task id="LOCAL-00001" summary="new linux system">
       <created>1658873037157</created>
@@ -140,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659983744089</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="docker working">
+      <created>1659998522712</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1659998522712</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -8,9 +8,9 @@ const ImageDevice = ({image, id, setStatusResponse, deviceId}) => {
         <>
             <Image
                 width={300}
-                height={'auto'}
+                height={'300'}
                 className="d-block w-100"
-                style={{cursor: 'pointer'}}
+                style={{cursor: 'pointer', objectFit: 'contain'}}
                 src={image}
                 alt='image device'
                 onClick={() => setImageMore(true)}

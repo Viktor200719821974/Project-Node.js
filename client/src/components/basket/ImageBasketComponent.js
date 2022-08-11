@@ -22,7 +22,7 @@ const ImageBasketComponent = ({deviceId}) => {
             {<Image
                 src={image || noImage}
                 alt={'image device'}
-                style={{width: '150px', height: 'auto', marginRight: '20px'}}/>}
+                style={{width: '150px', height: '150px', marginRight: '20px', objectFit: 'contain'}}/>}
         </div>
     );
 };

@@ -44,7 +44,8 @@ const ImageModal = ({show, onHide, image, id, setStatusResponse, deviceId}) => {
                         src={image}
                         alt={'imageDeviceMore'}
                         width={700}
-                        height={'auto'}
+                        height={700}
+                        style={{objectFit: 'contain'}}
                     />
                 </div>
 

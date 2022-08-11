@@ -11,7 +11,7 @@ const DeviceItem = ({device, image, type, brand, rating}) => {
     return (
         <Col md={3} className={"mt-3"} onClick={() => history.push(DEVICE_ROUTE + '/' + device.id)}>
             <Card style={{width: 202, cursor: 'pointer'}} border={"dark"}>
-                <Image width={200} height={'auto'} src={img[0] || noImage}/>
+                <Image width={200} height={200} style={{objectFit: 'contain'}} src={img[0] || noImage}/>
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div className={'deviceItem_div'}>{type} {brand}</div>
                     <div className="d-flex align-items-center">
