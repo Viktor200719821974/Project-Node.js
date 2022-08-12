@@ -13,6 +13,11 @@ import { orderRouter } from './orderRouter';
 
 const router = Router();
 
+router.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 router.use('/docs', swaggerUi.serve, swaggerUi.setup(docs));
 router.use('/auth', authRouter);
 router.use('/users', userRouter);
@@ -30,6 +35,7 @@ router.use('*', (err, req, res, next) => {
             message: err.message,
         });
 });
+
 // router.use('*', (req, res, next) => {
 // // update to match the domain you will make the request from
 //     res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD");
