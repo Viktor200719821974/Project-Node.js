@@ -6,7 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="project done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/basket/BasketComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/basket/BasketComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/CreateBrand.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/CreateBrand.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/CreateType.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/CreateType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Basket.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Basket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/routes/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/config/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/authController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/controllers/brandController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/brandController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/controllers/deviceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/deviceController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/controllers/typeController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/typeController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/db.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/router/apiRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/router/apiRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/router/brandRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/router/brandRouter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,26 +51,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/viktor/.nvm/versions/node/v16.16.0/bin/node",
-    "nodejs_package_manager_path": "/home/viktor/.nvm/versions/node/v16.16.0/bin/npm",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "/home/viktor/WebstormProjects/Project-Node.js/server/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/viktor/.nvm/versions/node/v16.16.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;/home/viktor/.nvm/versions/node/v16.16.0/bin/npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/viktor/WebstormProjects/Project-Node.js/server/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -108,7 +128,17 @@
       <workItem from="1660216194034" duration="16287000" />
       <workItem from="1660242041734" duration="5653000" />
       <workItem from="1660251276622" duration="2724000" />
-      <workItem from="1660298649312" duration="7031000" />
+      <workItem from="1660298649312" duration="9464000" />
+      <workItem from="1660325414503" duration="2753000" />
+      <workItem from="1660399830605" duration="1059000" />
+      <workItem from="1660403848708" duration="14714000" />
+      <workItem from="1660483911716" duration="3156000" />
+      <workItem from="1660489182789" duration="14290000" />
+      <workItem from="1660511421960" duration="1890000" />
+      <workItem from="1660560635061" duration="6578000" />
+      <workItem from="1660573125228" duration="2480000" />
+      <workItem from="1660578186244" duration="3131000" />
+      <workItem from="1660583247643" duration="8254000" />
     </task>
     <task id="LOCAL-00001" summary="new linux system">
       <created>1658873037157</created>
@@ -173,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660304848603</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="project done">
+      <created>1660311166148</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1660311166158</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

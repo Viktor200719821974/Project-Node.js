@@ -37,6 +37,9 @@ class BrandController {
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
             const brand = await brandService.getAll();
+            // res.setHeader('Access-Control-Allow-Origin', req.header('origin')
+            //     || req.header('x-forwarded-host') || req.header('referer') || req.header('host'));
+            // res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
             res.json(brand);
             return;
         } catch (e) {
@@ -45,4 +48,4 @@ class BrandController {
     }
 }
 
-export const brandController = new BrandController();
+export const brandsController = new BrandController();

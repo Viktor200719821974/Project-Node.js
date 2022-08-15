@@ -21,21 +21,29 @@ const Basket = () => {
     const [typePay, setTypePay] = useState('');
     const [image, setImage] = useState([]);
     const [error, setError] = useState('');
+    const [array, setArray] = useState([]);
+    const [imageArray, setImageArray] = useState([]);
+    const [statusResponse, setStatusResponse] = useState(false);
     const {basket, devices, count, setCount} = useAuth();
-
     const deviceId = basket.map(c => c.deviceId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const arr = [];
-    for (let i = 0; i < deviceId.length; i++){
-        const filter = devices.rows.filter(c => c.id === deviceId[i]);
-        arr.push(filter);
-    }
-    const img = [];
-    for (let i = 0; i < deviceId.length; i++){
-        const filterImage = image.filter(c => c.deviceId === deviceId[i]);
-        img.push(filterImage);
-    }
 
+    useEffect(() => {
+        const arr = [];
+        const img = [];
+        for (let i = 0; i < deviceId.length; i++){
+            const filter = devices.rows.filter(c => c.id === deviceId[i]);
+            arr.push(filter)
+            setArray(arr);
+        }
+        for (let i = 0; i < deviceId.length; i++){
+            const filterImage = image.filter(c => c.deviceId === deviceId[i]);
+            img.push(filterImage);
+            setImageArray(img);
+        }
+        if (statusResponse) {
+            setStatusResponse(false);
+        }
+    },[statusResponse, basket]);
     const order = () => {
         try {
             const formData = new FormData();
@@ -70,7 +78,7 @@ const Basket = () => {
     useEffect(() => {
         if (basket.length > 0){
             setAmountData(basket.map(c => c.amount).reduce((result, number) => result + number));
-            const arrayPrice = arr.map(c => c.map(c => c.price)[0]);
+            const arrayPrice = array.map(c => c.map(c => c.price)[0]);
             const arrayAmount = basket.map(c => c.amount);
             let num = 0;
             for(let i=0; i< arrayPrice.length; i++) {
@@ -79,7 +87,7 @@ const Basket = () => {
             setSum(num);
         }
         getImageDevice().then(data => setImage(data));
-    }, [arr, basket]);
+    }, [array, basket, statusResponse]);
 
     return (
         <div>
@@ -89,11 +97,12 @@ const Basket = () => {
                     <div className={'basket_div_noContent'}>ВАША КОРЗИНА ПОРОЖНЯ</div>
                 :
                 <div>
-                    {arr.map((c, index) => <BasketComponent
+                    {array.map((c, index) => <BasketComponent
                         key={index}
                         device={c}
                         number={index + 1}
-                        image={img.map(b => b.map(a => a.imageLocation))}
+                        image={imageArray.map(b => b.map(a => a.imageLocation))}
+                        setStatusResponse={setStatusResponse}
                     />)}
                     <div className={'basket_div_total_amount'}>
                         <div className={'basket_div_div_total_amount'}>
@@ -134,7 +143,6 @@ const Basket = () => {
                             Замовити
                         </Button>
                     </div>
-
             </div>}
         </div>
     );

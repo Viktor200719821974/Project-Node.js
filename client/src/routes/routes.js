@@ -22,10 +22,6 @@ export const authRoutes = [
         Component: Admin
     },
     {
-        path: BASKET_ROUTE,
-        Component: Basket
-    },
-    {
         path: DEVICE_CARD_ADMIN_ROUTE,
         Component: ChangeAndDeleteDevice
     },
@@ -58,5 +54,9 @@ export const publicRoutes = [
     {
         path: REGISTER_ROUTE,
         Component: Register
-    }
+    },
+    {
+        path: BASKET_ROUTE,
+        Component: Basket
+    },
 ]

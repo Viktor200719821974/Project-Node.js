@@ -15,14 +15,14 @@ const ImageDevice = ({image, id, setStatusResponse, deviceId}) => {
                 alt='image device'
                 onClick={() => setImageMore(true)}
             />
-            <ImageModal
-                show={imageMore}
-                onHide={() => setImageMore(false)}
-                image={image}
-                id={id}
-                setStatusResponse={setStatusResponse}
-                deviceId={deviceId}
-            />
+                <ImageModal
+                    show={imageMore}
+                    onHide={() => setImageMore(false)}
+                    image={image}
+                    id={id}
+                    setStatusResponse={setStatusResponse}
+                    deviceId={deviceId}
+                />
         </>
     );
 };

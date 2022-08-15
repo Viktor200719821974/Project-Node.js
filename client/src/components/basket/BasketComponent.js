@@ -6,7 +6,7 @@ import {deleteDeviceFromBasket} from "../../http/basketApi";
 import AmountComponent from "./AmountComponent";
 import ImageBasketComponent from "./ImageBasketComponent";
 
-const BasketComponent = ({device, number}) => {
+const BasketComponent = ({device, number, setStatusResponse}) => {
     const {types, brands, setBasket, setAmount, basket} = useAuth();
     return (
         <div>
@@ -61,6 +61,7 @@ const BasketComponent = ({device, number}) => {
                                 if(data === 'Ok'){
                                     setBasket();
                                     setAmount(1, c.id);
+                                    setStatusResponse(true);
                                 }
                             })}>
                             <MdDeleteForever/> Видалити

@@ -42,6 +42,9 @@ class AuthController {
         try {
             const { email } = req.body;
             const tokenPair = await authService.login(email, next);
+            // res.setHeader('Access-Control-Allow-Origin', req.header('origin')
+            //     || req.header('x-forwarded-host') || req.header('referer') || req.header('host'));
+            // res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
             res.json(tokenPair);
         } catch (e) {
             next(e);

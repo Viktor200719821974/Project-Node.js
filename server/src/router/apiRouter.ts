@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import docs from '../docs/swagger.json';
 import { userRouter } from './userRouter';
@@ -13,10 +13,10 @@ import { orderRouter } from './orderRouter';
 
 const router = Router();
 
-router.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
+// router.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     next();
+// });
 
 router.use('/docs', swaggerUi.serve, swaggerUi.setup(docs));
 router.use('/auth', authRouter);
@@ -35,7 +35,21 @@ router.use('*', (err, req, res, next) => {
             message: err.message,
         });
 });
-
+router.use((req: Request, res: Response, next: NextFunction) => {
+    res.setHeader(
+        "Access-Control-Allow-Origin",
+        "http//:localhost:80"
+    );
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+    );
+    next();
+});
 // router.use('*', (req, res, next) => {
 // // update to match the domain you will make the request from
 //     res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD");

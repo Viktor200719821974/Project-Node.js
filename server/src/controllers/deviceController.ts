@@ -24,6 +24,9 @@ class DeviceController {
             // @ts-ignore
             // eslint-disable-next-line max-len
             const devices = await deviceService.getAll(+brandId, +typeId, name, limit, page, offset);
+            // res.setHeader('Access-Control-Allow-Origin', req.header('origin')
+            //     || req.header('x-forwarded-host') || req.header('referer') || req.header('host'));
+            // res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
             res.json(devices);
         } catch (e) {
             next(e);

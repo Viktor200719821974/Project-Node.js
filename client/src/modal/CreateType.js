@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Alert, Button, Form, Modal} from "react-bootstrap";
 import {createType} from "../http/typeApi";
 
-const CreateType = ({show, onHide}) => {
+const CreateType = ({show, onHide, setResponse}) => {
     const [value, setValue] = useState('');
     const [statusResponse, setStatusResponse] = useState(false);
     const [error, setError] = useState('');
@@ -12,6 +12,7 @@ const CreateType = ({show, onHide}) => {
             createType({name:value}).then(data => {
                 if (data.name){
                     setStatusResponse(true);
+                    setResponse(true);
                     setError('');
                 }
                 setValue('');
@@ -42,9 +43,6 @@ const CreateType = ({show, onHide}) => {
                 * Тип був добавлений!!!
             </Alert>}
             {error && <Alert variant={'danger'} style={{textAlign: 'center', fontSize: '20px'}}>{error}</Alert>}
-            {/*{statusResponse  && <div className={'createDevice_div_successfully'}>*/}
-            {/*    * Тип був добавлений!!!*/}
-            {/*</div>}*/}
             <Modal.Body>
                 <Form>
                    <Form.Control

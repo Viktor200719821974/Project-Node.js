@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Alert, Button, Form, Modal} from "react-bootstrap";
 import {createBrand} from "../http/brandApi";
 
-const CreateBrand = ({show, onHide}) => {
+const CreateBrand = ({show, onHide, setResponse}) => {
     const [value, setValue] = useState('');
     const [statusResponse, setStatusResponse] = useState(false);
     const [error, setError] = useState('');
@@ -13,6 +13,7 @@ const CreateBrand = ({show, onHide}) => {
                 if (data.name) {
                     setStatusResponse(true);
                     setError('');
+                    setResponse(true);
                 }
                 setValue('');
             }).catch(err => {

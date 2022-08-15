@@ -16,6 +16,9 @@ class TypeController {
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
             const type = await typeService.getAll();
+            // res.setHeader('Access-Control-Allow-Origin', req.header('origin')
+            //     || req.header('x-forwarded-host') || req.header('referer') || req.header('host'));
+            // res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
             res.json(type);
             return;
         } catch (e) {

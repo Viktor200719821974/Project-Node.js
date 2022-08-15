@@ -15,6 +15,7 @@ const Admin = () => {
     const [changeAndDeleteTypeVisible, setChangeAndDeleteTypeVisible] = useState(false);
     const [typeVisible, setTypeVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
+    const [response, setResponse] = useState(false);
 
     return (
         <Container className={"d-flex flex-column"}>
@@ -65,18 +66,24 @@ const Admin = () => {
             <CreateBrand
                 show={brandVisible}
                 onHide={() => setBrandVisible(false)}
+                setResponse={setResponse}
             />
             <ChangeAndDeleteBrand
                 show={changeAndDeleteBrandVisible}
                 onHide={() => setChangeAndDeleteBrandVisible(false)}
+                setResponse={setResponse}
+                response={response}
             />
             <CreateType
                 show={typeVisible}
                 onHide={() => setTypeVisible(false)}
+                setResponse={setResponse}
             />
             <ChangeAndDeleteType
                 show={changeAndDeleteTypeVisible}
                 onHide={() => setChangeAndDeleteTypeVisible(false)}
+                setResponse={setResponse}
+                response={response}
             />
             <CreateDevice
                 show={deviceVisible}

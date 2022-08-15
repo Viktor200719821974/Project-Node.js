@@ -4,12 +4,12 @@ import useAuth from "../../hook/useAuth";
 import TypeBrandCardAdmin from "../../components/TypeBrandCardAdmin";
 import {getTypes} from "../../http/typeApi";
 
-const ChangeAndDeleteType = ({show, onHide}) => {
+const ChangeAndDeleteType = ({show, onHide, response, setResponse}) => {
     const {types, setTypes} = useAuth();
     const [statusResponse, setStatusResponse] = useState(false);
 
     useEffect(() => {
-        if (statusResponse){
+        if (statusResponse || response){
             getTypes().then(data => {
                 if (data){
                     setTypes(data);
@@ -20,9 +20,10 @@ const ChangeAndDeleteType = ({show, onHide}) => {
                 }
             });
             setStatusResponse(false);
+            setResponse(false);
         }
         // eslint-disable-next-line
-    },[statusResponse]);
+    },[statusResponse, response]);
     return (
         <Modal
             show={show}

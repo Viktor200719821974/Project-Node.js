@@ -4,12 +4,12 @@ import useAuth from "../../hook/useAuth";
 import TypeBrandCardAdmin from "../../components/TypeBrandCardAdmin";
 import {getBrands} from "../../http/brandApi";
 
-const ChangeAndDeleteBrand = ({show, onHide}) => {
+const ChangeAndDeleteBrand = ({show, onHide, response, setResponse}) => {
     const {brands, setBrands} = useAuth();
     const [statusResponse, setStatusResponse] = useState(false);
     
     useEffect(() => {
-        if (statusResponse){
+        if (statusResponse || response){
             getBrands().then(data => {
                 if (data){
                     setBrands(data);
@@ -20,9 +20,10 @@ const ChangeAndDeleteBrand = ({show, onHide}) => {
                 }
             });
             setStatusResponse(false);
+            setResponse(false);
         }
         // eslint-disable-next-line
-    },[statusResponse]);
+    },[statusResponse, response]);
     return (
         <Modal
             show={show}
