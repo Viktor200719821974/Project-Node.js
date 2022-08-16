@@ -9,6 +9,9 @@ import { apiRouter } from './router/apiRouter';
 
 const app = express();
 app.use(bodyParser.json());
+// app.use(cors({
+//     origin: '*'
+// }));
 // const corsOptions = {
 //     origin: '*',
 //     methods: ['GET', 'POST'],

@@ -6,27 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0c38461-4fcd-4e6e-b1b8-a1195bf736cd" name="Changes" comment="project done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/basket/BasketComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/basket/BasketComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/devices/imageDevices/ImageDevice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/CreateBrand.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/CreateBrand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/CreateType.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/CreateType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteBrand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/changeDeleteBrandType/ChangeAndDeleteType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/modal/imageDeviceModal/ImageModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Basket.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Basket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/routes/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/config/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/authController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/controllers/brandController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/brandController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/controllers/deviceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/deviceController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/controllers/typeController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/typeController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/router/apiRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/router/apiRouter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/router/brandRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/router/brandRouter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +118,8 @@
       <workItem from="1660560635061" duration="6578000" />
       <workItem from="1660573125228" duration="2480000" />
       <workItem from="1660578186244" duration="3131000" />
-      <workItem from="1660583247643" duration="8254000" />
+      <workItem from="1660583247643" duration="9514000" />
+      <workItem from="1660671801641" duration="2109000" />
     </task>
     <task id="LOCAL-00001" summary="new linux system">
       <created>1658873037157</created>
@@ -210,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660311166158</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="project done">
+      <created>1660592149276</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1660592149276</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
